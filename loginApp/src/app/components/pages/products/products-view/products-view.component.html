@@ -1,0 +1,30 @@
+
+<div class="main">
+
+    <button type="submit" routerLink="/products">Voltar</button> Lista de Produtos
+    <div class="divTable">
+        <button type="submit" routerLink="/products/add">Adicionar</button>
+        <div class="divTableBody">
+            <div class="divTableRowTitle">
+                <div class="divTableTitle">Nome</div>
+                <div class="divTableTitle">Fabricante</div>
+                <div class="divTableTitle">Descrição</div>
+                <div class="divTableTitle">QTD caixa</div>
+                <div class="divTableTitle">Unitário</div>
+                <div class="divTableTitle">preço</div>
+                <div class="divTableTitle">Stock</div>
+            </div>
+            <div routerLink="/productslist/{{prod.id}}" class="divTableRow" *ngFor="let prod of products">
+                <div class="divTableCell">{{prod.name}} </div>
+                <div class="divTableCell">{{prod.manufacture}}</div>
+                <div class="divTableCell">{{prod.description}}</div>
+                <div class="divTableCell">{{prod.boxQuantity}}</div>
+                <div class="divTableCell">{{prod.unity}}</div>
+                <div class="divTableCell">{{prod.price}}</div>
+                <div class="divTableCell">{{prod.stock}}</div>
+            </div>
+            </div>
+        </div>
+        
+</div>
+

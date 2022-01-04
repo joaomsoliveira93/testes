@@ -1,0 +1,80 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "username": "administrator",
+      "name": "Administrator",
+      "email": "admin@ua.pt",
+      "userType": "admin",
+      "password": "admin"
+    },
+    {
+      "id": 2,
+      "username": "user1",
+      "name": "User 1",
+      "email": "user1@ua.pt",
+      "userType": "user",
+      "password": "user1"
+    },
+    {
+      "username": "joaomsoliveira93",
+      "name": "João Oliveira",
+      "email": "joaomsoliveira@ua.pt",
+      "userType": "admin",
+      "password": "Johnny",
+      "id": 3
+    }
+  ],
+  "products": [
+    {
+      "id": 1,
+      "name": "Cápsula intensidade 14",
+      "manufacture": "Bellarom",
+      "description": "Café em cápsula intensidade 14 compativel com Delta Q",
+      "boxQuantity": 10,
+      "unity": "uni",
+      "price": 1.99,
+      "stock": 5
+    },
+    {
+      "id": 2,
+      "name": "Cápsula intensidade 10",
+      "manufacture": "Bellarom",
+      "description": "Café em cápsula intensidade 10 compativel com Delta Q",
+      "boxQuantity": 10,
+      "unity": "uni",
+      "price": 1.99,
+      "stock": 3
+    },
+    {
+      "id": 4,
+      "name": "Champô anti-caspa",
+      "manufacture": "Cien",
+      "description": "Champô anti-caspa para adulto",
+      "boxQuantity": 100,
+      "unity": "ml",
+      "price": 2.59,
+      "stock": 5
+    },
+    {
+      "id": 5,
+      "name": "Chocolate Branco",
+      "manufacture": "Mister choc",
+      "description": "Chocolate branco simples",
+      "boxQuantity": 1,
+      "unity": "uni",
+      "price": 0.49,
+      "stock": 25
+    },
+    {
+      "id": 6,
+      "name": "Chocolate negro",
+      "manufacture": "Mister Choc",
+      "description": "Chocolate negro simples",
+      "boxQuantity": 1,
+      "unity": "uni",
+      "price": 0.49,
+      "stock": 25
+    }
+  ]
+}

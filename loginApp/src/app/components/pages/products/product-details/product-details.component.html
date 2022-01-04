@@ -1,0 +1,17 @@
+<div class="main">
+    <button type="submit" routerLink="/productslist">Voltar</button> Detalhes do produto {{product.name}}
+    <div class="details">
+        <button type="submit" routerLink="/productslist/edit/{{product.id}}">Editar</button>
+        <button type="submit" (click)="deleteProduct()">Eliminar</button>
+        <div class="content">
+            <a>Nome: {{product.name}}</a> <br>
+            <a>Fabricante: {{product.manufacture}}</a> <br>
+            <a>Quantidade por caixa: {{product.boxQuantity}}</a> <br>
+            <a>Unitário: {{product.unity}}</a> <br>
+            <a>Preço: {{product.price}}</a> <br>
+            <a>stock: {{product.stock}}</a> <br>
+        </div>
+
+    </div>   
+
+</div>

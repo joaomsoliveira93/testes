@@ -1,0 +1,15 @@
+<div class="main">
+    <h2> Editar conta {{user.name}} </h2>
+    <div class="details">
+        <button type="submit" (click) = "saveUser()">Guardar</button>
+        <button type="submit" (click)="discardChanges()" >Cancelar</button>
+        <div class="content">
+            <a>Nome de Utilizador:</a> <input type="text" [(ngModel)] ="user.username"> <br>
+            <a>Nome:</a> <input type="text" [(ngModel)] ="user.name"> <br>
+            <a>E-mail:</a> <input type="text" [(ngModel)] ="user.email"> <br>
+           
+        </div>
+
+    </div>   
+
+</div>

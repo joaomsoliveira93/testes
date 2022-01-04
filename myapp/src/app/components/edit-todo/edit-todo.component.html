@@ -1,0 +1,12 @@
+<div class="todo">
+    <div>
+        <h1>Edit To do</h1>
+        <form class="form" (ngSubmit)="onSubmit()">
+            
+            <input name="title" type="text" placeholder="To do Title" [(ngModel)]="title">
+            
+            <input type="Submit" value="Save" class="btn">
+        </form>
+        <input type="Submit" value="Cancel" (click) = "onCancel()" class="btn">
+    </div>
+</div>

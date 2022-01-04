@@ -1,0 +1,22 @@
+<div class="main">
+
+    <H2>User Accounts</H2>
+    <div class="divTable">
+        <div class="divTableBody">
+            <div class="divTableRowTitle">
+                <div class="divTableTitle">Nome</div>
+                <div class="divTableTitle">Nome de Utilizador</div>
+                <div class="divTableTitle">E-mail</div>
+                <div class="divTableTitle">Tipo de Utilizador</div>
+            </div>
+            <div routerLink="/accounts/{{user.id}}" class="divTableRow" *ngFor="let user of users">
+                <div class="divTableCell">{{user.name}} </div>
+                <div class="divTableCell">{{user.username}}</div>
+                <div class="divTableCell">{{user.email}}</div>
+                <div class="divTableCell">{{user.userType}}</div>
+            </div>
+            </div>
+        </div>
+        
+</div>
+

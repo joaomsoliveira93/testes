@@ -1,0 +1,28 @@
+<div class="main">
+   <input type="button" routerLink="/productslist" *ngIf="(loggedUser.userType=='admin')" value="Edit Products List">
+   <div class="grid" >
+      <div class="item" *ngFor = "let product of products">
+         <div class="header">
+            {{product.name}}
+         </div>
+         <div class="content">
+            <p>{{product.description}}</p>
+            
+         </div>
+         <div class="footer">
+            
+            <div class="row">
+               <div class="uni">
+                  {{product.boxQuantity}} {{product.unity}}
+               </div>
+               <div class="price">
+                  {{product.price}}€
+               </div>
+            </div>
+            
+         </div>
+      </div>
+      
+    </div>
+</div>
+
