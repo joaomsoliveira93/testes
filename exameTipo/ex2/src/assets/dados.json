@@ -1,0 +1,22 @@
+{
+    "atletas": [
+      {
+        "id": 1,
+        "name": "Atelta 1",
+        "place": 1,
+        "times": [2.8,2.8,3.8]
+      },
+      {
+        "id": 2,
+        "name": "Atelta 2",
+        "place": 3,
+        "times": [7.8,3.8,5.8]
+      },
+      {
+        "id": 3,
+        "name": "Atelta 3",
+        "place": 2,
+        "times": [2.9,2.9,4.8]
+      }
+    ]
+  }
