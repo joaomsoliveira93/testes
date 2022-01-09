@@ -7,6 +7,7 @@ import { HeaderComponent } from './layout/header/header.component';
 import { FooterComponent } from './layout/footer/footer.component';
 import { ClassificacaoComponent } from './pages/classificacao/classificacao.component';
 import { DetalhesAtletaComponent } from './pages/detalhes-atleta/detalhes-atleta.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,9 @@ import { DetalhesAtletaComponent } from './pages/detalhes-atleta/detalhes-atleta
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule
+
   ],
   providers: [],
   bootstrap: [AppComponent]

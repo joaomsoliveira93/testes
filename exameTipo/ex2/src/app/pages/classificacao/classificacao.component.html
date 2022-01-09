@@ -1,3 +1,3 @@
-<ul *ngFor="let atleta of atletas">
-    <li> <a href="">{{atleta.id}}</a> </li>
+<ul *ngFor="let atleta of atletas; index as i">
+    <li> <a routerLink="atleta/{{i}}">{{atleta.place}} - {{atleta.name}} - {{atleta.times}}</a> </li>
 </ul>

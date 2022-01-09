@@ -12,7 +12,9 @@ export class ClassificacaoComponent implements OnInit {
   atletas = new Array<Atleta>();
 
   constructor(private dataService: DataServiceService) { 
-    this.dataService.getAll().subscribe(atletas => {this.atletas = atletas});
+    this.dataService.getAll().subscribe(atletas => {
+      this.atletas = atletas
+    });
   }
 
   ngOnInit(): void {

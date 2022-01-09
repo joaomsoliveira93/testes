@@ -1,1 +1,6 @@
-<p>detalhes-atleta works!</p>
+<h1>Informação sobre o atleta {{atleta.name}} </h1>
+<ul >
+    <li *ngfor="let time of times">
+        Parcial  - {{time}}
+    </li>
+</ul>
