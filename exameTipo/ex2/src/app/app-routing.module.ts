@@ -7,7 +7,7 @@ import { DetalhesAtletaComponent } from './pages/detalhes-atleta/detalhes-atleta
 
 const routes: Routes = [
   {path:"", component:ClassificacaoComponent},
-  {path:"/atleta/:id", component:DetalhesAtletaComponent},
+  {path:"atleta/:id", component:DetalhesAtletaComponent},
 ];
 
 @NgModule({
