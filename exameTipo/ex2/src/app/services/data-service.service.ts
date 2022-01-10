@@ -22,4 +22,5 @@ export class DataServiceService {
   getByDorsal(id: number): Observable<Atleta>{
     return of(this.atletas[id]);
   }
+
 }

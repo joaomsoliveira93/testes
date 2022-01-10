@@ -1,3 +1,7 @@
 .header{
-    align-items: center;
+    position: relative;
+    top:0;
+    max-width: 100%;
+    max-height: 80px;
+    
 }
