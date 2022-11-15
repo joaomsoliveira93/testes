@@ -2,7 +2,7 @@
 
 @section('content')
 <div>
-    <form method="POST" action="{{route('cliente.add.submit',$cliente->id)}}">
+    <form method="POST" action="{{route('cliente.add.submit')}}">
     @csrf
                 <h2>Adicionar Clientes</h2>
            

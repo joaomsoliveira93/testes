@@ -22,6 +22,10 @@ class clienteController extends Controller
         return view('editarCliente', compact('cliente'));
     }
 
+    public function addCliente(){
+        return view('addCliente');
+    }
+
     public function editClienteSubmit(Request $request,$id){
         $cliente = cliente::findOrFail($id);
         $cliente->nome = $request->nome;

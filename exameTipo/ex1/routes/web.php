@@ -14,10 +14,13 @@ use App\Http\Controllers\clienteController;
 |
 */
 
-Route::get('/', [clienteController::class, 'getAll'])->name('clientes.all');
+Route::get('/', function(){
+    return redirect('/Clientes');
+});
+Route::get('/Cliente/Adidionar', [clienteController::class, 'addCliente'])->name('cliente.add');
+Route::post('/Cliente/AdicionarSubmit', [clienteController::class, 'addClienteSubmit'])->name('cliente.add.submit');
+Route::get('/Clientes', [clienteController::class, 'getAll'])->name('clientes.all');
 Route::get('/Cliente/{id}', [clienteController::class, 'getCliente'])->name('cliente.view');
 Route::get('/Cliente/Editar/{id}', [clienteController::class, 'editCliente'])->name('cliente.edit');
 Route::post('/Cliente/EditarSubmit/{id}', [clienteController::class, 'editClienteSubmit'])->name('cliente.edit.submit');
 Route::match(['get','post'],'/Cliente/Drop/{id}', [clienteController::class, 'dropClienteSubmit'])->name('cliente.drop.submit');
-Route::get('/Cliente/Adidionar', function() {return view('addCliente');})->name('cliente.add');
-Route::post('/Cliente/AdicionarSubmit', [clienteController::class, 'addClienteSubmit'])->name('cliente.add.submit');
