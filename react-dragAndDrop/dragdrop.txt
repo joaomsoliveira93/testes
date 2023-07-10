@@ -1,0 +1,249 @@
+import React, { useState, useEffect } from 'react';
+import { Link, useParams } from 'react-router-dom';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import AddBusinessIcon from '@mui/icons-material/AddBusiness';
+import Swal from 'sweetalert2';
+import 'sweetalert2/dist/sweetalert2.min.css';
+import axios from 'axios';
+import { useStateContext } from '../../contexts/ContextProvider';
+import { Header, Card, List } from '../../components';
+import config from '../../config.json';
+import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
+
+
+const Embalamento = () => {
+  const { currentColor, isLoading, setIsLoading, user } = useStateContext();
+  const [update, setUpdate] = useState(false)
+  const { id } = useParams();
+
+  let itemsNormal = {
+    available: [],
+    assigned: [],
+  };
+
+  const [items, setItems] = useState(itemsNormal);
+
+  useEffect(async () => {
+    setIsLoading(true);
+    Swal.fire({
+      title: 'A Carregar...',
+      allowOutsideClick: false,
+      allowEscapeKey: false,
+    });
+    try {
+      const res = await axios.get(`${config.server.apiurl}/getFi/${id}`);
+      itemsNormal['available'] = res.data[0]
+      setItems(itemsNormal);
+      console.log(items)
+    } catch (err) {
+      console.log(err);
+    }
+    Swal.close();
+    setIsLoading(false);
+  }, [update]);
+
+  const removeFromList = (list, index) => {
+    const result = Array.from(list);
+    const [removed] = result.splice(index, 1);
+    return [removed, result];
+  };
+
+  const addToList = (list, index, element) => {
+    const result = Array.from(list);
+    result.splice(index, 0, element);
+    return result;
+  };
+
+  const onDragEnd = (result) => {
+    if (!result.destination) {
+      return;
+    }
+    const listCopy = { ...items };
+    const sourceItem = listCopy[result.source.droppableId][result.source.index];
+    Swal.fire({
+      title: `Transferência\nQuantidade Existente: ${sourceItem.qtt} ${sourceItem.unidade}`,
+      input: 'range',
+      inputAttributes: {
+        min: 0,
+        max: sourceItem.qtt,
+      },
+      inputValue: 0,
+      showCancelButton: true,
+      confirmButtonText: 'Continuar',
+      cancelButtonText: 'Cancelar',
+      showLoaderOnConfirm: true,
+      preConfirm: (value) => {
+        return value
+      },
+      allowOutsideClick: () => !Swal.isLoading()
+    }).then((r) => {
+      if (r.isConfirmed) {
+        if (parseFloat(r.value) === parseFloat(sourceItem.qtt)) {
+          console.log('teste')
+          const sourceList = listCopy[result.source.droppableId];
+          const [removedElement, newSourceList] = removeFromList(
+            sourceList,
+            result.source.index
+          );
+          listCopy[result.source.droppableId] = newSourceList;
+
+          const destinationList = listCopy[result.destination.droppableId];
+          listCopy[result.destination.droppableId] = addToList(
+            destinationList,
+            result.destination.index,
+            removedElement
+          );
+          setItems(listCopy);
+        }
+      }
+    })
+  
+  };
+  /*
+    const saveCliente = async () => {
+      try {
+        const res = await axios.put(`${config.server.apiurl}/updateCliente/${id}`, { nome, ncont, morada, cidade, codpost, contacto, email, rep, repemail, repcont, username: user.username });
+        if (res.data === 'OK') {
+          Swal.fire({
+            title: 'Sucesso!',
+            text: 'Os dados foram guardados com sucesso',
+            icon: 'success',
+            timer: 2000,
+            showConfirmButton: false,
+            timerProgressBar: true,
+            allowOutsideClick: false,
+          }).then(() => { setUpdate(1); });
+        } else {
+          Swal.fire({
+            title: 'Erro!',
+            text: 'Não Foi Possivel atualizar os dados',
+            icon: 'error',
+            timer: 2000,
+            showConfirmButton: false,
+            timerProgressBar: true,
+            allowOutsideClick: false,
+          }).then(() => { setUpdate(1); });
+        }
+      } catch (err) {
+        Swal.fire({
+          title: 'Erro!',
+          text: 'Não Foi Possivel atualizar os dados',
+          icon: 'error',
+          timer: 2000,
+          showConfirmButton: false,
+          timerProgressBar: true,
+          allowOutsideClick: false,
+        }).then(() => { setUpdate(1); });
+      }
+    };*/
+
+  return (
+    <div style={{ marginTop: '95px' }}>
+      {isLoading ? (
+        <div>Loading...</div>
+      ) : (
+        <div className="m-2 md:m-10  p-2 md:p-10 dark:bg-gray-400 bg-white rounded-3xl">
+          <div className="l-0 flex flex-wrap ">
+            <div className="mb-12 md:mb-0">
+              <Link
+                type="button"
+                to="/guias"
+                style={{
+                  backgroundColor: currentColor,
+                  borderColor: currentColor,
+                }}
+                className="p-3 mb-3 w-13 h-13 border-2 text-white rounded-full hover:drop-shadow-xl hover:text-black"
+              >
+                <ArrowBackIcon />
+              </Link>
+            </div>
+            <div className="w-full -mt-3 md:w-1/2 px-3  md:mb-0">
+              <Header category="Page" title={`Paletes Guia nº ${id}`} />
+            </div>
+          </div>
+          <div className="l-0 flex flex-wrap mb-6 -mx-3">
+            <div className="w-full md:w-1/6 px-3 mb-6 md:mb-0">
+              <div
+                id="changeLicense"
+                style={{ cursor: 'pointer', backgroundColor: currentColor, borderRadius: '10px' }}
+                className="p-3 text-white hover:drop-shadow-xl hover:text-black"
+              >
+                <AddBusinessIcon /> Alterar Licença
+              </div>
+            </div>
+          </div>
+          <DragDropContext onDragEnd={onDragEnd} >
+            <div className="flex flex-wrap">
+              <div className='md:w-1/2 w-full'>
+                <Droppable droppableId="available">
+                  {(provided) => (
+                    <div ref={provided.innerRef} {...provided.droppableProps}>
+                      <List
+                        title="Artigos em Falta"
+                        onDragEnd={onDragEnd}
+                        name="available"
+                      >
+                        {items.available.map((item, index) => (
+                          <Draggable
+                            key={item.fistamp}
+                            draggableId={item.fistamp + ""}
+                            index={index}
+                          >
+                            {(provided, snapshot) => (
+                              <div
+                                ref={provided.innerRef}
+                                {...provided.draggableProps}
+                                {...provided.dragHandleProps}
+                              >
+                                <Card data={item} />
+                              </div>
+                            )}
+                          </Draggable>
+                        ))}
+                        {provided.placeholder}
+                      </List>
+                    </div>
+                  )}
+                </Droppable>
+              </div>
+              <div className='md:w-1/2 w-full'>
+                <Droppable droppableId="assigned">
+                  {(provided) => (
+                    <div ref={provided.innerRef} {...provided.droppableProps}>
+                      <List
+                        title="Artigos Atribuidos"
+                        onDragEnd={onDragEnd}
+                        name="assigned"
+
+                      >
+                        {items.assigned.map((item, index) => (
+                          <Draggable
+                            draggableId={item.fistamp}
+                            index={index}
+                            key={item.fistamp}
+                          >
+                            {(provided, snapshot) => (
+                              <div
+                                ref={provided.innerRef}
+                                {...provided.draggableProps}
+                                {...provided.dragHandleProps}
+                              >
+                                <Card data={item} />
+                              </div>
+                            )}
+                          </Draggable>
+                        ))}
+                        {provided.placeholder}
+                      </List>
+                    </div>
+                  )}
+                </Droppable>
+              </div>
+            </div>
+          </DragDropContext>
+        </div>
+      )}
+    </div>
+  );
+};
+export default Embalamento;

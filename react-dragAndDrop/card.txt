@@ -1,0 +1,19 @@
+import React from "react";
+
+const Card = ({ data }) => {
+  return (
+    <div className="shadow-lg flex w-full cursor-pointer">
+      <main className="py-1 px-2 rounded-lg shadow-md shadow-slate-700 w-full bg-white">
+        <span className="flex flex-row justify-between">
+          <h4 className="uppercase font-normal">{data.ref} - {data.design}</h4>
+        </span>
+        <span className="flex flex-col">
+          <p>Quantidade: {data.qtt} {data.unidade}</p>
+          <p>Lote: {data.lote}</p>
+        </span>
+      </main>
+    </div>
+  );
+};
+
+export default Card;
