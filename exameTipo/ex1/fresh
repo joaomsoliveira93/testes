@@ -1,7 +1,0 @@
-
-Warning: require(D:\Private\Repositorios\testes\exameTipo\ex1/vendor/autoload.php): Failed to open stream: No such file or directory in D:\Private\Repositorios\testes\exameTipo\ex1\artisan on line 18
-
-Fatal error: Uncaught Error: Failed opening required 'D:\Private\Repositorios\testes\exameTipo\ex1/vendor/autoload.php' (include_path='C:\xampp\php\PEAR') in D:\Private\Repositorios\testes\exameTipo\ex1\artisan:18
-Stack trace:
-#0 {main}
-  thrown in D:\Private\Repositorios\testes\exameTipo\ex1\artisan on line 18
