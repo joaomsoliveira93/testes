@@ -1,0 +1,92 @@
+<div class="sidenav" [ngClass]="collapsed ? 'sidenav-collapsed': ''">
+    <div class="menu-container">
+        <button class="menu" (click)="toggleCollapse()"><i class="fas fa-bars"></i></button> 
+    </div>
+    <ul class="sidenav-nav">
+        <!--<li class="sidenav-nav-item" *ngFor="let data of navData">
+            <a class="sidenav-nav-link" [routerLink]="[data.routeLink]" 
+                routerLinkActive="active"
+                [routerLinkActiveOptions]="{exact: true}"
+            >
+                <i class="sidenav-link-icon" [class]="data.icon"></i>
+                <span class="sidenav-link-text" @fadeInOut *ngIf="collapsed">
+                    {{data.label}}
+                </span>
+            </a>
+        </li>-->
+        <li class="logo" @fadeInOut *ngIf="collapsed">
+            <a class="logo-link">
+                <i class="logo-icon fal fa-home"></i>
+                <span class="logo-text" >
+                    Company Name
+                </span>
+            </a>
+        </li>
+        <li class="sidenav-nav-item "  (click)="closeSidenav()" @fadeInOut *ngIf="collapsed">
+            <a class="sidenav-nav-link" routerLink="dashboard"
+                routerLinkActive="active"
+                [routerLinkActiveOptions]="{exact: true}"
+            >
+                <i class="sidenav-link-icon fal fa-home"></i>
+                <span class="sidenav-link-text">
+                    Dashboard
+                </span>
+            </a>
+        </li>
+        <li class="sidenav-nav-item "  (click)="closeSidenav()"@fadeInOut *ngIf="collapsed">
+            <a class="sidenav-nav-link" routerLink="products"
+                routerLinkActive="active"
+                [routerLinkActiveOptions]="{exact: true}"
+            >
+                <i class="sidenav-link-icon fal fa-box-open"></i>
+                <span class="sidenav-link-text">
+                    Products
+                </span>
+            </a>
+        </li>
+        <li class="sidenav-nav-item "  (click)="closeSidenav()"@fadeInOut *ngIf="collapsed">
+            <a class="sidenav-nav-link" routerLink="statistics"
+                routerLinkActive="active"
+                [routerLinkActiveOptions]="{exact: true}"
+            >
+                <i class="sidenav-link-icon fal fa-chart-bar"></i>
+                <span class="sidenav-link-text">
+                    Statistics
+                </span>
+            </a>
+        </li>
+        <li class="sidenav-nav-item "  (click)="closeSidenav()"@fadeInOut *ngIf="collapsed">
+            <a class="sidenav-nav-link" routerLink="coupens"
+                routerLinkActive="active"
+                [routerLinkActiveOptions]="{exact: true}"
+            >
+                <i class="sidenav-link-icon fal fa-tags"></i>
+                <span class="sidenav-link-text" >
+                    Coupens
+                </span>
+            </a>
+        </li>
+        <li class="sidenav-nav-item "  (click)="closeSidenav()"@fadeInOut *ngIf="collapsed">
+            <a class="sidenav-nav-link" routerLink="media"
+                routerLinkActive="active"
+                [routerLinkActiveOptions]="{exact: true}"
+            >
+                <i class="sidenav-link-icon fal fa-camera"></i>
+                <span class="sidenav-link-text">
+                    Media
+                </span>
+            </a>
+        </li>
+        <li class="sidenav-nav-item " (click)="closeSidenav()"@fadeInOut *ngIf="collapsed">
+            <a class="sidenav-nav-link" routerLink="settings"
+                routerLinkActive="active"
+                [routerLinkActiveOptions]="{exact: true}"
+            >
+                <i class="sidenav-link-icon fal fa-cog"></i>
+                <span class="sidenav-link-text">
+                    Settings
+                </span>
+            </a>
+        </li>
+    </ul>
+</div>

@@ -1,0 +1,8 @@
+<div *ngIf="isLoggedin" class="main-body">
+    <app-topbar></app-topbar>
+    <app-sidenav (onToggleSideNav)="onToggleSideNav($event)"></app-sidenav>
+    <app-body [collapsed]="isSideNavCollapsed" [screenWidth]="screenWidth"></app-body>
+</div>
+<div *ngIf="!isLoggedin" class="main-body">
+    <router-outlet></router-outlet>
+</div>

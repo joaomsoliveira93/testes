@@ -1,0 +1,9 @@
+<div class="topbar">
+    <div class="user">
+        <div (click)="toggleUserProfile()">
+            <a>{{user}}</a>
+            <span class="fa fa-arrow-down "></span>
+        </div>
+    </div>
+    <app-user-profile *ngIf="userProfile" [userProfile]="userProfile" (event)="toggleUserProfile()"></app-user-profile>
+</div>

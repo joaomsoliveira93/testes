@@ -1,0 +1,21 @@
+<div class="container">
+    <div class="login-form">
+        <div class="login-header">
+            <img src="./assets/img/user.png" width="100px">
+            <p class="txt1">Bem vindo</p>
+            <p class="txt2">Iniciar Sessão</p>
+        </div>
+        <div class="login-body">
+            <input type="text" [(ngModel)]="username" [class.obrigatorio]="username === ''"  placeholder="Nome de Utilizador">
+            <input type="password" [(ngModel)]="password" [class.obrigatorio]="password === ''" placeholder="Palavra-passe">
+
+            <div class="btn" (click)="onSubmit()">
+                Iniciar Sessão
+            </div>
+        </div>
+        <div class="login-footer">
+            2023 Todos os direitos reservados
+        </div>
+    </div>
+
+</div>

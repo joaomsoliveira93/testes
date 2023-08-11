@@ -1,0 +1,124 @@
+.cont {
+    width: 100%;
+    height: fit-content;
+    color: white;
+    box-shadow: 7px 6px 5px 5px rgba(0, 0, 0, 0.5);
+    position: sticky;
+    top: 60px;
+    background: white;
+    z-index: 50;
+    border-radius: 0px 0px 5px 5px;
+    padding-top: 10px;
+
+    .btn {
+        height: 30px;
+        width: fit-content;
+        background: #263238;
+        padding: 5px;
+        margin-left: 10px;
+        border-radius: 5px;
+        margin-bottom: 10px;
+    }
+
+    i {
+        margin-right: 10px;
+    }
+
+    .btn:hover {
+        cursor: pointer;
+        background: rgb(109, 109, 109);
+    }
+
+    .filters {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(11rem, 1fr));
+
+        input {
+            height: 30px;
+            border: none;
+            background-color: transparent;
+            padding-left: 5px;
+            border-bottom: black solid 2px;
+            width: 170px;
+            margin-top: 10px;
+            margin-left: 10px;
+            margin-bottom: 10px;
+        }
+
+        input:focus {
+            outline: none !important;
+            border-radius: 10px 10px 0px 0px;
+        }
+
+        input:hover {
+            border-bottom: rgb(109, 109, 109) solid 2px;
+        }
+
+
+        @media (max-width: 1600px) {
+            .filters {
+                grid-template-columns: repeat(3, minmax(12rem, 1fr));
+            }
+
+            input {
+                width: 170px;
+            }
+        }
+
+        @media (max-width: 1200px) {
+            .cont {
+                padding-top: 10px;
+
+                .filters {
+                    grid-template-columns: repeat(2, minmax(12rem, 1fr));
+                }
+
+                input {
+                    width: 170px;
+                }
+            }
+
+        }
+
+        @media (max-width: 900px) {
+            .cont {
+                padding-top: 10px;
+
+                .filters {
+                    grid-template-columns: repeat(1, 13rem);
+                }
+
+                input {
+                    width: 170px;
+                }
+            }
+        }
+    }
+}
+
+
+
+.card-grid {
+    margin-top: 15px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    column-gap: 10px;
+}
+
+@media (max-width: 1600px) {
+    .card-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (max-width: 1200px) {
+    .card-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 900px) {
+    .card-grid {
+        grid-template-columns: repeat(1, 1fr);
+    }
+}

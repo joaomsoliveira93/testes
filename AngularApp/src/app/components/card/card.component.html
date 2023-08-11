@@ -1,0 +1,30 @@
+<div class="card">
+    <div class="card-header">
+        <div class="header-title">
+            <p>{{title}}</p>
+        </div>
+        <div class="header-button" [routerLink]="link">
+            <i class="fal fa-eye"></i>
+            Detalhes
+        </div>        
+    </div>
+
+    <div class="card-content">
+        <div class="content1" *ngFor="let dt of display">
+            <p class="title">{{dt.title}}:</p>
+            <p class="desc"> {{dt.desc}}</p>
+        </div>
+
+    </div>
+
+    <div class="card-footer">     
+        <div class="footer-button">
+            <i class="fal fa-edit"></i>
+            Editar
+        </div>    
+        <div class="footer-button red">
+            <i class="fal fa-times"></i>
+            Apagar
+        </div>    
+    </div>
+</div>

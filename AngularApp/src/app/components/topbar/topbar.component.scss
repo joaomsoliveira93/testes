@@ -1,0 +1,43 @@
+.topbar {
+    background: #263238;
+    position: fixed;
+    z-index: 20;
+    top: 0;
+    width: 100%;
+    height: 50px;
+
+    .user {
+        position: absolute;
+        right: 0;
+        top: 2px;
+        height: 35px;
+        width: max-content;
+        cursor: pointer;
+        transition: all .5s ease;
+
+        div {
+            align-items: center;
+            margin-right: 15px;
+            margin-top: 8px;
+            position: absolute;
+            right: 0;
+            width: max-content;
+            color: white;
+            font-weight: 900;
+            padding: 5px 15px 5px 15px;
+            a {
+                margin-right: 10px;
+            }
+        }
+    }
+
+    .user:hover {
+        color: black !important;
+
+        div:hover {
+            border-radius: 5px;
+            background: white;
+            color: black;
+        }
+    }
+}
