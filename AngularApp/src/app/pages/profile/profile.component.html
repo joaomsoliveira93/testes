@@ -1,0 +1,88 @@
+<div @fade class="w-full h-fit z-50 shadow-xl shadow-slate-500 sticky rounded-lg p-2"
+    [style.background]="appMode==='dark' ? '#b0b5b5':'white'">
+    <app-header [title]="'Perfil'" [back]="''" [hasfilters]="true"></app-header>
+    <div *ngIf="!edit">
+        <button (click)="edit=true" class=" ml-2 mr-2 text-white p-2 rounded-md" [style.background-color]="color">
+            <i class="fa fa-pencil p-1"></i> <i *ngIf="!isScreenSizeLessThan1200"> Editar</i>
+        </button>
+        <button *ngIf="user.username === username || user.username !== 'admin'" class="mr-2 text-white p-2 rounded-md" (click)="openPopup()" [style.background-color]="color">
+            <i class="underline">****</i> <i *ngIf="!isScreenSizeLessThan1200"> Alterar Palavra-Passe</i>
+        </button>
+    </div>
+    <div *ngIf="edit">
+        <button (click)="updateUser()" class="mr-2 text-white p-2 rounded-md" style="color:white"
+            [style.background-color]="color">
+            <i class="fa fa-floppy-disk p-1"></i> <i *ngIf="!isScreenSizeLessThan1200"> Guardar</i>
+        </button>
+        <button (click)="cancelEdit()" class="mr-2 bg-red-600 text-white p-2 rounded-md">
+            <i class="fa fa-ban p-1"></i> <i *ngIf="!isScreenSizeLessThan1200"> Cancelar</i>
+        </button>
+    </div>
+</div>
+<div @fade *ngIf="!edit" class="w-full mt-6 grid grid-cols-1 md:grid-cols-2 gap-4 p-4 rounded-lg shadow-xl shadow-slate-500"
+    [style.background]="appMode==='dark' ? '#b0b5b5':'white'">
+    <div>
+        <label class="text-xl mr-2">Nome de Utilizador:</label>
+        <label class="text-xl font-extrabold break-words">{{user.username}}</label>
+    </div>
+
+    <div>
+        <label class="text-xl mr-2">Nome:</label>
+        <label class="text-xl font-extrabold break-words">{{user.name}}</label>
+    </div>
+
+    <div>
+        <label class="text-xl mr-2 break-keep">E-mail:</label>
+        <label class="text-xl font-extrabold break-words">{{user.email}}</label>
+    </div>
+
+    <div></div>
+
+    <div class="flex">
+        <label class="text-xl mr-2">Cor da Aplicação:</label>
+        <div class="w-20 h-8 rounded-lg -mt-0.5" [style.background-color]="user.appColor"></div>
+    </div>
+
+    <div>
+        <label class="text-xl mr-2">Modo da Aplicação:</label>
+        <label class="text-xl font-extrabold">{{user.appMode==='dark' ? 'Escuro' : 'Claro'}}</label>
+    </div>
+</div>
+
+<div @fade *ngIf="edit" class="w-full mt-5 grid grid-cols-1 md:grid-cols-2 gap-4 p-4 rounded-lg shadow"
+    [style.background]="appMode==='dark' ? '#b0b5b5':'white'">
+    <div class="mt-5">
+        <label class="text-xl mr-2">Nome de Utilizador:</label>
+        <label class="text-xl font-extrabold break-words">{{user.username}}</label>
+    </div>
+
+    <mat-form-field appearance="fill">
+        <mat-label>Nome</mat-label>
+        <input matInput [(ngModel)]="user.name" required>
+        <mat-error>Deve preencher o Nome</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+        <mat-label>E-mail</mat-label>
+        <input matInput type="email" [(ngModel)]="user.email" required>
+        <mat-error>Deve preencher o E-mail</mat-error>
+    </mat-form-field>
+
+    <div></div>
+
+
+    <mat-form-field appearance="fill">
+        <mat-label>Cor da Aplicação</mat-label>
+        <input type="color" matInput [(ngModel)]="user.appColor" required>
+        <mat-error>Deve preencher a Cor da Aplicação</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+        <mat-label>Modo da Aplicação</mat-label>
+        <mat-select [(ngModel)]="user.appMode" required>
+            <mat-option value="dark">Escuro</mat-option>
+            <mat-option value="light">Claro</mat-option>
+        </mat-select>
+        <mat-error>Deve preencher o Modo da Aplicação</mat-error>
+    </mat-form-field>
+</div>

@@ -1,0 +1,14 @@
+{
+    "server": {
+        "port":     3010
+    },
+    "mongoose":{
+        "url":"mongodb://ADDRESS:PORT/DATABASE"
+    },
+    "mssql": {
+        "user":     "",
+        "password": "",
+        "database": "",
+        "server":   ""
+    }
+}

@@ -1,0 +1,39 @@
+<div class="flex flex-col items-center p-4"[style.background]="appMode==='dark' ? '#b0b5b5':'white'">
+    <h2 mat-dialog-title class="text-xl font-bold mb-4">Novo Utilizador</h2>
+    <div mat-dialog-content class="w-full">
+
+        <mat-form-field appearance="fill" class="w-full">
+            <mat-label>Nome de Utilizador</mat-label>
+            <input matInput [(ngModel)]="user.username" required>
+            <mat-error>Deve preencher o Nome de Utilizador</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="w-full">
+            <mat-label>Nome</mat-label>
+            <input matInput [(ngModel)]="user.name" required>
+            <mat-error>Deve preencher o Nome</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="w-full">
+            <mat-label>E-mail</mat-label>
+            <input matInput type="email" [(ngModel)]="user.email" placeholder="Ex. exemplo@exemplo.com" required>
+            <mat-error>Deve preencher o E-mail</mat-error>
+            
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="w-full">
+            <mat-label>Tipo</mat-label>
+            <mat-select [(ngModel)]="user.tipo" required>
+                <mat-option value="admin">Administrador</mat-option>
+                <mat-option value="user">Utilizador</mat-option>
+            </mat-select>
+            <mat-error>Deve preencher o Tipo de Utilizador</mat-error>
+        </mat-form-field>
+    </div>
+    <div mat-dialog-actions class="flex justify-center mt-4">
+        <button style="background-color: rgba(0, 128, 0, 0.788);" mat-button (click)="saveUser()"><i
+                class="fa fa-floppy-disk"></i> Guardar</button>
+        <button style="background-color: rgba(168, 0, 0, 0.788);" mat-button (click)="onClose()"> <i
+                class="fa fa-ban"></i> Cancelar</button>
+    </div>
+</div>

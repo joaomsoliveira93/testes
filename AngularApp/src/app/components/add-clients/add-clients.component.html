@@ -1,0 +1,68 @@
+<div class="flex flex-col items-center p-4"[style.background]="appMode==='dark' ? '#b0b5b5':'white'">
+    <h2 mat-dialog-title class="text-xl font-bold mb-4">Novo Cliente</h2>
+    <div mat-dialog-content class="w-full">
+
+        <mat-form-field appearance="fill" class="w-full">
+            <mat-label>Nome</mat-label>
+            <input matInput [(ngModel)]="client.name" required>
+            <mat-error>Deve preencher o Nome</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="w-full">
+            <mat-label>Nº de Contribuinte</mat-label>
+            <input type="number" matInput [(ngModel)]="client.ncont" required>
+            <mat-error>Deve preencher o Nº de Contribuinte</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="w-full">
+            <mat-label>Morada</mat-label>
+            <input matInput [(ngModel)]="client.morada" required>
+            <mat-error>Deve preencher a morada</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="w-full">
+            <mat-label>Código Postal</mat-label>
+            <input matInput [(ngModel)]="client.codPost" required>
+            <mat-error>Deve preencher o Código Postal</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="w-full">
+            <mat-label>Cidade</mat-label>
+            <input matInput [(ngModel)]="client.cidade" required>
+            <mat-error>Deve preencher a Cidade</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="w-full">
+            <mat-label>E-mail</mat-label>
+            <input matInput type="email" [(ngModel)]="client.email" placeholder="Ex. exemplo@exemplo.com" required>
+            <mat-error>Deve preencher o E-mail</mat-error>            
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="w-full">
+            <mat-label>Contacto</mat-label>
+            <input matInput [(ngModel)]="client.contacto" required>
+            <mat-error>Deve preencher o contacto</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="w-full">
+            <mat-label>Representante</mat-label>
+            <input matInput [(ngModel)]="client.rep" >
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="w-full">
+            <mat-label>E-Mail do Representante</mat-label>
+            <input matInput [(ngModel)]="client.repEmail" >
+        </mat-form-field>
+        
+        <mat-form-field appearance="fill" class="w-full">
+            <mat-label>Contacto do Representante</mat-label>
+            <input matInput [(ngModel)]="client.repContacto" >
+        </mat-form-field>
+    </div>
+    <div mat-dialog-actions class="flex justify-center mt-4">
+        <button style="background-color: rgba(0, 128, 0, 0.788);" mat-button (click)="saveClient()"><i
+                class="fa fa-floppy-disk"></i> Guardar</button>
+        <button style="background-color: rgba(168, 0, 0, 0.788);" mat-button (click)="onClose()"> <i
+                class="fa fa-ban"></i> Cancelar</button>
+    </div>
+</div>

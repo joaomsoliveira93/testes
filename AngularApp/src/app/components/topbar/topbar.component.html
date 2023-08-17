@@ -1,9 +1,8 @@
-<div class="topbar">
-    <div class="user">
-        <div (click)="toggleUserProfile()">
-            <a>{{user}}</a>
-            <span class="fa fa-arrow-down "></span>
-        </div>
-    </div>
-    <app-user-profile *ngIf="userProfile" [userProfile]="userProfile" (event)="toggleUserProfile()"></app-user-profile>
+<div class="fixed z-40 top-0 w-full h-[50px]" [style.background]="color">
+    <button class="text-lg mr-2 mt-1 absolute right-0 w-max text-white font-black p-1 rounded-lg hover:bg-white hover:text-black"(click)="toggleUserProfile()">
+        {{user}}
+        <i class="fa fa-sort-down "></i>
+    </button>
+ 
+    <app-user-profile  [userProfile]="userProfile" (event)="toggleUserProfile()"></app-user-profile>
 </div>

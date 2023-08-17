@@ -1,23 +1,25 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AuthGuard } from 'src/services/auth-guard.service';
-import { CoupensComponent } from './pages/coupens/coupens.component';
+import { AuthGuard } from 'src/services/auth/auth-guard.service';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
-import { MediaComponent } from './pages/media/media.component';
-import { ProductsComponent } from './pages/products/products.component';
+import { AllclientsComponent } from './pages/clients/allclients/allclients.component';
+import { ViewclientComponent } from './pages/clients/viewclient/viewclient.component';
+import { UsersComponent } from './pages/users/allusers/allusers.component';
+import { ViewuserComponent } from './pages/users/viewuser/viewuser.component';
 import { SettingsComponent } from './pages/settings/settings.component';
-import { StatisticsComponent } from './pages/statistics/statistics.component';
 import { LoginComponent } from './pages/auth/login/login.component';
+import { ProfileComponent } from './pages/profile/profile.component';
 
 const routes: Routes = [
   {path: '', redirectTo: 'dashboard', pathMatch: 'full'},
   {path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard]},
-  {path: 'products', component: ProductsComponent, canActivate: [AuthGuard]},
-  {path: 'statistics', component: StatisticsComponent, canActivate: [AuthGuard]},
-  {path: 'coupens', component: CoupensComponent, canActivate: [AuthGuard]},
-  {path: 'media', component: MediaComponent, canActivate: [AuthGuard]},
+  {path: 'clients', component: AllclientsComponent, canActivate: [AuthGuard]},
+  {path: 'clients/:id', component: ViewclientComponent, canActivate: [AuthGuard]},
+  {path: 'users', component: UsersComponent, canActivate: [AuthGuard]},
+  {path: 'users/:id', component: ViewuserComponent, canActivate: [AuthGuard]},
+  {path: 'profile', component: ProfileComponent, canActivate: [AuthGuard]},
   {path: 'settings', component: SettingsComponent, canActivate: [AuthGuard]},
-  {path:'login',component:LoginComponent}
+  {path: 'login', component:LoginComponent}
 ];
 
 @NgModule({

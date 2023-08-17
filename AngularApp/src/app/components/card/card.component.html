@@ -1,30 +1,15 @@
-<div class="card">
-    <div class="card-header">
-        <div class="header-title">
-            <p>{{title}}</p>
-        </div>
-        <div class="header-button" [routerLink]="link">
-            <i class="fal fa-eye"></i>
-            Detalhes
-        </div>        
+<div class="w-full mb-7 h-60 rounded-lg shadow-lg shadow-slate-600" [style.background]="appMode==='dark' ? '#b0b5b5':'white'">
+
+    <div class="h-48 rounded-tl-lg rounded-tr-lg overflow-y-scroll">
+        <p class="text-lg pl-3 pr-3 pt-3"> {{desc1}}</p>
+        <p class="text-lg pl-3 pr-3"> {{desc2}}</p>
+        <p class="text-lg pl-3 pr-3"> {{desc3}}</p>
+        <p class="text-lg pl-3 pr-3"> {{desc4}}</p>
+        <p class="text-lg pl-3 pr-3"> {{desc5}}</p>
+        <p class="text-lg pl-3 pr-3"> {{desc6}}</p>
     </div>
 
-    <div class="card-content">
-        <div class="content1" *ngFor="let dt of display">
-            <p class="title">{{dt.title}}:</p>
-            <p class="desc"> {{dt.desc}}</p>
-        </div>
-
-    </div>
-
-    <div class="card-footer">     
-        <div class="footer-button">
-            <i class="fal fa-edit"></i>
-            Editar
-        </div>    
-        <div class="footer-button red">
-            <i class="fal fa-times"></i>
-            Apagar
-        </div>    
+    <div class="h-10 w-full justify-center flex">
+        <button class="mt-2 text-white w-24 rounded-xl" [style.background-color]="color" (click)="openLink(page+'/'+link)"> <i class="fa fa-eye"></i> Detalhes</button>
     </div>
 </div>

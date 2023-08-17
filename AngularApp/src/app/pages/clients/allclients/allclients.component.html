@@ -1,0 +1,153 @@
+<div @fade
+    class="w-[calc(100%+32px)] h-fit z-50 shadow-xl rounded-lg rounded-tr-none shadow-slate-500 sticky -top-4 -ml-4 -mt-4 p-2 "
+    [style.background]="appMode==='dark' ? '#b0b5b5':'white'">
+    <app-header [title]="title" [back]="back"></app-header>
+    <div class="flex w-full" *ngIf="isScreenSizeLessThan1200">
+        <button class="text-xl w-[29%] h-[50px] mb-5 md:mb-0 rounded-lg" [style.background-color]="color"
+            style="color:white" (click)="toggleInputs()">
+            <i class="fal fa-eye"></i> Filtros
+        </button>
+        <mat-form-field class="w-[53%] ml-[2%] md:w-1/4 md:ml-2 md:mr-2" appearance="fill">
+            <mat-label>Ordenar Por</mat-label>
+            <mat-select [(ngModel)]="sortingCriteria" (selectionChange)="changeOrder(sortAscending)">
+                <mat-option value="name">Nome</mat-option>
+                <mat-option value="email">E-mail</mat-option>
+                <mat-option value="contacto">Contacto</mat-option>
+                <mat-option value="ncont">Nº de contribuinte</mat-option>
+                <mat-option value="morada">Morada</mat-option>
+                <mat-option value="cidade">Cidade</mat-option>
+                <mat-option value="codPost">Código Postal</mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <div class="ml-[2%]">
+            <button *ngIf="!sortAscending" class="text-white h-[50px] w-[50px] rounded-xl"
+                [style.background-color]="color" (click)="changeOrder(true)">
+                <i class="fa fa-arrow-down text-4xl"></i>
+            </button>
+            <button *ngIf="sortAscending" class="text-white h-[50px] w-[50px]  rounded-xl"
+                [style.background-color]="color" (click)="changeOrder(false)">
+                <i class="fa fa-arrow-up  text-4xl"></i>
+            </button>
+
+        </div>
+    </div>
+
+    <div [@inputs]="showInputs ? 'collapsed' : 'expanded' " class="md:flex -mb-5 sticky top-0 w-full">
+
+        <mat-form-field class="w-full md:w-1/4 md:ml-2 md:mr-2" *ngIf="!isScreenSizeLessThan1200 || showInputs"
+            appearance="fill">
+            <mat-label>Nome</mat-label>
+            <input matInput [(ngModel)]="searchName" type="text" (input)="filterData()">
+        </mat-form-field>
+
+        <mat-form-field class="w-full md:w-1/4 md:ml-2 md:mr-2" *ngIf="!isScreenSizeLessThan1200 || showInputs"
+            appearance="fill">
+            <mat-label>Nº de Contribuinte</mat-label>
+            <input matInput [(ngModel)]="searchNcont" type="text" (input)="filterData()">
+        </mat-form-field>
+
+        <mat-form-field class="w-full md:w-1/4 md:ml-2 md:mr-2" *ngIf="!isScreenSizeLessThan1200 || showInputs"
+            appearance="fill">
+            <mat-label>E-mail</mat-label>
+            <input matInput [(ngModel)]="searchEmail" type="text" (input)="filterData()">
+        </mat-form-field>
+
+    </div>
+</div>
+<div @fade class="mt-4">
+    <p class="text-center rounded-lg text-xl mb-2 w-full shadow-2xl shadow-slate-600"
+        [style.background]="appMode==='dark' ? '#b0b5b5':'white'" *ngIf="filteredClients.length===0">
+        Sem clientes para mostrar!
+    </p>
+    <table *ngIf="!isScreenSizeLessThan1200 && filteredClients.length"
+        class="rounded-lg mb-2 w-full shadow-2xl shadow-slate-600"
+        [style.background]="appMode==='dark' ? '#b0b5b5':'white'">
+        <thead class="border-b-2 border-slate-500 sticky top-[130px] "
+            [style.background]="appMode==='dark' ? '#b0b5b5':'white'">
+            <tr>
+                <th class="p-2 text-left cursor-pointer" (click)="[sortingCriteria='name',changeOrder(!sortAscending)]">
+                    Nome
+                    <label *ngIf="sortingCriteria==='name' && sortAscending" class="fa fa-arrow-up"></label>
+                    <label *ngIf="sortingCriteria==='name' && !sortAscending" class="fa fa-arrow-down"></label>
+                </th>
+                <th class="p-2 text-left cursor-pointer"
+                    (click)="[sortingCriteria='ncont',changeOrder(!sortAscending)]">
+                    Nº de Contribuinte
+                    <label *ngIf="sortingCriteria==='ncont' && sortAscending" class="fa fa-arrow-up"></label>
+                    <label *ngIf="sortingCriteria==='ncont' && !sortAscending" class="fa fa-arrow-down"></label>
+                </th>
+                <th class="p-2 text-left cursor-pointer"
+                    (click)="[sortingCriteria='email',changeOrder(!sortAscending)]">
+                    E-mail
+                    <label *ngIf="sortingCriteria==='email' && sortAscending" class="fa fa-arrow-up"></label>
+                    <label *ngIf="sortingCriteria==='email' && !sortAscending" class="fa fa-arrow-down"></label>
+                </th>
+                <th class="p-2 text-left cursor-pointer"
+                    (click)="[sortingCriteria='contacto',changeOrder(!sortAscending)]">
+                    contacto
+                    <label *ngIf="sortingCriteria==='contacto' && sortAscending" class="fa fa-arrow-up"></label>
+                    <label *ngIf="sortingCriteria==='contacto' && !sortAscending" class="fa fa-arrow-down"></label>
+                </th>
+                <th class="p-2 text-left cursor-pointer"
+                    (click)="[sortingCriteria='morada',changeOrder(!sortAscending)]">
+                    Morada
+                    <label *ngIf="sortingCriteria==='morada' && sortAscending" class="fa fa-arrow-up"></label>
+                    <label *ngIf="sortingCriteria==='morada' && !sortAscending" class="fa fa-arrow-down"></label>
+                </th>
+                <th class="p-2 text-left cursor-pointer"
+                    (click)="[sortingCriteria='cidade',changeOrder(!sortAscending)]">
+                    Cidade
+                    <label *ngIf="sortingCriteria==='cidade' && sortAscending" class="fa fa-arrow-up"></label>
+                    <label *ngIf="sortingCriteria==='cidade' && !sortAscending" class="fa fa-arrow-down"></label>
+                </th>
+                <th class="p-2 text-left cursor-pointer"
+                    (click)="[sortingCriteria='codPost',changeOrder(!sortAscending)]">
+                    Código Postal
+                    <label *ngIf="sortingCriteria==='codPost' && sortAscending" class="fa fa-arrow-up"></label>
+                    <label *ngIf="sortingCriteria==='codPost' && !sortAscending" class="fa fa-arrow-down"></label>
+                </th>
+                <th class="p-2 text-left rounded-tr-2xl"></th>
+            </tr>
+        </thead>
+        <tbody *ngIf="!(filteredClients.length===0)" class="overflow-y-scroll">
+            <tr class="border-b-2 border-slate-500"
+                *ngFor="let user of filteredClients | slice: (currentPage - 1) * itemsPerPage : currentPage * itemsPerPage">
+                <td class="text-left p-2">{{ user.name }}</td>
+                <td class="text-left p-2">{{ user.ncont }}</td>
+                <td class="text-left p-2">{{ user.email }}</td>
+                <td class="text-left p-2">{{ user.contacto }}</td>
+                <td class="text-left p-2">{{ user.morada }}</td>
+                <td class="text-left p-2">{{ user.cidade }}</td>
+                <td class="text-left p-2">{{ user.codPost }}</td>
+                <td class="text-left p-2">
+                    <button class="fa fa-eye mr-2 text-white p-2 rounded-md" [style.background-color]="color"
+                        (click)="openClient(user._id)"></button>
+                </td>
+            </tr>
+        </tbody>
+
+    </table>
+    <div @fade class="mt-4" *ngIf="isScreenSizeLessThan1200">
+        <div *ngFor="let dt of filteredClients | slice: (currentPage - 1) * itemsPerPage : currentPage * itemsPerPage">
+            <app-card [page]="'clients'" [desc1]="'Nome: '+dt.name" [desc2]="'Nº de Contribuinte: '+dt.ncont"
+                [desc3]="'E-mail: '+dt.email" [desc4]="'Contacto: '+ dt.contacto "
+                [desc5]="'Morada: ' + dt.morada + ' ' + dt.codPost" [desc6]="'Cidade: '+ dt.cidade" [link]="dt._id">
+            </app-card>
+        </div>
+    </div>
+    <div class="justify-center flex">
+        <button class="mr-5 text-white h-8 w-8 rounded-xl" [style.background-color]="color"
+            [disabled]="currentPage === 1" (click)="onPageChange(currentPage - 1)">
+            <i class="fa fa-arrow-left"></i>
+        </button>
+        <span class="pt-2">{{ currentPage }} de {{getTotalPages()}}
+        </span>
+        <button class="ml-5 text-white h-8 w-8 rounded-xl" [style.background-color]="color"
+            [disabled]="currentPage === getTotalPages()" (click)="onPageChange(currentPage + 1)">
+            <i class="fa fa-arrow-right"></i>
+        </button>
+    </div>
+</div>
+<button class="fixed text-white bottom-2 right-4 w-12 h-12 rounded-full fa fa-plus" [style.background-color]="color"
+    (click)="openPopup()"></button>

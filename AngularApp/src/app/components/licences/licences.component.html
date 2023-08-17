@@ -1,0 +1,92 @@
+<div @fade class="w-full z-50 shadow-xl rounded-lg mt-5 shadow-slate-500  p-2 "
+    [style.background]="appMode==='dark' ? '#b0b5b5':'white'">
+    <p class="mb-2 text-2xl">Licenças do Cliente</p>
+    <mat-tab-group class="mt-1">
+        <mat-tab *ngFor="let licence of licences" [label]="licence.tipo.valueOf()">
+            <div class="mt-1 mb-5" *ngIf="edit!==licence._id">
+                <button *ngIf="licences.length>0" (click)="edit=licence._id"
+                    class="  mr-2 text-white p-2 rounded-md" [style.background-color]="color">
+                    <i class="fa fa-pencil p-1"></i> <i *ngIf="!isScreenSizeLessThan1200"> Editar</i>
+                </button>
+                <button *ngIf="licences.length>0" class="mr-2 bg-red-600 text-white p-2 rounded-md">
+                    <i class="fa fa-trash p-1"></i> <i *ngIf="!isScreenSizeLessThan1200"> Apagar</i>
+                </button>
+            </div>
+
+            <div class="mt-1 mb-5" *ngIf="edit===licence._id">
+                <button class="mr-2 text-white p-2 rounded-md" style="color:white" [style.background-color]="color">
+                    <i class="fa fa-floppy-disk p-1"></i> <i *ngIf="!isScreenSizeLessThan1200"> Guardar</i>
+                </button>
+                <button (click)="edit=''" class="mr-2 bg-red-600 text-white p-2 rounded-md">
+                    <i class="fa fa-ban p-1"></i> <i *ngIf="!isScreenSizeLessThan1200"> Cancelar</i>
+                </button>
+            </div>
+            <div *ngIf="edit===licence._id" class="w-full grid grid-cols-1 gap-4 md:grid-cols-2">
+                <div>
+                    <mat-form-field class="w-full" appearance="fill">
+                        <mat-label>Tipo</mat-label>
+                        <input matInput [(ngModel)]="licence.tipo" required>
+                        <mat-error>Deve preencher o tipo</mat-error>
+                    </mat-form-field>
+                </div>
+
+                <div>
+                    <label class="text-xl mr-2">Estado:</label>
+                    <label class="text-xl font-extrabold break-words">{{licence.estado ? 'Válida' : 'Expirada'}}</label>
+                </div>
+
+                <div>
+                    <mat-form-field class="w-full" appearance="fill">
+                        <mat-label>Início da licença</mat-label>
+                        <input type="date" [ngModel]="formatDate(licence.startedAt)" (change)="validateEstado($any($event.target).value,licence.endedAt,licence._id)" matInput required>
+                        <mat-error>Deve preencher o início da licença</mat-error>
+                    </mat-form-field>
+                </div>
+
+                <div>
+                    <mat-form-field class="w-full" appearance="fill">
+                        <mat-label>Fim da Licença</mat-label>
+                        <input type="date" [ngModel]="formatDate(licence.endedAt)" (change)="validateEstado(licence.startedAt,$any($event.target).value,licence._id)" matInput required>
+                        <mat-error>Deve preencher o fim da licença</mat-error>
+                    </mat-form-field>
+                </div>
+
+                <div>
+                    <mat-form-field class="w-full">
+                        <textarea matInput [(ngModel)]="licence.obs" placeholder="Observações"></textarea>
+                    </mat-form-field>
+                </div>
+
+            </div>
+            <div class="mt-2 w-full grid grid-cols-1 md:grid-cols-2" *ngIf="edit!==licence._id">
+                <div>
+                    <label class="text-xl mr-2">Tipo:</label>
+                    <label class="text-xl font-extrabold break-words">{{licence.tipo}}</label>
+                </div>
+                <div>
+                    <label class="text-xl mr-2">Estado:</label>
+                    <label class="text-xl font-extrabold break-words">{{licence.estado ? 'Válida' : 'Expirada'}}</label>
+                </div>
+
+                <div>
+                    <label class="text-xl mr-2">Início da Licença:</label>
+                    <label class="text-xl font-extrabold break-words">{{(licence.startedAt).split('T')[0]}}</label>
+                </div>
+                <div>
+                    <label class="text-xl mr-2">Fim da Licença:</label>
+                    <label class="text-xl font-extrabold break-words">{{formatDate(licence.endedAt)}}</label>
+                </div>
+
+                <div>
+                    <label class="text-xl mr-2">Observações:</label>
+                    <label class="text-xl font-extrabold break-words">{{licence.obs}}</label>
+                </div>
+            </div>
+        </mat-tab>
+    </mat-tab-group>
+    <div class="mt-5" *ngIf="!edit">
+        <button class="bg-red-600 text-white p-2 rounded-md">
+            <i class="fa fa-plus p-1"></i> <i *ngIf="!isScreenSizeLessThan1200" (click)="openPopup()"> Adicionar</i>
+        </button>
+    </div>
+</div>

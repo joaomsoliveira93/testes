@@ -1,6 +1,6 @@
-import { animate, style, transition, trigger } from '@angular/animations';
 import { Component, Output, EventEmitter, OnInit, HostListener } from '@angular/core';
-//import { navbarData } from './nav-data';
+import { animate, state, style, transition, trigger } from '@angular/animations';
+import { AuthGuard } from 'src/services/auth/auth-guard.service';
 
 interface SideNavToggle {
   screenWidth: number;
@@ -12,22 +12,31 @@ interface SideNavToggle {
   templateUrl: './sidenav.component.html',
   styleUrls: ['./sidenav.component.scss'],
   animations: [
-    trigger('fadeInOut', [
-      transition(':enter', [
-        style({ opacity: 0 }),
-        animate('1ms',
-          style({ opacity: 1 })
-        )
-      ])
+    trigger('fade', [
+      state('collapsed', style({ width: 0 })),
+      state('expanded', style({ width: "16.5625rem" })),
+      transition('collapsed <=> expanded', animate('100ms'))
     ])
   ]
 })
 export class SidenavComponent implements OnInit {
 
   @Output() onToggleSideNav: EventEmitter<SideNavToggle> = new EventEmitter();
+  color:string='';
+  appMode:string = '';
+  activeColor:string='';
   collapsed = false;
   screenWidth = 0;
-  //navData = navbarData;
+  constructor (private authGuard:AuthGuard){
+    this.color = this.authGuard.getAppColor();
+    this.appMode = this.authGuard.getAppMode();
+    if (this.appMode==='dark'){
+      this.activeColor='bg-[#767a7a] '
+    }else{
+      this.activeColor='bg-white text-black'
+    }
+  }
+
 
   @HostListener('window:resize', ['$event'])
   onResize(event: any) {

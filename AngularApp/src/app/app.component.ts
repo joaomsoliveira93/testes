@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthGuard } from 'src/services/auth-guard.service';
+import { AuthGuard } from 'src/services/auth/auth-guard.service';
 
 interface SideNavToggle {
   screenWidth: number;

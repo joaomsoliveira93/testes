@@ -1,0 +1,35 @@
+<div class="flex flex-col items-center p-4"[style.background]="appMode==='dark' ? '#b0b5b5':'white'">
+    <h2 mat-dialog-title class="text-xl font-bold mb-4">Nova Licença</h2>
+    <div mat-dialog-content class="w-full">
+
+        <mat-form-field appearance="fill" class="w-full">
+            <mat-label>Tipo</mat-label>
+            <input matInput [(ngModel)]="licence.tipo" required>
+            <mat-error>Deve preencher o Tipo da Licença</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="w-full">
+            <mat-label>Observações</mat-label>
+            <textarea type="text" matInput ></textarea>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="w-full">
+            <mat-label>Data de Início</mat-label>
+            <input type="date" matInput [(ngModel)]="licence.startedAt" (change)="validateEstado()" required>
+            <mat-error>Deve preencher a data de início</mat-error>
+          </mat-form-field>
+          
+          <mat-form-field appearance="fill" class="w-full">
+            <mat-label>Data de Fim</mat-label>
+            <input type="date" matInput [(ngModel)]="licence.endedAt" (change)="validateEstado()" required>
+            <mat-error>Deve preencher a data de fim</mat-error>
+          </mat-form-field>
+
+    </div>
+    <div mat-dialog-actions class="flex justify-center mt-4">
+        <button style="background-color: rgba(0, 128, 0, 0.788);" mat-button (click)="saveLicence()"><i
+                class="fa fa-floppy-disk"></i> Guardar</button>
+        <button style="background-color: rgba(168, 0, 0, 0.788);" mat-button (click)="onClose()"> <i
+                class="fa fa-ban"></i> Cancelar</button>
+    </div>
+</div>
