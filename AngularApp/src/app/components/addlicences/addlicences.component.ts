@@ -53,7 +53,9 @@ export class AddlicencesComponent {
     return `${year}-${month}-${day}`;
   }
 
+
   validateEstado(): void {
+    console.log(this.licence.startedAt)
     this.licence.estado=new Date(this.licence.startedAt) < new Date(this.licence.endedAt);
   }
 
@@ -101,9 +103,7 @@ export class AddlicencesComponent {
             iconColor: this.color,
             background: this.appMode === 'dark' ? '#b0b5b5' : 'white',
           }).then(() => {
-            this.dialogRef.close();
-            this.router.navigate(['/clients/' + this.clientId]);
-
+            this.dialogRef.close(res.data);
           });
         }
       } catch (error) {

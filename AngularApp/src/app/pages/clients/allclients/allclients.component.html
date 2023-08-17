@@ -1,6 +1,6 @@
 <div @fade
-    class="w-[calc(100%+32px)] h-fit z-50 shadow-xl rounded-lg rounded-tr-none shadow-slate-500 sticky -top-4 -ml-4 -mt-4 p-2 "
-    [style.background]="appMode==='dark' ? '#b0b5b5':'white'">
+    class="w-[calc(100%+32px)] h-fit z-50 shadow-md rounded-lg rounded-tr-none shadow-slate-500 sticky -top-4 -ml-4 -mt-4 p-2 "
+    [style.background]="appMode==='dark' ? '#b0b5b5':'#f2eeed'">
     <app-header [title]="title" [back]="back"></app-header>
     <div class="flex w-full" *ngIf="isScreenSizeLessThan1200">
         <button class="text-xl w-[29%] h-[50px] mb-5 md:mb-0 rounded-lg" [style.background-color]="color"
@@ -57,14 +57,14 @@
 </div>
 <div @fade class="mt-4">
     <p class="text-center rounded-lg text-xl mb-2 w-full shadow-2xl shadow-slate-600"
-        [style.background]="appMode==='dark' ? '#b0b5b5':'white'" *ngIf="filteredClients.length===0">
+        [style.background]="appMode==='dark' ? '#b0b5b5':'#f2eeed'" *ngIf="filteredClients.length===0">
         Sem clientes para mostrar!
     </p>
     <table *ngIf="!isScreenSizeLessThan1200 && filteredClients.length"
         class="rounded-lg mb-2 w-full shadow-2xl shadow-slate-600"
-        [style.background]="appMode==='dark' ? '#b0b5b5':'white'">
+        [style.background]="appMode==='dark' ? '#b0b5b5':'#f2eeed'">
         <thead class="border-b-2 border-slate-500 sticky top-[130px] "
-            [style.background]="appMode==='dark' ? '#b0b5b5':'white'">
+            [style.background]="appMode==='dark' ? '#b0b5b5':'#f2eeed'">
             <tr>
                 <th class="p-2 text-left cursor-pointer" (click)="[sortingCriteria='name',changeOrder(!sortAscending)]">
                     Nome

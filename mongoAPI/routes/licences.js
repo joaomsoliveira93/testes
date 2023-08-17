@@ -17,7 +17,6 @@ router.get('/alllicences/:id', async (req, res) => {
 });
 
 router.post('/licence/add', async (req, res) => {
-    console.log(req.body.licence)
     try {
         const newLicence = new Licence({
             clientId: req.body.licence.clientId,
@@ -33,7 +32,9 @@ router.post('/licence/add', async (req, res) => {
         });
         const result = await newLicence.save();
         if (result) {
-            res.send(result._id);
+            res.send(result);
+        }else{
+            res.send('NOK')
         }
 
     } catch (error) {

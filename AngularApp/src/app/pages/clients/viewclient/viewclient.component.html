@@ -1,4 +1,4 @@
-<div @fade class="w-[calc(100%+32px)] h-fit z-50 shadow-xl rounded-lg rounded-tr-none shadow-slate-500 sticky -top-4 -ml-4 -mt-4 p-2 "  [style.background]="appMode==='dark' ? '#b0b5b5':'white'">
+<div @fade class="w-[calc(100%+32px)] h-fit z-50 shadow-md rounded-lg rounded-tr-none shadow-slate-500 sticky -top-4 -ml-4 -mt-4 p-2 "  [style.background]="appMode==='dark' ? '#b0b5b5':'#f2eeed'">
     <app-header [title]="'Detalhes do Cliente'" [back]="back" [hasfilters]="true"></app-header>
     <div *ngIf="!edit">
         <button (click)="edit=true" class=" ml-2 mr-2 text-white p-2 rounded-md" [style.background-color]="color">
@@ -21,7 +21,7 @@
 </div>
 <div @fade *ngIf="!edit"
     class="w-full mt-6 grid grid-cols-1 md:grid-cols-2 gap-4 p-4 rounded-lg shadow-xl shadow-slate-500"
-    [style.background]="appMode==='dark' ? '#b0b5b5':'white'">
+    [style.background]="appMode==='dark' ? '#b0b5b5':'#f2eeed'">
 
     <div>
         <label class="text-xl mr-2">Nome:</label>
@@ -76,7 +76,7 @@
 
 </div>
 <div @fade *ngIf="edit" class="w-full mt-5 grid grid-cols-1 md:grid-cols-2 gap-4 p-4 rounded-lg shadow"
-    [style.background]="appMode==='dark' ? '#b0b5b5':'white'">
+    [style.background]="appMode==='dark' ? '#b0b5b5':'#f2eeed'">
 
     <mat-form-field appearance="fill">
         <mat-label>Nome</mat-label>

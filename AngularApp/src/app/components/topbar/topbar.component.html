@@ -1,5 +1,5 @@
-<div class="fixed z-40 top-0 w-full h-[50px]" [style.background]="color">
-    <button class="text-lg mr-2 mt-1 absolute right-0 w-max text-white font-black p-1 rounded-lg hover:bg-white hover:text-black"(click)="toggleUserProfile()">
+<div class="fixed z-40 top-0 w-full h-[50px]" [style.background]="appMode==='dark'?'#423f3f':'#d1cbcb'">
+    <button class="text-lg mr-2 mt-1 absolute right-0 w-max  font-black p-1 rounded-lg hover:bg-white hover:text-black" [ngClass]="appMode==='dark'?'text-white':'text-black'" (click)="toggleUserProfile()">
         {{user}}
         <i class="fa fa-sort-down "></i>
     </button>

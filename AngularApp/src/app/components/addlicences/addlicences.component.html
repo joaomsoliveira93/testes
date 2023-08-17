@@ -1,4 +1,4 @@
-<div class="flex flex-col items-center p-4"[style.background]="appMode==='dark' ? '#b0b5b5':'white'">
+<div class="flex flex-col items-center p-4" [style.background]="appMode==='dark' ? '#b0b5b5':'white'">
     <h2 mat-dialog-title class="text-xl font-bold mb-4">Nova Licença</h2>
     <div mat-dialog-content class="w-full">
 
@@ -10,20 +10,23 @@
 
         <mat-form-field appearance="fill" class="w-full">
             <mat-label>Observações</mat-label>
-            <textarea type="text" matInput ></textarea>
+            <textarea type="text" matInput [(ngModel)]="licence.obs"></textarea>
         </mat-form-field>
 
         <mat-form-field appearance="fill" class="w-full">
             <mat-label>Data de Início</mat-label>
-            <input type="date" matInput [(ngModel)]="licence.startedAt" (change)="validateEstado()" required>
-            <mat-error>Deve preencher a data de início</mat-error>
-          </mat-form-field>
-          
-          <mat-form-field appearance="fill" class="w-full">
+            <input matInput [matDatepicker]="inicio" matInput [(ngModel)]="licence.startedAt" (dateInput)="validateEstado()">
+            <mat-datepicker-toggle matIconSuffix [for]="inicio"></mat-datepicker-toggle>
+            <mat-datepicker #inicio></mat-datepicker>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="w-full">
             <mat-label>Data de Fim</mat-label>
-            <input type="date" matInput [(ngModel)]="licence.endedAt" (change)="validateEstado()" required>
-            <mat-error>Deve preencher a data de fim</mat-error>
-          </mat-form-field>
+            <input matInput [matDatepicker]="fim" matInput [(ngModel)]="licence.endedAt" (dateInput)="validateEstado()">
+            <mat-datepicker-toggle matIconSuffix [for]="fim"></mat-datepicker-toggle>
+            <mat-datepicker #fim ></mat-datepicker>
+        </mat-form-field>
+
 
     </div>
     <div mat-dialog-actions class="flex justify-center mt-4">

@@ -110,7 +110,7 @@ export class AuthGuard {
     };
     this.isLoggedInSubject.next(false);
     localStorage.removeItem('token');
-    document.body.style.backgroundColor = 'white';
+    document.body.style.backgroundColor = '#d1cbcb';
   }
 
   async getUser(username: string, password: string): Promise<any> {

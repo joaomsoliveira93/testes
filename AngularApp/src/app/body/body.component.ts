@@ -26,7 +26,12 @@ export class BodyComponent {
   }
 
   getBodyClass(): string {
-    document.body.style.backgroundColor = this.color;
+    if(this.appMode==='dark'){
+      document.body.style.backgroundColor = '#423f3f';
+    } else{
+      document.body.style.backgroundColor = '#d1cbcb'
+    }
+    
     let styleClass = '';
     if(this.collapsed && this.screenWidth > 768) {
       styleClass = "w-[calc(100%-16.5625rem)] ml-[16.5625rem]";

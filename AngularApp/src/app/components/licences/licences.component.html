@@ -1,26 +1,30 @@
 <div @fade class="w-full z-50 shadow-xl rounded-lg mt-5 shadow-slate-500  p-2 "
-    [style.background]="appMode==='dark' ? '#b0b5b5':'white'">
-    <p class="mb-2 text-2xl">Licenças do Cliente</p>
-    <mat-tab-group class="mt-1">
-        <mat-tab *ngFor="let licence of licences" [label]="licence.tipo.valueOf()">
-            <div class="mt-1 mb-5" *ngIf="edit!==licence._id">
-                <button *ngIf="licences.length>0" (click)="edit=licence._id"
-                    class="  mr-2 text-white p-2 rounded-md" [style.background-color]="color">
-                    <i class="fa fa-pencil p-1"></i> <i *ngIf="!isScreenSizeLessThan1200"> Editar</i>
-                </button>
-                <button *ngIf="licences.length>0" class="mr-2 bg-red-600 text-white p-2 rounded-md">
-                    <i class="fa fa-trash p-1"></i> <i *ngIf="!isScreenSizeLessThan1200"> Apagar</i>
-                </button>
-            </div>
+    [style.background]="appMode==='dark' ? '#b0b5b5':'#f2eeed'">
+    <p class="mb-2 text-2xl font-semibold">Licenças do Cliente</p>
+    <div class="mt-1 mb-5" *ngIf="edit===''">
+        <button class=" text-white mr-2 p-2 rounded-md" (click)="openPopup()" [style.background-color]="color">
+            <i class="fa fa-plus p-1"></i> <i *ngIf="!isScreenSizeLessThan1200" > Adicionar</i>
+        </button>
+        <button *ngIf="licences.length>0" (click)="edit=selectedLicence._id"
+            class="  mr-2 text-white p-2 rounded-md" [style.background-color]="color">
+            <i class="fa fa-pencil p-1"></i> <i *ngIf="!isScreenSizeLessThan1200"> Editar</i>
+        </button>
+        <button *ngIf="licences.length>0" class="mr-2 bg-red-600 text-white p-2 rounded-md" (click)="deleteLicence()">
+            <i class="fa fa-trash p-1"></i> <i *ngIf="!isScreenSizeLessThan1200"> Apagar</i>
+        </button>
+    </div>
 
-            <div class="mt-1 mb-5" *ngIf="edit===licence._id">
-                <button class="mr-2 text-white p-2 rounded-md" style="color:white" [style.background-color]="color">
-                    <i class="fa fa-floppy-disk p-1"></i> <i *ngIf="!isScreenSizeLessThan1200"> Guardar</i>
-                </button>
-                <button (click)="edit=''" class="mr-2 bg-red-600 text-white p-2 rounded-md">
-                    <i class="fa fa-ban p-1"></i> <i *ngIf="!isScreenSizeLessThan1200"> Cancelar</i>
-                </button>
-            </div>
+    <div class="mt-1 mb-5" *ngIf="edit!==''">
+        <button class="mr-2 text-white p-2 rounded-md" style="color:white" [style.background-color]="color" (click)="saveLicence()">
+            <i class="fa fa-floppy-disk p-1"></i> <i *ngIf="!isScreenSizeLessThan1200"> Guardar</i>
+        </button>
+        <button class="mr-2 bg-red-600 text-white p-2 rounded-md" (click)="cancelEdit()">
+            <i class="fa fa-ban p-1"></i> <i *ngIf="!isScreenSizeLessThan1200"> Cancelar</i>
+        </button>
+    </div>
+    <mat-tab-group class="mt-1" (selectedTabChange)="changeEdit($event)" >
+        <mat-tab *ngFor="let licence of licences" [label]="licence.tipo.valueOf()" [aria-label]="licence._id" [disabled]="edit!==licence._id && edit!==''">
+     
             <div *ngIf="edit===licence._id" class="w-full grid grid-cols-1 gap-4 md:grid-cols-2">
                 <div>
                     <mat-form-field class="w-full" appearance="fill">
@@ -35,21 +39,21 @@
                     <label class="text-xl font-extrabold break-words">{{licence.estado ? 'Válida' : 'Expirada'}}</label>
                 </div>
 
-                <div>
-                    <mat-form-field class="w-full" appearance="fill">
-                        <mat-label>Início da licença</mat-label>
-                        <input type="date" [ngModel]="formatDate(licence.startedAt)" (change)="validateEstado($any($event.target).value,licence.endedAt,licence._id)" matInput required>
-                        <mat-error>Deve preencher o início da licença</mat-error>
-                    </mat-form-field>
-                </div>
+                <mat-form-field appearance="fill" class="w-full">
+                    <mat-label>Data de Inicio</mat-label>
+                    <input matInput [matDatepicker]="inicio" [ngModel]="formatDate(licence.startedAt)" (dateInput)="validateEstado($any($event.target).value,licence.endedAt,licence._id)" required>
+                    <mat-datepicker-toggle matIconSuffix [for]="inicio"></mat-datepicker-toggle>
+                    <mat-datepicker #inicio ></mat-datepicker>
+                    <mat-error>Deve preencher o início da licença</mat-error>
+                </mat-form-field>
 
-                <div>
-                    <mat-form-field class="w-full" appearance="fill">
-                        <mat-label>Fim da Licença</mat-label>
-                        <input type="date" [ngModel]="formatDate(licence.endedAt)" (change)="validateEstado(licence.startedAt,$any($event.target).value,licence._id)" matInput required>
-                        <mat-error>Deve preencher o fim da licença</mat-error>
-                    </mat-form-field>
-                </div>
+                <mat-form-field appearance="fill" class="w-full">
+                    <mat-label>Data de Fim</mat-label>
+                    <input matInput [matDatepicker]="fim" [ngModel]="formatDate(licence.endedAt)" (dateInput)="validateEstado(licence.startedAt,$any($event.target).value,licence._id)" required>
+                    <mat-datepicker-toggle matIconSuffix [for]="fim"></mat-datepicker-toggle>
+                    <mat-datepicker #fim ></mat-datepicker>
+                    <mat-error>Deve preencher o fim da licença</mat-error>
+                </mat-form-field>
 
                 <div>
                     <mat-form-field class="w-full">
@@ -85,8 +89,6 @@
         </mat-tab>
     </mat-tab-group>
     <div class="mt-5" *ngIf="!edit">
-        <button class="bg-red-600 text-white p-2 rounded-md">
-            <i class="fa fa-plus p-1"></i> <i *ngIf="!isScreenSizeLessThan1200" (click)="openPopup()"> Adicionar</i>
-        </button>
+    
     </div>
 </div>
