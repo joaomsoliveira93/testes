@@ -1,1 +1,1 @@
-C:\Users\joaom\source\repos\WinUI APP\WinUI APP\WinUI APP.csproj;x86
+D:\Repositorios\testes\WinUI APP\WinUI APP\WinUI APP.csproj;x86

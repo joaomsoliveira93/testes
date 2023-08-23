@@ -24,32 +24,32 @@
         </StackPanel>            
 
         <ScrollViewer Grid.Row="3" HorizontalScrollMode="Disabled" HorizontalScrollBarVisibility="Disabled" VerticalScrollMode="Auto" VerticalScrollBarVisibility="Auto">
-            <Grid Width="Auto" Height="Auto" Background="Transparent" ColumnDefinitions="*,*" RowDefinitions ="40,30,40,30,40,30,40,30,50">
-                <TextBox Margin="20,0,20,0"  IsEnabled="False" Text="{x:Bind clientInfo.Name, Mode=TwoWay}" Grid.Column="0" Grid.Row="0" x:Name="name" PlaceholderText="Nome" TextChanged="validation"></TextBox>
-                <TextBox Margin="20,0,20,0" IsEnabled="False" Text="{x:Bind clientInfo.Ncont, Mode=TwoWay}" Grid.Column="1" Grid.Row="0" x:Name="nCont" PlaceholderText="Nº de Contribuinte" TextChanged="validation"></TextBox>
-                
-                <TextBlock Margin="20,0,20,0"  Grid.Column="0" Grid.Row="1" Foreground="Red" Visibility="Collapsed" x:Name="nameValidator"> O nome é obrigatório</TextBlock>
+            <Grid Width="Auto" Height="Auto" Background="Transparent" ColumnDefinitions="*,*" RowDefinitions ="70,30,70,30,70,30,70,30,70">
+                <TextBox Margin="20,0,20,0" Header="Nome"  IsEnabled="False" Text="{x:Bind clientInfo.Name, Mode=TwoWay}" Grid.Column="0" Grid.Row="0" x:Name="name" PlaceholderText="Nome" TextChanged="validation"></TextBox>
+                <TextBox Margin="20,0,20,0" Header="Nº de Contribuinte" IsEnabled="False" Text="{x:Bind clientInfo.Ncont, Mode=TwoWay}" Grid.Column="1" Grid.Row="0" x:Name="nCont" PlaceholderText="Nº de Contribuinte" TextChanged="validation"></TextBox>
+
+                <TextBlock Margin="20,0,20,0" Grid.Column="0" Grid.Row="1" Foreground="Red" Visibility="Collapsed" x:Name="nameValidator"> O nome é obrigatório</TextBlock>
                 <TextBlock Margin="20,0,20,0"  Grid.Column="1" Grid.Row="1" Foreground="Red" Visibility="Collapsed" x:Name="nContValidator"> O nº de contribuinte é obrigatório</TextBlock>
 
-                <TextBox Margin="20,0,20,0" IsEnabled="False" Text="{x:Bind clientInfo.Morada, Mode=TwoWay}" Grid.Column="0" Grid.Row="2" x:Name="morada" PlaceholderText="Morada" TextChanged="validation"></TextBox>
-                <TextBox Margin="20,0,20,0" IsEnabled="False" Text="{x:Bind clientInfo.CodPost, Mode=TwoWay}" Grid.Column="1" Grid.Row="2" x:Name="codPost" PlaceholderText="Código Postal" TextChanged="validation"></TextBox>
+                <TextBox Margin="20,0,20,0" Header="Morada" IsEnabled="False" Text="{x:Bind clientInfo.Morada, Mode=TwoWay}" Grid.Column="0" Grid.Row="2" x:Name="morada" PlaceholderText="Morada" TextChanged="validation"></TextBox>
+                <TextBox Margin="20,0,20,0" Header="Código Postal" IsEnabled="False" Text="{x:Bind clientInfo.CodPost, Mode=TwoWay}" Grid.Column="1" Grid.Row="2" x:Name="codPost" PlaceholderText="Código Postal" TextChanged="validation"></TextBox>
 
                 <TextBlock Margin="20,0,20,0"  Grid.Column="0" Grid.Row="3" Foreground="Red" Visibility="Collapsed" x:Name="moradaValidator"> A morada é obrigatória</TextBlock>
                 <TextBlock Margin="20,0,20,0"  Grid.Column="1" Grid.Row="3" Foreground="Red" Visibility="Collapsed" x:Name="codPostValidator"> O código postal é obrigatório</TextBlock>
 
-                <TextBox Margin="20,0,20,0" IsEnabled="False" Text="{x:Bind clientInfo.Cidade, Mode=TwoWay}" Grid.Column="0" Grid.Row="4" x:Name="cidade" PlaceholderText="Cidade" TextChanged="validation"></TextBox>
-                <TextBox Margin="20,0,20,0" IsEnabled="False" Text="{x:Bind clientInfo.Contacto, Mode=TwoWay}" Grid.Column="1" Grid.Row="4" x:Name="contacto" PlaceholderText="Contacto" TextChanged="validation"></TextBox>
+                <TextBox Margin="20,0,20,0" Header="Cidade" IsEnabled="False" Text="{x:Bind clientInfo.Cidade, Mode=TwoWay}" Grid.Column="0" Grid.Row="4" x:Name="cidade" PlaceholderText="Cidade" TextChanged="validation"></TextBox>
+                <TextBox Margin="20,0,20,0" Header="Contacto" IsEnabled="False" Text="{x:Bind clientInfo.Contacto, Mode=TwoWay}" Grid.Column="1" Grid.Row="4" x:Name="contacto" PlaceholderText="Contacto" TextChanged="validation"></TextBox>
 
                 <TextBlock Margin="20,0,20,0"  Grid.Column="0" Grid.Row="5" Foreground="Red" Visibility="Collapsed" x:Name="cidadeValidator"> A cidade é obrigatória</TextBlock>
                 <TextBlock Margin="20,0,20,0"  Grid.Column="1" Grid.Row="5" Foreground="Red" Visibility="Collapsed" x:Name="contactoValidator"> O contacto é obrigatório</TextBlock>
 
-                <TextBox Margin="20,0,20,0" IsEnabled="False" Text="{x:Bind clientInfo.Email, Mode=TwoWay}" Grid.Column="0" Grid.Row="6" x:Name="email" PlaceholderText="Email" TextChanged="validation"></TextBox>
-                <TextBox Margin="20,0,20,0" IsEnabled="False" Text="{x:Bind clientInfo.Rep, Mode=TwoWay}" Grid.Column="1" Grid.Row="6" x:Name="rep" PlaceholderText="Representante"></TextBox>
+                <TextBox Margin="20,0,20,0" Header="Email" IsEnabled="False" Text="{x:Bind clientInfo.Email, Mode=TwoWay}" Grid.Column="0" Grid.Row="6" x:Name="email" PlaceholderText="Email" TextChanged="validation"></TextBox>
+                <TextBox Margin="20,0,20,0" Header="Representante" IsEnabled="False" Text="{x:Bind clientInfo.Rep, Mode=TwoWay}" Grid.Column="1" Grid.Row="6" x:Name="rep" PlaceholderText="Representante"></TextBox>
 
                 <TextBlock Margin="20,0,20,0"  Grid.Column="0" Grid.Row="7" Foreground="Red" Visibility="Collapsed" x:Name="emailValidator"> O email é obrigatória</TextBlock>
 
-                <TextBox Margin="20,0,20,10" IsEnabled="False" Text="{x:Bind clientInfo.RepContacto, Mode=TwoWay}" Grid.Column="0" Grid.Row="8" x:Name="repContacto" PlaceholderText="Contacto do Representante"></TextBox>
-                <TextBox Margin="20,0,20,10" IsEnabled="False" Text="{x:Bind clientInfo.RepEmail, Mode=TwoWay}" Grid.Column="1" Grid.Row="8" x:Name="repEmail" PlaceholderText="Email do Representante"></TextBox>
+                <TextBox Margin="20,0,20,0" Header="Contacto do Representante" IsEnabled="False" Text="{x:Bind clientInfo.RepContacto, Mode=TwoWay}" Grid.Column="0" Grid.Row="8" x:Name="repContacto" PlaceholderText="Contacto do Representante"></TextBox>
+                <TextBox Margin="20,0,20,0" Header="Email do Representante" IsEnabled="False" Text="{x:Bind clientInfo.RepEmail, Mode=TwoWay}" Grid.Column="1" Grid.Row="8" x:Name="repEmail" PlaceholderText="Email do Representante"></TextBox>
             </Grid>
         </ScrollViewer>
         <StackPanel Orientation="Horizontal" Grid.Row="4">
@@ -92,13 +92,13 @@
             </controls:DataGrid>
         </RelativePanel>
         <ContentDialog x:Name="addEditDialog"  PrimaryButtonStyle="{StaticResource AccentButtonStyle}" Opened="addEditDialog_Opened" PrimaryButtonText="OK" CloseButtonText="Cancelar" PrimaryButtonClick="addEditDialog_PrimaryButtonClick" CloseButtonClick="addEditDialog_CloseButtonClick" >
-            <ScrollViewer  Grid.Row="3" Height="200" Width="Auto" HorizontalScrollMode="Disabled"  HorizontalScrollBarVisibility="Disabled" VerticalScrollMode="Auto" VerticalScrollBarVisibility="Auto">
+            <ScrollViewer  Grid.Row="3" Height="300" Width="Auto" HorizontalScrollMode="Disabled"  HorizontalScrollBarVisibility="Disabled" VerticalScrollMode="Auto" VerticalScrollBarVisibility="Auto">
                 <StackPanel Width="Auto" Height="Auto" Orientation="Vertical" Background="Transparent" >
-                    <TextBox Margin="20,10,20,0" x:Name="tipoLicenca" PlaceholderText="Tipo" TextChanged="validation" />
+                    <TextBox Header="Tipo" Margin="20,10,20,0" x:Name="tipoLicenca" PlaceholderText="Tipo" TextChanged="validation" />
                     <TextBlock Margin="20,10,20,0" Foreground="Red"  x:Name="tipoLicencaValidator"> O tipo da licença é obrigatório</TextBlock>
-                    <TextBox AutomationProperties.Name="multi-line TextBox" TextWrapping="Wrap" AcceptsReturn="True" Margin="20,10,20,0" x:Name="obsLicenca" PlaceholderText="Observações" />
-                    <CalendarDatePicker x:Name="startedAtLicenca" Margin="20,10,20,0" Width="Auto" PlaceholderText="Data de Início"/>
-                    <CalendarDatePicker x:Name="endedAtLicenca" Margin="20,10,20,0" Width="Auto" PlaceholderText="Data de Início"/>
+                    <TextBox Header="Observações" AutomationProperties.Name="multi-line TextBox" TextWrapping="Wrap" AcceptsReturn="True" Margin="20,10,20,0" x:Name="obsLicenca" PlaceholderText="Observações" />
+                    <CalendarDatePicker Header="Data de Início" x:Name="startedAtLicenca" Margin="20,10,20,0" Width="Auto" PlaceholderText="Data de Início"/>
+                    <CalendarDatePicker Header="Data de Fim" x:Name="endedAtLicenca" Margin="20,10,20,0" Width="Auto" PlaceholderText="Data de Início"/>
                 </StackPanel>
             </ScrollViewer>
         </ContentDialog>

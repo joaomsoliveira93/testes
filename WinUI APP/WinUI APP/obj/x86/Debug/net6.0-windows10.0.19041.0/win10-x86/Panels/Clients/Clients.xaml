@@ -10,7 +10,7 @@
     mc:Ignorable="d"
     Background="Transparent">
 
-    <Grid Width="Auto" Height="Auto" Background="Transparent" ColumnDefinitions="*" RowDefinitions ="30,50,60,Auto,20">
+    <Grid Width="Auto" Height="Auto" Background="Transparent" ColumnDefinitions="*" RowDefinitions ="30,50,80,Auto,20">
         <Rectangle Grid.Row="0" />
         <StackPanel Grid.Row="1" Orientation="Horizontal" >
             <TextBlock Margin="20,5,0,0" FontSize="25">Clientes</TextBlock>
@@ -21,13 +21,13 @@
         
         <ScrollViewer  Grid.Row="2" Width="Auto" HorizontalScrollMode="Enabled" HorizontalScrollBarVisibility="Auto" VerticalScrollMode="Disabled" VerticalScrollBarVisibility="Disabled">
             <StackPanel Orientation="Horizontal" Padding="10,10,0,10" >
-                <TextBox x:ConnectionId='24' Margin="10,0,10,0" Height="20" x:Name="filterNome" PlaceholderText="Nome"  Width="150"                      />
-                <TextBox x:ConnectionId='25' Margin="10,0,10,0" Height="20" x:Name="filterNcont" PlaceholderText="Nº de Contribuinte"  Width="150"                      />
-                <TextBox x:ConnectionId='26' Margin="10,0,10,0" Height="20" x:Name="filterMorada" PlaceholderText="Morada"  Width="150"                      />
-                <TextBox x:ConnectionId='27' Margin="10,0,10,0" Height="20" x:Name="filterCodPost" PlaceholderText="Código Postal"  Width="150"                      />
-                <TextBox x:ConnectionId='28' Margin="10,0,10,0" Height="20" x:Name="filterCidade" PlaceholderText="Cidade"  Width="150"                      />
-                <TextBox x:ConnectionId='29' Margin="10,0,10,0" Height="20" x:Name="filterContacto" PlaceholderText="Contacto"  Width="150"                      />
-                <TextBox x:ConnectionId='30' Margin="10,0,10,0" Height="20"  x:Name="filterEmail" PlaceholderText="Email"  Width="150"                      />
+                <TextBox x:ConnectionId='24' Margin="10,0,10,0" Header="Nome" x:Name="filterNome" PlaceholderText="Nome"  Width="150"                      />
+                <TextBox x:ConnectionId='25' Margin="10,0,10,0" Header="Nº de Contribuinte" x:Name="filterNcont" PlaceholderText="Nº de Contribuinte"  Width="150"                      />
+                <TextBox x:ConnectionId='26' Margin="10,0,10,0" Header="Morada" x:Name="filterMorada" PlaceholderText="Morada"  Width="150"                      />
+                <TextBox x:ConnectionId='27' Margin="10,0,10,0" Header="Código Postal" x:Name="filterCodPost" PlaceholderText="Código Postal"  Width="150"                      />
+                <TextBox x:ConnectionId='28' Margin="10,0,10,0" Header="Cidade" x:Name="filterCidade" PlaceholderText="Cidade"  Width="150"                      />
+                <TextBox x:ConnectionId='29' Margin="10,0,10,0" Header="Contacto" x:Name="filterContacto" PlaceholderText="Contacto"  Width="150"                      />
+                <TextBox x:ConnectionId='30' Margin="10,0,10,0" Header="Email" x:Name="filterEmail" PlaceholderText="Email"  Width="150"                      />
             </StackPanel>
         </ScrollViewer>
 
@@ -75,23 +75,23 @@
             </ContentDialog.TitleTemplate>
             <ScrollViewer  Grid.Row="3" Height="400" Width="Auto" HorizontalScrollMode="Disabled" HorizontalScrollBarVisibility="Disabled" VerticalScrollMode="Auto" VerticalScrollBarVisibility="Auto">
                 <StackPanel Width="Auto" Height="Auto" Orientation="Vertical" Background="Transparent" >
-                    <TextBox x:ConnectionId='5' Margin="20,10,20,0"                                             x:Name="name" PlaceholderText="Nome"                         ></TextBox>
+                    <TextBox x:ConnectionId='5' Margin="20,10,20,0" Header="Nome"                                             x:Name="name" PlaceholderText="Nome"                         ></TextBox>
                     <TextBlock x:ConnectionId='6' Margin="20,10,20,0" Foreground="Red"  x:Name="nameValidator"> O nome é obrigatório</TextBlock>
-                    <TextBox x:ConnectionId='7' Margin="20,10,20,0"                                              x:Name="nCont" PlaceholderText="Nº de Contribuinte"                         ></TextBox>
+                    <TextBox x:ConnectionId='7' Margin="20,10,20,0" Header="Nº de Contribuinte"                                              x:Name="nCont" PlaceholderText="Nº de Contribuinte"                         ></TextBox>
                     <TextBlock x:ConnectionId='8' Margin="20,10,20,0" Foreground="Red"  x:Name="nContValidator"> O nº de contribuinte é obrigatório</TextBlock>
-                    <TextBox x:ConnectionId='9' Margin="20,10,20,0"                                               x:Name="morada" PlaceholderText="Morada"                         ></TextBox>
+                    <TextBox x:ConnectionId='9' Margin="20,10,20,0" Header="Morada"                                               x:Name="morada" PlaceholderText="Morada"                         ></TextBox>
                     <TextBlock x:ConnectionId='10' Margin="20,10,20,0" Foreground="Red"  x:Name="moradaValidator"> A morada é obrigatória</TextBlock>
-                    <TextBox x:ConnectionId='11' Margin="20,10,20,0"                                                x:Name="codPost" PlaceholderText="Código Postal"                         ></TextBox>
+                    <TextBox x:ConnectionId='11' Margin="20,10,20,0" Header="Código Postal"                                                x:Name="codPost" PlaceholderText="Código Postal"                         ></TextBox>
                     <TextBlock x:ConnectionId='12' Margin="20,10,20,0" Foreground="Red"  x:Name="codPostValidator"> O código Postal é obrigatório</TextBlock>
-                    <TextBox x:ConnectionId='13' Margin="20,10,20,0"                                               x:Name="cidade" PlaceholderText="Cidade"                         ></TextBox>
+                    <TextBox x:ConnectionId='13' Margin="20,10,20,0" Header="Cidade"                                               x:Name="cidade" PlaceholderText="Cidade"                         ></TextBox>
                     <TextBlock x:ConnectionId='14' Margin="20,10,20,0" Foreground="Red"  x:Name="cidadeValidator"> A cidade é obrigatória</TextBlock>
-                    <TextBox x:ConnectionId='15' Margin="20,10,20,0"                                                 x:Name="contacto" PlaceholderText="Contacto"                         ></TextBox>
+                    <TextBox x:ConnectionId='15' Margin="20,10,20,0" Header="Contacto"                                                 x:Name="contacto" PlaceholderText="Contacto"                         ></TextBox>
                     <TextBlock x:ConnectionId='16' Margin="20,10,20,0" Foreground="Red"  x:Name="contactoValidator"> O contacto é obrigatório</TextBlock>
-                    <TextBox x:ConnectionId='17' Margin="20,10,20,0"                                              x:Name="email" PlaceholderText="Email"                         ></TextBox>
+                    <TextBox x:ConnectionId='17' Margin="20,10,20,0" Header="Email"                                              x:Name="email" PlaceholderText="Email"                         ></TextBox>
                     <TextBlock x:ConnectionId='18' Margin="20,10,20,0" Foreground="Red"  x:Name="emailValidator"> O email é obrigatório</TextBlock>
-                    <TextBox x:ConnectionId='19' Margin="20,10,20,0"                                            x:Name="rep" PlaceholderText="Representante"></TextBox>
-                    <TextBox x:ConnectionId='20' Margin="20,10,20,0"                                                    x:Name="repContacto" PlaceholderText="Contacto do Representante"></TextBox>
-                    <TextBox x:ConnectionId='21' Margin="20,10,20,0"                                                 x:Name="repEmail" PlaceholderText="Email do Representante"></TextBox>
+                    <TextBox x:ConnectionId='19' Margin="20,10,20,0" Header="Representante"                                            x:Name="rep" PlaceholderText="Representante"></TextBox>
+                    <TextBox x:ConnectionId='20' Margin="20,10,20,0" Header="Contacto do Representante"                                                    x:Name="repContacto" PlaceholderText="Contacto do Representante"></TextBox>
+                    <TextBox x:ConnectionId='21' Margin="20,10,20,0" Header="Email Representante"                                                 x:Name="repEmail" PlaceholderText="Email do Representante"></TextBox>
                 </StackPanel>
             </ScrollViewer>
         </ContentDialog>

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "VXvC+VI2tqImGOI/e1rTdzUX8ZD900YbjLgNYQLsD8fAO//If0jqJLYbX2RZWbet6/bIVFPdocXGmau6SvaqJQ==",
+  "dgSpecHash": "6kqnixNpBWWLIwHDZEO70233O6oXVbu8YCjO57PsRxMTuNAD6H2R0TA870Naw+4jymoPfQJcgN7FokpbWC8usQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\joaom\\source\\repos\\WinUI APP\\WinUI APP\\WinUI APP.csproj",
+  "projectFilePath": "D:\\Repositorios\\testes\\WinUI APP\\WinUI APP\\WinUI APP.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\joaom\\.nuget\\packages\\communitytoolkit.winui.ui.controls.datagrid\\7.1.2\\communitytoolkit.winui.ui.controls.datagrid.7.1.2.nupkg.sha512",
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages\\microsoft.windows.sdk.buildtools\\10.0.22621.756\\microsoft.windows.sdk.buildtools.10.0.22621.756.nupkg.sha512",

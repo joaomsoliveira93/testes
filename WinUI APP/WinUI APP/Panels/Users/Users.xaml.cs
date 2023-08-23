@@ -1,5 +1,6 @@
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
+using Microsoft.UI.Xaml.Data;
 using Microsoft.UI.Xaml.Media.Animation;
 using System;
 using System.Collections.Generic;
@@ -24,11 +25,11 @@ namespace WinUI_APP.Panels.Users
         string filtertipo = "Todos";
         string filterestado = "Todos";
         string newTipo = "user";
-        string newEstado = "1";
         public Users()
         {
             this.InitializeComponent();
             LoadData();
+            DataContext = this;
         }
 
         private async void LoadData()
@@ -101,15 +102,11 @@ namespace WinUI_APP.Panels.Users
 
         private void tipo_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            ComboBox temp = sender as ComboBox;
-            filtertipo = temp.SelectedValue.ToString();
             handleFilter();
         }
 
         private void estado_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            ComboBox temp = sender as ComboBox;
-            filterestado = temp.SelectedValue.ToString();
             handleFilter();
         }
 
@@ -134,21 +131,24 @@ namespace WinUI_APP.Panels.Users
 
         private void handleFilter()
         {
-            filteredUsers = new ObservableCollection<User>(users.Where(user => 
-             user.Username.ToLower().Contains(filterUsername.Text)
-          && ( filterNome.Text == "" || user.Name.ToLower().Contains((filterNome.Text).ToLower()))
-          && ( filterEmail.Text == "" || user.Email.ToLower().Contains((filterEmail.Text).ToLower()))
-          && ( filtertipo == "Todos" || user.Tipo == filtertipo)
-          && ( filterestado == "Todos" || user.Estado == filterestado)
-          ));
-            grid.ItemsSource = filteredUsers;
-            if (filteredUsers.Count() == 0)
+            if (filteredUsers != null)
             {
-                nothing.Visibility = Visibility.Visible;
-            }
-            else
-            {
-                nothing.Visibility = Visibility.Collapsed;
+                filteredUsers = new ObservableCollection<User>(users.Where(user =>
+                 user.Username.ToLower().Contains(filterUsername.Text)
+              && (filterNome.Text == "" || user.Name.ToLower().Contains((filterNome.Text).ToLower()))
+              && (filterEmail.Text == "" || user.Email.ToLower().Contains((filterEmail.Text).ToLower()))
+              && (filtertipo == "Todos" || user.Tipo == filtertipo)
+              && (filterestado == "Todos" || user.Estado == filterestado)
+              ));
+                grid.ItemsSource = filteredUsers;
+                if (filteredUsers.Count() == 0)
+                {
+                    nothing.Visibility = Visibility.Visible;
+                }
+                else
+                {
+                    nothing.Visibility = Visibility.Collapsed;
+                }
             }
         }
 
@@ -179,7 +179,6 @@ namespace WinUI_APP.Panels.Users
                         username = username.Text,
                         name = name.Text,
                         email = email.Text,
-                        estado = newEstado,
                         tipo = newTipo,
                     };
 
@@ -244,19 +243,67 @@ namespace WinUI_APP.Panels.Users
             }
         }
 
-        private void newtipo_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            ComboBox tmp = sender as ComboBox;
-            if (tmp.SelectedValue.ToString() == "Administrador")
-            {
-                newTipo = "admin";
-            }
-            else
-            {
-                newTipo = "user";
-            }
+    }
 
+    public class EstadoDisplayConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, string language)
+        {
+            string estadoValue = value as string;
+            if (estadoValue == "1")
+            {
+                return "Ativo";
+            }
+            else if (estadoValue == "0")
+            {
+                return "Inativo";
+            }
+            return string.Empty;
         }
 
+        public object ConvertBack(object value, Type targetType, object parameter, string language)
+        {
+            string estadoString = value as string;
+            if (estadoString == "Ativo")
+            {
+                return "1";
+            }
+            else if (estadoString == "Inativo")
+            {
+                return "0";
+            }
+            return string.Empty;
+        }
+    }
+
+    public class TipoDisplayConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, string language)
+        {
+            string tipoValue = value as string;
+            if (tipoValue == "admin")
+            {
+                return "Administrador";
+            }
+            else if (tipoValue == "user")
+            {
+                return "Utilizador";
+            }
+            return string.Empty;
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, string language)
+        {
+            string tipoString = value as string;
+            if (tipoString == "Administrador")
+            {
+                return "admin";
+            }
+            else if (tipoString == "Utilizador")
+            {
+                return "user";
+            }
+            return string.Empty;
+        }
     }
 }

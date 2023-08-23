@@ -224,7 +224,7 @@ namespace WinUI_APP.WinUI_APP_XamlTypeInfo
 
         private void InitTypeTables()
         {
-            _typeNameTable = new string[66];
+            _typeNameTable = new string[68];
             _typeNameTable[0] = "Microsoft.UI.Xaml.Controls.XamlControlsResources";
             _typeNameTable[1] = "Microsoft.UI.Xaml.ResourceDictionary";
             _typeNameTable[2] = "Object";
@@ -290,9 +290,11 @@ namespace WinUI_APP.WinUI_APP_XamlTypeInfo
             _typeNameTable[62] = "Microsoft.UI.Xaml.Controls.UserControl";
             _typeNameTable[63] = "WinUI_APP.Detalhes";
             _typeNameTable[64] = "WinUI_APP.Panels.Users.DtlUser";
-            _typeNameTable[65] = "WinUI_APP.Panels.Users.Users";
+            _typeNameTable[65] = "WinUI_APP.Panels.Users.TipoDisplayConverter";
+            _typeNameTable[66] = "WinUI_APP.Panels.Users.EstadoDisplayConverter";
+            _typeNameTable[67] = "WinUI_APP.Panels.Users.Users";
 
-            _typeTable = new global::System.Type[66];
+            _typeTable = new global::System.Type[68];
             _typeTable[0] = typeof(global::Microsoft.UI.Xaml.Controls.XamlControlsResources);
             _typeTable[1] = typeof(global::Microsoft.UI.Xaml.ResourceDictionary);
             _typeTable[2] = typeof(global::System.Object);
@@ -358,7 +360,9 @@ namespace WinUI_APP.WinUI_APP_XamlTypeInfo
             _typeTable[62] = typeof(global::Microsoft.UI.Xaml.Controls.UserControl);
             _typeTable[63] = typeof(global::WinUI_APP.Detalhes);
             _typeTable[64] = typeof(global::WinUI_APP.Panels.Users.DtlUser);
-            _typeTable[65] = typeof(global::WinUI_APP.Panels.Users.Users);
+            _typeTable[65] = typeof(global::WinUI_APP.Panels.Users.TipoDisplayConverter);
+            _typeTable[66] = typeof(global::WinUI_APP.Panels.Users.EstadoDisplayConverter);
+            _typeTable[67] = typeof(global::WinUI_APP.Panels.Users.Users);
         }
 
         private int LookupTypeIndexByName(string typeName)
@@ -409,7 +413,9 @@ namespace WinUI_APP.WinUI_APP_XamlTypeInfo
         private object Activate_60_Clientes() { return new global::WinUI_APP.Clientes(); }
         private object Activate_63_Detalhes() { return new global::WinUI_APP.Detalhes(); }
         private object Activate_64_DtlUser() { return new global::WinUI_APP.Panels.Users.DtlUser(); }
-        private object Activate_65_Users() { return new global::WinUI_APP.Panels.Users.Users(); }
+        private object Activate_65_TipoDisplayConverter() { return new global::WinUI_APP.Panels.Users.TipoDisplayConverter(); }
+        private object Activate_66_EstadoDisplayConverter() { return new global::WinUI_APP.Panels.Users.EstadoDisplayConverter(); }
+        private object Activate_67_Users() { return new global::WinUI_APP.Panels.Users.Users(); }
         private void MapAdd_0_XamlControlsResources(object instance, object key, object item)
         {
             var collection = (global::System.Collections.Generic.IDictionary<global::System.Object, global::System.Object>)instance;
@@ -956,9 +962,23 @@ namespace WinUI_APP.WinUI_APP_XamlTypeInfo
                 xamlType = userType;
                 break;
 
-            case 65:   //  WinUI_APP.Panels.Users.Users
+            case 65:   //  WinUI_APP.Panels.Users.TipoDisplayConverter
+                userType = new global::WinUI_APP.WinUI_APP_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Object"));
+                userType.Activator = Activate_65_TipoDisplayConverter;
+                userType.SetIsLocalType();
+                xamlType = userType;
+                break;
+
+            case 66:   //  WinUI_APP.Panels.Users.EstadoDisplayConverter
+                userType = new global::WinUI_APP.WinUI_APP_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Object"));
+                userType.Activator = Activate_66_EstadoDisplayConverter;
+                userType.SetIsLocalType();
+                xamlType = userType;
+                break;
+
+            case 67:   //  WinUI_APP.Panels.Users.Users
                 userType = new global::WinUI_APP.WinUI_APP_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Microsoft.UI.Xaml.Controls.Page"));
-                userType.Activator = Activate_65_Users;
+                userType.Activator = Activate_67_Users;
                 userType.SetIsLocalType();
                 xamlType = userType;
                 break;

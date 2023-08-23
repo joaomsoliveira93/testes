@@ -8,19 +8,22 @@ using System.Text.Json;
 using System.Text;
 using WinUI_APP.Classes;
 using System.Diagnostics;
+using Microsoft.UI.Xaml.Data;
+using System.Xml.Linq;
 
 namespace WinUI_APP.Panels.Users
 {
     public sealed partial class DtlUser : Page
     {
         private string userId = "";
-        private User userInfo = new User();
+        private readonly User userInfo = new User();
      
         string apiServer = Properties.Resources.apiServer;
         public DtlUser()
         {
             this.InitializeComponent();
         }
+
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
@@ -29,7 +32,7 @@ namespace WinUI_APP.Panels.Users
             if (e.Parameter != null)
             {
                 userId = e.Parameter.ToString();
-                GetUserFromApi();              
+                GetUserFromApi();
             }
         }
 
@@ -64,12 +67,12 @@ namespace WinUI_APP.Panels.Users
                         userInfo.Email = email;
 
                         element.TryGetProperty("estado", out var estadoProperty);
-                        string estado = estadoProperty.GetInt64().ToString();
-                        userInfo.Estado = estado;
+                        string tempestado = estadoProperty.GetInt64().ToString();
+                        userInfo.Estado = tempestado;
 
                         element.TryGetProperty("tipo", out var tipoProperty);
-                        string tipo = tipoProperty.GetString();
-                        userInfo.Tipo = tipo;
+                        string temptipo = tipoProperty.GetString();
+                        userInfo.Tipo = temptipo;
 
                     }
                 }
@@ -100,11 +103,12 @@ namespace WinUI_APP.Panels.Users
         {                
             name.IsEnabled = true;        
             email.IsEnabled = true;
-            tipo.IsEnabled = true;
-            estado.IsEnabled = true;
+            comboTipo.IsEnabled = true;
+            comboEstado.IsEnabled = true;
             email.IsEnabled = true;
             Editar.Visibility = Visibility.Collapsed;
             Apagar.Visibility = Visibility.Collapsed;
+            Reset.Visibility = Visibility.Collapsed;
             Guardar.Visibility = Visibility.Visible;
             Cancelar.Visibility = Visibility.Visible;
         }
@@ -113,10 +117,11 @@ namespace WinUI_APP.Panels.Users
         {
             name.IsEnabled = false;
             email.IsEnabled = false;
-            tipo.IsEnabled = false;
-            estado.IsEnabled = false;
+            comboTipo.IsEnabled = false;
+            comboEstado.IsEnabled = false;
             Editar.Visibility = Visibility.Visible;
             Apagar.Visibility = Visibility.Visible;
+            Reset.Visibility = Visibility.Visible;
             Guardar.Visibility = Visibility.Collapsed;
             Cancelar.Visibility = Visibility.Collapsed;
         }
@@ -164,8 +169,8 @@ namespace WinUI_APP.Panels.Users
                             username = userInfo.Username,
                             name = userInfo.Name,
                             email = userInfo.Email,
-                            estado = userInfo.getEstado(),
-                            tipo = userInfo.getTipo(),
+                            estado = userInfo.Estado,
+                            tipo = userInfo.Tipo,
                         };
 
                         var requestData = new
@@ -300,16 +305,75 @@ namespace WinUI_APP.Panels.Users
             }
         }
 
-        private void tipo_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private async void Reset_Click(object sender, RoutedEventArgs e)
         {
-            ComboBox temp = sender as ComboBox;
-            userInfo.Tipo = temp.SelectedValue.ToString();
-        }
+            ContentDialog dialog = new ContentDialog();
+            dialog.XamlRoot = this.XamlRoot;
+            dialog.Style = Application.Current.Resources["DefaultContentDialogStyle"] as Style;
+            dialog.Title = "A Palavra-Pase do utilizador será restaurada. Tem a certeza?";
+            dialog.PrimaryButtonText = "Sim";
+            dialog.CloseButtonText = "Cancelar";
+            dialog.DefaultButton = ContentDialogButton.Primary;
+            var result = await dialog.ShowAsync();
 
-        private void estado_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            ComboBox temp = sender as ComboBox;
-            userInfo.Estado = temp.SelectedValue.ToString();
+            string userId = "64d6c5195da9d3c2d466ded5";
+            if (result == ContentDialogResult.Primary)
+            {
+                using (var httpClient = new HttpClient())
+                {
+                    var updatedUser = new
+                    {
+                        _id = userInfo.Id,
+                    };
+
+                    var requestData = new
+                    {
+                        UserId = userId,
+                        User = updatedUser,
+                    };
+
+                    var options = new JsonSerializerOptions
+                    {
+                        PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
+                    };
+                    string requestDataJson = JsonSerializer.Serialize(requestData, options);
+
+                    var content = new StringContent(requestDataJson, Encoding.UTF8, "application/json");
+
+                    HttpResponseMessage response = await httpClient.PutAsync($"{apiServer}/user/resetpassword", content);
+                    string responseText = await response.Content.ReadAsStringAsync();
+                    if (responseText != "NOK" && responseText != "null")
+                    {
+                        ContentDialog dialog2 = new ContentDialog();
+                        dialog2.XamlRoot = this.XamlRoot;
+                        dialog2.Style = Application.Current.Resources["DefaultContentDialogStyle"] as Style;
+                        dialog2.Title = "A Palavra-Passe foi restaurada!";
+                        dialog2.CloseButtonText = "OK";
+                        dialog2.DefaultButton = ContentDialogButton.Primary;
+                        await dialog2.ShowAsync();
+                    }
+                    else if (responseText == "NOK")
+                    {
+                        ContentDialog dialog2 = new ContentDialog();
+                        dialog2.XamlRoot = this.XamlRoot;
+                        dialog2.Style = Application.Current.Resources["DefaultContentDialogStyle"] as Style;
+                        dialog2.Title = "Não foi possível restaurar a Palavr-Passe!";
+                        dialog2.CloseButtonText = "OK";
+                        dialog2.DefaultButton = ContentDialogButton.Primary;
+                        await dialog2.ShowAsync();
+                    }
+                    else
+                    {
+                        ContentDialog dialog2 = new ContentDialog();
+                        dialog2.XamlRoot = this.XamlRoot;
+                        dialog2.Style = Application.Current.Resources["DefaultContentDialogStyle"] as Style;
+                        dialog2.Title = "Não foi possível realizar a ligação com o servidor, por favor tente mais tarde!";
+                        dialog2.CloseButtonText = "OK";
+                        dialog2.DefaultButton = ContentDialogButton.Primary;
+                        await dialog2.ShowAsync();
+                    }
+                }
+            }
         }
     }
 }
