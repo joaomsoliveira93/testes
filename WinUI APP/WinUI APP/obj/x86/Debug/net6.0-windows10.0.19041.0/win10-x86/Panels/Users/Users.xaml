@@ -1,0 +1,106 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Page
+    x:Class="WinUI_APP.Panels.Users.Users"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:WinUI_APP.Panels.Users"
+    xmlns:controls="using:CommunityToolkit.WinUI.UI.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="Transparent">
+
+    <Grid Width="Auto" Height="Auto" Background="Transparent" ColumnDefinitions="*" RowDefinitions ="30,50,60,*,20">
+        <Rectangle Grid.Row="0" />
+        <StackPanel Grid.Row="1" Orientation="Horizontal" >
+            <TextBlock Margin="20,5,0,0" FontSize="25">Utilizadores</TextBlock>
+            <CommandBar Background="Transparent" IsOpen="False" DefaultLabelPosition="Right">
+                <AppBarButton x:ConnectionId='19' Icon="Add" Label="Adicionar"                             />
+            </CommandBar>
+        </StackPanel>
+
+        <ScrollViewer  Grid.Row="2" Width="Auto" HorizontalScrollMode="Enabled" HorizontalScrollBarVisibility="Auto" VerticalScrollMode="Disabled" VerticalScrollBarVisibility="Disabled">
+            <StackPanel Orientation="Horizontal" Padding="10,10,0,10" >
+                <TextBox x:ConnectionId='14' Margin="10,0,10,0" Height="20" x:Name="filterUsername" PlaceholderText="Nome de Utilizador"  Width="150"                      />
+                <TextBox x:ConnectionId='15' Margin="10,0,10,0" Height="20" x:Name="filterNome" PlaceholderText="Nome"  Width="150"                      />
+                <TextBox x:ConnectionId='16' Margin="10,0,10,0" Height="20"  x:Name="filterEmail" PlaceholderText="Email"  Width="150"                      />
+                
+                <ComboBox x:ConnectionId='17' Margin="10,5,0,0"                                          x:Name="tipo" PlaceholderText="Tipo" Width="150">
+                    <x:String>Todos</x:String>
+                    <x:String>Administrador</x:String>
+                    <x:String>Utilizador</x:String>
+                </ComboBox>
+
+                <ComboBox x:ConnectionId='18' Margin="10,5,0,0"                                            x:Name="estado" PlaceholderText="Estado" Width="150">
+                    <x:String>Todos</x:String>
+                    <x:String>Ativo</x:String>
+                    <x:String>Inativo</x:String>
+                </ComboBox>
+
+            </StackPanel>
+        </ScrollViewer>
+        <ScrollViewer  Grid.Row="3" Width="Auto" HorizontalScrollMode="Enabled" HorizontalScrollBarVisibility="Auto" VerticalScrollMode="Disabled" VerticalScrollBarVisibility="Disabled">
+            
+                <controls:DataGrid x:ConnectionId='12' 
+             x:Name="grid" 
+             RelativePanel.AlignLeftWithPanel="True" RelativePanel.AlignRightWithPanel="True" 
+             Width="Auto" Margin="12" 
+             VerticalAlignment="Stretch" HorizontalAlignment="Stretch" 
+             HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" 
+             AreRowDetailsFrozen="False" AreRowGroupHeadersFrozen="True" 
+             AutoGenerateColumns="False" CanUserSortColumns="True" 
+             CanUserReorderColumns="False" CanUserResizeColumns="True" 
+             ColumnHeaderHeight="32" FrozenColumnCount="0" 
+             GridLinesVisibility="None" HeadersVisibility="Column" 
+             IsReadOnly="True" RowDetailsVisibilityMode="Collapsed" 
+             SelectionMode="Extended" RowGroupHeaderPropertyNameAlternative="Name">
+                    <controls:DataGrid.Columns>
+                        <controls:DataGridTextColumn Width="Auto" Header="Nome de Utilizador" Binding="{Binding Username}" Tag="username" />
+                        <controls:DataGridTextColumn Width="Auto" Header="Nome" Binding="{Binding Name}" Tag="Nome" />
+                        <controls:DataGridTextColumn Width="Auto" Header="Email" Binding="{Binding Email}" Tag="Email" />
+                        <controls:DataGridTextColumn Width="Auto" Header="Estado" Binding="{Binding Estado}" Tag="Estado" />
+                        <controls:DataGridTextColumn Width="Auto" Header="Tipo" Binding="{Binding Tipo}" Tag="Tipo" />
+                        <controls:DataGridTemplateColumn Width="Auto" Header="">
+                            <controls:DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <AppBarButton x:ConnectionId='13' Height="50" Width="60" Icon="View"                              />
+                                </DataTemplate>
+                            </controls:DataGridTemplateColumn.CellTemplate>
+                        </controls:DataGridTemplateColumn>
+                    </controls:DataGrid.Columns>
+                </controls:DataGrid>
+ 
+        </ScrollViewer>
+        <TextBlock x:ConnectionId='2' Grid.Row="4" Margin="0,-70,0,0" HorizontalAlignment="Center" FontSize="25" VerticalAlignment="Center" Visibility="Collapsed" x:Name="nothing">Não Existem registos</TextBlock>
+
+        <ContentDialog x:ConnectionId='3' x:Name="addUserDialog" PrimaryButtonStyle="{StaticResource AccentButtonStyle}" PrimaryButtonText="Adicionar"                                                       CloseButtonText="Cancelar"  >
+            <ContentDialog.TitleTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Adicionar Utilizador"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ContentDialog.TitleTemplate>
+            <ScrollViewer  Grid.Row="3" Height="400" Width="Auto" HorizontalScrollMode="Disabled" HorizontalScrollBarVisibility="Disabled" VerticalScrollMode="Auto" VerticalScrollBarVisibility="Auto">
+                <StackPanel Width="Auto" Height="Auto" Orientation="Vertical" Background="Transparent" >
+                    <TextBox x:ConnectionId='5' Margin="20,10,20,0"  x:Name="username" PlaceholderText="Nome de Utilizador"                         ></TextBox>
+                    <TextBlock x:ConnectionId='6' Margin="20,10,20,0" Foreground="Red"  x:Name="usernameValidator"> O nome de utilizador é obrigatório</TextBlock>
+                    
+                    <TextBox x:ConnectionId='7' Margin="20,10,20,0"  x:Name="name" PlaceholderText="Nome"                         ></TextBox>
+                    <TextBlock x:ConnectionId='8' Margin="20,10,20,0" Foreground="Red"  x:Name="nameValidator"> O nome é obrigatório</TextBlock>
+                    
+                    <TextBox x:ConnectionId='9' Margin="20,10,20,0" x:Name="email" PlaceholderText="Email"                         ></TextBox>
+                    <TextBlock x:ConnectionId='10' Margin="20,10,20,0" Foreground="Red"  x:Name="emailValidator"> O email é obrigatório</TextBlock>
+
+                    <ComboBox x:ConnectionId='11' Margin="20,10,20,0"                                             x:Name="newtipo" PlaceholderText="Tipo" Width="250">
+                        <x:String>Todos</x:String>
+                        <x:String>Administrador</x:String>
+                        <x:String>Utilizador</x:String>
+                    </ComboBox>
+
+                </StackPanel>
+            </ScrollViewer>
+        </ContentDialog>
+    </Grid>
+</Page>
+

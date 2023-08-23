@@ -63,4 +63,8 @@ const ClientSchema = new mongoose.Schema({
     }
 });
 
+ClientSchema.virtual("id").get(function(){
+    return this._id;
+})
+
 module.exports = mongoose.model('Client', ClientSchema);

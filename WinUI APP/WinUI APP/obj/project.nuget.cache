@@ -1,0 +1,26 @@
+{
+  "version": 2,
+  "dgSpecHash": "VXvC+VI2tqImGOI/e1rTdzUX8ZD900YbjLgNYQLsD8fAO//If0jqJLYbX2RZWbet6/bIVFPdocXGmau6SvaqJQ==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\joaom\\source\\repos\\WinUI APP\\WinUI APP\\WinUI APP.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\joaom\\.nuget\\packages\\communitytoolkit.winui.ui.controls.datagrid\\7.1.2\\communitytoolkit.winui.ui.controls.datagrid.7.1.2.nupkg.sha512",
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages\\microsoft.windows.sdk.buildtools\\10.0.22621.756\\microsoft.windows.sdk.buildtools.10.0.22621.756.nupkg.sha512",
+    "C:\\Users\\joaom\\.nuget\\packages\\microsoft.windowsappsdk\\1.3.230724000\\microsoft.windowsappsdk.1.3.230724000.nupkg.sha512",
+    "C:\\Users\\joaom\\.nuget\\packages\\system.net.http.json\\7.0.1\\system.net.http.json.7.0.1.nupkg.sha512",
+    "C:\\Users\\joaom\\.nuget\\packages\\system.runtime.compilerservices.unsafe\\6.0.0\\system.runtime.compilerservices.unsafe.6.0.0.nupkg.sha512",
+    "C:\\Users\\joaom\\.nuget\\packages\\system.text.encodings.web\\7.0.0\\system.text.encodings.web.7.0.0.nupkg.sha512",
+    "C:\\Users\\joaom\\.nuget\\packages\\system.text.json\\7.0.2\\system.text.json.7.0.2.nupkg.sha512",
+    "C:\\Users\\joaom\\.nuget\\packages\\microsoft.netcore.app.runtime.win-x86\\6.0.21\\microsoft.netcore.app.runtime.win-x86.6.0.21.nupkg.sha512",
+    "C:\\Users\\joaom\\.nuget\\packages\\microsoft.windows.sdk.net.ref\\10.0.19041.29\\microsoft.windows.sdk.net.ref.10.0.19041.29.nupkg.sha512",
+    "C:\\Users\\joaom\\.nuget\\packages\\microsoft.aspnetcore.app.runtime.win-x86\\6.0.21\\microsoft.aspnetcore.app.runtime.win-x86.6.0.21.nupkg.sha512",
+    "C:\\Users\\joaom\\.nuget\\packages\\microsoft.netcore.app.runtime.win-arm64\\6.0.21\\microsoft.netcore.app.runtime.win-arm64.6.0.21.nupkg.sha512",
+    "C:\\Users\\joaom\\.nuget\\packages\\microsoft.aspnetcore.app.runtime.win-x64\\6.0.21\\microsoft.aspnetcore.app.runtime.win-x64.6.0.21.nupkg.sha512",
+    "C:\\Users\\joaom\\.nuget\\packages\\microsoft.windowsdesktop.app.runtime.win-arm64\\6.0.21\\microsoft.windowsdesktop.app.runtime.win-arm64.6.0.21.nupkg.sha512",
+    "C:\\Users\\joaom\\.nuget\\packages\\microsoft.windowsdesktop.app.runtime.win-x64\\6.0.21\\microsoft.windowsdesktop.app.runtime.win-x64.6.0.21.nupkg.sha512",
+    "C:\\Users\\joaom\\.nuget\\packages\\microsoft.aspnetcore.app.runtime.win-arm64\\6.0.21\\microsoft.aspnetcore.app.runtime.win-arm64.6.0.21.nupkg.sha512",
+    "C:\\Users\\joaom\\.nuget\\packages\\microsoft.netcore.app.runtime.win-x64\\6.0.21\\microsoft.netcore.app.runtime.win-x64.6.0.21.nupkg.sha512",
+    "C:\\Users\\joaom\\.nuget\\packages\\microsoft.windowsdesktop.app.runtime.win-x86\\6.0.21\\microsoft.windowsdesktop.app.runtime.win-x86.6.0.21.nupkg.sha512"
+  ],
+  "logs": []
+}

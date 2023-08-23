@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Page x:ConnectionId='1'
+    x:Class="WinUI_APP.Panels.Users.DtlUser"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:WinUI_APP.Panels.Users"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="Transparent">
+
+    <Grid Width="Auto" Height="Auto" Background="Transparent" ColumnDefinitions="*" RowDefinitions ="30,50,45,*">
+        <Rectangle Grid.Row="0" />
+        <RelativePanel Grid.Row="1">
+            <TextBlock Margin="20,10,0,0" FontSize="25">Detalhes do Utilizador</TextBlock>
+        </RelativePanel>
+        <StackPanel Orientation="Horizontal" Grid.Row="2">
+            <CommandBar Background="Transparent" IsOpen="False" DefaultLabelPosition="Right">
+                <AppBarButton x:ConnectionId='9' Icon="Edit" x:Name="Editar" Label="Editar"                     />
+                <AppBarButton x:ConnectionId='10' Icon="Delete" x:Name="Apagar" Label="Apagar"                     />
+                <AppBarButton x:ConnectionId='11' Icon="Save" x:Name="Guardar" Label="Guardar" Visibility="Collapsed"                      />
+                <AppBarButton x:ConnectionId='12' Icon="Cancel" x:Name="Cancelar" Label="Cancelar" Visibility="Collapsed"                       />
+            </CommandBar>
+        </StackPanel>
+
+        <ScrollViewer Grid.Row="3" HorizontalScrollMode="Disabled" HorizontalScrollBarVisibility="Disabled" VerticalScrollMode="Auto" VerticalScrollBarVisibility="Auto">
+            <Grid Width="Auto" Height="Auto" Background="Transparent" ColumnDefinitions="*,*" RowDefinitions ="40,30,40,30,40">
+                <TextBox x:ConnectionId='2' Margin="20,0,20,0"  IsEnabled="False"                                                Grid.Column="0" Grid.Row="0" x:Name="username" PlaceholderText="Nome de Utilizador"></TextBox>
+                <TextBox x:ConnectionId='3' Margin="20,0,20,0" IsEnabled="False"                                            Grid.Column="1" Grid.Row="0" x:Name="name" PlaceholderText="Nome"                         ></TextBox>
+
+                <TextBlock x:ConnectionId='4' Margin="20,0,20,0"  Grid.Column="1" Grid.Row="1" Foreground="Red" Visibility="Collapsed" x:Name="nameValidator"> O nome é obrigatório</TextBlock>
+
+                <TextBox x:ConnectionId='5' Margin="20,0,20,0" IsEnabled="False"                                             Grid.Column="0" Grid.Row="2" x:Name="email" PlaceholderText="Email"                         ></TextBox>
+                <ComboBox x:ConnectionId='6' IsEnabled="False" Margin="20,0,20,0" Grid.Column="1" Grid.Row="2"                                                    x:Name="tipo"                                          PlaceholderText="Tipo" Width="250">
+                    <x:String>Administrador</x:String>
+                    <x:String>Utilizador</x:String>
+                </ComboBox>
+
+                <TextBlock x:ConnectionId='7' Margin="20,0,20,0"  Grid.Column="0" Grid.Row="3" Foreground="Red" Visibility="Collapsed" x:Name="emailValidator"> o Email é obrigatório</TextBlock>
+
+                <ComboBox x:ConnectionId='8' IsEnabled="False" Margin="20,0,20,0" Grid.Column="0" Grid.Row="4"                                                      x:Name="estado"                                            PlaceholderText="Estado" Width="250">
+                    <x:String>Ativo</x:String>
+                    <x:String>Inativo</x:String>
+                </ComboBox>
+            </Grid>
+        </ScrollViewer>
+    </Grid>
+</Page>
+

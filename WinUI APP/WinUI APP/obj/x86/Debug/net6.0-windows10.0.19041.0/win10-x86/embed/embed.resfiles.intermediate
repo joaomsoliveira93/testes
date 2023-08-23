@@ -1,0 +1,7 @@
+App.xbf
+AppResources.xbf
+MainWindow.xbf
+Panels\Clients\Clients.xbf
+Panels\Clients\DtlClient.xbf
+Panels\Users\DtlUser.xbf
+Panels\Users\Users.xbf

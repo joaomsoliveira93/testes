@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Page
+    x:Class="WinUI_APP.Detalhes"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:WinUI_APP"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:controls="using:CommunityToolkit.WinUI.UI.Controls"
+
+    Background="Transparent">
+
+    <Grid Width="Auto" Height="Auto" Background="Transparent" ColumnDefinitions="*" RowDefinitions ="30,50,45,*,45,*">
+        <Rectangle Grid.Row="0" />
+        <RelativePanel Grid.Row="1">
+            <TextBlock Margin="20,10,0,0" FontSize="25">Detalhes do Cliente</TextBlock>
+        </RelativePanel>
+        <StackPanel Orientation="Horizontal" Grid.Row="2">
+            <CommandBar Background="Transparent" IsOpen="False" DefaultLabelPosition="Right">
+                <AppBarButton Icon="Edit" x:Name="Editar" Label="Editar" Click="Editar_Click"/>
+                <AppBarButton Icon="Delete" x:Name="Apagar" Label="Apagar" Click="Apagar_Click"/>
+                <AppBarButton Icon="Save" x:Name="Guardar" Label="Guardar" Visibility="Collapsed" Click="Guardar_Click"/>
+                <AppBarButton Icon="Cancel" x:Name="Cancelar" Label="Cancelar" Visibility="Collapsed" Click="Cancelar_Click"/>
+            </CommandBar>    
+        </StackPanel>            
+
+        <ScrollViewer Grid.Row="3" HorizontalScrollMode="Disabled" HorizontalScrollBarVisibility="Disabled" VerticalScrollMode="Auto" VerticalScrollBarVisibility="Auto">
+            <Grid Width="Auto" Height="Auto" Background="Transparent" ColumnDefinitions="*,*" RowDefinitions ="40,30,40,30,40,30,40,30,50">
+                <TextBox Margin="20,0,20,0"  IsEnabled="False" Text="{x:Bind clientInfo.Name, Mode=TwoWay}" Grid.Column="0" Grid.Row="0" x:Name="name" PlaceholderText="Nome" TextChanged="validation"></TextBox>
+                <TextBox Margin="20,0,20,0" IsEnabled="False" Text="{x:Bind clientInfo.Ncont, Mode=TwoWay}" Grid.Column="1" Grid.Row="0" x:Name="nCont" PlaceholderText="Nº de Contribuinte" TextChanged="validation"></TextBox>
+                
+                <TextBlock Margin="20,0,20,0"  Grid.Column="0" Grid.Row="1" Foreground="Red" Visibility="Collapsed" x:Name="nameValidator"> O nome é obrigatório</TextBlock>
+                <TextBlock Margin="20,0,20,0"  Grid.Column="1" Grid.Row="1" Foreground="Red" Visibility="Collapsed" x:Name="nContValidator"> O nº de contribuinte é obrigatório</TextBlock>
+
+                <TextBox Margin="20,0,20,0" IsEnabled="False" Text="{x:Bind clientInfo.Morada, Mode=TwoWay}" Grid.Column="0" Grid.Row="2" x:Name="morada" PlaceholderText="Morada" TextChanged="validation"></TextBox>
+                <TextBox Margin="20,0,20,0" IsEnabled="False" Text="{x:Bind clientInfo.CodPost, Mode=TwoWay}" Grid.Column="1" Grid.Row="2" x:Name="codPost" PlaceholderText="Código Postal" TextChanged="validation"></TextBox>
+
+                <TextBlock Margin="20,0,20,0"  Grid.Column="0" Grid.Row="3" Foreground="Red" Visibility="Collapsed" x:Name="moradaValidator"> A morada é obrigatória</TextBlock>
+                <TextBlock Margin="20,0,20,0"  Grid.Column="1" Grid.Row="3" Foreground="Red" Visibility="Collapsed" x:Name="codPostValidator"> O código postal é obrigatório</TextBlock>
+
+                <TextBox Margin="20,0,20,0" IsEnabled="False" Text="{x:Bind clientInfo.Cidade, Mode=TwoWay}" Grid.Column="0" Grid.Row="4" x:Name="cidade" PlaceholderText="Cidade" TextChanged="validation"></TextBox>
+                <TextBox Margin="20,0,20,0" IsEnabled="False" Text="{x:Bind clientInfo.Contacto, Mode=TwoWay}" Grid.Column="1" Grid.Row="4" x:Name="contacto" PlaceholderText="Contacto" TextChanged="validation"></TextBox>
+
+                <TextBlock Margin="20,0,20,0"  Grid.Column="0" Grid.Row="5" Foreground="Red" Visibility="Collapsed" x:Name="cidadeValidator"> A cidade é obrigatória</TextBlock>
+                <TextBlock Margin="20,0,20,0"  Grid.Column="1" Grid.Row="5" Foreground="Red" Visibility="Collapsed" x:Name="contactoValidator"> O contacto é obrigatório</TextBlock>
+
+                <TextBox Margin="20,0,20,0" IsEnabled="False" Text="{x:Bind clientInfo.Email, Mode=TwoWay}" Grid.Column="0" Grid.Row="6" x:Name="email" PlaceholderText="Email" TextChanged="validation"></TextBox>
+                <TextBox Margin="20,0,20,0" IsEnabled="False" Text="{x:Bind clientInfo.Rep, Mode=TwoWay}" Grid.Column="1" Grid.Row="6" x:Name="rep" PlaceholderText="Representante"></TextBox>
+
+                <TextBlock Margin="20,0,20,0"  Grid.Column="0" Grid.Row="7" Foreground="Red" Visibility="Collapsed" x:Name="emailValidator"> O email é obrigatória</TextBlock>
+
+                <TextBox Margin="20,0,20,10" IsEnabled="False" Text="{x:Bind clientInfo.RepContacto, Mode=TwoWay}" Grid.Column="0" Grid.Row="8" x:Name="repContacto" PlaceholderText="Contacto do Representante"></TextBox>
+                <TextBox Margin="20,0,20,10" IsEnabled="False" Text="{x:Bind clientInfo.RepEmail, Mode=TwoWay}" Grid.Column="1" Grid.Row="8" x:Name="repEmail" PlaceholderText="Email do Representante"></TextBox>
+            </Grid>
+        </ScrollViewer>
+        <StackPanel Orientation="Horizontal" Grid.Row="4">
+            <TextBlock Margin="20,8,0,0" FontSize="20">Licenças do Cliente</TextBlock>
+            <CommandBar  Background="Transparent" IsOpen="False" DefaultLabelPosition="Right">
+                <AppBarButton Icon="Add" Label="Adicionar" Click="addLicenceButton_Click"/>
+            </CommandBar>
+        </StackPanel>
+        <RelativePanel Grid.Row="5">
+            <controls:DataGrid 
+                x:Name="licencesGrid" 
+                RelativePanel.AlignLeftWithPanel="True" RelativePanel.AlignRightWithPanel="True" 
+                Width="Auto" Margin="12,0,12,0" 
+                VerticalAlignment="Stretch" HorizontalAlignment="Stretch" 
+                HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" 
+                AreRowDetailsFrozen="False" AreRowGroupHeadersFrozen="True" 
+                AutoGenerateColumns="False" CanUserSortColumns="True" 
+                CanUserReorderColumns="False" CanUserResizeColumns="True" 
+                ColumnHeaderHeight="32" FrozenColumnCount="0" 
+                GridLinesVisibility="None" HeadersVisibility="Column" 
+                IsReadOnly="True" RowDetailsVisibilityMode="Collapsed" 
+                SelectionMode="Extended" RowGroupHeaderPropertyNameAlternative="Tipo">
+                <controls:DataGrid.Columns>
+                    <controls:DataGridTextColumn Width="Auto" Header="Tipo" Binding="{Binding Tipo}" Tag="Tipo" />
+                    <controls:DataGridTextColumn Width="Auto" Header="Observações" Binding="{Binding Obs}" Tag="Obs" />
+                    <controls:DataGridTextColumn Width="Auto" Header="Data de Início" Binding="{Binding StartedAt}" Tag="StartedAt" />
+                    <controls:DataGridTextColumn Width="Auto" Header="Data de Fim" Binding="{Binding EndedAt}" Tag="endedAt" />
+                    <controls:DataGridTextColumn IsReadOnly="True" Width="Auto" Header="Estado" Binding="{Binding Estado}" Tag="Estado" />
+                    <controls:DataGridTemplateColumn Width="Auto" Header="">
+                        <controls:DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <AppBarButton Height="50" Width="60" Icon="Edit" Click="EditLicenceButton_Click"/>
+                                    <AppBarButton Height="50" Width="60" Icon="Delete" Click="DeleteLicenceButton_Click"/>
+                                </StackPanel>                                
+                            </DataTemplate>
+                        </controls:DataGridTemplateColumn.CellTemplate>
+                    </controls:DataGridTemplateColumn>
+                </controls:DataGrid.Columns>
+            </controls:DataGrid>
+        </RelativePanel>
+        <ContentDialog x:Name="addEditDialog"  PrimaryButtonStyle="{StaticResource AccentButtonStyle}" Opened="addEditDialog_Opened" PrimaryButtonText="OK" CloseButtonText="Cancelar" PrimaryButtonClick="addEditDialog_PrimaryButtonClick" CloseButtonClick="addEditDialog_CloseButtonClick" >
+            <ScrollViewer  Grid.Row="3" Height="200" Width="Auto" HorizontalScrollMode="Disabled"  HorizontalScrollBarVisibility="Disabled" VerticalScrollMode="Auto" VerticalScrollBarVisibility="Auto">
+                <StackPanel Width="Auto" Height="Auto" Orientation="Vertical" Background="Transparent" >
+                    <TextBox Margin="20,10,20,0" x:Name="tipoLicenca" PlaceholderText="Tipo" TextChanged="validation" />
+                    <TextBlock Margin="20,10,20,0" Foreground="Red"  x:Name="tipoLicencaValidator"> O tipo da licença é obrigatório</TextBlock>
+                    <TextBox AutomationProperties.Name="multi-line TextBox" TextWrapping="Wrap" AcceptsReturn="True" Margin="20,10,20,0" x:Name="obsLicenca" PlaceholderText="Observações" />
+                    <CalendarDatePicker x:Name="startedAtLicenca" Margin="20,10,20,0" Width="Auto" PlaceholderText="Data de Início"/>
+                    <CalendarDatePicker x:Name="endedAtLicenca" Margin="20,10,20,0" Width="Auto" PlaceholderText="Data de Início"/>
+                </StackPanel>
+            </ScrollViewer>
+        </ContentDialog>
+    </Grid>
+ 
+</Page>
+

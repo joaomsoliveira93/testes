@@ -1,13 +1,12 @@
 const express = require('express');
 const config = require('../config');
 const router = express.Router();
-const Client = require('../models/client')
-const sha256 = require('js-sha256');
-const jwt = require('jsonwebtoken');
+const Client = require('../models/client');
+const Licence = require('../models/licence');
 
 router.get('/allclients', async (req, res) => {
     try {
-        const clients = await Client.find({}, 'name ncont morada cidade codPost contacto email rep repContacto repEmail ');
+        const clients = await Client.find({}, 'name ncont morada cidade codPost contacto email rep repContacto repEmail id');
         if (clients.length > 0) {
             res.json(clients);
         } else {
@@ -67,7 +66,6 @@ router.post('/client/add', async (req, res) => {
 
 router.put('/client/update', async (req, res) => {
     try {
-        console.log(req.body.client)
         const updatedData = {
             name: req.body.client.name,
             ncont: req.body.client.ncont,
@@ -101,9 +99,13 @@ router.put('/client/update', async (req, res) => {
 
 router.delete('/client/delete/:id', async (req, res) => {
     try {
+
+        await Licence.deleteMany({clientId:req.params.id});
+
         const deletedClient = await Client.deleteOne(
             { _id: req.params.id }
         );
+
         if (deletedClient) {
             res.send('OK');
         } else {
