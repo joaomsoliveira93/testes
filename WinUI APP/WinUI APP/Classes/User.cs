@@ -72,16 +72,7 @@ namespace WinUI_APP.Classes
         private string tipo;
         public string Tipo
         {
-            get {
-                if (tipo == "admin")
-                {
-                    return "Administrador";
-                }
-                else
-                {
-                    return "Utilizador";
-                }
-            }
+            get { return tipo; }
             set
             {
                 if (value != tipo)
@@ -90,20 +81,12 @@ namespace WinUI_APP.Classes
                     PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Tipo)));
                 }
             }
-
         }
 
         private string estado;
         public string Estado
         {
-            get { if (estado=="1") {
-                    return "Ativo";
-                }
-                else
-                {
-                    return "Inativo";
-                }
-            }
+            get { return estado; }
             set
             {
                 if (value != estado)
@@ -114,29 +97,7 @@ namespace WinUI_APP.Classes
             }
         }
 
-        public string getEstado()
-        {
-            if (estado == "Ativo")
-            {
-                return "1";
-            }
-            else
-            {
-                return "0";
-            }
-        }
 
-        public string getTipo()
-        {
-            if (tipo == "Administrador")
-            {
-                return "admin";
-            }
-            else
-            {
-                return "user";
-            }
-        }
 
         public event PropertyChangedEventHandler PropertyChanged;
     }

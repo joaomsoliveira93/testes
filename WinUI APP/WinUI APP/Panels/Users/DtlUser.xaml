@@ -18,31 +18,37 @@
             <CommandBar Background="Transparent" IsOpen="False" DefaultLabelPosition="Right">
                 <AppBarButton Icon="Edit" x:Name="Editar" Label="Editar" Click="Editar_Click"/>
                 <AppBarButton Icon="Delete" x:Name="Apagar" Label="Apagar" Click="Apagar_Click"/>
+                <AppBarButton x:Name="Reset" Label="Restaurar Palavra-Passe" Click="Reset_Click">
+                    <FontIcon Glyph="&#xE9A9;" />
+                </AppBarButton>
                 <AppBarButton Icon="Save" x:Name="Guardar" Label="Guardar" Visibility="Collapsed" Click="Guardar_Click"/>
                 <AppBarButton Icon="Cancel" x:Name="Cancelar" Label="Cancelar" Visibility="Collapsed" Click="Cancelar_Click"/>
             </CommandBar>
         </StackPanel>
 
         <ScrollViewer Grid.Row="3" HorizontalScrollMode="Disabled" HorizontalScrollBarVisibility="Disabled" VerticalScrollMode="Auto" VerticalScrollBarVisibility="Auto">
-            <Grid Width="Auto" Height="Auto" Background="Transparent" ColumnDefinitions="*,*" RowDefinitions ="40,30,40,30,40">
-                <TextBox Margin="20,0,20,0"  IsEnabled="False" Text="{x:Bind userInfo.Username, Mode=TwoWay}" Grid.Column="0" Grid.Row="0" x:Name="username" PlaceholderText="Nome de Utilizador"></TextBox>
-                <TextBox Margin="20,0,20,0" IsEnabled="False" Text="{x:Bind userInfo.Name, Mode=TwoWay}" Grid.Column="1" Grid.Row="0" x:Name="name" PlaceholderText="Nome" TextChanged="validation"></TextBox>
+            <Grid Width="Auto" Height="Auto" Background="Transparent" ColumnDefinitions="*,*" RowDefinitions ="60,30,60,30,60">
+                
+                <TextBox Margin="20,0,20,0" Header="Nome de Utilizador" IsEnabled="False" Text="{x:Bind userInfo.Username, Mode=TwoWay}" Grid.Column="0" Grid.Row="0" x:Name="username" PlaceholderText="Nome de Utilizador"></TextBox>
 
+                <TextBox Margin="20,0,20,0" Header="Nome" IsEnabled="False" Text="{x:Bind userInfo.Name, Mode=TwoWay}" Grid.Column="1" Grid.Row="0" x:Name="name" PlaceholderText="Nome" TextChanged="validation"></TextBox>
                 <TextBlock Margin="20,0,20,0"  Grid.Column="1" Grid.Row="1" Foreground="Red" Visibility="Collapsed" x:Name="nameValidator"> O nome é obrigatório</TextBlock>
 
-                <TextBox Margin="20,0,20,0" IsEnabled="False" Text="{x:Bind userInfo.Email, Mode=TwoWay}" Grid.Column="0" Grid.Row="2" x:Name="email" PlaceholderText="Email" TextChanged="validation"></TextBox>
-                <ComboBox IsEnabled="False" Margin="20,0,20,0" Grid.Column="1" Grid.Row="2" SelectedItem="{x:Bind userInfo.Tipo, Mode=TwoWay}" x:Name="tipo" SelectionChanged="tipo_SelectionChanged" PlaceholderText="Tipo" Width="250">
-                    <x:String>Administrador</x:String>
-                    <x:String>Utilizador</x:String>
-                </ComboBox>
-
+                <TextBox Margin="20,0,20,0" Header="Email" IsEnabled="False" Text="{x:Bind userInfo.Email, Mode=TwoWay}" Grid.Column="0" Grid.Row="2" x:Name="email" PlaceholderText="Email" TextChanged="validation"></TextBox>
                 <TextBlock Margin="20,0,20,0"  Grid.Column="0" Grid.Row="3" Foreground="Red" Visibility="Collapsed" x:Name="emailValidator"> o Email é obrigatório</TextBlock>
 
-                <ComboBox IsEnabled="False" Margin="20,0,20,0" Grid.Column="0" Grid.Row="4" SelectedItem="{x:Bind userInfo.Estado, Mode=TwoWay}" x:Name="estado" SelectionChanged="estado_SelectionChanged" PlaceholderText="Estado" Width="250">
-                    <x:String>Ativo</x:String>
-                    <x:String>Inativo</x:String>
+                <ComboBox IsEnabled="False" Margin="20,0,20,0" Header="Tipo" Grid.Column="1" Grid.Row="2" SelectedValue="{x:Bind userInfo.Tipo, Mode=TwoWay}" x:Name="comboTipo" Width="250" DisplayMemberPath="Content" SelectedValuePath="Tag">
+                    <ComboBoxItem Tag="admin" Content="Administrador"></ComboBoxItem>
+                    <ComboBoxItem Tag="user" Content="Utilizador"></ComboBoxItem>
+                </ComboBox>
+
+                <ComboBox IsEnabled="False" Margin="20,0,20,0" Header="Estado" Grid.Column="0" Grid.Row="4" SelectedValue="{x:Bind userInfo.Estado, Mode=TwoWay}" x:Name="comboEstado" Width="250" DisplayMemberPath="Content" SelectedValuePath="Tag">
+                    <ComboBoxItem Tag="1"  Content="Ativo" ></ComboBoxItem>
+                    <ComboBoxItem Tag="0"  Content="Inativo"></ComboBoxItem>
                 </ComboBox>
             </Grid>
+            
         </ScrollViewer>
     </Grid>
+    
 </Page>

@@ -14,11 +14,13 @@ using System.Diagnostics;
 using System.Linq;
 using Microsoft.UI.Xaml.Data;
 using System.Globalization;
+using Windows.Storage;
 
 namespace WinUI_APP
 {
     public sealed partial class Detalhes : Page
     {
+        private readonly string userId = ApplicationData.Current.LocalSettings.Values["userId"] as string;
         private string clientId = "";
         private Clients clientInfo = new Clients();
         private ObservableCollection<Licences> licences;
@@ -192,7 +194,6 @@ namespace WinUI_APP
                 dialog.DefaultButton = ContentDialogButton.Primary;
                 var result = await dialog.ShowAsync();
 
-                string userId = "64d6c5195da9d3c2d466ded5";
                 if (result == ContentDialogResult.Primary)
                 {
                     using (var httpClient = new HttpClient())
@@ -429,7 +430,6 @@ namespace WinUI_APP
 
         private async void addEditDialog_PrimaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
         {
-            string userId = "64d6c5195da9d3c2d466ded5";
             if (tipoLicenca.Text != "")
             {   
                 if (selectedLicence.Id != null)

@@ -18,32 +18,38 @@
             <CommandBar Background="Transparent" IsOpen="False" DefaultLabelPosition="Right">
                 <AppBarButton x:ConnectionId='9' Icon="Edit" x:Name="Editar" Label="Editar"                     />
                 <AppBarButton x:ConnectionId='10' Icon="Delete" x:Name="Apagar" Label="Apagar"                     />
-                <AppBarButton x:ConnectionId='11' Icon="Save" x:Name="Guardar" Label="Guardar" Visibility="Collapsed"                      />
-                <AppBarButton x:ConnectionId='12' Icon="Cancel" x:Name="Cancelar" Label="Cancelar" Visibility="Collapsed"                       />
+                <AppBarButton x:ConnectionId='11' x:Name="Reset" Label="Restaurar Palavra-Passe"                    >
+                    <FontIcon Glyph="&#xE9A9;" />
+                </AppBarButton>
+                <AppBarButton x:ConnectionId='12' Icon="Save" x:Name="Guardar" Label="Guardar" Visibility="Collapsed"                      />
+                <AppBarButton x:ConnectionId='13' Icon="Cancel" x:Name="Cancelar" Label="Cancelar" Visibility="Collapsed"                       />
             </CommandBar>
         </StackPanel>
 
         <ScrollViewer Grid.Row="3" HorizontalScrollMode="Disabled" HorizontalScrollBarVisibility="Disabled" VerticalScrollMode="Auto" VerticalScrollBarVisibility="Auto">
-            <Grid Width="Auto" Height="Auto" Background="Transparent" ColumnDefinitions="*,*" RowDefinitions ="40,30,40,30,40">
-                <TextBox x:ConnectionId='2' Margin="20,0,20,0"  IsEnabled="False"                                                Grid.Column="0" Grid.Row="0" x:Name="username" PlaceholderText="Nome de Utilizador"></TextBox>
-                <TextBox x:ConnectionId='3' Margin="20,0,20,0" IsEnabled="False"                                            Grid.Column="1" Grid.Row="0" x:Name="name" PlaceholderText="Nome"                         ></TextBox>
+            <Grid Width="Auto" Height="Auto" Background="Transparent" ColumnDefinitions="*,*" RowDefinitions ="60,30,60,30,60">
+                
+                <TextBox x:ConnectionId='2' Margin="20,0,20,0" Header="Nome de Utilizador" IsEnabled="False"                                                Grid.Column="0" Grid.Row="0" x:Name="username" PlaceholderText="Nome de Utilizador"></TextBox>
 
+                <TextBox x:ConnectionId='3' Margin="20,0,20,0" Header="Nome" IsEnabled="False"                                            Grid.Column="1" Grid.Row="0" x:Name="name" PlaceholderText="Nome"                         ></TextBox>
                 <TextBlock x:ConnectionId='4' Margin="20,0,20,0"  Grid.Column="1" Grid.Row="1" Foreground="Red" Visibility="Collapsed" x:Name="nameValidator"> O nome é obrigatório</TextBlock>
 
-                <TextBox x:ConnectionId='5' Margin="20,0,20,0" IsEnabled="False"                                             Grid.Column="0" Grid.Row="2" x:Name="email" PlaceholderText="Email"                         ></TextBox>
-                <ComboBox x:ConnectionId='6' IsEnabled="False" Margin="20,0,20,0" Grid.Column="1" Grid.Row="2"                                                    x:Name="tipo"                                          PlaceholderText="Tipo" Width="250">
-                    <x:String>Administrador</x:String>
-                    <x:String>Utilizador</x:String>
+                <TextBox x:ConnectionId='5' Margin="20,0,20,0" Header="Email" IsEnabled="False"                                             Grid.Column="0" Grid.Row="2" x:Name="email" PlaceholderText="Email"                         ></TextBox>
+                <TextBlock x:ConnectionId='6' Margin="20,0,20,0"  Grid.Column="0" Grid.Row="3" Foreground="Red" Visibility="Collapsed" x:Name="emailValidator"> o Email é obrigatório</TextBlock>
+
+                <ComboBox x:ConnectionId='7' IsEnabled="False" Margin="20,0,20,0" Header="Tipo" Grid.Column="1" Grid.Row="2"                                                     x:Name="comboTipo" Width="250" DisplayMemberPath="Content" SelectedValuePath="Tag">
+                    <ComboBoxItem Tag="admin" Content="Administrador"></ComboBoxItem>
+                    <ComboBoxItem Tag="user" Content="Utilizador"></ComboBoxItem>
                 </ComboBox>
 
-                <TextBlock x:ConnectionId='7' Margin="20,0,20,0"  Grid.Column="0" Grid.Row="3" Foreground="Red" Visibility="Collapsed" x:Name="emailValidator"> o Email é obrigatório</TextBlock>
-
-                <ComboBox x:ConnectionId='8' IsEnabled="False" Margin="20,0,20,0" Grid.Column="0" Grid.Row="4"                                                      x:Name="estado"                                            PlaceholderText="Estado" Width="250">
-                    <x:String>Ativo</x:String>
-                    <x:String>Inativo</x:String>
+                <ComboBox x:ConnectionId='8' IsEnabled="False" Margin="20,0,20,0" Header="Estado" Grid.Column="0" Grid.Row="4"                                                       x:Name="comboEstado" Width="250" DisplayMemberPath="Content" SelectedValuePath="Tag">
+                    <ComboBoxItem Tag="1"  Content="Ativo" ></ComboBoxItem>
+                    <ComboBoxItem Tag="0"  Content="Inativo"></ComboBoxItem>
                 </ComboBox>
             </Grid>
+            
         </ScrollViewer>
     </Grid>
+    
 </Page>
 

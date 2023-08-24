@@ -52,6 +52,7 @@ router.post('/login', async (req, res) => {
                     user.tokenValidDate = currentDate;
                     user.save()
                 }
+                console.log(user)
                 res.send(user);
             }
         }
@@ -217,13 +218,15 @@ router.put('/user/changepassword', async (req, res) => {
             if (updatedUser) {
                 res.send('OK');
             } else {
-                res.send('null')
+                res.send('NOK')
             }
         } else {
-            res.send('NOK')
+            res.send('errada')
         }
     } catch (error) {
         console.error(error);
+        res.send('null');
+
     }
 });
 

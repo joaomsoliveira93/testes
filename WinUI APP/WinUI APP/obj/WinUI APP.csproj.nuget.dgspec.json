@@ -59,6 +59,10 @@
             "System.Net.Http.Json": {
               "target": "Package",
               "version": "[7.0.1, )"
+            },
+            "WinUIEx": {
+              "target": "Package",
+              "version": "[2.2.0, )"
             }
           },
           "imports": [

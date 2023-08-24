@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "6kqnixNpBWWLIwHDZEO70233O6oXVbu8YCjO57PsRxMTuNAD6H2R0TA870Naw+4jymoPfQJcgN7FokpbWC8usQ==",
+  "dgSpecHash": "kRxYHRJ/eEj0uYURXXlfddplIRZYLHGdCdhYj5hqdyMSz++K8kiN6lnjvQ+LsGiBxDzAsDHup04nCPZFWFwqOQ==",
   "success": true,
   "projectFilePath": "D:\\Repositorios\\testes\\WinUI APP\\WinUI APP\\WinUI APP.csproj",
   "expectedPackageFiles": [
@@ -11,6 +11,7 @@
     "C:\\Users\\joaom\\.nuget\\packages\\system.runtime.compilerservices.unsafe\\6.0.0\\system.runtime.compilerservices.unsafe.6.0.0.nupkg.sha512",
     "C:\\Users\\joaom\\.nuget\\packages\\system.text.encodings.web\\7.0.0\\system.text.encodings.web.7.0.0.nupkg.sha512",
     "C:\\Users\\joaom\\.nuget\\packages\\system.text.json\\7.0.2\\system.text.json.7.0.2.nupkg.sha512",
+    "C:\\Users\\joaom\\.nuget\\packages\\winuiex\\2.2.0\\winuiex.2.2.0.nupkg.sha512",
     "C:\\Users\\joaom\\.nuget\\packages\\microsoft.netcore.app.runtime.win-x86\\6.0.21\\microsoft.netcore.app.runtime.win-x86.6.0.21.nupkg.sha512",
     "C:\\Users\\joaom\\.nuget\\packages\\microsoft.windows.sdk.net.ref\\10.0.19041.29\\microsoft.windows.sdk.net.ref.10.0.19041.29.nupkg.sha512",
     "C:\\Users\\joaom\\.nuget\\packages\\microsoft.aspnetcore.app.runtime.win-x86\\6.0.21\\microsoft.aspnetcore.app.runtime.win-x86.6.0.21.nupkg.sha512",

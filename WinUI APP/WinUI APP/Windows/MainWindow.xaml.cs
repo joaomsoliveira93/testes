@@ -2,16 +2,19 @@ using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media.Animation;
 using Microsoft.UI.Xaml.Navigation;
-using System.Runtime.InteropServices; 
+using System.Runtime.InteropServices;
+using System.Xml.Linq;
+using Windows.Storage;
 using WinRT;
-using WinUI_APP.Classes;
-using WinUI_APP.Panels.Users;
+
 
 namespace WinUI_APP
 {
     public sealed partial class MainWindow : Window
     {
-       public MainWindow()
+       private string name = ApplicationData.Current.LocalSettings.Values["name"] as string;
+        private bool isAdmin = (ApplicationData.Current.LocalSettings.Values["tipo"] as string)=="admin" ? true : false;
+        public MainWindow()
         {
             this.InitializeComponent();
 
@@ -19,7 +22,17 @@ namespace WinUI_APP
             this.SetTitleBar(AppTitleBar);      // set user ui element as titlebar
             TrySetMicaBackdrop();
             sidebar.ItemInvoked += Sidebar_ItemInvoked;
+            foreach (var item in sidebar.MenuItems)
+            {
+                if (item is NavigationViewItem navItem && navItem.Tag as string == "Clientes")
+                {
+                    sidebar.SelectedItem = navItem;
+                    content.Navigate(typeof(Clientes), null, new SlideNavigationTransitionInfo() { Effect = SlideNavigationTransitionEffect.FromRight });
+                    break;
+                }
+            }
         }
+   
 
         private void NavigationView_BackRequested(NavigationView sender, NavigationViewBackRequestedEventArgs args)
         {
@@ -101,7 +114,7 @@ namespace WinUI_APP
         {
             if (args.IsSettingsInvoked)
             {
-                // Handle settings click
+                content.Navigate(typeof(Panels.Settings), null, new SlideNavigationTransitionInfo() { Effect = SlideNavigationTransitionEffect.FromRight });
             }
             else
             {
@@ -115,6 +128,23 @@ namespace WinUI_APP
                             break;
                         case "Users":
                             content.Navigate(typeof(Panels.Users.Users), null, new SlideNavigationTransitionInfo() { Effect = SlideNavigationTransitionEffect.FromRight });
+                            break;
+                        case "Profile":
+                            content.Navigate(typeof(Panels.Profile), null, new SlideNavigationTransitionInfo() { Effect = SlideNavigationTransitionEffect.FromRight });
+                            break;
+                        case "Logout":
+                            
+                            ApplicationData.Current.LocalSettings.Values["userId"] = "";
+                            ApplicationData.Current.LocalSettings.Values["username"] = "";
+                            ApplicationData.Current.LocalSettings.Values["name"] = "";
+                            ApplicationData.Current.LocalSettings.Values["tipo"] = "";
+                            ApplicationData.Current.LocalSettings.Values["email"] = "";
+                            ApplicationData.Current.LocalSettings.Values["token"] = "";
+                            ApplicationData.Current.LocalSettings.Values["tokenValidDate"] = "";
+
+                            var Window = new LoginWindow();
+                            Window.Activate();
+                            this.Close();
                             break;
                     }
                 }

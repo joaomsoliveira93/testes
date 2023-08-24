@@ -15,10 +15,15 @@
         <NavigationView Grid.Row="1" x:Name="sidebar" PaneDisplayMode="Auto" IsSettingsVisible="True" BackRequested="NavigationView_BackRequested" IsBackEnabled="False">
             <NavigationView.MenuItems>
                 <NavigationViewItem Content="Clientes" Tag="Clientes" Icon="People" />
-                <NavigationViewItem Content="Utilizadores" Tag="Users" Icon="OtherUser" />
+                <NavigationViewItem Visibility="{x:Bind isAdmin}" Content="Utilizadores" Tag="Users" Icon="OtherUser" />
             </NavigationView.MenuItems>
             <NavigationView.FooterMenuItems>
-                <NavigationViewItem Content="Account" Tag="SamplePage4" Icon="Contact" />
+                <NavigationViewItem Content="{x:Bind name}" Tag="Profile" Icon="Contact" />
+                <NavigationViewItem Content="Terminar Sessão" Tag="Logout">
+                    <NavigationViewItem.Icon>
+                        <FontIcon Glyph="&#xF3B1;" />
+                    </NavigationViewItem.Icon>
+                </NavigationViewItem>
             </NavigationView.FooterMenuItems>
             <Frame Background="Transparent" x:Name="content" Navigated="ContentFrame_Navigated">
                 <Frame.ContentTransitions>
@@ -26,7 +31,6 @@
                         <NavigationThemeTransition  />
                     </TransitionCollection>
                 </Frame.ContentTransitions>
-
             </Frame>
         </NavigationView>
     </Grid> 

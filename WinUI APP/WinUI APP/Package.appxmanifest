@@ -15,7 +15,7 @@
   <mp:PhoneIdentity PhoneProductId="204a8730-0c98-48a8-bd55-407962abcebc" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 
   <Properties>
-    <DisplayName>WinUI APP</DisplayName>
+    <DisplayName>Gestor de Licenças</DisplayName>
     <PublisherDisplayName>joaom</PublisherDisplayName>
     <Logo>Assets\StoreLogo.png</Logo>
   </Properties>
@@ -34,7 +34,7 @@
       Executable="$targetnametoken$.exe"
       EntryPoint="$targetentrypoint$">
       <uap:VisualElements
-        DisplayName="WinUI APP"
+        DisplayName="Gestor de Licenças"
         Description="WinUI APP"
         BackgroundColor="transparent"
         Square150x150Logo="Assets\Square150x150Logo.png"

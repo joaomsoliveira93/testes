@@ -10,7 +10,7 @@
     mc:Ignorable="d"
     Background="Transparent">
 
-    <Grid Width="Auto" Height="Auto" Background="Transparent" ColumnDefinitions="*" RowDefinitions ="30,50,60,Auto,20">
+    <Grid Width="Auto" Height="Auto" Background="Transparent" ColumnDefinitions="*" RowDefinitions ="30,50,80,Auto,20">
         <Rectangle Grid.Row="0" />
         <StackPanel Grid.Row="1" Orientation="Horizontal" >
             <TextBlock Margin="20,5,0,0" FontSize="25">Clientes</TextBlock>
@@ -21,13 +21,13 @@
         
         <ScrollViewer  Grid.Row="2" Width="Auto" HorizontalScrollMode="Enabled" HorizontalScrollBarVisibility="Auto" VerticalScrollMode="Disabled" VerticalScrollBarVisibility="Disabled">
             <StackPanel Orientation="Horizontal" Padding="10,10,0,10" >
-                <TextBox Margin="10,0,10,0" Height="20" x:Name="filterNome" PlaceholderText="Nome"  Width="150" TextChanged="filter" />
-                <TextBox Margin="10,0,10,0" Height="20" x:Name="filterNcont" PlaceholderText="Nº de Contribuinte"  Width="150" TextChanged="filter" />
-                <TextBox Margin="10,0,10,0" Height="20" x:Name="filterMorada" PlaceholderText="Morada"  Width="150" TextChanged="filter" />
-                <TextBox Margin="10,0,10,0" Height="20" x:Name="filterCodPost" PlaceholderText="Código Postal"  Width="150" TextChanged="filter" />
-                <TextBox Margin="10,0,10,0" Height="20" x:Name="filterCidade" PlaceholderText="Cidade"  Width="150" TextChanged="filter" />
-                <TextBox Margin="10,0,10,0" Height="20" x:Name="filterContacto" PlaceholderText="Contacto"  Width="150" TextChanged="filter" />
-                <TextBox Margin="10,0,10,0" Height="20"  x:Name="filterEmail" PlaceholderText="Email"  Width="150" TextChanged="filter" />
+                <TextBox Margin="10,0,10,0" Header="Nome" x:Name="filterNome" PlaceholderText="Nome"  Width="150" TextChanged="filter" />
+                <TextBox Margin="10,0,10,0" Header="Nº de Contribuinte" x:Name="filterNcont" PlaceholderText="Nº de Contribuinte"  Width="150" TextChanged="filter" />
+                <TextBox Margin="10,0,10,0" Header="Morada" x:Name="filterMorada" PlaceholderText="Morada"  Width="150" TextChanged="filter" />
+                <TextBox Margin="10,0,10,0" Header="Código Postal" x:Name="filterCodPost" PlaceholderText="Código Postal"  Width="150" TextChanged="filter" />
+                <TextBox Margin="10,0,10,0" Header="Cidade" x:Name="filterCidade" PlaceholderText="Cidade"  Width="150" TextChanged="filter" />
+                <TextBox Margin="10,0,10,0" Header="Contacto" x:Name="filterContacto" PlaceholderText="Contacto"  Width="150" TextChanged="filter" />
+                <TextBox Margin="10,0,10,0" Header="Email" x:Name="filterEmail" PlaceholderText="Email"  Width="150" TextChanged="filter" />
             </StackPanel>
         </ScrollViewer>
 
@@ -75,23 +75,23 @@
             </ContentDialog.TitleTemplate>
             <ScrollViewer  Grid.Row="3" Height="400" Width="Auto" HorizontalScrollMode="Disabled" HorizontalScrollBarVisibility="Disabled" VerticalScrollMode="Auto" VerticalScrollBarVisibility="Auto">
                 <StackPanel Width="Auto" Height="Auto" Orientation="Vertical" Background="Transparent" >
-                    <TextBox Margin="20,10,20,0" Text="{x:Bind newClient.Name, Mode=TwoWay}" x:Name="name" PlaceholderText="Nome" TextChanged="validation"></TextBox>
+                    <TextBox Margin="20,10,20,0" Header="Nome" Text="{x:Bind newClient.Name, Mode=TwoWay}" x:Name="name" PlaceholderText="Nome" TextChanged="validation"></TextBox>
                     <TextBlock Margin="20,10,20,0" Foreground="Red"  x:Name="nameValidator"> O nome é obrigatório</TextBlock>
-                    <TextBox Margin="20,10,20,0" Text="{x:Bind newClient.Ncont, Mode=TwoWay}" x:Name="nCont" PlaceholderText="Nº de Contribuinte" TextChanged="validation"></TextBox>
+                    <TextBox Margin="20,10,20,0" Header="Nº de Contribuinte" Text="{x:Bind newClient.Ncont, Mode=TwoWay}" x:Name="nCont" PlaceholderText="Nº de Contribuinte" TextChanged="validation"></TextBox>
                     <TextBlock Margin="20,10,20,0" Foreground="Red"  x:Name="nContValidator"> O nº de contribuinte é obrigatório</TextBlock>
-                    <TextBox Margin="20,10,20,0" Text="{x:Bind newClient.Morada, Mode=TwoWay}" x:Name="morada" PlaceholderText="Morada" TextChanged="validation"></TextBox>
+                    <TextBox Margin="20,10,20,0" Header="Morada" Text="{x:Bind newClient.Morada, Mode=TwoWay}" x:Name="morada" PlaceholderText="Morada" TextChanged="validation"></TextBox>
                     <TextBlock Margin="20,10,20,0" Foreground="Red"  x:Name="moradaValidator"> A morada é obrigatória</TextBlock>
-                    <TextBox Margin="20,10,20,0" Text="{x:Bind newClient.CodPost, Mode=TwoWay}" x:Name="codPost" PlaceholderText="Código Postal" TextChanged="validation"></TextBox>
+                    <TextBox Margin="20,10,20,0" Header="Código Postal" Text="{x:Bind newClient.CodPost, Mode=TwoWay}" x:Name="codPost" PlaceholderText="Código Postal" TextChanged="validation"></TextBox>
                     <TextBlock Margin="20,10,20,0" Foreground="Red"  x:Name="codPostValidator"> O código Postal é obrigatório</TextBlock>
-                    <TextBox Margin="20,10,20,0" Text="{x:Bind newClient.Cidade, Mode=TwoWay}" x:Name="cidade" PlaceholderText="Cidade" TextChanged="validation"></TextBox>
+                    <TextBox Margin="20,10,20,0" Header="Cidade" Text="{x:Bind newClient.Cidade, Mode=TwoWay}" x:Name="cidade" PlaceholderText="Cidade" TextChanged="validation"></TextBox>
                     <TextBlock Margin="20,10,20,0" Foreground="Red"  x:Name="cidadeValidator"> A cidade é obrigatória</TextBlock>
-                    <TextBox Margin="20,10,20,0" Text="{x:Bind newClient.Contacto, Mode=TwoWay}" x:Name="contacto" PlaceholderText="Contacto" TextChanged="validation"></TextBox>
+                    <TextBox Margin="20,10,20,0" Header="Contacto" Text="{x:Bind newClient.Contacto, Mode=TwoWay}" x:Name="contacto" PlaceholderText="Contacto" TextChanged="validation"></TextBox>
                     <TextBlock Margin="20,10,20,0" Foreground="Red"  x:Name="contactoValidator"> O contacto é obrigatório</TextBlock>
-                    <TextBox Margin="20,10,20,0" Text="{x:Bind newClient.Email, Mode=TwoWay}" x:Name="email" PlaceholderText="Email" TextChanged="validation"></TextBox>
+                    <TextBox Margin="20,10,20,0" Header="Email" Text="{x:Bind newClient.Email, Mode=TwoWay}" x:Name="email" PlaceholderText="Email" TextChanged="validation"></TextBox>
                     <TextBlock Margin="20,10,20,0" Foreground="Red"  x:Name="emailValidator"> O email é obrigatório</TextBlock>
-                    <TextBox Margin="20,10,20,0" Text="{x:Bind newClient.Rep, Mode=TwoWay}" x:Name="rep" PlaceholderText="Representante"></TextBox>
-                    <TextBox Margin="20,10,20,0" Text="{x:Bind newClient.RepContacto, Mode=TwoWay}" x:Name="repContacto" PlaceholderText="Contacto do Representante"></TextBox>
-                    <TextBox Margin="20,10,20,0" Text="{x:Bind newClient.RepEmail, Mode=TwoWay}" x:Name="repEmail" PlaceholderText="Email do Representante"></TextBox>
+                    <TextBox Margin="20,10,20,0" Header="Representante" Text="{x:Bind newClient.Rep, Mode=TwoWay}" x:Name="rep" PlaceholderText="Representante"></TextBox>
+                    <TextBox Margin="20,10,20,0" Header="Contacto do Representante" Text="{x:Bind newClient.RepContacto, Mode=TwoWay}" x:Name="repContacto" PlaceholderText="Contacto do Representante"></TextBox>
+                    <TextBox Margin="20,10,20,0" Header="Email Representante" Text="{x:Bind newClient.RepEmail, Mode=TwoWay}" x:Name="repEmail" PlaceholderText="Email do Representante"></TextBox>
                 </StackPanel>
             </ScrollViewer>
         </ContentDialog>

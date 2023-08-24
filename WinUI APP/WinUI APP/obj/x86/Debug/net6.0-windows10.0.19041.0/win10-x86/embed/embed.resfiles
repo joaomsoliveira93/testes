@@ -1,7 +1,10 @@
 App.xbf
 AppResources.xbf
-MainWindow.xbf
 Panels\Clients\Clients.xbf
 Panels\Clients\DtlClient.xbf
+Panels\Profile.xbf
+Panels\Settings.xbf
 Panels\Users\DtlUser.xbf
 Panels\Users\Users.xbf
+Windows\LoginWindow.xbf
+Windows\MainWindow.xbf

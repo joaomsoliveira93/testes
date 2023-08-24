@@ -12,11 +12,13 @@ using System.Text.Json;
 using System.Text;
 using Microsoft.UI.Xaml.Media.Animation;
 using WinUI_APP.Classes;
+using Windows.Storage;
 
 namespace WinUI_APP
 {
     public sealed partial class Clientes : Page
     {
+        private string userId = ApplicationData.Current.LocalSettings.Values["userId"] as string;
         private ObservableCollection<Clients> clients;
         private Clients newClient = new Clients();
         private ObservableCollection<Clients> filteredClients;
@@ -151,7 +153,6 @@ namespace WinUI_APP
 
         private async void addClientDialog_PrimaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
         {
-            string userId = "64d6c5195da9d3c2d466ded5";
             if (newClient.Name != "" && newClient.Ncont != "" && newClient.Morada != "" && newClient.Cidade != "" && newClient.CodPost != "" && newClient.Contacto != "" && newClient.Email != "")
             {
                 using (var httpClient = new HttpClient())

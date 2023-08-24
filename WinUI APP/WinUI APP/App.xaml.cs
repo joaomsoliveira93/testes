@@ -8,40 +8,54 @@ using Microsoft.UI.Xaml.Navigation;
 using Microsoft.UI.Xaml.Shapes;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Text;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.Storage;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
 
 namespace WinUI_APP
 {
-    /// <summary>
-    /// Provides application-specific behavior to supplement the default Application class.
-    /// </summary>
+
     public partial class App : Application
     {
-        /// <summary>
-        /// Initializes the singleton application object.  This is the first line of authored code
-        /// executed, and as such is the logical equivalent of main() or WinMain().
-        /// </summary>
+
         public App()
         {
             this.InitializeComponent();
         }
 
-        /// <summary>
-        /// Invoked when the application is launched.
-        /// </summary>
-        /// <param name="args">Details about the launch request and process.</param>
+ 
         protected override void OnLaunched(Microsoft.UI.Xaml.LaunchActivatedEventArgs args)
         {
-            m_window = new MainWindow();
+            string validtoken = ApplicationData.Current.LocalSettings.Values["tokenValidDate"] as string;
+            if (validtoken == "" || validtoken == null)
+            {
+                m_window = new LoginWindow();
+            }
+            else
+            {
+                DateTime tokenExpirationDate = DateTime.Parse(validtoken);
+                DateTime currentSystemDate = DateTime.Now;
+
+                if (tokenExpirationDate > currentSystemDate)
+                {
+                    m_window = new MainWindow();
+                }
+                else
+                {
+                    m_window = new LoginWindow();
+                }
+            }    
+
             m_window.Activate();
         }
 
