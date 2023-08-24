@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\joaom\\source\\repos\\WinUI APP\\WinUI APP\\WinUI APP.csproj": {}
+    "D:\\Repositorios\\testes\\WinUI APP\\WinUI APP\\WinUI APP.csproj": {}
   },
   "projects": {
-    "C:\\Users\\joaom\\source\\repos\\WinUI APP\\WinUI APP\\WinUI APP.csproj": {
+    "D:\\Repositorios\\testes\\WinUI APP\\WinUI APP\\WinUI APP.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\joaom\\source\\repos\\WinUI APP\\WinUI APP\\WinUI APP.csproj",
+        "projectUniqueName": "D:\\Repositorios\\testes\\WinUI APP\\WinUI APP\\WinUI APP.csproj",
         "projectName": "WinUI APP",
-        "projectPath": "C:\\Users\\joaom\\source\\repos\\WinUI APP\\WinUI APP\\WinUI APP.csproj",
+        "projectPath": "D:\\Repositorios\\testes\\WinUI APP\\WinUI APP\\WinUI APP.csproj",
         "packagesPath": "C:\\Users\\joaom\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\joaom\\source\\repos\\WinUI APP\\WinUI APP\\obj\\",
+        "outputPath": "D:\\Repositorios\\testes\\WinUI APP\\WinUI APP\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

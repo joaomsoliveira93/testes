@@ -10,37 +10,37 @@
     <PackageArchitecture>x86</PackageArchitecture>
     <PackageIdentityName>204a8730-0c98-48a8-bd55-407962abcebc</PackageIdentityName>
     <PackageIdentityPublisher>CN=joaom</PackageIdentityPublisher>
-    <IntermediateOutputPath>C:\Users\joaom\source\repos\WinUI APP\WinUI APP\obj\x86\Debug\net6.0-windows10.0.19041.0\win10-x86\</IntermediateOutputPath>
+    <IntermediateOutputPath>D:\Repositorios\testes\WinUI APP\WinUI APP\obj\x86\Debug\net6.0-windows10.0.19041.0\win10-x86\</IntermediateOutputPath>
     <RemoteDeploymentType>CopyToDevice</RemoteDeploymentType>
     <PackageRegistrationPath></PackageRegistrationPath>
     <RemoveNonLayoutFiles>false</RemoveNonLayoutFiles>
     <DeployOptionalPackages>false</DeployOptionalPackages>
     <WindowsSdkPath>C:\Program Files %28x86%29\Windows Kits\10\</WindowsSdkPath>
-    <LayoutDir>C:\Users\joaom\source\repos\WinUI APP\WinUI APP\bin\x86\Debug\net6.0-windows10.0.19041.0\win10-x86\AppX</LayoutDir>
+    <LayoutDir>D:\Repositorios\testes\WinUI APP\WinUI APP\bin\x86\Debug\net6.0-windows10.0.19041.0\win10-x86\AppX</LayoutDir>
   </PropertyGroup>
   <ItemGroup>
-    <AppXManifest Include="C:\Users\joaom\source\repos\WinUI APP\WinUI APP\bin\x86\Debug\net6.0-windows10.0.19041.0\win10-x86\AppxManifest.xml">
+    <AppXManifest Include="D:\Repositorios\testes\WinUI APP\WinUI APP\bin\x86\Debug\net6.0-windows10.0.19041.0\win10-x86\AppxManifest.xml">
       <PackagePath>AppxManifest.xml</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
     </AppXManifest>
   </ItemGroup>
   <ItemGroup>
-    <AppxPackagedFile Include="C:\Users\joaom\source\repos\WinUI APP\WinUI APP\bin\x86\Debug\net6.0-windows10.0.19041.0\win10-x86\resources.pri">
+    <AppxPackagedFile Include="D:\Repositorios\testes\WinUI APP\WinUI APP\bin\x86\Debug\net6.0-windows10.0.19041.0\win10-x86\resources.pri">
       <PackagePath>resources.pri</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\joaom\source\repos\WinUI APP\WinUI APP\bin\x86\Debug\net6.0-windows10.0.19041.0\win10-x86\WinUI APP.runtimeconfig.json">
+    <AppxPackagedFile Include="D:\Repositorios\testes\WinUI APP\WinUI APP\bin\x86\Debug\net6.0-windows10.0.19041.0\win10-x86\WinUI APP.runtimeconfig.json">
       <PackagePath>WinUI APP.runtimeconfig.json</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\joaom\source\repos\WinUI APP\WinUI APP\bin\x86\Debug\net6.0-windows10.0.19041.0\win10-x86\WinUI APP.dll">
+    <AppxPackagedFile Include="D:\Repositorios\testes\WinUI APP\WinUI APP\bin\x86\Debug\net6.0-windows10.0.19041.0\win10-x86\WinUI APP.dll">
       <PackagePath>WinUI APP.dll</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\joaom\source\repos\WinUI APP\WinUI APP\bin\x86\Debug\net6.0-windows10.0.19041.0\win10-x86\WinUI APP.dll.config">
+    <AppxPackagedFile Include="D:\Repositorios\testes\WinUI APP\WinUI APP\bin\x86\Debug\net6.0-windows10.0.19041.0\win10-x86\WinUI APP.dll.config">
       <PackagePath>WinUI APP.dll.config</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\joaom\source\repos\WinUI APP\WinUI APP\obj\x86\Debug\net6.0-windows10.0.19041.0\win10-x86\apphost.exe">
+    <AppxPackagedFile Include="D:\Repositorios\testes\WinUI APP\WinUI APP\obj\x86\Debug\net6.0-windows10.0.19041.0\win10-x86\apphost.exe">
       <PackagePath>WinUI APP.exe</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\joaom\source\repos\WinUI APP\WinUI APP\bin\x86\Debug\net6.0-windows10.0.19041.0\win10-x86\WinUI APP.deps.json">
+    <AppxPackagedFile Include="D:\Repositorios\testes\WinUI APP\WinUI APP\bin\x86\Debug\net6.0-windows10.0.19041.0\win10-x86\WinUI APP.deps.json">
       <PackagePath>WinUI APP.deps.json</PackagePath>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\joaom\.nuget\packages\microsoft.netcore.app.runtime.win-x86\6.0.21\runtimes\win-x86\lib\net6.0\Microsoft.CSharp.dll">
@@ -772,25 +772,25 @@
     <AppxPackagedFile Include="C:\Users\joaom\.nuget\packages\communitytoolkit.winui.ui.controls.datagrid\7.1.2\lib\net5.0-windows10.0.18362\CommunityToolkit.WinUI.UI.Controls.DataGrid.pri">
       <PackagePath>CommunityToolkit.WinUI.UI.Controls.DataGrid.pri</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\joaom\source\repos\WinUI APP\WinUI APP\Assets\LockScreenLogo.scale-200.png">
+    <AppxPackagedFile Include="D:\Repositorios\testes\WinUI APP\WinUI APP\Assets\LockScreenLogo.scale-200.png">
       <PackagePath>Assets\LockScreenLogo.scale-200.png</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\joaom\source\repos\WinUI APP\WinUI APP\Assets\SplashScreen.scale-200.png">
+    <AppxPackagedFile Include="D:\Repositorios\testes\WinUI APP\WinUI APP\Assets\SplashScreen.scale-200.png">
       <PackagePath>Assets\SplashScreen.scale-200.png</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\joaom\source\repos\WinUI APP\WinUI APP\Assets\Square150x150Logo.scale-200.png">
+    <AppxPackagedFile Include="D:\Repositorios\testes\WinUI APP\WinUI APP\Assets\Square150x150Logo.scale-200.png">
       <PackagePath>Assets\Square150x150Logo.scale-200.png</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\joaom\source\repos\WinUI APP\WinUI APP\Assets\Square44x44Logo.scale-200.png">
+    <AppxPackagedFile Include="D:\Repositorios\testes\WinUI APP\WinUI APP\Assets\Square44x44Logo.scale-200.png">
       <PackagePath>Assets\Square44x44Logo.scale-200.png</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\joaom\source\repos\WinUI APP\WinUI APP\Assets\Square44x44Logo.targetsize-24_altform-unplated.png">
+    <AppxPackagedFile Include="D:\Repositorios\testes\WinUI APP\WinUI APP\Assets\Square44x44Logo.targetsize-24_altform-unplated.png">
       <PackagePath>Assets\Square44x44Logo.targetsize-24_altform-unplated.png</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\joaom\source\repos\WinUI APP\WinUI APP\Assets\StoreLogo.png">
+    <AppxPackagedFile Include="D:\Repositorios\testes\WinUI APP\WinUI APP\Assets\StoreLogo.png">
       <PackagePath>Assets\StoreLogo.png</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\joaom\source\repos\WinUI APP\WinUI APP\Assets\Wide310x150Logo.scale-200.png">
+    <AppxPackagedFile Include="D:\Repositorios\testes\WinUI APP\WinUI APP\Assets\Wide310x150Logo.scale-200.png">
       <PackagePath>Assets\Wide310x150Logo.scale-200.png</PackagePath>
     </AppxPackagedFile>
   </ItemGroup>
