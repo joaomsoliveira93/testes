@@ -1,24 +1,30 @@
-<div [@fade]="userProfile ? 'expanded' : 'collapsed'" class="z-0 fixed w-80 h-max top-14 right-4 rounded-lg shadow-lg shadow-black"
-    [style.background]="appMode==='dark' ? '#767a7a':'#f2eeed'">
-    <div class="mr-[50px] h-10 w-72 rounded-lg">
-        <button class="rounded-md absolute right-2 top-2 bg-[#c76464] w-8 h-8 text-white hover:bg-[#ff0000]"
+<div *ngIf="userProfile" class="half-transparent z-50 h-screen w-screen fixed" (click)="handleEvent()"></div>
+<div [@fade]="userProfile ? 'expanded' : 'collapsed'"
+    class="z-50 fixed w-72 h-max top-14 right-4 rounded-lg shadow-lg shadow-black"
+    [style.background]="appMode==='dark' ? '#423f3f':'#d1cbcb'">
+    <div class="mr-1 h-10 w-64 rounded-lg">
+        <button class="rounded-md absolute right-1 top-1  w-8 h-8 text-white hover:bg-[#ff0000]" [style.background]="color"
             (click)="handleEvent()"> <i class="fal fa-times"></i></button>
     </div>
     <div class="w-full h-full">
-        <div class="pt-1 flex">
-            <img class="flex m-auto rounded-lg" width="80" src="./assets/img/user.png" />
-            <div class="block pt-3 pr-3">
-                <p>{{name}}</p>
-                <p>{{email}}</p>
+        <div class="pt-3 flex">
+            <img class="flex ml-2 mr-2 rounded-lg" width="80" [src]="img" />
+            <div class="block pt-3 pr-3 ">
+                <p [style.color]="appMode==='dark' ? 'white':'black'">{{name}}</p>
+                <p [style.color]="appMode==='dark' ? 'white':'black'">{{email}}</p>
             </div>
         </div>
-        <button class="w-[calc(100%-16px)] rounded-lg mt-5 ml-2 mb-1 pt-2 pb-2 bg-slate-300 hover:bg-slate-500"
-            (click)="goProfile('profile')">
-            <i class="font-black text-2xl -ml-40 fal fa-user"></i>
+        <button class="w-full h-20 rounded-md mt-5 pt-2 pb-2" 
+        [style.color]="appMode==='dark' ? 'white':'black'" 
+        [ngClass]="appMode==='dark' ? 'hover:bg-[#767a7a]' : 'hover:bg-white'"
+        (click)="goProfile('profile')">
+            <p class="cursor-pointer font-black text-2xl -ml-40 fal fa-user"></p>
             <label class="ml-5 font-black text-2xl">Perfil</label>
         </button>
 
-        <button class="w-[calc(100%-16px)] rounded-lg mt-0 ml-2 mb-3 pt-2 pb-2 bg-slate-300 hover:bg-slate-500"
+        <button class="w-full h-20 rounded-md mt-0 mb-2 pt-2 pb-2" 
+        [style.color]="appMode==='dark' ? 'white':'black'" 
+        [ngClass]="appMode==='dark' ? 'hover:bg-[#767a7a]' : 'hover:bg-white'"
         (click)="handleLogout()">
             <i class="font-black text-2xl -ml-40 fal fa-sign-in"></i>
             <label class="ml-5 font-black text-2xl">Sair</label>

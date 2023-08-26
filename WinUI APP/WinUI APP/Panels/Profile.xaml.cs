@@ -1,42 +1,37 @@
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
-using Microsoft.UI.Xaml.Controls.Primitives;
-using Microsoft.UI.Xaml.Data;
-using Microsoft.UI.Xaml.Input;
-using Microsoft.UI.Xaml.Media;
-using Microsoft.UI.Xaml.Navigation;
-using Microsoft.WindowsAppSDK.Runtime.Packages;
 using System.Net.Http;
 using System.Text.Json;
 using System.Text;
-using System.Xml.Linq;
 using Windows.Storage;
 using WinUI_APP.Classes;
 using System.Diagnostics;
+using Windows.Storage.Pickers;
+using Microsoft.UI.Xaml.Media.Imaging;
 
 namespace WinUI_APP.Panels
 {
     public sealed partial class Profile : Page
     {
         private string userId = ApplicationData.Current.LocalSettings.Values["userId"] as string;
+        private string profileImage = ApplicationData.Current.LocalSettings.Values["img"] as string;
         private readonly User userInfo = new User();
+        private string apiServer = Properties.Resources.apiServer;
+        private StorageFile newImage = null;
 
-        string apiServer = Properties.Resources.apiServer;
         public Profile()
         {
             this.InitializeComponent();
             GetUserFromApi();
+
         }
 
         private async void GetUserFromApi()
         {
+            BitmapImage bitmapImage = new BitmapImage(new Uri(profileImage, UriKind.Absolute));
+            profileImg.Source = bitmapImage;
             using (var client = new HttpClient())
             {
                 HttpResponseMessage response = await client.GetAsync($"{apiServer}/user/{userId}");
@@ -77,23 +72,11 @@ namespace WinUI_APP.Panels
                 }
                 else if (responseText == "NOK")
                 {
-                    ContentDialog dialog2 = new ContentDialog();
-                    dialog2.XamlRoot = this.XamlRoot;
-                    dialog2.Style = Application.Current.Resources["DefaultContentDialogStyle"] as Style;
-                    dialog2.Title = "O utilizador não existe!";
-                    dialog2.CloseButtonText = "OK";
-                    dialog2.DefaultButton = ContentDialogButton.Primary;
-                    await dialog2.ShowAsync();
+                    ShowContentDialog("O utilizador não existe!");
                 }
                 else
                 {
-                    ContentDialog dialog2 = new ContentDialog();
-                    dialog2.XamlRoot = this.XamlRoot;
-                    dialog2.Style = Application.Current.Resources["DefaultContentDialogStyle"] as Style;
-                    dialog2.Title = "Não foi possível realizar a ligação com o servidor, por favor tente mais tarde!";
-                    dialog2.CloseButtonText = "OK";
-                    dialog2.DefaultButton = ContentDialogButton.Primary;
-                    await dialog2.ShowAsync();
+                    ShowContentDialog("Não foi possível realizar a ligação com o servidor, por favor tente mais tarde!");
                 }
             }
         }
@@ -103,6 +86,7 @@ namespace WinUI_APP.Panels
             name.IsEnabled = true;
             email.IsEnabled = true;
             email.IsEnabled = true;
+            PickAPhotoButton.Visibility = Visibility.Visible;
             Editar.Visibility = Visibility.Collapsed;
             Reset.Visibility = Visibility.Collapsed;
             Guardar.Visibility = Visibility.Visible;
@@ -113,6 +97,7 @@ namespace WinUI_APP.Panels
         {
             name.IsEnabled = false;
             email.IsEnabled = false;
+            PickAPhotoButton.Visibility = Visibility.Collapsed;
             Editar.Visibility = Visibility.Visible;
             Reset.Visibility = Visibility.Visible;
             Guardar.Visibility = Visibility.Collapsed;
@@ -154,6 +139,35 @@ namespace WinUI_APP.Panels
                 {
                     using (var httpClient = new HttpClient())
                     {
+                        StorageFolder localFolder = ApplicationData.Current.LocalFolder;
+
+                        StorageFile profilePictureFile = await localFolder.CreateFileAsync("profilePicture.jpg", CreationCollisionOption.ReplaceExisting);
+
+                        if(newImage != null)
+                        {
+                             using (var newImageStream = await newImage.OpenReadAsync())
+                            {
+                                using (var profilePictureStream = await profilePictureFile.OpenStreamForWriteAsync())
+                                {
+                                    await newImageStream.AsStreamForRead().CopyToAsync(profilePictureStream);
+                                }
+                            } 
+                            profileImage = profilePictureFile.Path;
+                            ApplicationData.Current.LocalSettings.Values["img"] = profilePictureFile.Path;
+                            profileImage = profilePictureFile.Path;
+                            byte[] imageBytes;
+                            using (var stream = await newImage.OpenReadAsync())
+                            {
+                                using (var reader = new BinaryReader(stream.AsStreamForRead()))
+                                {
+                                    imageBytes = reader.ReadBytes((int)stream.Size);
+                                }
+                            }
+                            string newImage64 = Convert.ToBase64String(imageBytes);
+                            this.userInfo.Img = $"data:image/jpeg;base64,{newImage64}";
+                        }    
+
+
                         var updatedUser = new
                         {
                             _id = userInfo.Id,
@@ -162,6 +176,7 @@ namespace WinUI_APP.Panels
                             email = userInfo.Email,
                             estado = userInfo.Estado,
                             tipo = userInfo.Tipo,
+                            img = userInfo.Img,
                         };
 
                         var requestData = new
@@ -182,47 +197,23 @@ namespace WinUI_APP.Panels
                         string responseText = await response.Content.ReadAsStringAsync();
                         if (responseText != "NOK" && responseText != "null")
                         {
-                            ContentDialog dialog2 = new ContentDialog();
-                            dialog2.XamlRoot = this.XamlRoot;
-                            dialog2.Style = Application.Current.Resources["DefaultContentDialogStyle"] as Style;
-                            dialog2.Title = "O utilizador foi atualizado com sucesso!";
-                            dialog2.CloseButtonText = "OK";
-                            dialog2.DefaultButton = ContentDialogButton.Primary;
-                            await dialog2.ShowAsync();
+                            ShowContentDialog("O utilizador foi atualizado com sucesso!");
                         }
                         else if (responseText == "NOK")
                         {
                             GetUserFromApi();
-                            ContentDialog dialog2 = new ContentDialog();
-                            dialog2.XamlRoot = this.XamlRoot;
-                            dialog2.Style = Application.Current.Resources["DefaultContentDialogStyle"] as Style;
-                            dialog2.Title = "Não foi possível atualizar o utilizador!";
-                            dialog2.CloseButtonText = "OK";
-                            dialog2.DefaultButton = ContentDialogButton.Primary;
-                            await dialog2.ShowAsync();
+                            ShowContentDialog("Não foi possível atualizar o utilizador!");
                         }
                         else
                         {
-                            ContentDialog dialog2 = new ContentDialog();
-                            dialog2.XamlRoot = this.XamlRoot;
-                            dialog2.Style = Application.Current.Resources["DefaultContentDialogStyle"] as Style;
-                            dialog2.Title = "Não foi possível realizar a ligação com o servidor, por favor tente mais tarde!";
-                            dialog2.CloseButtonText = "OK";
-                            dialog2.DefaultButton = ContentDialogButton.Primary;
-                            await dialog2.ShowAsync();
+                            ShowContentDialog("Não foi possível realizar a ligação com o servidor, por favor tente mais tarde!");
                         }
                     }
                 }
                 else
                 {
                     GetUserFromApi();
-                    ContentDialog dialog2 = new ContentDialog();
-                    dialog2.XamlRoot = this.XamlRoot;
-                    dialog2.Style = Application.Current.Resources["DefaultContentDialogStyle"] as Style;
-                    dialog2.Title = "As alterações foram descartadas!";
-                    dialog2.CloseButtonText = "OK";
-                    dialog2.DefaultButton = ContentDialogButton.Primary;
-                    await dialog2.ShowAsync();
+                    ShowContentDialog("As alterações foram descartadas!");
                 }
                 hideDisable();
             }
@@ -277,67 +268,73 @@ namespace WinUI_APP.Panels
                         Debug.WriteLine(responseText);
                         if (responseText != "NOK" && responseText != "errada" && responseText != "null")
                         {
-                            ContentDialog dialog2 = new ContentDialog();
-                            dialog2.XamlRoot = this.XamlRoot;
-                            dialog2.Style = Application.Current.Resources["DefaultContentDialogStyle"] as Style;
-                            dialog2.Title = "A Palavra-Passe foi alteradas!";
-                            dialog2.CloseButtonText = "OK";
-                            dialog2.DefaultButton = ContentDialogButton.Primary;
-                            await dialog2.ShowAsync();
+                            ShowContentDialog("A Palavra-Passe foi alteradas!");
                         }
                         else if (responseText == "errada")
                         {
-                            ContentDialog dialog2 = new ContentDialog();
-                            dialog2.XamlRoot = this.XamlRoot;
-                            dialog2.Style = Application.Current.Resources["DefaultContentDialogStyle"] as Style;
-                            dialog2.Title = "A Palavra-Passe atual está Errada!";
-                            dialog2.CloseButtonText = "OK";
-                            dialog2.DefaultButton = ContentDialogButton.Primary;
-                            await dialog2.ShowAsync();
+
+                            ShowContentDialog("A Palavra-Passe atual está Errada!");
                         }
                         else if (responseText == "NOK")
                         {
-                            ContentDialog dialog2 = new ContentDialog();
-                            dialog2.XamlRoot = this.XamlRoot;
-                            dialog2.Style = Application.Current.Resources["DefaultContentDialogStyle"] as Style;
-                            dialog2.Title = "Não foi possível alterar a palavra-passe!";
-                            dialog2.CloseButtonText = "OK";
-                            dialog2.DefaultButton = ContentDialogButton.Primary;
-                            await dialog2.ShowAsync();
+                            ShowContentDialog("Não foi possível alterar a palavra-passe!");
                         }
                         else
                         {
-                            ContentDialog dialog2 = new ContentDialog();
-                            dialog2.XamlRoot = this.XamlRoot;
-                            dialog2.Style = Application.Current.Resources["DefaultContentDialogStyle"] as Style;
-                            dialog2.Title = "Não foi possível realizar a ligação com o servidor, por favor tente mais tarde!";
-                            dialog2.CloseButtonText = "OK";
-                            dialog2.DefaultButton = ContentDialogButton.Primary;
-                            await dialog2.ShowAsync();
+                            ShowContentDialog("Não foi possível realizar a ligação com o servidor, por favor tente mais tarde!");
                         }
                     }
                 }
                 else
                 {
-                    ContentDialog dialog2 = new ContentDialog();
-                    dialog2.XamlRoot = this.XamlRoot;
-                    dialog2.Style = Application.Current.Resources["DefaultContentDialogStyle"] as Style;
-                    dialog2.Title = "As palavras-passe não coincidem!";
-                    dialog2.CloseButtonText = "OK";
-                    dialog2.DefaultButton = ContentDialogButton.Primary;
-                    await dialog2.ShowAsync();
+                    ShowContentDialog("As palavras-passe não coincidem!");
                 }
             }
             else
             {
-                ContentDialog dialog2 = new ContentDialog();
-                dialog2.XamlRoot = this.XamlRoot;
-                dialog2.Style = Application.Current.Resources["DefaultContentDialogStyle"] as Style;
-                dialog2.Title = "Tem que preencher todas as palavras-passe!";
-                dialog2.CloseButtonText = "OK";
-                dialog2.DefaultButton = ContentDialogButton.Primary;
-                await dialog2.ShowAsync();
+                ShowContentDialog("Tem que preencher todas as palavras-passe!");
             }
+        }
+
+        private async void PickAPhotoButton_Click(object sender, RoutedEventArgs e)
+        {
+            FileOpenPicker fileOpenPicker = new FileOpenPicker();
+
+            fileOpenPicker.ViewMode = PickerViewMode.Thumbnail;
+            fileOpenPicker.SuggestedStartLocation = PickerLocationId.PicturesLibrary;
+            fileOpenPicker.FileTypeFilter.Add(".jpg");
+            fileOpenPicker.FileTypeFilter.Add(".jpeg");
+            fileOpenPicker.FileTypeFilter.Add(".png");
+
+            MainWindow window = new MainWindow();
+
+            var hwnd = WinRT.Interop.WindowNative.GetWindowHandle(window);
+            WinRT.Interop.InitializeWithWindow.Initialize(fileOpenPicker, hwnd);
+
+            newImage = await fileOpenPicker.PickSingleFileAsync();
+
+            if (newImage != null)
+            {
+                BitmapImage bitmapImage = new BitmapImage();
+                using (var stream = await newImage.OpenAsync(FileAccessMode.Read))
+                {
+                    await bitmapImage.SetSourceAsync(stream);
+                }
+                profileImg.Source = bitmapImage;
+            }
+        }
+
+        private async void ShowContentDialog(string message)
+        {
+            ContentDialog dialog = new ContentDialog
+            {
+                XamlRoot = this.Content.XamlRoot,
+                Style = Application.Current.Resources["DefaultContentDialogStyle"] as Style,
+                Title = message,
+                CloseButtonText = "OK",
+                DefaultButton = ContentDialogButton.Primary
+            };
+            await dialog.ShowAsync();
         }
     }
 }

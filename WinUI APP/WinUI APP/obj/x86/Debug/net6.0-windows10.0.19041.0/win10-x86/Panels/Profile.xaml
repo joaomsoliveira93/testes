@@ -16,17 +16,17 @@
         </RelativePanel>
         <StackPanel Orientation="Horizontal" Grid.Row="2">
             <CommandBar Background="Transparent" IsOpen="False" DefaultLabelPosition="Right">
-                <AppBarButton x:ConnectionId='12' Icon="Edit" x:Name="Editar" Label="Editar"                     />
-                <AppBarButton x:ConnectionId='13'  x:Name="Reset" Label="Alterar Palavra-Passe"                    >
+                <AppBarButton x:ConnectionId='14' Icon="Edit" x:Name="Editar" Label="Editar"                     />
+                <AppBarButton x:ConnectionId='15'  x:Name="Reset" Label="Alterar Palavra-Passe"                    >
                     <FontIcon Glyph="&#xE9A9;" />
                 </AppBarButton>
-                <AppBarButton x:ConnectionId='14' Icon="Save" x:Name="Guardar" Label="Guardar" Visibility="Collapsed"                      />
-                <AppBarButton x:ConnectionId='15' Icon="Cancel" x:Name="Cancelar" Label="Cancelar" Visibility="Collapsed"                       />
+                <AppBarButton x:ConnectionId='16' Icon="Save" x:Name="Guardar" Label="Guardar" Visibility="Collapsed"                      />
+                <AppBarButton x:ConnectionId='17' Icon="Cancel" x:Name="Cancelar" Label="Cancelar" Visibility="Collapsed"                       />
             </CommandBar>
         </StackPanel>
 
         <ScrollViewer Grid.Row="3" HorizontalScrollMode="Disabled" HorizontalScrollBarVisibility="Disabled" VerticalScrollMode="Auto" VerticalScrollBarVisibility="Auto">
-            <Grid Width="Auto" Height="Auto" Background="Transparent" ColumnDefinitions="*,*" RowDefinitions ="60,30,60,30,60">
+            <Grid Width="Auto" Height="Auto" Background="Transparent" ColumnDefinitions="*,*" RowDefinitions ="60,30,60,30,30,150,40">
 
                 <TextBox x:ConnectionId='7' Margin="20,0,20,0" Header="Nome de Utilizador" IsEnabled="False"                                                Grid.Column="0" Grid.Row="0" x:Name="username" PlaceholderText="Nome de Utilizador"></TextBox>
 
@@ -35,6 +35,13 @@
 
                 <TextBox x:ConnectionId='10' Margin="20,0,20,0" Header="Email" IsEnabled="False"                                             Grid.Column="0" Grid.Row="2" x:Name="email" PlaceholderText="Email"                         ></TextBox>
                 <TextBlock x:ConnectionId='11' Margin="20,0,20,0"  Grid.Column="0" Grid.Row="3" Foreground="Red" Visibility="Collapsed" x:Name="emailValidator"> o Email é obrigatório</TextBlock>
+
+                <TextBlock Margin="20,0,0,0"  Grid.Column="0" Grid.Row="4" >Foto de Perfil</TextBlock>
+                <Border Margin="20,-5,0,0" Grid.Column="0" Grid.Row="5" Width="150" Height="150"  HorizontalAlignment="Left" VerticalAlignment="Top" CornerRadius="20" Background="Transparent">
+                    <Image x:ConnectionId='13' x:Name="profileImg"  Stretch="UniformToFill" />
+                </Border>
+                <Button x:ConnectionId='12' Visibility="Collapsed" Margin="20,0,0,0" Grid.Column="0" Grid.Row="6" x:Name="PickAPhotoButton" Content="Escolher Imagem"                                />
+                
             </Grid>
 
         </ScrollViewer>

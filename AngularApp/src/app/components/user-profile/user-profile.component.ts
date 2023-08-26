@@ -22,12 +22,16 @@ export class UserProfileComponent {
   name: string = '';
   email:string='';
   appMode:string='';
+  color:string='';
+  img:string='';
 
   constructor(private authGuard: AuthGuard,private router: Router) {
     this.userProfile = false;
     this.name = authGuard.getName();    
     this.email= authGuard.getEmail();
     this.appMode = authGuard.getAppMode();
+    this.color=authGuard.getAppColor();
+    this.img= this.authGuard.getImg();
   }
 
   goProfile(link:string){

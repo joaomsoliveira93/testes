@@ -3,6 +3,6 @@
     <app-sidenav (onToggleSideNav)="onToggleSideNav($event)"></app-sidenav>
     <app-body  [collapsed]="isSideNavCollapsed" [screenWidth]="screenWidth"></app-body>
 </div>
-<div *ngIf="!isLoggedin" class="main-body">
+<div *ngIf="!isLoggedin" class="main-body z-10">
     <router-outlet></router-outlet>
 </div>

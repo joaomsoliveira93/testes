@@ -16,18 +16,18 @@
         </RelativePanel>
         <StackPanel Orientation="Horizontal" Grid.Row="2">
             <CommandBar Background="Transparent" IsOpen="False" DefaultLabelPosition="Right">
-                <AppBarButton x:ConnectionId='9' Icon="Edit" x:Name="Editar" Label="Editar"                     />
-                <AppBarButton x:ConnectionId='10' Icon="Delete" x:Name="Apagar" Label="Apagar"                     />
-                <AppBarButton x:ConnectionId='11' x:Name="Reset" Label="Restaurar Palavra-Passe"                    >
+                <AppBarButton x:ConnectionId='14' Icon="Edit" x:Name="Editar" Label="Editar"                     />
+                <AppBarButton x:ConnectionId='15' Icon="Delete" x:Name="Apagar" Label="Apagar"                     />
+                <AppBarButton x:ConnectionId='16' x:Name="Reset" Label="Restaurar Palavra-Passe"                    >
                     <FontIcon Glyph="&#xE9A9;" />
                 </AppBarButton>
-                <AppBarButton x:ConnectionId='12' Icon="Save" x:Name="Guardar" Label="Guardar" Visibility="Collapsed"                      />
-                <AppBarButton x:ConnectionId='13' Icon="Cancel" x:Name="Cancelar" Label="Cancelar" Visibility="Collapsed"                       />
+                <AppBarButton x:ConnectionId='17' Icon="Save" x:Name="Guardar" Label="Guardar" Visibility="Collapsed"                      />
+                <AppBarButton x:ConnectionId='18' Icon="Cancel" x:Name="Cancelar" Label="Cancelar" Visibility="Collapsed"                       />
             </CommandBar>
         </StackPanel>
 
         <ScrollViewer Grid.Row="3" HorizontalScrollMode="Disabled" HorizontalScrollBarVisibility="Disabled" VerticalScrollMode="Auto" VerticalScrollBarVisibility="Auto">
-            <Grid Width="Auto" Height="Auto" Background="Transparent" ColumnDefinitions="*,*" RowDefinitions ="60,30,60,30,60">
+            <Grid Width="Auto" Height="Auto" Background="Transparent" ColumnDefinitions="*,*" RowDefinitions ="60,30,60,30,60,200">
                 
                 <TextBox x:ConnectionId='2' Margin="20,0,20,0" Header="Nome de Utilizador" IsEnabled="False"                                                Grid.Column="0" Grid.Row="0" x:Name="username" PlaceholderText="Nome de Utilizador"></TextBox>
 
@@ -37,15 +37,29 @@
                 <TextBox x:ConnectionId='5' Margin="20,0,20,0" Header="Email" IsEnabled="False"                                             Grid.Column="0" Grid.Row="2" x:Name="email" PlaceholderText="Email"                         ></TextBox>
                 <TextBlock x:ConnectionId='6' Margin="20,0,20,0"  Grid.Column="0" Grid.Row="3" Foreground="Red" Visibility="Collapsed" x:Name="emailValidator"> o Email é obrigatório</TextBlock>
 
-                <ComboBox x:ConnectionId='7' IsEnabled="False" Margin="20,0,20,0" Header="Tipo" Grid.Column="1" Grid.Row="2"                                                     x:Name="comboTipo" Width="250" DisplayMemberPath="Content" SelectedValuePath="Tag">
+                <ComboBox x:ConnectionId='7' IsEnabled="False" Margin="20,0,20,0" Header="Tipo" Grid.Column="0" Grid.Row="4"                                                     x:Name="comboTipo" Width="250"                                               DisplayMemberPath="Content" SelectedValuePath="Tag">
                     <ComboBoxItem Tag="admin" Content="Administrador"></ComboBoxItem>
                     <ComboBoxItem Tag="user" Content="Utilizador"></ComboBoxItem>
                 </ComboBox>
 
-                <ComboBox x:ConnectionId='8' IsEnabled="False" Margin="20,0,20,0" Header="Estado" Grid.Column="0" Grid.Row="4"                                                       x:Name="comboEstado" Width="250" DisplayMemberPath="Content" SelectedValuePath="Tag">
+                <ComboBox x:ConnectionId='8' IsEnabled="False" Margin="20,0,20,0" Header="Estado" Grid.Column="1" Grid.Row="2"                                                       x:Name="comboEstado" Width="250" DisplayMemberPath="Content" SelectedValuePath="Tag">
                     <ComboBoxItem Tag="1"  Content="Ativo" ></ComboBoxItem>
                     <ComboBoxItem Tag="0"  Content="Inativo"></ComboBoxItem>
                 </ComboBox>
+
+                <StackPanel Margin="20,10,20,0" Grid.Column="0" Grid.Row="5" >
+                    <TextBlock  > Permissões do Utilizador</TextBlock>
+                    <StackPanel Margin="20,10,20,0">
+                        <CheckBox x:ConnectionId='9' x:Name="PermissionsAllCheckBox" Content="Todas" IsThreeState="True"
+                                                                                             
+                                                                    
+                         IsEnabled="False"/>
+                        <CheckBox x:ConnectionId='10' IsEnabled="False" x:Name="ClientsCheckBox" Content="Gere Clientes" Margin="24,0,0,0"                                                                                                                   />
+                        <CheckBox x:ConnectionId='11' IsEnabled="False" x:Name="LicencesCheckBox" Content="Gere Licenças" Margin="24,0,0,0"                                                                                                                    />
+                        <CheckBox x:ConnectionId='12' IsEnabled="False" x:Name="UsersCheckBox" Content="Gere Utilizadores" Margin="24,0,0,0"                                                                                                                />
+                        <CheckBox x:ConnectionId='13' IsEnabled="False" x:Name="PermissionsCheckBox" Content="Gere Permissões" Margin="24,0,0,0"                                                                                                                      />
+                    </StackPanel>
+                </StackPanel>
             </Grid>
             
         </ScrollViewer>

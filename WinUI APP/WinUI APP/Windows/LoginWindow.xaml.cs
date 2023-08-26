@@ -10,6 +10,8 @@ using System.Net.Http;
 using System.Text.Json;
 using System.IO;
 using WinUIEx;
+using Windows.Storage.Streams;
+using System.Diagnostics;
 
 namespace WinUI_APP
 {
@@ -48,23 +50,41 @@ namespace WinUI_APP
             string username = UsernameTextBox.Text;
             string password = PasswordBox.Password;
 
-            if (username != "" && password != "")
+            if (!string.IsNullOrEmpty(username) && !string.IsNullOrEmpty(password))
             {
-                _ = AutoLoginAsync(username, password);
+                await PerformLoginAsync(username, password);
             }
             else
             {
-                ContentDialog dialog2 = new ContentDialog();
-                dialog2.XamlRoot = this.Content.XamlRoot;
-                dialog2.Style = Application.Current.Resources["DefaultContentDialogStyle"] as Style;
-                dialog2.Title = "O Nome de utilizador e a palavra-passe são Obrigatórias!";
-                dialog2.CloseButtonText = "OK";
-                dialog2.DefaultButton = ContentDialogButton.Primary;
-                await dialog2.ShowAsync();
+                ShowContentDialog("O Nome de utilizador e a palavra-passe são obrigatórias!");
             }
         }
 
-        private async Task AutoLoginAsync(string username, string password)
+        private async Task PerformLoginAsync(string username, string password)
+        {
+            try
+            {
+                bool loginSuccessful = await AutoLoginAsync(username, password);
+
+                if (loginSuccessful)
+                {
+                    // Delay opening the new window
+                    await Task.Delay(100); // Adjust the delay time as needed
+                    OpenMainWindow();
+                    CloseCurrentWindow();
+                }
+                else
+                {
+                    ShowContentDialog("Credenciais inválidas ou problemas de conexão.");
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"Ocorreu um erro durante o login: {ex.Message}");
+            }
+        }
+
+        private async Task<bool> AutoLoginAsync(string username, string password)
         {
             StringBuilder stringBuilder = new StringBuilder();            
 
@@ -100,34 +120,18 @@ namespace WinUI_APP
                 string responseText = await response.Content.ReadAsStringAsync();
                 if (responseText == "null")
                 {
-                    ContentDialog dialog2 = new ContentDialog();
-                    dialog2.Style = Application.Current.Resources["DefaultContentDialogStyle"] as Style;
-                    dialog2.Title = "Não foi possível realizar a ligação com o servidor, por favor tente mais tarde!";
-                    dialog2.CloseButtonText = "OK";
-                    dialog2.DefaultButton = ContentDialogButton.Primary;
-                    await dialog2.ShowAsync();
+
+                    ShowContentDialog("Não foi possível realizar a ligação com o servidor, por favor tente mais tarde!");
 
                 }
                 else if (responseText == "NOK")
                 {
-                    ContentDialog dialog2 = new ContentDialog();
-                    dialog2.XamlRoot = this.Content.XamlRoot;
-                    dialog2.Style = Application.Current.Resources["DefaultContentDialogStyle"] as Style;
-                    dialog2.Title = "As suas credenciais estão erradas!";
-                    dialog2.CloseButtonText = "OK";
-                    dialog2.DefaultButton = ContentDialogButton.Primary;
-                    await dialog2.ShowAsync();
+                   ShowContentDialog("As suas credenciais estão erradas!");
+
                 }
                 else if (responseText == "inactive")
                 {
-                    ContentDialog dialog2 = new ContentDialog();
-                    dialog2.XamlRoot = this.Content.XamlRoot;
-                    dialog2.Style = Application.Current.Resources["DefaultContentDialogStyle"] as Style;
-                    dialog2.Title = "O seu utilizador não se encontra ativo!";
-                    dialog2.CloseButtonText = "OK";
-                    dialog2.DefaultButton = ContentDialogButton.Primary;
-                    await dialog2.ShowAsync();
-
+                     ShowContentDialog("O seu utilizador não se encontra ativo!");            
                 }
                 else
                 {
@@ -157,12 +161,42 @@ namespace WinUI_APP
                         element.TryGetProperty("tokenValidDate", out var tokenValidDateProperty);
                         ApplicationData.Current.LocalSettings.Values["tokenValidDate"] = tokenValidDateProperty.GetString();
 
-                        var mainWindow = new MainWindow();
-                        mainWindow.Activate();
-                        this.Close();
+                        element.TryGetProperty("canManageClients", out var clientsProperty);
+                        ApplicationData.Current.LocalSettings.Values["clients"] = clientsProperty.GetBoolean();
+
+                        element.TryGetProperty("canManageLicences", out var licencesProperty);
+                        ApplicationData.Current.LocalSettings.Values["licences"] = licencesProperty.GetBoolean();
+
+                        element.TryGetProperty("canManageUsers", out var usersProperty);
+                        ApplicationData.Current.LocalSettings.Values["users"] = usersProperty.GetBoolean();
+
+                        element.TryGetProperty("canManagePermissions", out var permissionsProperty);
+                        ApplicationData.Current.LocalSettings.Values["permissions"] = permissionsProperty.GetBoolean();
+
+                        element.TryGetProperty("img", out var imgProperty);
+
+                        string base64Image = imgProperty.GetString().Split(',')[1];
+                        byte[] imageBytes = Convert.FromBase64String(base64Image);
+                        StorageFolder localFolder = ApplicationData.Current.LocalFolder;
+                        StorageFile profilePictureFile = await localFolder.CreateFileAsync("profilePicture.jpg", CreationCollisionOption.ReplaceExisting);
+
+                        using (IRandomAccessStream stream = await profilePictureFile.OpenAsync(FileAccessMode.ReadWrite))
+                        {
+                            using (IOutputStream outputStream = stream.GetOutputStreamAt(0))
+                            {
+                                DataWriter dataWriter = new DataWriter(outputStream);
+                                dataWriter.WriteBytes(imageBytes);
+                                await dataWriter.StoreAsync();
+                                dataWriter.DetachStream();
+                            }
+                        }
+                        ApplicationData.Current.LocalSettings.Values["img"] = profilePictureFile.Path;
                     }
+
+                    return true;
+
                 }
-                
+                return false;                
             }
         }
 
@@ -234,6 +268,31 @@ namespace WinUI_APP
                 case ElementTheme.Light: m_configurationSource.Theme = Microsoft.UI.Composition.SystemBackdrops.SystemBackdropTheme.Light; break;
                 case ElementTheme.Default: m_configurationSource.Theme = Microsoft.UI.Composition.SystemBackdrops.SystemBackdropTheme.Default; break;
             }
+        }
+
+        private void OpenMainWindow()
+        {    
+            var mainWindow = new MainWindow();
+            mainWindow.Activate();     
+        }
+
+        private void CloseCurrentWindow()
+        {
+            this.Close();
+        }
+
+        private async void ShowContentDialog(string message)
+        {
+            ContentDialog dialog = new ContentDialog
+            {
+                XamlRoot = this.Content.XamlRoot,
+                Style = Application.Current.Resources["DefaultContentDialogStyle"] as Style,
+                Title = message,
+                CloseButtonText = "OK",
+                DefaultButton = ContentDialogButton.Primary
+            };
+
+            await dialog.ShowAsync();
         }
 
     }

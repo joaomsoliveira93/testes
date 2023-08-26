@@ -14,7 +14,7 @@
         <Rectangle Grid.Row="0" />
         <StackPanel Grid.Row="1" Orientation="Horizontal" >
             <TextBlock Margin="20,5,0,0" FontSize="25">Clientes</TextBlock>
-            <CommandBar Background="Transparent" IsOpen="False" DefaultLabelPosition="Right">
+            <CommandBar Visibility="{x:Bind ManageClients}" Background="Transparent" IsOpen="False" DefaultLabelPosition="Right">
                 <AppBarButton Icon="Add" Label="Adicionar" Click="addClient_Click"/>
             </CommandBar>
         </StackPanel>

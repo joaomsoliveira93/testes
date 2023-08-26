@@ -6,7 +6,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BodyComponent } from './body/body.component';
 import { SidenavComponent } from './components/sidenav/sidenav.component';
-import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { UsersComponent } from './pages/users/allusers/allusers.component';
 import { SettingsComponent } from './pages/settings/settings.component';
 import { TopbarComponent } from './components/topbar/topbar.component';
@@ -33,13 +32,13 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { AddlicencesComponent } from './components/addlicences/addlicences.component';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
+import {MatCheckboxModule} from '@angular/material/checkbox';
 
 @NgModule({
   declarations: [
     AppComponent,
     BodyComponent,
     SidenavComponent,
-    DashboardComponent,
     UsersComponent,
     SettingsComponent,
     TopbarComponent,
@@ -71,6 +70,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
     MatTabsModule,
     MatNativeDateModule,
     MatDatepickerModule,
+    MatCheckboxModule,
   ],
   providers: [ConfigService],
   bootstrap: [AppComponent]

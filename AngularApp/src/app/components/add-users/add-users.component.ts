@@ -17,7 +17,9 @@ export class AddUsersComponent {
   apiUrl: string = '';
   userId: string = '';
   appMode: string = '';
-  color:string='';
+  color: string = '';
+  allComplete: boolean = false;
+  managePermissions: Boolean = false;
   user: User = {
     _id: '',
     username: '',
@@ -27,6 +29,11 @@ export class AddUsersComponent {
     appMode: 'dark',
     email: '',
     estado: 1,
+    canManageUsers: false,
+    canManageClients: false,
+    canManageLicences: false,
+    canManagePermissions:false,
+    img:'',
   }
 
   constructor(
@@ -38,10 +45,52 @@ export class AddUsersComponent {
   ) {
     this.userId = this.authGuard.getId();
     this.appMode = this.authGuard.getAppMode();
+    this.color=this.authGuard.getAppColor();
+    this.managePermissions = this.authGuard.getCanManagePermissions();
   }
 
   onClose(): void {
     this.dialogRef.close();
+  }
+
+  updateAllComplete() {
+    this.allComplete = this.user.canManageClients != false && this.user.canManageLicences != false && this.user.canManageUsers != false && this.user.canManagePermissions != false;
+  }
+
+  someComplete(): boolean {
+    return (this.user.canManageClients != false || this.user.canManageLicences != false || this.user.canManageUsers != false || this.user.canManagePermissions != false) && !this.allComplete;
+  }
+
+  setAll(completed: boolean) {
+    if (!completed) {
+      this.allComplete = !completed;
+      this.user.canManageClients = false;
+      this.user.canManageLicences = false;
+      this.user.canManageUsers = false;
+      this.user.canManagePermissions = false;
+    } else {
+      this.allComplete = completed;
+      this.user.canManageClients = true;
+      this.user.canManageLicences = true;
+      this.user.canManageUsers = true;
+      this.user.canManagePermissions = true;
+    }
+  }
+
+  definePermissions(e:string){
+    if (e === 'admin'){
+      this.allComplete = true;
+      this.user.canManageClients = true;
+      this.user.canManageLicences = true;
+      this.user.canManageUsers = true;
+      this.user.canManagePermissions = true;
+    }else{
+      this.allComplete = false;
+      this.user.canManageClients = false;
+      this.user.canManageLicences = false;
+      this.user.canManageUsers = false;
+      this.user.canManagePermissions = false;
+    }
   }
 
   async saveUser() {

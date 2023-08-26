@@ -11,11 +11,13 @@ export class TopbarComponent {
   user: String = '';
   color:string = '';
   appMode:string = '';
+  img:string='';
 
   constructor(private authGuard: AuthGuard) {
     this.user = this.authGuard.getName();
     this.color = this.authGuard.getAppColor();
     this.appMode = this.authGuard.getAppMode();
+    this.img=this.authGuard.getImg();
   }
 
   toggleUserProfile(): void {

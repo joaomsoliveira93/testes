@@ -64,6 +64,31 @@ const UserSchema = new mongoose.Schema({
     },
     tokenValidDate:{
         type :Date
+    },
+    canManageUsers: {
+        type: Boolean,
+        require: true,
+        default: false
+    },
+    canManagePermissions: {
+        type: Boolean,
+        require: true,
+        default: false
+    },
+    canManageLicences: {
+        type: Boolean,
+        require: true,
+        default: false
+    },
+    canManageClients: {
+        type: Boolean,
+        require: true,
+        default: false
+    },
+    img:{
+        type:String,
+        required:true,
+        default:'./assets/img/user.png',
     }
 });
 

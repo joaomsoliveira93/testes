@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 using System.Linq;
 using Microsoft.UI.Xaml;
 using System;
-using System.Diagnostics;
 using System.IO;
 using System.Text.Json;
 using System.Text;
@@ -19,10 +18,11 @@ namespace WinUI_APP
     public sealed partial class Clientes : Page
     {
         private string userId = ApplicationData.Current.LocalSettings.Values["userId"] as string;
+        private bool ManageClients = (bool)ApplicationData.Current.LocalSettings.Values["clients"];
         private ObservableCollection<Clients> clients;
         private Clients newClient = new Clients();
         private ObservableCollection<Clients> filteredClients;
-        string apiServer = Properties.Resources.apiServer;
+        private string apiServer = Properties.Resources.apiServer;
         public Clientes()
         {            
             this.InitializeComponent();
@@ -189,24 +189,11 @@ namespace WinUI_APP
                     string responseText = await response.Content.ReadAsStringAsync();
                     if (responseText == "null")
                     {
-                        ContentDialog dialog2 = new ContentDialog();
-                        dialog2.XamlRoot = this.XamlRoot;
-                        dialog2.Style = Application.Current.Resources["DefaultContentDialogStyle"] as Style;
-                        dialog2.Title = "Não foi possível realizar a ligação com o servidor, por favor tente mais tarde!";
-                        dialog2.CloseButtonText = "OK";
-                        dialog2.DefaultButton = ContentDialogButton.Primary;
-                        await dialog2.ShowAsync();
-
+                        ShowContentDialog("Não foi possível realizar a ligação com o servidor, por favor tente mais tarde!");
                     }
                     else if (responseText == "NOK")
                     {
-                        ContentDialog dialog2 = new ContentDialog();
-                        dialog2.XamlRoot = this.XamlRoot;
-                        dialog2.Style = Application.Current.Resources["DefaultContentDialogStyle"] as Style;
-                        dialog2.Title = "Não foi possível adicionar o Cliente!";
-                        dialog2.CloseButtonText = "OK";
-                        dialog2.DefaultButton = ContentDialogButton.Primary;
-                        await dialog2.ShowAsync();
+                        ShowContentDialog("Não foi possível adicionar o Cliente!");
                     }
                     else
                     {
@@ -244,6 +231,19 @@ namespace WinUI_APP
             {
                 block.Visibility = Visibility.Visible;
             }
+        }
+
+        private async void ShowContentDialog(string message)
+        {
+            ContentDialog dialog = new ContentDialog
+            {
+                XamlRoot = this.Content.XamlRoot,
+                Style = Application.Current.Resources["DefaultContentDialogStyle"] as Style,
+                Title = message,
+                CloseButtonText = "OK",
+                DefaultButton = ContentDialogButton.Primary
+            };
+            await dialog.ShowAsync();
         }
     }
 }

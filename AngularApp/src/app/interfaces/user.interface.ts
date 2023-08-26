@@ -7,4 +7,9 @@ export interface User {
     appMode: string;
     email:string;
     estado:number;
+    canManageUsers:Boolean;
+    canManageLicences:Boolean;
+    canManageClients:Boolean;
+    canManagePermissions:Boolean;
+    img:string;
   }

@@ -29,21 +29,21 @@
     <AppXManifest Include="D:\Repositorios\testes\WinUI APP\WinUI APP\bin\x86\Debug\net6.0-windows10.0.19041.0\win10-x86\AppxManifest.xml">
       <PackagePath>AppxManifest.xml</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2023-08-24T21:58:00.257</Modified>
+      <Modified>2023-08-26T18:21:02.506</Modified>
     </AppXManifest>
   </ItemGroup>
   <ItemGroup>
     <AppxPackagedFile Include="D:\Repositorios\testes\WinUI APP\WinUI APP\bin\x86\Debug\net6.0-windows10.0.19041.0\win10-x86\resources.pri">
       <PackagePath>resources.pri</PackagePath>
-      <Modified>2023-08-24T21:58:00.023</Modified>
+      <Modified>2023-08-26T18:19:28.585</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Repositorios\testes\WinUI APP\WinUI APP\bin\x86\Debug\net6.0-windows10.0.19041.0\win10-x86\WinUI APP.runtimeconfig.json">
       <PackagePath>WinUI APP.runtimeconfig.json</PackagePath>
-      <Modified>2023-08-24T21:32:17.014</Modified>
+      <Modified>2023-08-26T16:04:40.849</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Repositorios\testes\WinUI APP\WinUI APP\bin\x86\Debug\net6.0-windows10.0.19041.0\win10-x86\WinUI APP.dll">
       <PackagePath>WinUI APP.dll</PackagePath>
-      <Modified>2023-08-24T21:57:59.933</Modified>
+      <Modified>2023-08-26T18:21:02.230</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Repositorios\testes\WinUI APP\WinUI APP\bin\x86\Debug\net6.0-windows10.0.19041.0\win10-x86\WinUI APP.dll.config">
       <PackagePath>WinUI APP.dll.config</PackagePath>
@@ -51,11 +51,11 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Repositorios\testes\WinUI APP\WinUI APP\obj\x86\Debug\net6.0-windows10.0.19041.0\win10-x86\apphost.exe">
       <PackagePath>WinUI APP.exe</PackagePath>
-      <Modified>2023-08-24T21:57:59.939</Modified>
+      <Modified>2023-08-26T18:21:02.236</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Repositorios\testes\WinUI APP\WinUI APP\bin\x86\Debug\net6.0-windows10.0.19041.0\win10-x86\WinUI APP.deps.json">
       <PackagePath>WinUI APP.deps.json</PackagePath>
-      <Modified>2023-08-24T21:32:16.892</Modified>
+      <Modified>2023-08-26T16:04:40.807</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\joaom\.nuget\packages\microsoft.netcore.app.runtime.win-x86\6.0.21\runtimes\win-x86\lib\net6.0\Microsoft.CSharp.dll">
       <PackagePath>Microsoft.CSharp.dll</PackagePath>

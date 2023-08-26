@@ -16,13 +16,12 @@ namespace WinUI_APP.Panels.Users
         private string userId = ApplicationData.Current.LocalSettings.Values["userId"] as string;
         private string seeUserId = "";
         private readonly User userInfo = new User();
-     
-        string apiServer = Properties.Resources.apiServer;
+        private bool perm = (bool)ApplicationData.Current.LocalSettings.Values["permissions"];
+        private string apiServer = Properties.Resources.apiServer;
         public DtlUser()
         {
             this.InitializeComponent();
         }
-
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
@@ -73,27 +72,31 @@ namespace WinUI_APP.Panels.Users
                         string temptipo = tipoProperty.GetString();
                         userInfo.Tipo = temptipo;
 
+                        element.TryGetProperty("canManageClients", out var canManageClientsProperty);
+                        bool tempcanManageClients = canManageClientsProperty.GetBoolean();
+                        userInfo.CanManageClients = tempcanManageClients;
+
+                        element.TryGetProperty("canManageLicences", out var canManageLicencesProperty);
+                        bool tempcanManageLicences = canManageLicencesProperty.GetBoolean();
+                        userInfo.CanManageLicences = tempcanManageLicences;
+
+                        element.TryGetProperty("canManageUsers", out var canManageUsersProperty);
+                        bool tempcanManageUsers = canManageUsersProperty.GetBoolean();
+                        userInfo.CanManageUsers = tempcanManageUsers;
+
+                        element.TryGetProperty("canManagePermissions", out var canManagePermissionsProperty);
+                        bool tempcanManagePermissions = canManagePermissionsProperty.GetBoolean();
+                        userInfo.CanManagePermissions = tempcanManagePermissions;
+
                     }
                 }
                 else if (responseText == "NOK")
                 {
-                    ContentDialog dialog2 = new ContentDialog();
-                    dialog2.XamlRoot = this.XamlRoot;
-                    dialog2.Style = Application.Current.Resources["DefaultContentDialogStyle"] as Style;
-                    dialog2.Title = "O utilizador não existe!";
-                    dialog2.CloseButtonText = "OK";
-                    dialog2.DefaultButton = ContentDialogButton.Primary;
-                    await dialog2.ShowAsync();
+                    ShowContentDialog("O utilizador não existe!");
                 }
                 else
                 {
-                    ContentDialog dialog2 = new ContentDialog();
-                    dialog2.XamlRoot = this.XamlRoot;
-                    dialog2.Style = Application.Current.Resources["DefaultContentDialogStyle"] as Style;
-                    dialog2.Title = "Não foi possível realizar a ligação com o servidor, por favor tente mais tarde!";
-                    dialog2.CloseButtonText = "OK";
-                    dialog2.DefaultButton = ContentDialogButton.Primary;
-                    await dialog2.ShowAsync();
+                    ShowContentDialog("Não foi possível realizar a ligação com o servidor, por favor tente mais tarde!");
                 }
             }
         }
@@ -105,6 +108,14 @@ namespace WinUI_APP.Panels.Users
             comboTipo.IsEnabled = true;
             comboEstado.IsEnabled = true;
             email.IsEnabled = true;
+            if (perm)
+            {
+                ClientsCheckBox.IsEnabled = true;
+                LicencesCheckBox.IsEnabled = true;
+                UsersCheckBox.IsEnabled = true;
+                PermissionsAllCheckBox.IsEnabled = true;
+                PermissionsCheckBox.IsEnabled = true;
+            }
             Editar.Visibility = Visibility.Collapsed;
             Apagar.Visibility = Visibility.Collapsed;
             Reset.Visibility = Visibility.Collapsed;
@@ -118,6 +129,11 @@ namespace WinUI_APP.Panels.Users
             email.IsEnabled = false;
             comboTipo.IsEnabled = false;
             comboEstado.IsEnabled = false;
+            ClientsCheckBox.IsEnabled = false;
+            LicencesCheckBox.IsEnabled = false;
+            UsersCheckBox.IsEnabled = false;
+            PermissionsAllCheckBox.IsEnabled = false;
+            PermissionsCheckBox.IsEnabled = false;
             Editar.Visibility = Visibility.Visible;
             Apagar.Visibility = Visibility.Visible;
             Reset.Visibility = Visibility.Visible;
@@ -169,6 +185,10 @@ namespace WinUI_APP.Panels.Users
                             email = userInfo.Email,
                             estado = userInfo.Estado,
                             tipo = userInfo.Tipo,
+                            canManageClients = userInfo.CanManageClients,
+                            canManageLicences = userInfo.CanManageLicences,
+                            canManageUsers = userInfo.CanManageUsers,
+                            canManagePermissions = userInfo.CanManagePermissions,
                         };
 
                         var requestData = new
@@ -189,47 +209,23 @@ namespace WinUI_APP.Panels.Users
                         string responseText = await response.Content.ReadAsStringAsync();
                         if (responseText != "NOK" && responseText != "null")
                         {
-                            ContentDialog dialog2 = new ContentDialog();
-                            dialog2.XamlRoot = this.XamlRoot;
-                            dialog2.Style = Application.Current.Resources["DefaultContentDialogStyle"] as Style;
-                            dialog2.Title = "O utilizador foi atualizado com sucesso!";
-                            dialog2.CloseButtonText = "OK";
-                            dialog2.DefaultButton = ContentDialogButton.Primary;
-                            await dialog2.ShowAsync();
+                            ShowContentDialog("O utilizador foi atualizado com sucesso!");
                         }
                         else if (responseText == "NOK")
                         {
                             GetUserFromApi();
-                            ContentDialog dialog2 = new ContentDialog();
-                            dialog2.XamlRoot = this.XamlRoot;
-                            dialog2.Style = Application.Current.Resources["DefaultContentDialogStyle"] as Style;
-                            dialog2.Title = "Não foi possível atualizar o utilizador!";
-                            dialog2.CloseButtonText = "OK";
-                            dialog2.DefaultButton = ContentDialogButton.Primary;
-                            await dialog2.ShowAsync();
+                            ShowContentDialog("Não foi possível atualizar o utilizador!");
                         }
                         else
                         {
-                            ContentDialog dialog2 = new ContentDialog();
-                            dialog2.XamlRoot = this.XamlRoot;
-                            dialog2.Style = Application.Current.Resources["DefaultContentDialogStyle"] as Style;
-                            dialog2.Title = "Não foi possível realizar a ligação com o servidor, por favor tente mais tarde!";
-                            dialog2.CloseButtonText = "OK";
-                            dialog2.DefaultButton = ContentDialogButton.Primary;
-                            await dialog2.ShowAsync();
+                            ShowContentDialog("Não foi possível realizar a ligação com o servidor, por favor tente mais tarde!");
                         }
                     }
                 }
                 else
                 {
                     GetUserFromApi();
-                    ContentDialog dialog2 = new ContentDialog();
-                    dialog2.XamlRoot = this.XamlRoot;
-                    dialog2.Style = Application.Current.Resources["DefaultContentDialogStyle"] as Style;
-                    dialog2.Title = "As alterações foram descartadas!";
-                    dialog2.CloseButtonText = "OK";
-                    dialog2.DefaultButton = ContentDialogButton.Primary;
-                    await dialog2.ShowAsync();
+                    ShowContentDialog("As alterações foram descartadas!");
                 }
                 hideDisable();
             }
@@ -255,35 +251,17 @@ namespace WinUI_APP.Panels.Users
                     string responseText = await response.Content.ReadAsStringAsync();
                     if (responseText != "NOK" && responseText != "null")
                     {
-                        ContentDialog dialog2 = new ContentDialog();
-                        dialog2.XamlRoot = this.XamlRoot;
-                        dialog2.Style = Application.Current.Resources["DefaultContentDialogStyle"] as Style;
-                        dialog2.Title = "O utilizador foi apagado com sucesso!";
-                        dialog2.CloseButtonText = "OK";
-                        dialog2.DefaultButton = ContentDialogButton.Primary;
-                        await dialog2.ShowAsync();
+                        ShowContentDialog("O utilizador foi apagado com sucesso!");
                         Frame.GoBack();
                     }
                     else if (responseText == "NOK")
                     {
                         GetUserFromApi();
-                        ContentDialog dialog2 = new ContentDialog();
-                        dialog2.XamlRoot = this.XamlRoot;
-                        dialog2.Style = Application.Current.Resources["DefaultContentDialogStyle"] as Style;
-                        dialog2.Title = "Não foi possível apagar!";
-                        dialog2.CloseButtonText = "OK";
-                        dialog2.DefaultButton = ContentDialogButton.Primary;
-                        await dialog2.ShowAsync();
+                        ShowContentDialog("Não foi possível apagar!");
                     }
                     else
                     {
-                        ContentDialog dialog2 = new ContentDialog();
-                        dialog2.XamlRoot = this.XamlRoot;
-                        dialog2.Style = Application.Current.Resources["DefaultContentDialogStyle"] as Style;
-                        dialog2.Title = "Não foi possível realizar a ligação com o servidor, por favor tente mais tarde!";
-                        dialog2.CloseButtonText = "OK";
-                        dialog2.DefaultButton = ContentDialogButton.Primary;
-                        await dialog2.ShowAsync();
+                        ShowContentDialog("Não foi possível realizar a ligação com o servidor, por favor tente mais tarde!");
                     }
                 }
             }
@@ -341,36 +319,108 @@ namespace WinUI_APP.Panels.Users
                     string responseText = await response.Content.ReadAsStringAsync();
                     if (responseText != "NOK" && responseText != "null")
                     {
-                        ContentDialog dialog2 = new ContentDialog();
-                        dialog2.XamlRoot = this.XamlRoot;
-                        dialog2.Style = Application.Current.Resources["DefaultContentDialogStyle"] as Style;
-                        dialog2.Title = "A Palavra-Passe foi restaurada!";
-                        dialog2.CloseButtonText = "OK";
-                        dialog2.DefaultButton = ContentDialogButton.Primary;
-                        await dialog2.ShowAsync();
+
+                        ShowContentDialog("A Palavra-Passe foi restaurada!");
                     }
                     else if (responseText == "NOK")
                     {
-                        ContentDialog dialog2 = new ContentDialog();
-                        dialog2.XamlRoot = this.XamlRoot;
-                        dialog2.Style = Application.Current.Resources["DefaultContentDialogStyle"] as Style;
-                        dialog2.Title = "Não foi possível restaurar a Palavr-Passe!";
-                        dialog2.CloseButtonText = "OK";
-                        dialog2.DefaultButton = ContentDialogButton.Primary;
-                        await dialog2.ShowAsync();
+                        ShowContentDialog("Não foi possível restaurar a Palavr-Passe!");
                     }
                     else
                     {
-                        ContentDialog dialog2 = new ContentDialog();
-                        dialog2.XamlRoot = this.XamlRoot;
-                        dialog2.Style = Application.Current.Resources["DefaultContentDialogStyle"] as Style;
-                        dialog2.Title = "Não foi possível realizar a ligação com o servidor, por favor tente mais tarde!";
-                        dialog2.CloseButtonText = "OK";
-                        dialog2.DefaultButton = ContentDialogButton.Primary;
-                        await dialog2.ShowAsync();
+                        ShowContentDialog("Não foi possível realizar a ligação com o servidor, por favor tente mais tarde!");
                     }
                 }
             }
+        }
+
+        private void PermissionsAll_Checked(object sender, RoutedEventArgs e)
+        {
+            UsersCheckBox.IsChecked = PermissionsCheckBox.IsChecked = LicencesCheckBox.IsChecked = ClientsCheckBox.IsChecked = true;
+        }
+
+        private void PermissionsAll_Unchecked(object sender, RoutedEventArgs e)
+        {
+            UsersCheckBox.IsChecked = PermissionsCheckBox.IsChecked = LicencesCheckBox.IsChecked = ClientsCheckBox.IsChecked = false;
+        }
+
+        private void PermissionsAll_Indeterminate(object sender, RoutedEventArgs e)
+        {
+
+            if (ClientsCheckBox.IsChecked == true &&
+                LicencesCheckBox.IsChecked == true &&
+                UsersCheckBox.IsChecked == true &&
+                PermissionsCheckBox.IsChecked == true)
+            {
+                PermissionsAllCheckBox.IsChecked = false;
+            }
+        }
+
+        private void SetCheckedState()
+        {
+            if (ClientsCheckBox != null)
+            {
+                if (ClientsCheckBox.IsChecked == true &&
+                    LicencesCheckBox.IsChecked == true &&
+                    UsersCheckBox.IsChecked == true &&
+                    PermissionsCheckBox.IsChecked == true)
+                {
+                    PermissionsAllCheckBox.IsChecked = true;
+                }
+                else if (ClientsCheckBox.IsChecked == false &&
+                    LicencesCheckBox.IsChecked == false &&
+                    UsersCheckBox.IsChecked == false &&
+                    PermissionsCheckBox.IsChecked == false)
+                {
+                    PermissionsAllCheckBox.IsChecked = false;
+                }
+                else
+                {
+                    PermissionsAllCheckBox.IsChecked = null;
+                }
+            }
+        }
+
+        private void Option_Checked(object sender, RoutedEventArgs e)
+        {
+            SetCheckedState();
+        }
+
+        private void Option_Unchecked(object sender, RoutedEventArgs e)
+        {
+            SetCheckedState();
+        }
+
+        private void comboTipo_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {         
+            ComboBox temp = (ComboBox)sender;
+            if (temp.SelectedValue.ToString() == "admin")
+            {
+                ClientsCheckBox.IsChecked = true;
+                LicencesCheckBox.IsChecked = true;
+                UsersCheckBox.IsChecked = true;
+                PermissionsCheckBox.IsChecked = true;
+            }
+            else
+            {
+                ClientsCheckBox.IsChecked = false;
+                LicencesCheckBox.IsChecked = false;
+                UsersCheckBox.IsChecked = false;
+                PermissionsCheckBox.IsChecked = false;
+            }            
+        }
+
+        private async void ShowContentDialog(string message)
+        {
+            ContentDialog dialog = new ContentDialog
+            {
+                XamlRoot = this.Content.XamlRoot,
+                Style = Application.Current.Resources["DefaultContentDialogStyle"] as Style,
+                Title = message,
+                CloseButtonText = "OK",
+                DefaultButton = ContentDialogButton.Primary
+            };
+            await dialog.ShowAsync();
         }
     }
 }

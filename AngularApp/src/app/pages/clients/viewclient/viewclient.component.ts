@@ -32,6 +32,7 @@ export class ViewclientComponent {
   username: String = '';
   color: string = '';
   appMode: string = '';
+  manageClients: Boolean = false;
   client: Client = {
     _id: '',
     name: '',
@@ -51,6 +52,7 @@ export class ViewclientComponent {
     this.username = this.authGuard.getUserName();
     this.color = this.authGuard.getAppColor();
     this.appMode = this.authGuard.getAppMode();
+    this.manageClients = this.authGuard.getCanManageClients();
   }
 
   async ngOnInit() {

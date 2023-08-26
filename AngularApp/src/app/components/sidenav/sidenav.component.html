@@ -1,10 +1,10 @@
-<div [@fade]="collapsed ? 'expanded' : 'collapsed'" class="mt-[49px] fixed z-50 top-0 bottom-0 h-full "
+<div class="fixed z-30 top-1 left-4">
+    <button class="menu w-10 h-10 text-white rounded-lg p-[0.313rem] font-black text-2xl cursor-pointer"
+        [style.background]="color" (click)="toggleCollapse()"><i
+            class="fas fa-bars"></i></button>
+</div>
+<div [@fade]="collapsed ? 'expanded' : 'collapsed'" class="mt-[49px] fixed z-20 top-0 bottom-0 h-full "
     [ngClass]="collapsed ? 'w-[16.5625rem]': 'w-0'" [style.background]="appMode==='dark'?'#423f3f':'#d1cbcb'">
-    <div class="absolute w-full -mt-11 left-2">
-        <button class="menu w-10 h-10 rounded-lg p-[0.313rem] font-black text-2xl cursor-pointer"
-            [style.background]="appMode==='dark' ? '#b0b5b5':'white'" (click)="toggleCollapse()"><i
-                class="fas fa-bars"></i></button>
-    </div>
     <ul class="h-[calc(100% - 30px)] " >
         <li class="w-full mb-[0.625rem]  ml-[15px] mr-[15px]" *ngIf="collapsed">
             <a class=" flex h-12 mt-5 rounded-lg" [ngClass]="appMode==='dark'?'text-white':'text-black'" >
@@ -14,17 +14,8 @@
                 </span>
             </a>
         </li>
-        <li class="w-[calc(100% - 15px)] mb-2 ml-[15px]" (click)="closeSidenav()" *ngIf="collapsed">
-            <a class=" flex h-12 pt-4 rounded-tl-lg rounded-bl-lg" [ngClass]="appMode==='dark'?'text-white':'text-black'"  routerLink="dashboard"
-                [routerLinkActive]="activeColor" [routerLinkActiveOptions]="{exact: false}">
-                <i class="font-black text-2xl ml-3 w-8 -mt-2 fal fa-home"></i>
-                <span class="ml-4 font-black">
-                    Dashboard
-                </span>
-            </a>
-        </li>
         <li class="w-[calc(100% - 10px)] mb-2 ml-[15px]  "  (click)="closeSidenav()" *ngIf="collapsed">
-            <a class='flex h-12 pt-4  rounded-tl-lg rounded-bl-lg ' [ngClass]="appMode==='dark'?'text-white':'text-black'"  routerLink="clients"
+            <a class='flex h-12 pt-4  rounded-tl-lg rounded-bl-lg ' [ngClass]="appMode==='dark'?'text-white hover:bg-[#767a7a] ':'text-black hover:bg-white'"  routerLink="clients"
                 [routerLinkActive]="activeColor" [routerLinkActiveOptions]="{exact: false}">
                 <i class=" font-black text-2xl w-8 ml-3 -mt-2 fal fa-users"></i>
                 <span class=" ml-4 font-black">
@@ -32,8 +23,8 @@
                 </span>
             </a>
         </li>
-        <li class="w-[calc(100% - 10px)] mb-2 ml-[15px] "  (click)="closeSidenav()" *ngIf="collapsed">
-            <a class='flex h-12 pt-4 t rounded-tl-lg rounded-bl-lg' [ngClass]="appMode==='dark'?'text-white':'text-black'"   routerLink="users"
+        <li class="w-[calc(100% - 10px)] mb-2 ml-[15px] "  (click)="closeSidenav()" *ngIf="collapsed && managePermissions">
+            <a class='flex h-12 pt-4 t rounded-tl-lg rounded-bl-lg' [ngClass]="appMode==='dark'?'text-white hover:bg-[#767a7a] ':'text-black hover:bg-white'"   routerLink="users"
                 [routerLinkActive]="activeColor" [routerLinkActiveOptions]="{exact: false}">
                 <i class=" font-black text-2xl w-8 ml-3 -mt-2 fal fa-users"></i>
                 <span class=" ml-4 font-black">
@@ -42,7 +33,7 @@
             </a>
         </li>
         <li class="w-[calc(100% - 15px)] mb-2 ml-[15px]" (click)="closeSidenav()" *ngIf="collapsed">
-            <a class=" flex h-12 pt-4 rounded-tl-lg rounded-bl-lg" [ngClass]="appMode==='dark'?'text-white':'text-black'"  routerLink="settings"
+            <a class=" flex h-12 pt-4 rounded-tl-lg rounded-bl-lg" [ngClass]="appMode==='dark'?'text-white hover:bg-[#767a7a] ':'text-black hover:bg-white'"  routerLink="settings"
                 [routerLinkActive]="activeColor" [routerLinkActiveOptions]="{exact: false}">
                 <i class="font-black text-2xl w-8 ml-3 -mt-2 fal fa-cog"></i>
                 <span class="font-black ml-4">

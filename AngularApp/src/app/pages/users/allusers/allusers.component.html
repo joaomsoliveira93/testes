@@ -1,10 +1,10 @@
 <div @fade
-    class="w-[calc(100%+32px)] h-fit z-50 shadow-md rounded-lg rounded-tr-none shadow-slate-500 sticky -top-4 -ml-4 -mt-4 p-2 "
+    class="w-[calc(100%+32px)] h-fit z-10 shadow-md rounded-lg rounded-tr-none shadow-slate-500 sticky -top-4 -ml-4 -mt-4 p-2 "
     [style.background]="appMode==='dark' ? '#b0b5b5':'#f2eeed'">
     <app-header [title]="title" [back]="back"></app-header>
     <div class="flex w-full" *ngIf="isScreenSizeLessThan1200">
-        <button class="text-xl w-[29%] h-[50px] mb-5 md:mb-0 rounded-lg" [style.background-color]="color" style="color:white"
-            (click)="toggleInputs()">
+        <button class="text-xl w-[29%] h-[50px] mb-5 md:mb-0 rounded-lg" [style.background-color]="color"
+            style="color:white" (click)="toggleInputs()">
             <i class="fal fa-eye"></i> Filtros
         </button>
         <mat-form-field class="w-[53%] ml-[2%] md:w-1/4 md:ml-2 md:mr-2" appearance="fill">
@@ -19,10 +19,12 @@
         </mat-form-field>
 
         <div class="ml-[2%]">
-            <button *ngIf="!sortAscending" class="text-white h-[50px] w-[50px] rounded-xl" [style.background-color]="color" (click)="changeOrder(true)">
+            <button *ngIf="!sortAscending" class="text-white h-[50px] w-[50px] rounded-xl"
+                [style.background-color]="color" (click)="changeOrder(true)">
                 <i class="fa fa-arrow-down text-4xl"></i>
             </button>
-            <button *ngIf="sortAscending" class="text-white h-[50px] w-[50px]  rounded-xl" [style.background-color]="color" (click)="changeOrder(false)">
+            <button *ngIf="sortAscending" class="text-white h-[50px] w-[50px]  rounded-xl"
+                [style.background-color]="color" (click)="changeOrder(false)">
                 <i class="fa fa-arrow-up  text-4xl"></i>
             </button>
 
@@ -71,10 +73,12 @@
     </div>
 </div>
 <div @fade class="mt-4">
-    <p class="text-center rounded-lg text-xl mb-2 w-full shadow-2xl shadow-slate-600" [style.background]="appMode==='dark' ? '#b0b5b5':'white'" *ngIf="filteredUsers.length===0">
+    <p class="text-center rounded-lg text-xl mb-2 w-full shadow-2xl shadow-slate-600"
+        [style.background]="appMode==='dark' ? '#b0b5b5':'white'" *ngIf="filteredUsers.length===0">
         Sem utilizadores para mostrar!
     </p>
-    <table *ngIf="!isScreenSizeLessThan1200 && !(filteredUsers.length===0)" class="rounded-lg mb-2 w-full shadow-2xl shadow-slate-600"
+    <table *ngIf="!isScreenSizeLessThan1200 && !(filteredUsers.length===0)"
+        class="rounded-lg mb-2 w-full shadow-2xl shadow-slate-600"
         [style.background]="appMode==='dark' ? '#b0b5b5':'#f2eeed'">
         <thead class="border-b-2 border-slate-500 sticky top-[130px] "
             [style.background]="appMode==='dark' ? '#b0b5b5':'#f2eeed'">
@@ -135,6 +139,7 @@
         </div>
     </div>
     <div class="justify-center flex">
+        <input class="rounded-md pl-2 w-14 mr-5" type="number" min="1" max="50" matInput [(ngModel)]="itemsPerPage">
         <button class="mr-5 text-white h-8 w-8 rounded-xl" [style.background-color]="color"
             [disabled]="currentPage === 1" (click)="onPageChange(currentPage - 1)">
             <i class="fa fa-arrow-left"></i>

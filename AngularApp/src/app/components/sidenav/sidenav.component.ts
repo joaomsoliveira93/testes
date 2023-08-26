@@ -27,14 +27,16 @@ export class SidenavComponent implements OnInit {
   activeColor:string='';
   collapsed = false;
   screenWidth = 0;
+  managePermissions:Boolean = false;
   constructor (private authGuard:AuthGuard){
     this.color = this.authGuard.getAppColor();
     this.appMode = this.authGuard.getAppMode();
     if (this.appMode==='dark'){
-      this.activeColor='bg-[#767a7a] '
+      this.activeColor='bg-[#767a7a]'
     }else{
       this.activeColor='bg-white text-black'
     }
+    this.managePermissions= this.authGuard.getCanManageUsers();
   }
 
 

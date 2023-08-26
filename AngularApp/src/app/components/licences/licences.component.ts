@@ -33,6 +33,7 @@ export class LicencesComponent {
   apiUrl: string = '';
   licences: Licence[] = [];
   userId: string = '';
+  manageLicences: Boolean = false;
   selectedLicence: Licence = {
     _id: '',
     clientId: '',
@@ -48,6 +49,7 @@ export class LicencesComponent {
     this.color = this.authGuard.getAppColor();
     this.appMode = this.authGuard.getAppMode();
     this.userId = this.authGuard.getId();
+    this.manageLicences = this.authGuard.getCanManageLicences();
     this.dialogRef = undefined;
   }
 

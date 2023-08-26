@@ -1,7 +1,7 @@
 <div @fade class="w-full z-50 shadow-xl rounded-lg mt-5 shadow-slate-500  p-2 "
     [style.background]="appMode==='dark' ? '#b0b5b5':'#f2eeed'">
     <p class="mb-2 text-2xl font-semibold">Licenças do Cliente</p>
-    <div class="mt-1 mb-5" *ngIf="edit===''">
+    <div class="mt-1 mb-5" *ngIf="edit==='' && manageLicences">
         <button class=" text-white mr-2 p-2 rounded-md" (click)="openPopup()" [style.background-color]="color">
             <i class="fa fa-plus p-1"></i> <i *ngIf="!isScreenSizeLessThan1200" > Adicionar</i>
         </button>

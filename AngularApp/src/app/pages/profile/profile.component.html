@@ -1,11 +1,13 @@
-<div @fade class="w-[calc(100%+32px)] h-fit z-50 shadow-md rounded-lg rounded-tr-none shadow-slate-500 sticky -top-4 -ml-4 -mt-4 p-2 "
+<div @fade
+    class="w-[calc(100%+32px)] opacity-90 h-fit z-50 shadow-md rounded-lg rounded-tr-none shadow-slate-500 sticky -top-4 -ml-4 -mt-4 p-2 "
     [style.background]="appMode==='dark' ? '#b0b5b5':'#f2eeed'">
     <app-header [title]="'Perfil'" [back]="''" [hasfilters]="true"></app-header>
     <div *ngIf="!edit">
         <button (click)="edit=true" class=" ml-2 mr-2 text-white p-2 rounded-md" [style.background-color]="color">
             <i class="fa fa-pencil p-1"></i> <i *ngIf="!isScreenSizeLessThan1200"> Editar</i>
         </button>
-        <button *ngIf="user.username === username || user.username !== 'admin'" class="mr-2 text-white p-2 rounded-md" (click)="openPopup()" [style.background-color]="color">
+        <button *ngIf="user.username === username || user.username !== 'admin'" class="mr-2 text-white p-2 rounded-md"
+            (click)="openPopup()" [style.background-color]="color">
             <i class="underline">****</i> <i *ngIf="!isScreenSizeLessThan1200"> Alterar Palavra-Passe</i>
         </button>
     </div>
@@ -19,7 +21,8 @@
         </button>
     </div>
 </div>
-<div @fade *ngIf="!edit" class="w-full mt-6 grid grid-cols-1 md:grid-cols-2 gap-4 p-4 rounded-lg shadow-xl shadow-slate-500"
+<div @fade *ngIf="!edit"
+    class="w-full mt-6 grid grid-cols-1 md:grid-cols-2 gap-4 p-4 rounded-lg shadow-xl shadow-slate-500"
     [style.background]="appMode==='dark' ? '#b0b5b5':'#f2eeed'">
     <div>
         <label class="text-xl mr-2">Nome de Utilizador:</label>
@@ -46,6 +49,10 @@
     <div>
         <label class="text-xl mr-2">Modo da Aplicação:</label>
         <label class="text-xl font-extrabold">{{user.appMode==='dark' ? 'Escuro' : 'Claro'}}</label>
+    </div>
+    <div>
+        <label class="text-xl mr-2">Fotografia do Perfil:</label>
+        <img [src]="img" class="rounded-lg" width="150" />
     </div>
 </div>
 
@@ -85,4 +92,12 @@
         </mat-select>
         <mat-error>Deve preencher o Modo da Aplicação</mat-error>
     </mat-form-field>
+
+    <div>
+        <label class="text-xl mr-2">Fotografia do Perfil:</label>
+        <input type="file" style="display: none;" (change)="onImageChange($event)" accept="image/*" #fileInput />
+        <img [src]="img" class="rounded-lg cursor-pointer" width="150" (click)="fileInput.click()" />
+    </div>
+
+
 </div>

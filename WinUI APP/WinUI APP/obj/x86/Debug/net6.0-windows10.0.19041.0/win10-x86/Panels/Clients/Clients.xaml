@@ -14,8 +14,8 @@
         <Rectangle Grid.Row="0" />
         <StackPanel Grid.Row="1" Orientation="Horizontal" >
             <TextBlock Margin="20,5,0,0" FontSize="25">Clientes</TextBlock>
-            <CommandBar Background="Transparent" IsOpen="False" DefaultLabelPosition="Right">
-                <AppBarButton x:ConnectionId='31' Icon="Add" Label="Adicionar"                        />
+            <CommandBar x:ConnectionId='31'                                     Background="Transparent" IsOpen="False" DefaultLabelPosition="Right">
+                <AppBarButton x:ConnectionId='32' Icon="Add" Label="Adicionar"                        />
             </CommandBar>
         </StackPanel>
         

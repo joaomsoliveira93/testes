@@ -9,23 +9,31 @@
     mc:Ignorable="d">
     <Grid Width="Auto" Height="Auto" Background="Transparent" ColumnDefinitions="*" RowDefinitions ="Auto,*">
         <Border x:ConnectionId='2' Height="30" Grid.Row="0" Background="Transparent" x:Name="AppTitleBar" Grid.Column="1" VerticalAlignment="Top">
-            <TextBlock x:ConnectionId='7' x:Name="AppTitle" Text="{StaticResource AppTitleName}" VerticalAlignment="Top" Margin="10,5,0,0" />
+            <TextBlock x:ConnectionId='8' x:Name="AppTitle" Text="{StaticResource AppTitleName}" VerticalAlignment="Top" Margin="10,5,0,0" />
         </Border>
 
         <NavigationView x:ConnectionId='3' Grid.Row="1" x:Name="sidebar" PaneDisplayMode="Auto" IsSettingsVisible="True"                                              IsBackEnabled="False">
             <NavigationView.MenuItems>
                 <NavigationViewItem Content="Clientes" Tag="Clientes" Icon="People" />
-                <NavigationViewItem x:ConnectionId='4'                               Content="Utilizadores" Tag="Users" Icon="OtherUser" />
+                <NavigationViewItem x:ConnectionId='4'                                   Content="Utilizadores" Tag="Users" Icon="OtherUser" />
             </NavigationView.MenuItems>
             <NavigationView.FooterMenuItems>
-                <NavigationViewItem x:ConnectionId='5'                         Tag="Profile" Icon="Contact" />
+                <NavigationViewItem Tag="Profile">
+                    <StackPanel Orientation="Horizontal">
+                        <Border Width="30" Height="30" Margin="0,0,10,0" CornerRadius="20" Background="LightGray">
+                            <Image x:ConnectionId='6'                                Stretch="UniformToFill" />
+                        </Border>
+                        <TextBlock x:ConnectionId='5' Margin="0,5,0,0"                     ></TextBlock> 
+                    </StackPanel>
+         
+                </NavigationViewItem>
                 <NavigationViewItem Content="Terminar Sessão" Tag="Logout">
                     <NavigationViewItem.Icon>
                         <FontIcon Glyph="&#xF3B1;" />
                     </NavigationViewItem.Icon>
                 </NavigationViewItem>
             </NavigationView.FooterMenuItems>
-            <Frame x:ConnectionId='6' Background="Transparent" x:Name="content"                                   >
+            <Frame x:ConnectionId='7' Background="Transparent" x:Name="content"                                   >
                 <Frame.ContentTransitions>
                     <TransitionCollection>
                         <NavigationThemeTransition  />

@@ -21,7 +21,12 @@ export class AuthGuard {
     appColor: '',
     appMode: '',
     email: '',
-    estado: 1
+    estado: 1,
+    canManageUsers: false,
+    canManageClients: false,
+    canManageLicences: false,
+    canManagePermissions: false,
+    img:'',
   };
   apiUrl: string = '';
 
@@ -56,6 +61,26 @@ export class AuthGuard {
 
   getId() {
     return this.userData._id;
+  }
+
+  getCanManageUsers() {
+    return this.userData.canManageUsers;
+  }
+
+  getCanManagePermissions() {
+    return this.userData.canManagePermissions;
+  }
+
+  getCanManageLicences() {
+    return this.userData.canManageLicences;
+  }
+
+  getCanManageClients() {
+    return this.userData.canManageClients;
+  }
+
+  getImg(){
+    return this.userData.img;
   }
 
   async canActivate(
@@ -106,7 +131,12 @@ export class AuthGuard {
       appColor: '',
       appMode: '',
       email: '',
-      estado: 1
+      estado: 1,
+      canManageUsers: false,
+      canManageClients: false,
+      canManageLicences: false,
+      canManagePermissions: false,
+      img:'',
     };
     this.isLoggedInSubject.next(false);
     localStorage.removeItem('token');
@@ -128,7 +158,12 @@ export class AuthGuard {
             appColor: '',
             appMode: '',
             email: '',
-            estado: 1
+            estado: 1,
+            canManageUsers: false,
+            canManageClients: false,
+            canManageLicences: false,
+            canManagePermissions: false,
+            img:'',
           };
           this.isLoggedInSubject.next(false);
           return res.data;
@@ -141,7 +176,12 @@ export class AuthGuard {
             email: res.data.email,
             appColor: res.data.appColor,
             appMode: res.data.appMode,
-            estado: res.data.estado
+            estado: res.data.estado,
+            canManageUsers: res.data.canManageUsers,
+            canManageClients: res.data.canManageClients,
+            canManageLicences: res.data.canManageLicences,
+            canManagePermissions: res.data.canManagePermissions,
+            img:res.data.img,
           };
           localStorage.setItem('token', JSON.stringify({
             token: res.data.token,
@@ -169,6 +209,6 @@ export class AuthGuard {
 
 
 }
-export const IsAuthGuard: CanActivateFn = (route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Promise<boolean> =>{
+export const IsAuthGuard: CanActivateFn = (route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Promise<boolean> => {
   return inject(AuthGuard).canActivate(route, state);
 }

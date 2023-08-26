@@ -15,56 +15,47 @@
             <TextBlock Margin="20,10,0,0" FontSize="25">Detalhes do Cliente</TextBlock>
         </RelativePanel>
         <StackPanel Orientation="Horizontal" Grid.Row="2">
-            <CommandBar Background="Transparent" IsOpen="False" DefaultLabelPosition="Right">
-                <AppBarButton x:ConnectionId='30' Icon="Edit" x:Name="Editar" Label="Editar"                     />
-                <AppBarButton x:ConnectionId='31' Icon="Delete" x:Name="Apagar" Label="Apagar"                     />
-                <AppBarButton x:ConnectionId='32' Icon="Save" x:Name="Guardar" Label="Guardar" Visibility="Collapsed"                      />
-                <AppBarButton x:ConnectionId='33' Icon="Cancel" x:Name="Cancelar" Label="Cancelar" Visibility="Collapsed"                       />
-            </CommandBar>    
+            <CommandBar x:ConnectionId='32'                                     Background="Transparent" IsOpen="False" DefaultLabelPosition="Right">
+                <AppBarButton x:ConnectionId='33' Icon="Edit" x:Name="Editar" Label="Editar"                     />
+                <AppBarButton x:ConnectionId='34' Icon="Delete" x:Name="Apagar" Label="Apagar"                     />
+                <AppBarButton x:ConnectionId='35' Icon="Save" x:Name="Guardar" Label="Guardar" Visibility="Collapsed"                      />
+                <AppBarButton x:ConnectionId='36' Icon="Cancel" x:Name="Cancelar" Label="Cancelar" Visibility="Collapsed"                       />
+            </CommandBar>
         </StackPanel>
 
-        <Expander IsExpanded="True" Grid.Row="3" HorizontalAlignment="Stretch" >
-            <Expander.Header>
-                <TextBlock>Dados do Cliente</TextBlock>
-            </Expander.Header>
-            <Expander.Content>
-                <ScrollViewer HorizontalAlignment="Stretch" HorizontalScrollMode="Disabled" HorizontalScrollBarVisibility="Disabled" VerticalScrollMode="Auto" VerticalScrollBarVisibility="Auto">
-                    <Grid  Height="Auto" Background="Transparent" ColumnDefinitions="*,*" RowDefinitions ="70,30,70,30,70,30,70,30,70">
-                        <TextBox x:ConnectionId='13' Margin="20,0,20,0" Header="Nome"  IsEnabled="False"                                              Grid.Column="0" Grid.Row="0" x:Name="name" PlaceholderText="Nome"                         ></TextBox>
-                        <TextBox x:ConnectionId='14' Margin="20,0,20,0" Header="Nº de Contribuinte" IsEnabled="False"                                               Grid.Column="1" Grid.Row="0" x:Name="nCont" PlaceholderText="Nº de Contribuinte"                         ></TextBox>
+        <ScrollViewer Grid.Row="3" HorizontalScrollMode="Disabled" HorizontalScrollBarVisibility="Disabled" VerticalScrollMode="Auto" VerticalScrollBarVisibility="Auto">
+            <Grid Width="Auto" Height="Auto" Background="Transparent" ColumnDefinitions="*,*" RowDefinitions ="70,30,70,30,70,30,70,30,70">
+                <TextBox x:ConnectionId='15' Margin="20,0,20,0" Header="Nome"  IsEnabled="False"                                              Grid.Column="0" Grid.Row="0" x:Name="name" PlaceholderText="Nome"                         ></TextBox>
+                <TextBox x:ConnectionId='16' Margin="20,0,20,0" Header="Nº de Contribuinte" IsEnabled="False"                                               Grid.Column="1" Grid.Row="0" x:Name="nCont" PlaceholderText="Nº de Contribuinte"                         ></TextBox>
 
-                        <TextBlock x:ConnectionId='15' Margin="20,0,20,0" Grid.Column="0" Grid.Row="1" Foreground="Red" Visibility="Collapsed" x:Name="nameValidator"> O nome é obrigatório</TextBlock>
-                        <TextBlock x:ConnectionId='16' Margin="20,0,20,0"  Grid.Column="1" Grid.Row="1" Foreground="Red" Visibility="Collapsed" x:Name="nContValidator"> O nº de contribuinte é obrigatório</TextBlock>
+                <TextBlock x:ConnectionId='17' Margin="20,0,20,0" Grid.Column="0" Grid.Row="1" Foreground="Red" Visibility="Collapsed" x:Name="nameValidator"> O nome é obrigatório</TextBlock>
+                <TextBlock x:ConnectionId='18' Margin="20,0,20,0"  Grid.Column="1" Grid.Row="1" Foreground="Red" Visibility="Collapsed" x:Name="nContValidator"> O nº de contribuinte é obrigatório</TextBlock>
 
-                        <TextBox x:ConnectionId='17' Margin="20,0,20,0" Header="Morada" IsEnabled="False"                                                Grid.Column="0" Grid.Row="2" x:Name="morada" PlaceholderText="Morada"                         ></TextBox>
-                        <TextBox x:ConnectionId='18' Margin="20,0,20,0" Header="Código Postal" IsEnabled="False"                                                 Grid.Column="1" Grid.Row="2" x:Name="codPost" PlaceholderText="Código Postal"                         ></TextBox>
+                <TextBox x:ConnectionId='19' Margin="20,0,20,0" Header="Morada" IsEnabled="False"                                                Grid.Column="0" Grid.Row="2" x:Name="morada" PlaceholderText="Morada"                         ></TextBox>
+                <TextBox x:ConnectionId='20' Margin="20,0,20,0" Header="Código Postal" IsEnabled="False"                                                 Grid.Column="1" Grid.Row="2" x:Name="codPost" PlaceholderText="Código Postal"                         ></TextBox>
 
-                        <TextBlock x:ConnectionId='19' Margin="20,0,20,0"  Grid.Column="0" Grid.Row="3" Foreground="Red" Visibility="Collapsed" x:Name="moradaValidator"> A morada é obrigatória</TextBlock>
-                        <TextBlock x:ConnectionId='20' Margin="20,0,20,0"  Grid.Column="1" Grid.Row="3" Foreground="Red" Visibility="Collapsed" x:Name="codPostValidator"> O código postal é obrigatório</TextBlock>
+                <TextBlock x:ConnectionId='21' Margin="20,0,20,0"  Grid.Column="0" Grid.Row="3" Foreground="Red" Visibility="Collapsed" x:Name="moradaValidator"> A morada é obrigatória</TextBlock>
+                <TextBlock x:ConnectionId='22' Margin="20,0,20,0"  Grid.Column="1" Grid.Row="3" Foreground="Red" Visibility="Collapsed" x:Name="codPostValidator"> O código postal é obrigatório</TextBlock>
 
-                        <TextBox x:ConnectionId='21' Margin="20,0,20,0" Header="Cidade" IsEnabled="False"                                                Grid.Column="0" Grid.Row="4" x:Name="cidade" PlaceholderText="Cidade"                         ></TextBox>
-                        <TextBox x:ConnectionId='22' Margin="20,0,20,0" Header="Contacto" IsEnabled="False"                                                  Grid.Column="1" Grid.Row="4" x:Name="contacto" PlaceholderText="Contacto"                         ></TextBox>
+                <TextBox x:ConnectionId='23' Margin="20,0,20,0" Header="Cidade" IsEnabled="False"                                                Grid.Column="0" Grid.Row="4" x:Name="cidade" PlaceholderText="Cidade"                         ></TextBox>
+                <TextBox x:ConnectionId='24' Margin="20,0,20,0" Header="Contacto" IsEnabled="False"                                                  Grid.Column="1" Grid.Row="4" x:Name="contacto" PlaceholderText="Contacto"                         ></TextBox>
 
-                        <TextBlock x:ConnectionId='23' Margin="20,0,20,0"  Grid.Column="0" Grid.Row="5" Foreground="Red" Visibility="Collapsed" x:Name="cidadeValidator"> A cidade é obrigatória</TextBlock>
-                        <TextBlock x:ConnectionId='24' Margin="20,0,20,0"  Grid.Column="1" Grid.Row="5" Foreground="Red" Visibility="Collapsed" x:Name="contactoValidator"> O contacto é obrigatório</TextBlock>
+                <TextBlock x:ConnectionId='25' Margin="20,0,20,0"  Grid.Column="0" Grid.Row="5" Foreground="Red" Visibility="Collapsed" x:Name="cidadeValidator"> A cidade é obrigatória</TextBlock>
+                <TextBlock x:ConnectionId='26' Margin="20,0,20,0"  Grid.Column="1" Grid.Row="5" Foreground="Red" Visibility="Collapsed" x:Name="contactoValidator"> O contacto é obrigatório</TextBlock>
 
-                        <TextBox x:ConnectionId='25' Margin="20,0,20,0" Header="Email" IsEnabled="False"                                               Grid.Column="0" Grid.Row="6" x:Name="email" PlaceholderText="Email"                         ></TextBox>
-                        <TextBox x:ConnectionId='26' Margin="20,0,20,0" Header="Representante" IsEnabled="False"                                             Grid.Column="1" Grid.Row="6" x:Name="rep" PlaceholderText="Representante"></TextBox>
+                <TextBox x:ConnectionId='27' Margin="20,0,20,0" Header="Email" IsEnabled="False"                                               Grid.Column="0" Grid.Row="6" x:Name="email" PlaceholderText="Email"                         ></TextBox>
+                <TextBox x:ConnectionId='28' Margin="20,0,20,0" Header="Representante" IsEnabled="False"                                             Grid.Column="1" Grid.Row="6" x:Name="rep" PlaceholderText="Representante"></TextBox>
 
-                        <TextBlock x:ConnectionId='27' Margin="20,0,20,0"  Grid.Column="0" Grid.Row="7" Foreground="Red" Visibility="Collapsed" x:Name="emailValidator"> O email é obrigatória</TextBlock>
+                <TextBlock x:ConnectionId='29' Margin="20,0,20,0"  Grid.Column="0" Grid.Row="7" Foreground="Red" Visibility="Collapsed" x:Name="emailValidator"> O email é obrigatória</TextBlock>
 
-                        <TextBox x:ConnectionId='28' Margin="20,0,20,0" Header="Contacto do Representante" IsEnabled="False"                                                     Grid.Column="0" Grid.Row="8" x:Name="repContacto" PlaceholderText="Contacto do Representante"></TextBox>
-                        <TextBox x:ConnectionId='29' Margin="20,0,20,0" Header="Email do Representante" IsEnabled="False"                                                  Grid.Column="1" Grid.Row="8" x:Name="repEmail" PlaceholderText="Email do Representante"></TextBox>
-                    </Grid>
-                </ScrollViewer>
-            </Expander.Content>
-        </Expander>
-
-        
+                <TextBox x:ConnectionId='30' Margin="20,0,20,0" Header="Contacto do Representante" IsEnabled="False"                                                     Grid.Column="0" Grid.Row="8" x:Name="repContacto" PlaceholderText="Contacto do Representante"></TextBox>
+                <TextBox x:ConnectionId='31' Margin="20,0,20,0" Header="Email do Representante" IsEnabled="False"                                                  Grid.Column="1" Grid.Row="8" x:Name="repEmail" PlaceholderText="Email do Representante"></TextBox>
+            </Grid>
+        </ScrollViewer>
         <StackPanel Orientation="Horizontal" Grid.Row="4">
             <TextBlock Margin="20,8,0,0" FontSize="20">Licenças do Cliente</TextBlock>
-            <CommandBar  Background="Transparent" IsOpen="False" DefaultLabelPosition="Right">
-                <AppBarButton x:ConnectionId='12' Icon="Add" Label="Adicionar"                               />
+            <CommandBar x:ConnectionId='13'                                      Background="Transparent" IsOpen="False" DefaultLabelPosition="Right">
+                <AppBarButton x:ConnectionId='14' Icon="Add" Label="Adicionar"                               />
             </CommandBar>
         </StackPanel>
         <RelativePanel Grid.Row="5">
@@ -87,12 +78,12 @@
                     <controls:DataGridTextColumn Width="Auto" Header="Data de Início" Binding="{Binding StartedAt}" Tag="StartedAt" />
                     <controls:DataGridTextColumn Width="Auto" Header="Data de Fim" Binding="{Binding EndedAt}" Tag="endedAt" />
                     <controls:DataGridTextColumn IsReadOnly="True" Width="Auto" Header="Estado" Binding="{Binding Estado}" Tag="Estado" />
-                    <controls:DataGridTemplateColumn Width="Auto" Header="">
+                    <controls:DataGridTemplateColumn x:ConnectionId='9'                                      Width="Auto" Header="">
                         <controls:DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <StackPanel Orientation="Horizontal">
-                                    <AppBarButton x:ConnectionId='10' Height="50" Width="60" Icon="Edit"                                />
-                                    <AppBarButton x:ConnectionId='11' Height="50" Width="60" Icon="Delete"                                  />
+                                    <AppBarButton x:ConnectionId='11' Height="50" Width="60" Icon="Edit"                                />
+                                    <AppBarButton x:ConnectionId='12' Height="50" Width="60" Icon="Delete"                                  />
                                 </StackPanel>                                
                             </DataTemplate>
                         </controls:DataGridTemplateColumn.CellTemplate>

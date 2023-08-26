@@ -97,7 +97,75 @@ namespace WinUI_APP.Classes
             }
         }
 
+        private bool canManageClients;
+        public bool CanManageClients
+        {
+            get { return canManageClients; }
+            set
+            {
+                if (value != canManageClients)
+                {
+                    canManageClients = value;
+                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(CanManageClients)));
+                }
+            }
+        }
 
+        private bool canManageLicences;
+        public bool CanManageLicences
+        {
+            get { return canManageLicences; }
+            set
+            {
+                if (value != canManageLicences)
+                {
+                    canManageLicences = value;
+                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(CanManageLicences)));
+                }
+            }
+        }
+
+        private bool canManageUsers;
+        public bool CanManageUsers
+        {
+            get { return canManageUsers; }
+            set
+            {
+                if (value != canManageUsers)
+                {
+                    canManageUsers = value;
+                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(CanManageUsers)));
+                }
+            }
+        }
+
+        private bool canManagePermissions;
+        public bool CanManagePermissions
+        {
+            get { return canManagePermissions; }
+            set
+            {
+                if (value != canManagePermissions)
+                {
+                    canManagePermissions = value;
+                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(CanManagePermissions)));
+                }
+            }
+        }
+
+        private string img;
+        public string Img
+        {
+            get { return img; }
+            set
+            {
+                if (value != img)
+                {
+                    img = value;
+                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Img)));
+                }
+            }
+        }
 
         public event PropertyChangedEventHandler PropertyChanged;
     }

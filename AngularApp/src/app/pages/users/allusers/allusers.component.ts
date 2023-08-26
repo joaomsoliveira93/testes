@@ -49,6 +49,7 @@ export class UsersComponent implements OnInit {
   isScreenSizeLessThan1200 = false;
   color: string = '';
   appMode: string = '';
+  manageUsers: Boolean = false;
 
   constructor(private authGuard: AuthGuard,
     public dialog: MatDialog,
@@ -58,6 +59,7 @@ export class UsersComponent implements OnInit {
   ) {
     this.color = this.authGuard.getAppColor();
     this.appMode = this.authGuard.getAppMode();
+    this.manageUsers = this.authGuard.getCanManageUsers();
   }
 
   toggleInputs(): void {
@@ -65,6 +67,7 @@ export class UsersComponent implements OnInit {
   }
 
   filterData(): void {
+    this.currentPage = 1;
     this.filteredUsers = this.users.filter((item) =>
       (item.name.toLocaleLowerCase().includes(this.searchName.toLocaleLowerCase())) &&
       (item.username.toLocaleLowerCase().includes(this.searchUserName.toLocaleLowerCase())) &&
@@ -75,7 +78,8 @@ export class UsersComponent implements OnInit {
   }
 
   async ngOnInit() {
-    Swal.fire({
+    if (this.manageUsers){
+      Swal.fire({
       title: 'A Carregar...',
       allowOutsideClick: false,
       allowEscapeKey: false,
@@ -103,6 +107,10 @@ export class UsersComponent implements OnInit {
         background: this.appMode === 'dark' ? '#b0b5b5' : 'white',
       })
     }
+    }else{
+      this.router.navigate(['/clients']);
+    }
+    
 
     this.currentPage = 1;
     this.itemsPerPage = 10;

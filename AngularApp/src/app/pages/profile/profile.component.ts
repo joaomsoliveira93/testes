@@ -30,6 +30,7 @@ export class ProfileComponent {
   username: String = '';
   color: string = '';
   appMode: string = '';
+  img:string='';
   user: User = {
     _id: '',
     username: '',
@@ -38,7 +39,12 @@ export class ProfileComponent {
     appColor: '',
     appMode: '',
     email: '',
-    estado: 1
+    estado: 1,
+    canManageUsers:false,
+    canManageClients:false,
+    canManageLicences:false,
+    canManagePermissions:false,
+    img:'',
   }
 
   constructor(public dialog: MatDialog, private authGuard: AuthGuard, private breakpointObserver: BreakpointObserver, private configService: ConfigService) {
@@ -46,6 +52,7 @@ export class ProfileComponent {
     this.username = this.authGuard.getUserName();
     this.color = this.authGuard.getAppColor();
     this.appMode = this.authGuard.getAppMode();
+    this.img=this.authGuard.getImg();
   }
 
   async ngOnInit() {
@@ -166,7 +173,6 @@ export class ProfileComponent {
     }).then(async (result) => {
       if (result.isConfirmed) {
         await this.loadApiUrl();
-        const tempUser: User = this.user;
         const res = await axios.put(`${this.apiUrl}/user/resetpassword`, { userId: this.userId, user: this.user });
         if (res.data === null) {
           Swal.fire({
@@ -233,5 +239,17 @@ export class ProfileComponent {
         content: 'This is the content of the popup.'
       }
     });
+  }
+
+  onImageChange(event: any): void {
+    const file = event.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (e: any) => {
+        this.img = e.target.result;
+        this.user.img = e.target.result;
+      };
+      reader.readAsDataURL(file);   
+    }
   }
 }

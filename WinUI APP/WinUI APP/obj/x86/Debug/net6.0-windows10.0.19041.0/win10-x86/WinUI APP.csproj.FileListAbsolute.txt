@@ -318,8 +318,12 @@ D:\Repositorios\testes\WinUI APP\WinUI APP\bin\x86\Debug\net6.0-windows10.0.1904
 D:\Repositorios\testes\WinUI APP\WinUI APP\bin\x86\Debug\net6.0-windows10.0.19041.0\win10-x86\AppResources.xbf
 D:\Repositorios\testes\WinUI APP\WinUI APP\bin\x86\Debug\net6.0-windows10.0.19041.0\win10-x86\Panels\Clients\Clients.xbf
 D:\Repositorios\testes\WinUI APP\WinUI APP\bin\x86\Debug\net6.0-windows10.0.19041.0\win10-x86\Panels\Clients\DtlClient.xbf
+D:\Repositorios\testes\WinUI APP\WinUI APP\bin\x86\Debug\net6.0-windows10.0.19041.0\win10-x86\Panels\Profile.xbf
+D:\Repositorios\testes\WinUI APP\WinUI APP\bin\x86\Debug\net6.0-windows10.0.19041.0\win10-x86\Panels\Settings.xbf
 D:\Repositorios\testes\WinUI APP\WinUI APP\bin\x86\Debug\net6.0-windows10.0.19041.0\win10-x86\Panels\Users\DtlUser.xbf
 D:\Repositorios\testes\WinUI APP\WinUI APP\bin\x86\Debug\net6.0-windows10.0.19041.0\win10-x86\Panels\Users\Users.xbf
+D:\Repositorios\testes\WinUI APP\WinUI APP\bin\x86\Debug\net6.0-windows10.0.19041.0\win10-x86\Windows\LoginWindow.xbf
+D:\Repositorios\testes\WinUI APP\WinUI APP\bin\x86\Debug\net6.0-windows10.0.19041.0\win10-x86\Windows\MainWindow.xbf
 D:\Repositorios\testes\WinUI APP\WinUI APP\bin\x86\Debug\net6.0-windows10.0.19041.0\win10-x86\WinUI APP.deps.json
 D:\Repositorios\testes\WinUI APP\WinUI APP\bin\x86\Debug\net6.0-windows10.0.19041.0\win10-x86\WinUI APP.runtimeconfig.json
 D:\Repositorios\testes\WinUI APP\WinUI APP\bin\x86\Debug\net6.0-windows10.0.19041.0\win10-x86\WinUI APP.dll
@@ -345,6 +349,7 @@ D:\Repositorios\testes\WinUI APP\WinUI APP\bin\x86\Debug\net6.0-windows10.0.1904
 D:\Repositorios\testes\WinUI APP\WinUI APP\bin\x86\Debug\net6.0-windows10.0.19041.0\win10-x86\System.Net.Http.Json.dll
 D:\Repositorios\testes\WinUI APP\WinUI APP\bin\x86\Debug\net6.0-windows10.0.19041.0\win10-x86\System.Text.Encodings.Web.dll
 D:\Repositorios\testes\WinUI APP\WinUI APP\bin\x86\Debug\net6.0-windows10.0.19041.0\win10-x86\System.Text.Json.dll
+D:\Repositorios\testes\WinUI APP\WinUI APP\bin\x86\Debug\net6.0-windows10.0.19041.0\win10-x86\WinUIEx.dll
 D:\Repositorios\testes\WinUI APP\WinUI APP\bin\x86\Debug\net6.0-windows10.0.19041.0\win10-x86\Microsoft.WindowsAppRuntime.Bootstrap.dll
 D:\Repositorios\testes\WinUI APP\WinUI APP\bin\x86\Debug\net6.0-windows10.0.19041.0\win10-x86\Microsoft.CSharp.dll
 D:\Repositorios\testes\WinUI APP\WinUI APP\bin\x86\Debug\net6.0-windows10.0.19041.0\win10-x86\Microsoft.VisualBasic.Core.dll
@@ -575,23 +580,39 @@ D:\Repositorios\testes\WinUI APP\WinUI APP\obj\x86\Debug\net6.0-windows10.0.1904
 D:\Repositorios\testes\WinUI APP\WinUI APP\obj\x86\Debug\net6.0-windows10.0.19041.0\win10-x86\Panels\Clients\Clients.g.cs
 D:\Repositorios\testes\WinUI APP\WinUI APP\obj\x86\Debug\net6.0-windows10.0.19041.0\win10-x86\Panels\Clients\DtlClient.g.i.cs
 D:\Repositorios\testes\WinUI APP\WinUI APP\obj\x86\Debug\net6.0-windows10.0.19041.0\win10-x86\Panels\Clients\DtlClient.g.cs
+D:\Repositorios\testes\WinUI APP\WinUI APP\obj\x86\Debug\net6.0-windows10.0.19041.0\win10-x86\Panels\Profile.g.i.cs
+D:\Repositorios\testes\WinUI APP\WinUI APP\obj\x86\Debug\net6.0-windows10.0.19041.0\win10-x86\Panels\Profile.g.cs
+D:\Repositorios\testes\WinUI APP\WinUI APP\obj\x86\Debug\net6.0-windows10.0.19041.0\win10-x86\Panels\Settings.g.i.cs
+D:\Repositorios\testes\WinUI APP\WinUI APP\obj\x86\Debug\net6.0-windows10.0.19041.0\win10-x86\Panels\Settings.g.cs
 D:\Repositorios\testes\WinUI APP\WinUI APP\obj\x86\Debug\net6.0-windows10.0.19041.0\win10-x86\Panels\Users\DtlUser.g.i.cs
 D:\Repositorios\testes\WinUI APP\WinUI APP\obj\x86\Debug\net6.0-windows10.0.19041.0\win10-x86\Panels\Users\DtlUser.g.cs
 D:\Repositorios\testes\WinUI APP\WinUI APP\obj\x86\Debug\net6.0-windows10.0.19041.0\win10-x86\Panels\Users\Users.g.i.cs
 D:\Repositorios\testes\WinUI APP\WinUI APP\obj\x86\Debug\net6.0-windows10.0.19041.0\win10-x86\Panels\Users\Users.g.cs
+D:\Repositorios\testes\WinUI APP\WinUI APP\obj\x86\Debug\net6.0-windows10.0.19041.0\win10-x86\Windows\LoginWindow.g.i.cs
+D:\Repositorios\testes\WinUI APP\WinUI APP\obj\x86\Debug\net6.0-windows10.0.19041.0\win10-x86\Windows\LoginWindow.g.cs
+D:\Repositorios\testes\WinUI APP\WinUI APP\obj\x86\Debug\net6.0-windows10.0.19041.0\win10-x86\Windows\MainWindow.g.i.cs
+D:\Repositorios\testes\WinUI APP\WinUI APP\obj\x86\Debug\net6.0-windows10.0.19041.0\win10-x86\Windows\MainWindow.g.cs
 D:\Repositorios\testes\WinUI APP\WinUI APP\obj\x86\Debug\net6.0-windows10.0.19041.0\win10-x86\XamlTypeInfo.g.cs
 D:\Repositorios\testes\WinUI APP\WinUI APP\obj\x86\Debug\net6.0-windows10.0.19041.0\win10-x86\App.xaml
 D:\Repositorios\testes\WinUI APP\WinUI APP\obj\x86\Debug\net6.0-windows10.0.19041.0\win10-x86\AppResources.xaml
 D:\Repositorios\testes\WinUI APP\WinUI APP\obj\x86\Debug\net6.0-windows10.0.19041.0\win10-x86\Panels\Clients\Clients.xaml
 D:\Repositorios\testes\WinUI APP\WinUI APP\obj\x86\Debug\net6.0-windows10.0.19041.0\win10-x86\Panels\Clients\DtlClient.xaml
+D:\Repositorios\testes\WinUI APP\WinUI APP\obj\x86\Debug\net6.0-windows10.0.19041.0\win10-x86\Panels\Settings.xaml
 D:\Repositorios\testes\WinUI APP\WinUI APP\obj\x86\Debug\net6.0-windows10.0.19041.0\win10-x86\Panels\Users\DtlUser.xaml
 D:\Repositorios\testes\WinUI APP\WinUI APP\obj\x86\Debug\net6.0-windows10.0.19041.0\win10-x86\Panels\Users\Users.xaml
+D:\Repositorios\testes\WinUI APP\WinUI APP\obj\x86\Debug\net6.0-windows10.0.19041.0\win10-x86\Windows\LoginWindow.xaml
+D:\Repositorios\testes\WinUI APP\WinUI APP\obj\x86\Debug\net6.0-windows10.0.19041.0\win10-x86\Windows\MainWindow.xaml
+D:\Repositorios\testes\WinUI APP\WinUI APP\obj\x86\Debug\net6.0-windows10.0.19041.0\win10-x86\Panels\Profile.xaml
 D:\Repositorios\testes\WinUI APP\WinUI APP\obj\x86\Debug\net6.0-windows10.0.19041.0\win10-x86\App.xbf
 D:\Repositorios\testes\WinUI APP\WinUI APP\obj\x86\Debug\net6.0-windows10.0.19041.0\win10-x86\AppResources.xbf
 D:\Repositorios\testes\WinUI APP\WinUI APP\obj\x86\Debug\net6.0-windows10.0.19041.0\win10-x86\Panels\Clients\Clients.xbf
 D:\Repositorios\testes\WinUI APP\WinUI APP\obj\x86\Debug\net6.0-windows10.0.19041.0\win10-x86\Panels\Clients\DtlClient.xbf
+D:\Repositorios\testes\WinUI APP\WinUI APP\obj\x86\Debug\net6.0-windows10.0.19041.0\win10-x86\Panels\Settings.xbf
 D:\Repositorios\testes\WinUI APP\WinUI APP\obj\x86\Debug\net6.0-windows10.0.19041.0\win10-x86\Panels\Users\DtlUser.xbf
 D:\Repositorios\testes\WinUI APP\WinUI APP\obj\x86\Debug\net6.0-windows10.0.19041.0\win10-x86\Panels\Users\Users.xbf
+D:\Repositorios\testes\WinUI APP\WinUI APP\obj\x86\Debug\net6.0-windows10.0.19041.0\win10-x86\Windows\LoginWindow.xbf
+D:\Repositorios\testes\WinUI APP\WinUI APP\obj\x86\Debug\net6.0-windows10.0.19041.0\win10-x86\Windows\MainWindow.xbf
+D:\Repositorios\testes\WinUI APP\WinUI APP\obj\x86\Debug\net6.0-windows10.0.19041.0\win10-x86\Panels\Profile.xbf
 D:\Repositorios\testes\WinUI APP\WinUI APP\obj\x86\Debug\net6.0-windows10.0.19041.0\win10-x86\XamlSaveStateFile.xml
 D:\Repositorios\testes\WinUI APP\WinUI APP\obj\x86\Debug\net6.0-windows10.0.19041.0\win10-x86\WinUI APP.GeneratedMSBuildEditorConfig.editorconfig
 D:\Repositorios\testes\WinUI APP\WinUI APP\obj\x86\Debug\net6.0-windows10.0.19041.0\win10-x86\WinUI_APP.Properties.Resources.resources
@@ -621,24 +642,3 @@ D:\Repositorios\testes\WinUI APP\WinUI APP\obj\x86\Debug\net6.0-windows10.0.1904
 D:\Repositorios\testes\WinUI APP\WinUI APP\obj\x86\Debug\net6.0-windows10.0.19041.0\win10-x86\qualifiers.txt.intermediate
 D:\Repositorios\testes\WinUI APP\WinUI APP\obj\x86\Debug\net6.0-windows10.0.19041.0\win10-x86\MultipleQualifiersPerDimensionFound.txt
 D:\Repositorios\testes\WinUI APP\WinUI APP\obj\x86\Debug\net6.0-windows10.0.19041.0\win10-x86\ProjectArchitectures.txt
-D:\Repositorios\testes\WinUI APP\WinUI APP\bin\x86\Debug\net6.0-windows10.0.19041.0\win10-x86\Panels\Profile.xbf
-D:\Repositorios\testes\WinUI APP\WinUI APP\obj\x86\Debug\net6.0-windows10.0.19041.0\win10-x86\Panels\Profile.g.i.cs
-D:\Repositorios\testes\WinUI APP\WinUI APP\obj\x86\Debug\net6.0-windows10.0.19041.0\win10-x86\Panels\Profile.g.cs
-D:\Repositorios\testes\WinUI APP\WinUI APP\obj\x86\Debug\net6.0-windows10.0.19041.0\win10-x86\Panels\Profile.xaml
-D:\Repositorios\testes\WinUI APP\WinUI APP\obj\x86\Debug\net6.0-windows10.0.19041.0\win10-x86\Panels\Profile.xbf
-D:\Repositorios\testes\WinUI APP\WinUI APP\bin\x86\Debug\net6.0-windows10.0.19041.0\win10-x86\Panels\Settings.xbf
-D:\Repositorios\testes\WinUI APP\WinUI APP\obj\x86\Debug\net6.0-windows10.0.19041.0\win10-x86\Panels\Settings.g.i.cs
-D:\Repositorios\testes\WinUI APP\WinUI APP\obj\x86\Debug\net6.0-windows10.0.19041.0\win10-x86\Panels\Settings.g.cs
-D:\Repositorios\testes\WinUI APP\WinUI APP\obj\x86\Debug\net6.0-windows10.0.19041.0\win10-x86\Panels\Settings.xaml
-D:\Repositorios\testes\WinUI APP\WinUI APP\obj\x86\Debug\net6.0-windows10.0.19041.0\win10-x86\Panels\Settings.xbf
-D:\Repositorios\testes\WinUI APP\WinUI APP\bin\x86\Debug\net6.0-windows10.0.19041.0\win10-x86\Windows\LoginWindow.xbf
-D:\Repositorios\testes\WinUI APP\WinUI APP\bin\x86\Debug\net6.0-windows10.0.19041.0\win10-x86\Windows\MainWindow.xbf
-D:\Repositorios\testes\WinUI APP\WinUI APP\obj\x86\Debug\net6.0-windows10.0.19041.0\win10-x86\Windows\LoginWindow.g.i.cs
-D:\Repositorios\testes\WinUI APP\WinUI APP\obj\x86\Debug\net6.0-windows10.0.19041.0\win10-x86\Windows\LoginWindow.g.cs
-D:\Repositorios\testes\WinUI APP\WinUI APP\obj\x86\Debug\net6.0-windows10.0.19041.0\win10-x86\Windows\MainWindow.g.i.cs
-D:\Repositorios\testes\WinUI APP\WinUI APP\obj\x86\Debug\net6.0-windows10.0.19041.0\win10-x86\Windows\MainWindow.g.cs
-D:\Repositorios\testes\WinUI APP\WinUI APP\obj\x86\Debug\net6.0-windows10.0.19041.0\win10-x86\Windows\LoginWindow.xaml
-D:\Repositorios\testes\WinUI APP\WinUI APP\obj\x86\Debug\net6.0-windows10.0.19041.0\win10-x86\Windows\MainWindow.xaml
-D:\Repositorios\testes\WinUI APP\WinUI APP\obj\x86\Debug\net6.0-windows10.0.19041.0\win10-x86\Windows\LoginWindow.xbf
-D:\Repositorios\testes\WinUI APP\WinUI APP\obj\x86\Debug\net6.0-windows10.0.19041.0\win10-x86\Windows\MainWindow.xbf
-D:\Repositorios\testes\WinUI APP\WinUI APP\bin\x86\Debug\net6.0-windows10.0.19041.0\win10-x86\WinUIEx.dll

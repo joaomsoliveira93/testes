@@ -1,6 +1,6 @@
 <div @fade class="w-[calc(100%+32px)] h-fit z-50 shadow-md rounded-lg rounded-tr-none shadow-slate-500 sticky -top-4 -ml-4 -mt-4 p-2 "  [style.background]="appMode==='dark' ? '#b0b5b5':'#f2eeed'">
     <app-header [title]="'Detalhes do Cliente'" [back]="back" [hasfilters]="true"></app-header>
-    <div *ngIf="!edit">
+    <div *ngIf="!edit && manageClients">
         <button (click)="edit=true" class=" ml-2 mr-2 text-white p-2 rounded-md" [style.background-color]="color">
             <i class="fa fa-pencil p-1"></i> <i *ngIf="!isScreenSizeLessThan1200"> Editar</i>
         </button>

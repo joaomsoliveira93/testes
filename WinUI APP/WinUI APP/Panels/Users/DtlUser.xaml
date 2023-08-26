@@ -27,7 +27,7 @@
         </StackPanel>
 
         <ScrollViewer Grid.Row="3" HorizontalScrollMode="Disabled" HorizontalScrollBarVisibility="Disabled" VerticalScrollMode="Auto" VerticalScrollBarVisibility="Auto">
-            <Grid Width="Auto" Height="Auto" Background="Transparent" ColumnDefinitions="*,*" RowDefinitions ="60,30,60,30,60">
+            <Grid Width="Auto" Height="Auto" Background="Transparent" ColumnDefinitions="*,*" RowDefinitions ="60,30,60,30,60,200">
                 
                 <TextBox Margin="20,0,20,0" Header="Nome de Utilizador" IsEnabled="False" Text="{x:Bind userInfo.Username, Mode=TwoWay}" Grid.Column="0" Grid.Row="0" x:Name="username" PlaceholderText="Nome de Utilizador"></TextBox>
 
@@ -37,15 +37,29 @@
                 <TextBox Margin="20,0,20,0" Header="Email" IsEnabled="False" Text="{x:Bind userInfo.Email, Mode=TwoWay}" Grid.Column="0" Grid.Row="2" x:Name="email" PlaceholderText="Email" TextChanged="validation"></TextBox>
                 <TextBlock Margin="20,0,20,0"  Grid.Column="0" Grid.Row="3" Foreground="Red" Visibility="Collapsed" x:Name="emailValidator"> o Email é obrigatório</TextBlock>
 
-                <ComboBox IsEnabled="False" Margin="20,0,20,0" Header="Tipo" Grid.Column="1" Grid.Row="2" SelectedValue="{x:Bind userInfo.Tipo, Mode=TwoWay}" x:Name="comboTipo" Width="250" DisplayMemberPath="Content" SelectedValuePath="Tag">
+                <ComboBox IsEnabled="False" Margin="20,0,20,0" Header="Tipo" Grid.Column="0" Grid.Row="4" SelectedValue="{x:Bind userInfo.Tipo, Mode=TwoWay}" x:Name="comboTipo" Width="250" SelectionChanged="comboTipo_SelectionChanged" DisplayMemberPath="Content" SelectedValuePath="Tag">
                     <ComboBoxItem Tag="admin" Content="Administrador"></ComboBoxItem>
                     <ComboBoxItem Tag="user" Content="Utilizador"></ComboBoxItem>
                 </ComboBox>
 
-                <ComboBox IsEnabled="False" Margin="20,0,20,0" Header="Estado" Grid.Column="0" Grid.Row="4" SelectedValue="{x:Bind userInfo.Estado, Mode=TwoWay}" x:Name="comboEstado" Width="250" DisplayMemberPath="Content" SelectedValuePath="Tag">
+                <ComboBox IsEnabled="False" Margin="20,0,20,0" Header="Estado" Grid.Column="1" Grid.Row="2" SelectedValue="{x:Bind userInfo.Estado, Mode=TwoWay}" x:Name="comboEstado" Width="250" DisplayMemberPath="Content" SelectedValuePath="Tag">
                     <ComboBoxItem Tag="1"  Content="Ativo" ></ComboBoxItem>
                     <ComboBoxItem Tag="0"  Content="Inativo"></ComboBoxItem>
                 </ComboBox>
+
+                <StackPanel Margin="20,10,20,0" Grid.Column="0" Grid.Row="5" >
+                    <TextBlock  > Permissões do Utilizador</TextBlock>
+                    <StackPanel Margin="20,10,20,0">
+                        <CheckBox x:Name="PermissionsAllCheckBox" Content="Todas" IsThreeState="True"
+                        Checked="PermissionsAll_Checked" Unchecked="PermissionsAll_Unchecked"
+                        Indeterminate="PermissionsAll_Indeterminate"
+                         IsEnabled="False"/>
+                        <CheckBox IsEnabled="False" x:Name="ClientsCheckBox" Content="Gere Clientes" Margin="24,0,0,0" Checked="Option_Checked" Unchecked="Option_Unchecked" IsChecked="{x:Bind userInfo.CanManageClients, Mode=TwoWay}" />
+                        <CheckBox IsEnabled="False" x:Name="LicencesCheckBox" Content="Gere Licenças" Margin="24,0,0,0" Checked="Option_Checked" Unchecked="Option_Unchecked" IsChecked="{x:Bind userInfo.CanManageLicences, Mode=TwoWay}" />
+                        <CheckBox IsEnabled="False" x:Name="UsersCheckBox" Content="Gere Utilizadores" Margin="24,0,0,0" Checked="Option_Checked" Unchecked="Option_Unchecked" IsChecked="{x:Bind userInfo.CanManageUsers, Mode=TwoWay}"/>
+                        <CheckBox IsEnabled="False" x:Name="PermissionsCheckBox" Content="Gere Permissões" Margin="24,0,0,0" Checked="Option_Checked" Unchecked="Option_Unchecked" IsChecked="{x:Bind userInfo.CanManagePermissions, Mode=TwoWay}"/>
+                    </StackPanel>
+                </StackPanel>
             </Grid>
             
         </ScrollViewer>

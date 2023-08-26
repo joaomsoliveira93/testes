@@ -99,19 +99,30 @@
             </ContentDialog.TitleTemplate>
             <ScrollViewer  Grid.Row="3" Height="400" Width="Auto" HorizontalScrollMode="Disabled" HorizontalScrollBarVisibility="Disabled" VerticalScrollMode="Auto" VerticalScrollBarVisibility="Auto">
                 <StackPanel Width="Auto" Height="Auto" Orientation="Vertical" Background="Transparent" >
-                    <TextBox Margin="20,10,20,0" Header="Nome de Utilizador" x:Name="username" PlaceholderText="Nome de Utilizador" TextChanged="validation"></TextBox>
+                    <TextBox Margin="20,10,20,0" Header="Nome de Utilizador" x:Name="username" PlaceholderText="Nome de Utilizador" TextChanged="validation" Text="{x:Bind newUser.Username, Mode=TwoWay}"></TextBox>
                     <TextBlock Margin="20,10,20,0" Foreground="Red"  x:Name="usernameValidator"> O nome de utilizador é obrigatório</TextBlock>
 
-                    <TextBox Margin="20,10,20,0" Header="Nome" x:Name="name" PlaceholderText="Nome" TextChanged="validation"></TextBox>
+                    <TextBox Margin="20,10,20,0" Header="Nome" x:Name="name" PlaceholderText="Nome" TextChanged="validation" Text="{x:Bind newUser.Name, Mode=TwoWay}"></TextBox>
                     <TextBlock Margin="20,10,20,0" Foreground="Red"  x:Name="nameValidator"> O nome é obrigatório</TextBlock>
 
-                    <TextBox Margin="20,10,20,0" Header="Email" x:Name="email" PlaceholderText="Email" TextChanged="validation"></TextBox>
+                    <TextBox Margin="20,10,20,0" Header="Email" x:Name="email" PlaceholderText="Email" TextChanged="validation" Text="{x:Bind newUser.Email, Mode=TwoWay}"></TextBox>
                     <TextBlock Margin="20,10,20,0" Foreground="Red"  x:Name="emailValidator"> O email é obrigatório</TextBlock>
 
-                    <ComboBox Margin="20,10,20,0" Header="Tipo" SelectedValue="{x:Bind newtipo}" x:Name="newtipo" Width="250" DisplayMemberPath="Content" SelectedValuePath="Tag">
+                    <ComboBox Margin="20,10,20,0" Header="Tipo" SelectedValue="{x:Bind newtipo}" x:Name="newtipo" Width="250" DisplayMemberPath="Content" SelectedValuePath="Tag" SelectionChanged="newtipo_SelectionChanged">
                         <ComboBoxItem Tag="admin" Content="Administrador"></ComboBoxItem>
                         <ComboBoxItem Tag="user" Content="Utilizador"></ComboBoxItem>
                     </ComboBox>
+
+                    <TextBlock Visibility="{x:Bind perm}" Margin="20,10,20,0" > Permissões do Utilizador</TextBlock>
+                    <StackPanel Visibility="{x:Bind perm}" Margin="20,10,20,0">
+                        <CheckBox x:Name="PermissionsAllCheckBox" Content="Todas" IsThreeState="True"
+                        Checked="PermissionsAll_Checked" Unchecked="PermissionsAll_Unchecked"
+                        Indeterminate="PermissionsAll_Indeterminate" />
+                        <CheckBox x:Name="ClientsCheckBox" Content="Gere Clientes" Margin="24,0,0,0" Checked="Option_Checked" Unchecked="Option_Unchecked" IsChecked="{x:Bind newUser.CanManageClients, Mode=TwoWay}" />
+                        <CheckBox x:Name="LicencesCheckBox" Content="Gere Licenças" Margin="24,0,0,0" Checked="Option_Checked" Unchecked="Option_Unchecked" IsChecked="{x:Bind newUser.CanManageLicences, Mode=TwoWay}" />
+                        <CheckBox x:Name="UsersCheckBox" Content="Gere Utilizadores" Margin="24,0,0,0" Checked="Option_Checked" Unchecked="Option_Unchecked" IsChecked="{x:Bind newUser.CanManageUsers, Mode=TwoWay}"/>
+                        <CheckBox x:Name="PermissionsCheckBox" Content="Gere Permissões" Margin="24,0,0,0" Checked="Option_Checked" Unchecked="Option_Unchecked" IsChecked="{x:Bind newUser.CanManagePermissions, Mode=TwoWay}"/>
+                    </StackPanel>
 
                 </StackPanel>
             </ScrollViewer>

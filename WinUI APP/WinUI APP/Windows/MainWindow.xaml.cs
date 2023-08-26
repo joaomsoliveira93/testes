@@ -3,7 +3,6 @@ using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media.Animation;
 using Microsoft.UI.Xaml.Navigation;
 using System.Runtime.InteropServices;
-using System.Xml.Linq;
 using Windows.Storage;
 using WinRT;
 
@@ -12,7 +11,9 @@ namespace WinUI_APP
 {
     public sealed partial class MainWindow : Window
     {
-       private string name = ApplicationData.Current.LocalSettings.Values["name"] as string;
+        private bool manageUsers = (bool)ApplicationData.Current.LocalSettings.Values["users"];
+        private string name = ApplicationData.Current.LocalSettings.Values["name"] as string;
+        private string profileImage = ApplicationData.Current.LocalSettings.Values["img"] as string;
         private bool isAdmin = (ApplicationData.Current.LocalSettings.Values["tipo"] as string)=="admin" ? true : false;
         public MainWindow()
         {
@@ -141,6 +142,11 @@ namespace WinUI_APP
                             ApplicationData.Current.LocalSettings.Values["email"] = "";
                             ApplicationData.Current.LocalSettings.Values["token"] = "";
                             ApplicationData.Current.LocalSettings.Values["tokenValidDate"] = "";
+                            ApplicationData.Current.LocalSettings.Values["clients"] = "";
+                            ApplicationData.Current.LocalSettings.Values["licences"] = "";
+                            ApplicationData.Current.LocalSettings.Values["users"] = "";
+                            ApplicationData.Current.LocalSettings.Values["permissions"] = "";
+                            ApplicationData.Current.LocalSettings.Values["img"] = "";
 
                             var Window = new LoginWindow();
                             Window.Activate();

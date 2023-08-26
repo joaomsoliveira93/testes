@@ -26,7 +26,7 @@
         </StackPanel>
 
         <ScrollViewer Grid.Row="3" HorizontalScrollMode="Disabled" HorizontalScrollBarVisibility="Disabled" VerticalScrollMode="Auto" VerticalScrollBarVisibility="Auto">
-            <Grid Width="Auto" Height="Auto" Background="Transparent" ColumnDefinitions="*,*" RowDefinitions ="60,30,60,30,60">
+            <Grid Width="Auto" Height="Auto" Background="Transparent" ColumnDefinitions="*,*" RowDefinitions ="60,30,60,30,30,150,40">
 
                 <TextBox Margin="20,0,20,0" Header="Nome de Utilizador" IsEnabled="False" Text="{x:Bind userInfo.Username, Mode=TwoWay}" Grid.Column="0" Grid.Row="0" x:Name="username" PlaceholderText="Nome de Utilizador"></TextBox>
 
@@ -35,6 +35,13 @@
 
                 <TextBox Margin="20,0,20,0" Header="Email" IsEnabled="False" Text="{x:Bind userInfo.Email, Mode=TwoWay}" Grid.Column="0" Grid.Row="2" x:Name="email" PlaceholderText="Email" TextChanged="validation"></TextBox>
                 <TextBlock Margin="20,0,20,0"  Grid.Column="0" Grid.Row="3" Foreground="Red" Visibility="Collapsed" x:Name="emailValidator"> o Email é obrigatório</TextBlock>
+
+                <TextBlock Margin="20,0,0,0"  Grid.Column="0" Grid.Row="4" >Foto de Perfil</TextBlock>
+                <Border Margin="20,-5,0,0" Grid.Column="0" Grid.Row="5" Width="150" Height="150"  HorizontalAlignment="Left" VerticalAlignment="Top" CornerRadius="20" Background="Transparent">
+                    <Image x:Name="profileImg"  Stretch="UniformToFill" />
+                </Border>
+                <Button Visibility="Collapsed" Margin="20,0,0,0" Grid.Column="0" Grid.Row="6" x:Name="PickAPhotoButton" Content="Escolher Imagem" Click="PickAPhotoButton_Click" />
+                
             </Grid>
 
         </ScrollViewer>

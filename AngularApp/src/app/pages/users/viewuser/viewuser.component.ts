@@ -24,6 +24,7 @@ import Swal from 'sweetalert2';
   ]
 })
 export class ViewuserComponent {
+  allComplete: boolean = false;
   back: string = ''
   apiUrl: string = '';
   isScreenSizeLessThan1200 = false;
@@ -33,6 +34,8 @@ export class ViewuserComponent {
   username: String = '';
   color: string = '';
   appMode: string = '';
+  managePermissions: Boolean = false;
+  manageUsers: Boolean = false;
   user: User = {
     _id: '',
     username: '',
@@ -41,7 +44,12 @@ export class ViewuserComponent {
     appColor: '',
     appMode: '',
     email: '',
-    estado: 1
+    estado: 1,
+    canManageUsers: false,
+    canManageClients: false,
+    canManageLicences: false,
+    canManagePermissions: false,
+    img:'',
   }
 
   constructor(public dialog: MatDialog, private authGuard: AuthGuard, private breakpointObserver: BreakpointObserver, private route: ActivatedRoute, private router: Router, private configService: ConfigService) {
@@ -49,10 +57,55 @@ export class ViewuserComponent {
     this.username = this.authGuard.getUserName();
     this.color = this.authGuard.getAppColor();
     this.appMode = this.authGuard.getAppMode();
+    this.managePermissions = this.authGuard.getCanManagePermissions();
+    this.manageUsers = this.authGuard.getCanManageUsers();
+  }
+
+  updateAllComplete() {
+    this.allComplete = this.user.canManageClients != false && this.user.canManageLicences != false && this.user.canManageUsers != false && this.user.canManagePermissions != false;
+  }
+
+  someComplete(): boolean {
+    return (this.user.canManageClients != false || this.user.canManageLicences != false || this.user.canManageUsers != false || this.user.canManagePermissions != false) && !this.allComplete;
+  }
+
+  setAll(completed: boolean) {
+    if (!completed) {
+      this.allComplete = !completed;
+      this.user.canManageClients = false;
+      this.user.canManageLicences = false;
+      this.user.canManageUsers = false;
+      this.user.canManagePermissions = false;
+    } else {
+      this.allComplete = completed;
+      this.user.canManageClients = true;
+      this.user.canManageLicences = true;
+      this.user.canManageUsers = true;
+      this.user.canManagePermissions = true;
+    }
+  }
+
+  definePermissions(e: string) {
+    if (this.managePermissions) {
+      if (e === 'admin') {
+        this.allComplete = true;
+        this.user.canManageClients = true;
+        this.user.canManageLicences = true;
+        this.user.canManageUsers = true;
+        this.user.canManagePermissions = true;
+      } else {
+        this.allComplete = false;
+        this.user.canManageClients = false;
+        this.user.canManageLicences = false;
+        this.user.canManageUsers = false;
+        this.user.canManagePermissions = false;
+      }
+    }
   }
 
   async ngOnInit() {
-    Swal.fire({
+    if(this.manageUsers){
+       Swal.fire({
       title: 'A Carregar...',
       allowOutsideClick: false,
       allowEscapeKey: false,
@@ -68,6 +121,7 @@ export class ViewuserComponent {
       this.paramId = this.route.snapshot.params['id'];
       const res = await axios.get<User>(`${this.apiUrl}/user/${this.paramId}`);
       this.user = res.data;
+      this.allComplete = this.user.canManageClients != false && this.user.canManageLicences != false && this.user.canManageUsers != false;
       this.back = '/users'
       Swal.close();
     } catch (error) {
@@ -84,7 +138,10 @@ export class ViewuserComponent {
         background: this.appMode === 'dark' ? '#b0b5b5' : 'white',
       })
     }
-
+    }else{
+      this.router.navigate(['/clients']);
+    }
+   
   }
 
   updateUser() {
@@ -148,6 +205,8 @@ export class ViewuserComponent {
                 if (this.username === this.user.username) {
                   this.authGuard.updateUser(tempUser);
                 }
+                this.edit = false;
+                console.log('here');
               });
             }
           } catch (error) {
@@ -204,7 +263,7 @@ export class ViewuserComponent {
               this.user = tempUser;
               this.edit = false;
             });
-          } else if(res.data===null){
+          } else if (res.data === null) {
             Swal.fire({
               title: 'Erro!',
               text: 'Não foi possível realizar a ligação ao servidor. Por favor tenta mais tarde!',
@@ -284,7 +343,7 @@ export class ViewuserComponent {
               this.user = tempUser;
               this.edit = false;
             });
-          } else if(res.data===null){
+          } else if (res.data === null) {
             Swal.fire({
               title: 'Erro!',
               text: 'Não foi possível realizar a ligação ao servidor. Por favor tenta mais tarde!',
@@ -360,7 +419,7 @@ export class ViewuserComponent {
               iconColor: this.color,
               background: this.appMode === 'dark' ? '#b0b5b5' : 'white',
             });
-          } else if(res.data===null){
+          } else if (res.data === null) {
             Swal.fire({
               title: 'Erro!',
               text: 'Não foi possível realizar a ligação ao servidor. Por favor tenta mais tarde!',

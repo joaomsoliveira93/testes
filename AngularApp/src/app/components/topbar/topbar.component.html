@@ -1,8 +1,13 @@
-<div class="fixed z-40 top-0 w-full h-[50px]" [style.background]="appMode==='dark'?'#423f3f':'#d1cbcb'">
-    <button class="text-lg mr-2 mt-1 absolute right-0 w-max  font-black p-1 rounded-lg hover:bg-white hover:text-black" [ngClass]="appMode==='dark'?'text-white':'text-black'" (click)="toggleUserProfile()">
-        {{user}}
-        <i class="fa fa-sort-down "></i>
+<div class="fixed z-30 top-0 w-full h-[50px]" [style.background]="appMode==='dark'?'#423f3f':'#d1cbcb'">
+    <button class="text-lg mr-2 mt-1 absolute right-0 w-max  font-black p-1 rounded-lg"
+    [ngClass]="appMode==='dark' ? 'hover:bg-[#767a7a] hover:text-white text-white' : 'hover:bg-white hover:text-black text-black'" 
+    (click)="toggleUserProfile()">
+        <div class="flex">
+            <img [src]="img" class="w-10 max-h-9 rounded-full mr-2">
+            {{user}}
+            <i class="fa fa-sort-down ml-2"></i>
+        </div>
+
     </button>
- 
-    <app-user-profile  [userProfile]="userProfile" (event)="toggleUserProfile()"></app-user-profile>
+    <app-user-profile [userProfile]="userProfile" (event)="toggleUserProfile()"></app-user-profile>
 </div>

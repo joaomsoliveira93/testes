@@ -11,11 +11,13 @@
             <i class="fa fa-trash p-1"></i> <i *ngIf="!isScreenSizeLessThan1200"> Apagar</i>
         </button>
 
-        <button *ngIf="user.estado === 0 && (user.username === username || user.username !== 'admin')" class="mr-2 text-white p-2 rounded-md bg-green-500" (click)="updateEstado(1)">
+        <button *ngIf="user.estado === 0 && (user.username === username || user.username !== 'admin')"
+            class="mr-2 text-white p-2 rounded-md bg-green-500" (click)="updateEstado(1)">
             <i class="fa fa-check p-1"></i> <i *ngIf="!isScreenSizeLessThan1200"> Ativar Utilizador</i>
         </button>
 
-        <button *ngIf="user.estado === 1 && (user.username === username || user.username !== 'admin')" class="mr-2 text-white p-2 rounded-md bg-red-600" (click)="updateEstado(0)">
+        <button *ngIf="user.estado === 1 && (user.username === username || user.username !== 'admin')"
+            class="mr-2 text-white p-2 rounded-md bg-red-600" (click)="updateEstado(0)">
             <i class="fa fa-ban p-1"></i> <i *ngIf="!isScreenSizeLessThan1200"> Desativar Utilizador</i>
         </button>
 
@@ -65,14 +67,14 @@
         <label class="text-xl font-extrabold">{{user.estado===0 ? 'Inativo' : 'Ativo'}}</label>
     </div>
 
-    <div class="flex">
-        <label class="text-xl mr-2">Cor da Aplicação:</label>
-        <div class="w-20 h-8 rounded-lg -mt-0.5" [style.background-color]="user.appColor"></div>
-    </div>
-
     <div>
-        <label class="text-xl mr-2">Modo da Aplicação:</label>
-        <label class="text-xl font-extrabold">{{user.appMode==='dark' ? 'Escuro' : 'Claro'}}</label>
+        <label class="text-xl mr-2">Permissões do Utilizador:</label>
+        <div>
+            <p class="text-xl font-extrabold">{{user.canManageClients ? 'Gere Clientes' : 'Não Gere Clientes'}}</p>
+            <p class="text-xl font-extrabold">{{user.canManageLicences ? 'Gere Licenças' : 'Não Gere Licenças'}}</p>
+            <p class="text-xl font-extrabold">{{user.canManageUsers ? 'Gere Utilizadores' : 'Não Gere Utilizadores'}}</p>
+            <p class="text-xl font-extrabold">{{user.canManagePermissions ? 'Gere Permissões' : 'Não Gere Permissões'}}</p>
+        </div>
     </div>
 </div>
 <div @fade *ngIf="edit" class="w-full mt-5 grid grid-cols-1 md:grid-cols-2 gap-4 p-4 rounded-lg shadow"
@@ -98,7 +100,7 @@
 
     <mat-form-field *ngIf="user.username !== username && user.username !== 'admin'" appearance="fill">
         <mat-label>Tipo</mat-label>
-        <mat-select [(ngModel)]="user.tipo" required>
+        <mat-select [(ngModel)]="user.tipo" (selectionChange)="definePermissions(user.tipo)" required>
             <mat-option value="admin">Administrador</mat-option>
             <mat-option value="user">Utilizador</mat-option>
         </mat-select>
@@ -116,20 +118,35 @@
         <label class="text-xl font-extrabold break-words">{{user.estado===0 ? 'Inativo' : 'Ativo'}}</label>
     </div>
 
-    <mat-form-field appearance="fill">
-        <mat-label>Cor da Aplicação</mat-label>
-        <input type="color" matInput [(ngModel)]="user.appColor" required>
-        <mat-error>Deve preencher a Cor da Aplicação</mat-error>
-    </mat-form-field>
-
-    <mat-form-field appearance="fill">
-        <mat-label>Modo da Aplicação</mat-label>
-        <mat-select [(ngModel)]="user.appMode" required>
-            <mat-option value="dark">Escuro</mat-option>
-            <mat-option value="light">Claro</mat-option>
-        </mat-select>
-        <mat-error>Deve preencher o Modo da Aplicação</mat-error>
-    </mat-form-field>
+    <div *ngIf="(user.username !== username && user.username !== 'admin') && managePermissions">
+        <div>
+            <p class="text-black">Permissões do Utilizador</p>
+            <mat-checkbox [checked]="allComplete" [color]="color"
+                [indeterminate]="someComplete()" (change)="setAll($event.checked)">
+                Todas
+            </mat-checkbox>
+        </div>
+        <div class="ml-5">
+            <mat-checkbox [(ngModel)]="user.canManageClients" [color]="color" (ngModelChange)="updateAllComplete()">
+                Gerir Clientes
+            </mat-checkbox>
+        </div>
+        <div class="ml-5">
+            <mat-checkbox [(ngModel)]="user.canManageLicences" [color]="color" (ngModelChange)="updateAllComplete()">
+                Gerir Licenças
+            </mat-checkbox>
+        </div>
+        <div class="ml-5">
+            <mat-checkbox [(ngModel)]="user.canManageUsers" [color]="color" (ngModelChange)="updateAllComplete()">
+                Gerir Utilizadores
+            </mat-checkbox>
+        </div>
+        <div class="ml-5">
+            <mat-checkbox [(ngModel)]="user.canManagePermissions" [color]="color" (ngModelChange)="updateAllComplete()">
+                Gerir Permissões
+            </mat-checkbox>
+        </div>
+    </div>
 </div>
 <button class="fixed text-white bottom-2 right-4 w-12 h-12 rounded-full fa fa-plus" [style.background-color]="color"
     (click)="openPopup()"></button>

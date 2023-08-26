@@ -10,10 +10,7 @@ using System.Threading.Tasks;
 using System.Net.Http;
 using System.Text;
 using WinUI_APP.Classes;
-using System.Diagnostics;
 using System.Linq;
-using Microsoft.UI.Xaml.Data;
-using System.Globalization;
 using Windows.Storage;
 
 namespace WinUI_APP
@@ -21,11 +18,13 @@ namespace WinUI_APP
     public sealed partial class Detalhes : Page
     {
         private readonly string userId = ApplicationData.Current.LocalSettings.Values["userId"] as string;
+        private bool ManageClients = (bool)ApplicationData.Current.LocalSettings.Values["clients"];
+        private bool ManageLicences = (bool)ApplicationData.Current.LocalSettings.Values["licences"];
         private string clientId = "";
         private Clients clientInfo = new Clients();
         private ObservableCollection<Licences> licences;
         private Licences selectedLicence;
-        string apiServer = Properties.Resources.apiServer;
+        private string apiServer = Properties.Resources.apiServer;
         public Detalhes()
         {            
             this.InitializeComponent();   
@@ -105,23 +104,11 @@ namespace WinUI_APP
                 }
                 else if (responseText == "NOK") 
                 {
-                    ContentDialog dialog2 = new ContentDialog();
-                    dialog2.XamlRoot = this.XamlRoot;
-                    dialog2.Style = Application.Current.Resources["DefaultContentDialogStyle"] as Style;
-                    dialog2.Title = "O cliente não existe!";
-                    dialog2.CloseButtonText = "OK";
-                    dialog2.DefaultButton = ContentDialogButton.Primary;
-                    await dialog2.ShowAsync();
+                    ShowContentDialog("O cliente não existe!");
                 }
                 else
                 {
-                    ContentDialog dialog2 = new ContentDialog();
-                    dialog2.XamlRoot = this.XamlRoot;
-                    dialog2.Style = Application.Current.Resources["DefaultContentDialogStyle"] as Style;
-                    dialog2.Title = "Não foi possível realizar a ligação com o servidor, por favor tente mais tarde!";
-                    dialog2.CloseButtonText = "OK";
-                    dialog2.DefaultButton = ContentDialogButton.Primary;
-                    await dialog2.ShowAsync();
+                    ShowContentDialog("Não foi possível realizar a ligação com o servidor, por favor tente mais tarde!");
                 }
             }
         }
@@ -177,8 +164,7 @@ namespace WinUI_APP
             { 
                 GetClientFromApi();
                 hideDisable();
-            }
-                
+            }                
         }
 
         private async void Guardar_Click(object sender, RoutedEventArgs e)
@@ -231,47 +217,24 @@ namespace WinUI_APP
                         string responseText = await response.Content.ReadAsStringAsync();
                         if (responseText != "NOK" && responseText != "null")
                         {
-                            ContentDialog dialog2 = new ContentDialog();
-                            dialog2.XamlRoot = this.XamlRoot;
-                            dialog2.Style = Application.Current.Resources["DefaultContentDialogStyle"] as Style;
-                            dialog2.Title = "O Cliente foi atualizado com sucesso!";
-                            dialog2.CloseButtonText = "OK";
-                            dialog2.DefaultButton = ContentDialogButton.Primary;
-                            await dialog2.ShowAsync();
+
+                            ShowContentDialog("O Cliente foi atualizado com sucesso!");
                         }
                         else if (responseText == "NOK")
                         {
                             GetClientFromApi();
-                            ContentDialog dialog2 = new ContentDialog();
-                            dialog2.XamlRoot = this.XamlRoot;
-                            dialog2.Style = Application.Current.Resources["DefaultContentDialogStyle"] as Style;
-                            dialog2.Title = "Não foi possível atualizar o Cliente!";
-                            dialog2.CloseButtonText = "OK";
-                            dialog2.DefaultButton = ContentDialogButton.Primary;
-                            await dialog2.ShowAsync();
+                            ShowContentDialog("Não foi possível atualizar o Cliente!");
                         }
                         else
                         {
-                            ContentDialog dialog2 = new ContentDialog();
-                            dialog2.XamlRoot = this.XamlRoot;
-                            dialog2.Style = Application.Current.Resources["DefaultContentDialogStyle"] as Style;
-                            dialog2.Title = "Não foi possível realizar a ligação com o servidor, por favor tente mais tarde!";
-                            dialog2.CloseButtonText = "OK";
-                            dialog2.DefaultButton = ContentDialogButton.Primary;
-                            await dialog2.ShowAsync();
+                            ShowContentDialog("Não foi possível realizar a ligação com o servidor, por favor tente mais tarde!");
                         }
                     }
                 }
                 else
                 {
                     GetClientFromApi();
-                    ContentDialog dialog2 = new ContentDialog();
-                    dialog2.XamlRoot = this.XamlRoot;
-                    dialog2.Style = Application.Current.Resources["DefaultContentDialogStyle"] as Style;
-                    dialog2.Title = "As alterações foram descartadas!";
-                    dialog2.CloseButtonText = "OK";
-                    dialog2.DefaultButton = ContentDialogButton.Primary;
-                    await dialog2.ShowAsync();
+                    ShowContentDialog("As alterações foram descartadas!");
                 }
                 hideDisable();
             }
@@ -297,35 +260,17 @@ namespace WinUI_APP
                     string responseText = await response.Content.ReadAsStringAsync();
                     if (responseText != "NOK" && responseText != "null")
                     {
-                        ContentDialog dialog2 = new ContentDialog();
-                        dialog2.XamlRoot = this.XamlRoot;
-                        dialog2.Style = Application.Current.Resources["DefaultContentDialogStyle"] as Style;
-                        dialog2.Title = "O Cliente e as licenças foram apagadas com sucesso!";
-                        dialog2.CloseButtonText = "OK";
-                        dialog2.DefaultButton = ContentDialogButton.Primary;
-                        await dialog2.ShowAsync();
+                        ShowContentDialog("O Cliente e as licenças foram apagadas com sucesso!");
                         Frame.GoBack();
                     }
                     else if(responseText == "NOK")
                     {
                         GetClientFromApi();
-                        ContentDialog dialog2 = new ContentDialog();
-                        dialog2.XamlRoot = this.XamlRoot;
-                        dialog2.Style = Application.Current.Resources["DefaultContentDialogStyle"] as Style;
-                        dialog2.Title = "Não foi possível apagar!";
-                        dialog2.CloseButtonText = "OK";
-                        dialog2.DefaultButton = ContentDialogButton.Primary;
-                        await dialog2.ShowAsync();
+                        ShowContentDialog("Não foi possível apagar!");
                     }
                     else
                     {
-                        ContentDialog dialog2 = new ContentDialog();
-                        dialog2.XamlRoot = this.XamlRoot;
-                        dialog2.Style = Application.Current.Resources["DefaultContentDialogStyle"] as Style;
-                        dialog2.Title = "Não foi possível realizar a ligação com o servidor, por favor tente mais tarde!";
-                        dialog2.CloseButtonText = "OK";
-                        dialog2.DefaultButton = ContentDialogButton.Primary;
-                        await dialog2.ShowAsync();
+                        ShowContentDialog("Não foi possível realizar a ligação com o servidor, por favor tente mais tarde!");
                     }
                 }
             }           
@@ -475,35 +420,17 @@ namespace WinUI_APP
                         {
                             licences = await GetLicencesFromApi();
                             licencesGrid.ItemsSource = licences;
-                            ContentDialog dialog2 = new ContentDialog();
-                            dialog2.XamlRoot = this.XamlRoot;
-                            dialog2.Style = Application.Current.Resources["DefaultContentDialogStyle"] as Style;
-                            dialog2.Title = "A Licença foi atualizada com sucesso!";
-                            dialog2.CloseButtonText = "OK";
-                            dialog2.DefaultButton = ContentDialogButton.Primary;
-                            await dialog2.ShowAsync();
+                            ShowContentDialog("A Licença foi atualizada com sucesso!");
                         }
                         else if (responseText == "NOK")
                         {
                             selectedLicence = null;
-                            ContentDialog dialog2 = new ContentDialog();
-                            dialog2.XamlRoot = this.XamlRoot;
-                            dialog2.Style = Application.Current.Resources["DefaultContentDialogStyle"] as Style;
-                            dialog2.Title = "Não foi possível atualizar a Licença!";
-                            dialog2.CloseButtonText = "OK";
-                            dialog2.DefaultButton = ContentDialogButton.Primary;
-                            await dialog2.ShowAsync();
+                            ShowContentDialog("Não foi possível atualizar a Licença!");
                         }
                         else
                         {
                             selectedLicence = null;
-                            ContentDialog dialog2 = new ContentDialog();
-                            dialog2.XamlRoot = this.XamlRoot;
-                            dialog2.Style = Application.Current.Resources["DefaultContentDialogStyle"] as Style;
-                            dialog2.Title = "Não foi possível realizar a ligação com o servidor, por favor tente mais tarde!";
-                            dialog2.CloseButtonText = "OK";
-                            dialog2.DefaultButton = ContentDialogButton.Primary;
-                            await dialog2.ShowAsync();
+                            ShowContentDialog("Não foi possível realizar a ligação com o servidor, por favor tente mais tarde!");
                         }
                     }
                 }
@@ -550,35 +477,17 @@ namespace WinUI_APP
                         {
                             licences = await GetLicencesFromApi();
                             licencesGrid.ItemsSource = licences;
-                            ContentDialog dialog2 = new ContentDialog();
-                            dialog2.XamlRoot = this.XamlRoot;
-                            dialog2.Style = Application.Current.Resources["DefaultContentDialogStyle"] as Style;
-                            dialog2.Title = "A Licença foi adicionada com sucesso!";
-                            dialog2.CloseButtonText = "OK";
-                            dialog2.DefaultButton = ContentDialogButton.Primary;
-                            await dialog2.ShowAsync();
+                            ShowContentDialog("A Licença foi adicionada com sucesso!");
                         }
                         else if (responseText == "NOK")
                         {
                             selectedLicence = null;
-                            ContentDialog dialog2 = new ContentDialog();
-                            dialog2.XamlRoot = this.XamlRoot;
-                            dialog2.Style = Application.Current.Resources["DefaultContentDialogStyle"] as Style;
-                            dialog2.Title = "Não foi possível adicionar a Licença!";
-                            dialog2.CloseButtonText = "OK";
-                            dialog2.DefaultButton = ContentDialogButton.Primary;
-                            await dialog2.ShowAsync();
+                            ShowContentDialog("Não foi possível adicionar a Licença!");
                         }
                         else
                         {
                             selectedLicence = null;
-                            ContentDialog dialog2 = new ContentDialog();
-                            dialog2.XamlRoot = this.XamlRoot;
-                            dialog2.Style = Application.Current.Resources["DefaultContentDialogStyle"] as Style;
-                            dialog2.Title = "Não foi possível realizar a ligação com o servidor, por favor tente mais tarde!";
-                            dialog2.CloseButtonText = "OK";
-                            dialog2.DefaultButton = ContentDialogButton.Primary;
-                            await dialog2.ShowAsync();
+                            ShowContentDialog("Não foi possível realizar a ligação com o servidor, por favor tente mais tarde!");
                         }
                     }
                 }                        
@@ -634,34 +543,16 @@ namespace WinUI_APP
                         {
                             licences = await GetLicencesFromApi();
                             licencesGrid.ItemsSource = licences;
-                            ContentDialog dialog2 = new ContentDialog();
-                            dialog2.XamlRoot = this.XamlRoot;
-                            dialog2.Style = Application.Current.Resources["DefaultContentDialogStyle"] as Style;
-                            dialog2.Title = "A licença foi apagada com sucesso!";
-                            dialog2.CloseButtonText = "OK";
-                            dialog2.DefaultButton = ContentDialogButton.Primary;
-                            await dialog2.ShowAsync();
+                            ShowContentDialog("A licença foi apagada com sucesso!");
                         }
                         else if (responseText == "NOK")
                         {
                             GetClientFromApi();
-                            ContentDialog dialog2 = new ContentDialog();
-                            dialog2.XamlRoot = this.XamlRoot;
-                            dialog2.Style = Application.Current.Resources["DefaultContentDialogStyle"] as Style;
-                            dialog2.Title = "Não foi possível apagar a licença!";
-                            dialog2.CloseButtonText = "OK";
-                            dialog2.DefaultButton = ContentDialogButton.Primary;
-                            await dialog2.ShowAsync();
+                            ShowContentDialog("Não foi possível apagar a licença!");
                         }
                         else
                         {
-                            ContentDialog dialog2 = new ContentDialog();
-                            dialog2.XamlRoot = this.XamlRoot;
-                            dialog2.Style = Application.Current.Resources["DefaultContentDialogStyle"] as Style;
-                            dialog2.Title = "Não foi possível realizar a ligação com o servidor, por favor tente mais tarde!";
-                            dialog2.CloseButtonText = "OK";
-                            dialog2.DefaultButton = ContentDialogButton.Primary;
-                            await dialog2.ShowAsync();
+                            ShowContentDialog("Não foi possível realizar a ligação com o servidor, por favor tente mais tarde!");
                         }
                     }
                 }
@@ -675,6 +566,19 @@ namespace WinUI_APP
             addEditDialog.Title = "Adicionar Licença";
             addEditDialog.XamlRoot = this.XamlRoot;
             ContentDialogResult result = await addEditDialog.ShowAsync();
+        }
+
+        private async void ShowContentDialog(string message)
+        {
+            ContentDialog dialog = new ContentDialog
+            {
+                XamlRoot = this.Content.XamlRoot,
+                Style = Application.Current.Resources["DefaultContentDialogStyle"] as Style,
+                Title = message,
+                CloseButtonText = "OK",
+                DefaultButton = ContentDialogButton.Primary
+            };
+            await dialog.ShowAsync();
         }
     }
 }

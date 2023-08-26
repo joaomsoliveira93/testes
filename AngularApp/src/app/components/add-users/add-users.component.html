@@ -1,4 +1,4 @@
-<div class="flex flex-col items-center p-4"[style.background]="appMode==='dark' ? '#b0b5b5':'#f2eeed'">
+<div class="flex flex-col items-center p-4" [style.background]="appMode==='dark' ? '#b0b5b5':'#f2eeed'">
     <h2 mat-dialog-title class="text-xl font-bold mb-4">Novo Utilizador</h2>
     <div mat-dialog-content class="w-full">
 
@@ -18,17 +18,48 @@
             <mat-label>E-mail</mat-label>
             <input matInput type="email" [(ngModel)]="user.email" placeholder="Ex. exemplo@exemplo.com" required>
             <mat-error>Deve preencher o E-mail</mat-error>
-            
         </mat-form-field>
 
         <mat-form-field appearance="fill" class="w-full">
             <mat-label>Tipo</mat-label>
-            <mat-select [(ngModel)]="user.tipo" required>
+            <mat-select [(ngModel)]="user.tipo" (selectionChange)="definePermissions(user.tipo)" required>
                 <mat-option value="admin">Administrador</mat-option>
                 <mat-option value="user">Utilizador</mat-option>
             </mat-select>
             <mat-error>Deve preencher o Tipo de Utilizador</mat-error>
         </mat-form-field>
+        <div *ngIf="managePermissions">
+            <div>
+                <p class="text-black">Permissões do Utilizador</p>
+                <mat-checkbox [checked]="allComplete" [color]="color" [indeterminate]="someComplete()"
+                    (change)="setAll($event.checked)">
+                    Todas
+                </mat-checkbox>
+            </div>
+            <div class="ml-5">
+                <mat-checkbox [(ngModel)]="user.canManageClients" [color]="color" (ngModelChange)="updateAllComplete()">
+                    Gerir Clientes
+                </mat-checkbox>
+            </div>
+            <div class="ml-5">
+                <mat-checkbox [(ngModel)]="user.canManageLicences" [color]="color"
+                    (ngModelChange)="updateAllComplete()">
+                    Gerir Licenças
+                </mat-checkbox>
+            </div>
+            <div class="ml-5">
+                <mat-checkbox [(ngModel)]="user.canManageUsers" [color]="color" (ngModelChange)="updateAllComplete()">
+                    Gerir Utilizadores
+                </mat-checkbox>
+            </div>
+            <div class="ml-5">
+                <mat-checkbox [(ngModel)]="user.canManagePermissions" [color]="color"
+                    (ngModelChange)="updateAllComplete()">
+                    Gerir Permissões
+                </mat-checkbox>
+            </div>
+        </div>
+
     </div>
     <div mat-dialog-actions class="flex justify-center mt-4">
         <button style="background-color: rgba(0, 128, 0, 0.788);" mat-button (click)="saveUser()"><i

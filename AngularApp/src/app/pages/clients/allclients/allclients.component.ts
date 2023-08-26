@@ -47,6 +47,7 @@ export class AllclientsComponent implements OnInit {
   isScreenSizeLessThan1200 = false;
   color: string = '';
   appMode: string = '';
+  manageClients: Boolean = false;
 
   constructor(private authGuard: AuthGuard,
     public dialog: MatDialog,
@@ -56,6 +57,7 @@ export class AllclientsComponent implements OnInit {
   ) {
     this.color = this.authGuard.getAppColor();
     this.appMode = this.authGuard.getAppMode();
+    this.manageClients = this.authGuard.getCanManageClients()
   }
 
   toggleInputs(): void {

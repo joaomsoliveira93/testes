@@ -15,7 +15,7 @@
             <TextBlock Margin="20,10,0,0" FontSize="25">Detalhes do Cliente</TextBlock>
         </RelativePanel>
         <StackPanel Orientation="Horizontal" Grid.Row="2">
-            <CommandBar Background="Transparent" IsOpen="False" DefaultLabelPosition="Right">
+            <CommandBar Visibility="{x:Bind ManageClients}" Background="Transparent" IsOpen="False" DefaultLabelPosition="Right">
                 <AppBarButton Icon="Edit" x:Name="Editar" Label="Editar" Click="Editar_Click"/>
                 <AppBarButton Icon="Delete" x:Name="Apagar" Label="Apagar" Click="Apagar_Click"/>
                 <AppBarButton Icon="Save" x:Name="Guardar" Label="Guardar" Visibility="Collapsed" Click="Guardar_Click"/>
@@ -23,7 +23,7 @@
             </CommandBar>
         </StackPanel>
 
-        <ScrollViewer  HorizontalScrollMode="Disabled" HorizontalScrollBarVisibility="Disabled" VerticalScrollMode="Auto" VerticalScrollBarVisibility="Auto">
+        <ScrollViewer Grid.Row="3" HorizontalScrollMode="Disabled" HorizontalScrollBarVisibility="Disabled" VerticalScrollMode="Auto" VerticalScrollBarVisibility="Auto">
             <Grid Width="Auto" Height="Auto" Background="Transparent" ColumnDefinitions="*,*" RowDefinitions ="70,30,70,30,70,30,70,30,70">
                 <TextBox Margin="20,0,20,0" Header="Nome"  IsEnabled="False" Text="{x:Bind clientInfo.Name, Mode=TwoWay}" Grid.Column="0" Grid.Row="0" x:Name="name" PlaceholderText="Nome" TextChanged="validation"></TextBox>
                 <TextBox Margin="20,0,20,0" Header="Nº de Contribuinte" IsEnabled="False" Text="{x:Bind clientInfo.Ncont, Mode=TwoWay}" Grid.Column="1" Grid.Row="0" x:Name="nCont" PlaceholderText="Nº de Contribuinte" TextChanged="validation"></TextBox>
@@ -54,7 +54,7 @@
         </ScrollViewer>
         <StackPanel Orientation="Horizontal" Grid.Row="4">
             <TextBlock Margin="20,8,0,0" FontSize="20">Licenças do Cliente</TextBlock>
-            <CommandBar  Background="Transparent" IsOpen="False" DefaultLabelPosition="Right">
+            <CommandBar Visibility="{x:Bind ManageLicences}" Background="Transparent" IsOpen="False" DefaultLabelPosition="Right">
                 <AppBarButton Icon="Add" Label="Adicionar" Click="addLicenceButton_Click"/>
             </CommandBar>
         </StackPanel>
@@ -78,7 +78,7 @@
                     <controls:DataGridTextColumn Width="Auto" Header="Data de Início" Binding="{Binding StartedAt}" Tag="StartedAt" />
                     <controls:DataGridTextColumn Width="Auto" Header="Data de Fim" Binding="{Binding EndedAt}" Tag="endedAt" />
                     <controls:DataGridTextColumn IsReadOnly="True" Width="Auto" Header="Estado" Binding="{Binding Estado}" Tag="Estado" />
-                    <controls:DataGridTemplateColumn Width="Auto" Header="">
+                    <controls:DataGridTemplateColumn Visibility="{x:Bind ManageLicences}" Width="Auto" Header="">
                         <controls:DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <StackPanel Orientation="Horizontal">

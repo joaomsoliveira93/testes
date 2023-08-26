@@ -52,7 +52,6 @@ router.post('/login', async (req, res) => {
                     user.tokenValidDate = currentDate;
                     user.save()
                 }
-                console.log(user)
                 res.send(user);
             }
         }
@@ -78,7 +77,7 @@ router.get('/allusers', async (req, res) => {
 
 router.get('/user/:id', async (req, res) => {
     try {
-        const user = await User.find({ _id: req.params.id }, 'username estado name tipo appColor appMode email ');
+        const user = await User.find({ _id: req.params.id }, 'username estado name tipo appColor appMode email canManageClients canManageLicences canManageUsers canManagePermissions');
         if (user.length > 0) {
             res.json(user[0]);
         } else {
@@ -113,6 +112,10 @@ router.post('/user/add', async (req, res) => {
                 token: '',
                 tokenCreatedAt: null,
                 tokenValidDate: null,
+                canManageClients:req.body.user.canManageClients,
+                canManageLicences:req.body.user.canManageLicences,
+                canManageUsers:req.body.user.canManageUsers,
+                canManagePermissions:req.body.user.canManagePermissions,
             });
             const result = await newUser.save();
             console.log(result)
@@ -140,6 +143,11 @@ router.put('/user/update', async (req, res) => {
             estado: req.body.user.estado,
             updatedAt: Date.now(),
             updatedBy: req.body.userId,
+            canManageClients:req.body.user.canManageClients,
+            canManageLicences:req.body.user.canManageLicences,
+            canManageUsers:req.body.user.canManageUsers,
+            canManagePermissions:req.body.user.canManagePermissions,
+            img:req.body.user.img,
         };
         const updatedUser = await User.findOneAndUpdate(
             { _id: req.body.user._id },
