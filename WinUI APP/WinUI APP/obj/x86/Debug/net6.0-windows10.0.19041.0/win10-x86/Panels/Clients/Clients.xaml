@@ -14,8 +14,8 @@
         <Rectangle Grid.Row="0" />
         <StackPanel Grid.Row="1" Orientation="Horizontal" >
             <TextBlock Margin="20,5,0,0" FontSize="25">Clientes</TextBlock>
-            <CommandBar x:ConnectionId='31'                                     Background="Transparent" IsOpen="False" DefaultLabelPosition="Right">
-                <AppBarButton x:ConnectionId='32' Icon="Add" Label="Adicionar"                        />
+            <CommandBar x:ConnectionId='27'                                     Background="Transparent" IsOpen="False" DefaultLabelPosition="Right">
+                <AppBarButton x:ConnectionId='28' Icon="Add" Label="Adicionar"                        />
             </CommandBar>
         </StackPanel>
         
@@ -23,11 +23,7 @@
             <StackPanel Orientation="Horizontal" Padding="10,10,0,10" >
                 <TextBox x:ConnectionId='24' Margin="10,0,10,0" Header="Nome" x:Name="filterNome" PlaceholderText="Nome"  Width="150"                      />
                 <TextBox x:ConnectionId='25' Margin="10,0,10,0" Header="Nº de Contribuinte" x:Name="filterNcont" PlaceholderText="Nº de Contribuinte"  Width="150"                      />
-                <TextBox x:ConnectionId='26' Margin="10,0,10,0" Header="Morada" x:Name="filterMorada" PlaceholderText="Morada"  Width="150"                      />
-                <TextBox x:ConnectionId='27' Margin="10,0,10,0" Header="Código Postal" x:Name="filterCodPost" PlaceholderText="Código Postal"  Width="150"                      />
-                <TextBox x:ConnectionId='28' Margin="10,0,10,0" Header="Cidade" x:Name="filterCidade" PlaceholderText="Cidade"  Width="150"                      />
-                <TextBox x:ConnectionId='29' Margin="10,0,10,0" Header="Contacto" x:Name="filterContacto" PlaceholderText="Contacto"  Width="150"                      />
-                <TextBox x:ConnectionId='30' Margin="10,0,10,0" Header="Email" x:Name="filterEmail" PlaceholderText="Email"  Width="150"                      />
+                <TextBox x:ConnectionId='26' Margin="10,0,10,0" Header="Email" x:Name="filterEmail" PlaceholderText="Email"  Width="150"                      />
             </StackPanel>
         </ScrollViewer>
 

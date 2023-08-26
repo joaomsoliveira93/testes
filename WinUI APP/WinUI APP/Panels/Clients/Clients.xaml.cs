@@ -23,6 +23,7 @@ namespace WinUI_APP
         private Clients newClient = new Clients();
         private ObservableCollection<Clients> filteredClients;
         private string apiServer = Properties.Resources.apiServer;
+
         public Clientes()
         {            
             this.InitializeComponent();
@@ -119,10 +120,6 @@ namespace WinUI_APP
         {              
             filteredClients = new ObservableCollection<Clients>(clients.Where(client => client.Name.ToLower().Contains(filterNome.Text) 
             && client.Ncont.ToLower().Contains(filterNcont.Text) 
-            && client.Morada.ToLower().Contains(filterMorada.Text)
-            && client.CodPost.ToLower().Contains(filterCodPost.Text)
-            && client.CodPost.ToLower().Contains(filterCidade.Text)
-            && client.CodPost.ToLower().Contains(filterContacto.Text)
             && client.CodPost.ToLower().Contains(filterEmail.Text)
             ));
             grid.ItemsSource = filteredClients;

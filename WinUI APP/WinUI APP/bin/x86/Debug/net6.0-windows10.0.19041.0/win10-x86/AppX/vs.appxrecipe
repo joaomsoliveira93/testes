@@ -29,13 +29,13 @@
     <AppXManifest Include="D:\Repositorios\testes\WinUI APP\WinUI APP\bin\x86\Debug\net6.0-windows10.0.19041.0\win10-x86\AppxManifest.xml">
       <PackagePath>AppxManifest.xml</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2023-08-26T18:21:02.506</Modified>
+      <Modified>2023-08-26T18:24:55.211</Modified>
     </AppXManifest>
   </ItemGroup>
   <ItemGroup>
     <AppxPackagedFile Include="D:\Repositorios\testes\WinUI APP\WinUI APP\bin\x86\Debug\net6.0-windows10.0.19041.0\win10-x86\resources.pri">
       <PackagePath>resources.pri</PackagePath>
-      <Modified>2023-08-26T18:19:28.585</Modified>
+      <Modified>2023-08-26T18:24:54.896</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Repositorios\testes\WinUI APP\WinUI APP\bin\x86\Debug\net6.0-windows10.0.19041.0\win10-x86\WinUI APP.runtimeconfig.json">
       <PackagePath>WinUI APP.runtimeconfig.json</PackagePath>
@@ -43,7 +43,7 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Repositorios\testes\WinUI APP\WinUI APP\bin\x86\Debug\net6.0-windows10.0.19041.0\win10-x86\WinUI APP.dll">
       <PackagePath>WinUI APP.dll</PackagePath>
-      <Modified>2023-08-26T18:21:02.230</Modified>
+      <Modified>2023-08-26T18:24:54.650</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Repositorios\testes\WinUI APP\WinUI APP\bin\x86\Debug\net6.0-windows10.0.19041.0\win10-x86\WinUI APP.dll.config">
       <PackagePath>WinUI APP.dll.config</PackagePath>
@@ -51,7 +51,7 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Repositorios\testes\WinUI APP\WinUI APP\obj\x86\Debug\net6.0-windows10.0.19041.0\win10-x86\apphost.exe">
       <PackagePath>WinUI APP.exe</PackagePath>
-      <Modified>2023-08-26T18:21:02.236</Modified>
+      <Modified>2023-08-26T18:24:54.673</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Repositorios\testes\WinUI APP\WinUI APP\bin\x86\Debug\net6.0-windows10.0.19041.0\win10-x86\WinUI APP.deps.json">
       <PackagePath>WinUI APP.deps.json</PackagePath>
