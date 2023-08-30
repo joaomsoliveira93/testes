@@ -6,7 +6,7 @@ import FenceIcon from '@mui/icons-material/Fence';
 import { useStateContext } from '../contexts/ContextProvider';
 
 const Sidebar = () => {
-  const { setUserProfile, currentColor, activeMenu, setActiveMenu, setThemeSettings, screenSize, user } = useStateContext();
+  const { setUserProfile, activeMenu, setActiveMenu, setThemeSettings, screenSize, user } = useStateContext();
 
   const handleCloseSideBar = () => {
     if (activeMenu !== undefined && screenSize <= 900) {
@@ -34,7 +34,7 @@ const Sidebar = () => {
               key="clientes"
               onClick={() => { handleCloseSideBar(); setUserProfile(false); setThemeSettings(false); }}
               style={({ isActive }) => ({
-                backgroundColor: isActive ? currentColor : '',
+                backgroundColor: isActive ? user.appColor : '',
               })}
               className={({ isActive }) => (`flex items-center gap-5 pl-4 pt-3 pb-2.5 m-2 rounded-lg text-md ${isActive ? 'text-white' : 'text-gray-700 dark:text-gray-200 dark:hover:text-black hover:bg-gray-200'}`)}
             >
@@ -53,7 +53,7 @@ const Sidebar = () => {
                   key="utilizadores"
                   onClick={() => { handleCloseSideBar(); setUserProfile(false); setThemeSettings(false); }}
                   style={({ isActive }) => ({
-                    backgroundColor: isActive ? currentColor : '',
+                    backgroundColor: isActive ? user.appColor : '',
                   })}
                   className={({ isActive }) => (`flex items-center gap-5 pl-4 pt-3 pb-2.5 m-2 rounded-lg text-md ${isActive ? 'text-white' : 'text-gray-700 dark:text-gray-200 dark:hover:text-black hover:bg-gray-200'}`)}
                 >

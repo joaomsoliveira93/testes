@@ -77,7 +77,7 @@ router.get('/allusers', async (req, res) => {
 
 router.get('/user/:id', async (req, res) => {
     try {
-        const user = await User.find({ _id: req.params.id }, 'username estado name tipo appColor appMode email canManageClients canManageLicences canManageUsers canManagePermissions');
+        const user = await User.find({ _id: req.params.id }, 'username estado name tipo appColor appMode email canManageClients canManageLicences canManageUsers canManagePermissions img');
         if (user.length > 0) {
             res.json(user[0]);
         } else {

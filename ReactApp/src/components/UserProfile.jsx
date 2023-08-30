@@ -6,7 +6,7 @@ import AccountBoxIcon from '@mui/icons-material/AccountBox';
 import { useStateContext } from '../contexts/ContextProvider';
 
 const UserProfile = () => {
-  const { currentColor, user, setUser, userProfile, setUserProfile } = useStateContext();
+  const { user, setUser, userProfile, setUserProfile } = useStateContext();
   const logout = () => {
     setUser(null);
     localStorage.removeItem('User');
@@ -51,7 +51,7 @@ const UserProfile = () => {
           >
             <button
               type="button"
-              style={{ backgroundColor: currentColor, borderColor: currentColor }}
+              style={{ backgroundColor: user.appColor, borderColor: user.appColor }}
               className="text-white w-11 h-12 rounded-lg border-10 border-solid"
             >
               <AccountBoxIcon />
@@ -70,7 +70,7 @@ const UserProfile = () => {
           >
             <button
               type="button"
-              style={{ backgroundColor: currentColor, borderColor: currentColor }}
+              style={{ backgroundColor: user.appColor, borderColor: user.appColor }}
               className="text-white w-11 h-12 rounded-lg border-10 border-solid"
             >
               <LogoutIcon />

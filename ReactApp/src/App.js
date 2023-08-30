@@ -2,13 +2,13 @@ import React, { useEffect } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import axios from 'axios';
 import { Navbar, Sidebar, ThemeSettings, UserProfile } from './components';
-import { Utilizadores, DetalhesUser, Login, Profile, Clientes, DtlCliente } from './pages';
+import { Utilizadores, DtlUtilizador, Login, Profile, Clientes, DtlCliente } from './pages';
 import './App.css';
 import config from './config.json';
 import { useStateContext } from './contexts/ContextProvider';
 
 const App = () => {
-  const { currentMode, user, setUser, setCurrentMode, setCurrentColor } = useStateContext();
+  const { user, setUser } = useStateContext();
   useEffect(async () => {
     try {
       const temp = JSON.parse(localStorage.getItem('token'));
@@ -25,9 +25,9 @@ const App = () => {
         }
 
         setUser({
-          id: res.data._id,
+          _id: res.data._id,
           username: res.data.username,
-          name: res.data.username,
+          name: res.data.name,
           email: res.data.email,
           tipo: res.data.tipo,
           img: res.data.img,
@@ -35,9 +35,9 @@ const App = () => {
           canManageLicences: res.data.canManageLicences,
           canManagePermissions: res.data.canManagePermissions,
           canManageUsers: res.data.canManageUsers,
+          appColor: res.data.appColor,
+          appMode: res.data.appMode,
         });
-        setCurrentMode(res.data.appMode);
-        setCurrentColor(res.data.appColor);
       }
     } catch (error) {
       console.error(error);
@@ -54,7 +54,7 @@ const App = () => {
           </Routes>
         </div>
       ) : (
-        <div className={`${currentMode === 'Dark' ? 'dark' : ''} flex relative  ${currentMode === 'Dark' ? 'bg-gray-600' : 'bg-slate-400'}  w-full min-h-screen`}>
+        <div className={`${user.appMode === 'dark' ? 'dark' : ''} flex relative  ${user.appMode === 'Dark' ? 'bg-gray-600' : 'bg-slate-400'}  w-full min-h-screen`}>
           <ThemeSettings />
           <Sidebar />
           <Navbar />
@@ -65,7 +65,7 @@ const App = () => {
             <Route path="/Clientes/:id" element={<DtlCliente />} />
             <Route path="/perfil/:id" element={<Profile />} />
             <Route path="/utilizadores" element={<Utilizadores />} />
-            <Route path="/utilizadores/:id" element={<DetalhesUser />} />
+            <Route path="/utilizadores/:id" element={<DtlUtilizador />} />
           </Routes>
         </div>
       )}

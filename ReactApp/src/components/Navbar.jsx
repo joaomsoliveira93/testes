@@ -21,7 +21,7 @@ const NavButton = ({ title, customFunc, icon, dotColor }) => (
 );
 
 const Navbar = () => {
-  const { userProfile, setUserProfile, currentColor, activeMenu, setActiveMenu, setScreenSize, screenSize, user } = useStateContext();
+  const { userProfile, setUserProfile, activeMenu, setActiveMenu, setScreenSize, screenSize, user } = useStateContext();
   useEffect(() => {
     const handleResize = () => setScreenSize(window.innerWidth);
     window.addEventListener('resize', handleResize);
@@ -41,7 +41,7 @@ const Navbar = () => {
 
   return (
     <div className=" dark:bg-[#484B52] z-30  bg-slate-200 hover:text-black fixed top-0 flex h-12 right-0 left-0 pt-2 justify-between ">
-      <NavButton title="Menu" customFunc={handleActiveMenu} color={currentColor} icon={<AiOutlineMenu />} />
+      <NavButton title="Menu" customFunc={handleActiveMenu} color={user.appColor} icon={<AiOutlineMenu />} />
       <div className="flex pr-3">
         <div content="Profile">
           <div

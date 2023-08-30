@@ -14,7 +14,7 @@ import config from '../../config.json';
 const rowsPerPageOptions = [5, 10, 25];
 
 const Clientes = () => {
-    const { currentMode, currentColor, activeMenu, screenSize } = useStateContext();
+    const { activeMenu, screenSize, user } = useStateContext();
     const [initialData, setInitialData] = useState([]);
     const [page, setPage] = useState(0);
     const [rowsPerPage, setRowsPerPage] = useState(rowsPerPageOptions[2]);
@@ -32,8 +32,8 @@ const Clientes = () => {
             showConfirmButton: false,
             allowOutsideClick: false,
             allowEscapeKey: false,
-            background: currentMode === 'dark' ? '#a1a6ad' : '#FFFFFF',
-            iconColor: currentColor,
+            background: user.appMode === 'dark' ? '#a1a6ad' : '#FFFFFF',
+            iconColor: user.appColor,
         });
 
         try {
@@ -103,13 +103,13 @@ const Clientes = () => {
                 <div className="flex">
                     <Button
                         className=""
-                        style={{ cursor: 'pointer', backgroundColor: currentColor, borderRadius: '5px', color: 'white', marginLeft: '12px', marginBottom: '7px', padding: '5px' }}
+                        style={{ cursor: 'pointer', backgroundColor: user.appColor, borderRadius: '5px', color: 'white', marginLeft: '12px', marginBottom: '7px', padding: '5px' }}
                         onClick={() => setAddNew(true)}
                     >
                         <AddIcon /> Novo
                     </Button>
                     {((activeMenu && ((screenSize - 305) < 950)) || (!activeMenu && (screenSize < 950)))
-                        && <Button style={{ cursor: 'pointer', backgroundColor: currentColor, borderRadius: '5px', color: 'white', marginLeft: '12px', marginBottom: '7px', padding: '5px' }} onClick={() => setShowFilters(!showFilters)}><VisibilityIcon />Filtros</Button>}
+                        && <Button style={{ cursor: 'pointer', backgroundColor: user.appColor, borderRadius: '5px', color: 'white', marginLeft: '12px', marginBottom: '7px', padding: '5px' }} onClick={() => setShowFilters(!showFilters)}><VisibilityIcon />Filtros</Button>}
                     {
                         showFilters && (
                             <div>
@@ -147,13 +147,13 @@ const Clientes = () => {
             </div>
             {addNew && <AddClient open={addNew} setAdd={closeAddModel} /> }
             <div className={`fixed component mt-[180px] mr-2 p-3 bottom-2 -top-4 right-0 ${activeMenu && screenSize > 900 ? 'w-[calc(100%-305px)]' : 'w-[calc(100%-15px)]'} dark:bg-gray-400 bg-white rounded-md`}>
-                <Paper sx={{ width: '100%', height: '100%' }} style={{ backgroundColor: currentMode === 'dark' ? '#a1a6ad' : '#FFFFFF' }}>
-                    <TableContainer style={{ height: '90%', backgroundColor: currentMode === 'dark' ? '#a1a6ad' : '#FFFFFF' }}>
+                <Paper sx={{ width: '100%', height: '100%' }} style={{ backgroundColor: user.appMode === 'dark' ? '#a1a6ad' : '#FFFFFF' }}>
+                    <TableContainer style={{ height: '90%', backgroundColor: user.appMode === 'dark' ? '#a1a6ad' : '#FFFFFF' }}>
                         <Table stickyHeader size="small">
                             <TableHead>
                                 <TableRow>
-                                    <TableCell style={{ backgroundColor: currentMode === 'dark' ? '#a1a6ad' : '#FFFFFF' }} />
-                                    <TableCell key="nome" style={{ backgroundColor: currentMode === 'dark' ? '#a1a6ad' : '#FFFFFF' }}>
+                                    <TableCell style={{ backgroundColor: user.appMode === 'dark' ? '#a1a6ad' : '#FFFFFF' }} />
+                                    <TableCell key="nome" style={{ backgroundColor: user.appMode === 'dark' ? '#a1a6ad' : '#FFFFFF' }}>
                                         <TableSortLabel
                                             active={orderBy === 'nome'}
                                             direction={orderBy === 'nome' ? order : 'asc'}
@@ -162,7 +162,7 @@ const Clientes = () => {
                                             Nome
                                         </TableSortLabel>
                                     </TableCell>
-                                    <TableCell key="ncont" style={{ backgroundColor: currentMode === 'dark' ? '#a1a6ad' : '#FFFFFF' }}>
+                                    <TableCell key="ncont" style={{ backgroundColor: user.appMode === 'dark' ? '#a1a6ad' : '#FFFFFF' }}>
                                         <TableSortLabel
                                             active={orderBy === 'ncont'}
                                             direction={orderBy === 'nconr' ? order : 'asc'}
@@ -171,7 +171,7 @@ const Clientes = () => {
                                             Nº de contribuinte
                                         </TableSortLabel>
                                     </TableCell>
-                                    <TableCell key="morada" style={{ backgroundColor: currentMode === 'dark' ? '#a1a6ad' : '#FFFFFF' }}>
+                                    <TableCell key="morada" style={{ backgroundColor: user.appMode === 'dark' ? '#a1a6ad' : '#FFFFFF' }}>
                                         <TableSortLabel
                                             active={orderBy === 'morada'}
                                             direction={orderBy === 'morada' ? order : 'asc'}
@@ -180,7 +180,7 @@ const Clientes = () => {
                                             Morada
                                         </TableSortLabel>
                                     </TableCell>
-                                    <TableCell key="cidade" style={{ backgroundColor: currentMode === 'dark' ? '#a1a6ad' : '#FFFFFF' }}>
+                                    <TableCell key="cidade" style={{ backgroundColor: user.appMode === 'dark' ? '#a1a6ad' : '#FFFFFF' }}>
                                         <TableSortLabel
                                             active={orderBy === 'cidade'}
                                             direction={orderBy === 'cidade' ? order : 'asc'}
@@ -189,7 +189,7 @@ const Clientes = () => {
                                             Cidade
                                         </TableSortLabel>
                                     </TableCell>
-                                    <TableCell key="codPost" style={{ backgroundColor: currentMode === 'dark' ? '#a1a6ad' : '#FFFFFF' }}>
+                                    <TableCell key="codPost" style={{ backgroundColor: user.appMode === 'dark' ? '#a1a6ad' : '#FFFFFF' }}>
                                         <TableSortLabel
                                             active={orderBy === 'codPost'}
                                             direction={orderBy === 'codPost' ? order : 'asc'}
@@ -198,7 +198,7 @@ const Clientes = () => {
                                             Código Postal
                                         </TableSortLabel>
                                     </TableCell>
-                                    <TableCell key="contacto" style={{ backgroundColor: currentMode === 'dark' ? '#a1a6ad' : '#FFFFFF' }}>
+                                    <TableCell key="contacto" style={{ backgroundColor: user.appMode === 'dark' ? '#a1a6ad' : '#FFFFFF' }}>
                                         <TableSortLabel
                                             active={orderBy === 'contacto'}
                                             direction={orderBy === 'contacto' ? order : 'asc'}
@@ -207,7 +207,7 @@ const Clientes = () => {
                                             Contacto
                                         </TableSortLabel>
                                     </TableCell>
-                                    <TableCell key="email" style={{ backgroundColor: currentMode === 'dark' ? '#a1a6ad' : '#FFFFFF' }}>
+                                    <TableCell key="email" style={{ backgroundColor: user.appMode === 'dark' ? '#a1a6ad' : '#FFFFFF' }}>
                                         <TableSortLabel
                                             active={orderBy === 'email'}
                                             direction={orderBy === 'email' ? order : 'asc'}
@@ -226,7 +226,7 @@ const Clientes = () => {
                                             <TableCell width="30px">
                                                 <Link
                                                     to={`/clientes/${encodeURIComponent(row._id)}`}
-                                                    style={{ cursor: 'pointer', backgroundColor: currentColor, borderRadius: '5px' }}
+                                                    style={{ cursor: 'pointer', backgroundColor: user.appColor, borderRadius: '5px' }}
                                                     className="p-2 text-center text-white hover:drop-shadow-xl "
                                                 >
                                                     <VisibilityIcon />

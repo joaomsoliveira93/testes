@@ -12,7 +12,7 @@ import { useStateContext } from '../contexts/ContextProvider';
 import config from '../config.json';
 
 export default function AddClient({ open, setAdd }) {
-    const { currentMode, currentColor, user } = useStateContext();
+    const { user } = useStateContext();
     const [client, setClient] = useState({
         name: '',
         ncont: '',
@@ -33,7 +33,7 @@ export default function AddClient({ open, setAdd }) {
     const handleSave = async () => {
         if (client.name !== '' && client.ncont !== '' && client.morada !== '' && client.codPost !== '' && client.cidade !== '' && client.email !== '') {
             try {
-                const res = await axios.post(`${config.server.apiurl}/client/add`, { client, userId: user.id });
+                const res = await axios.post(`${config.server.apiurl}/client/add`, { client, userId: user._id });
                 if (res.data === 'NOK') {
                     Swal.fire({
                         title: 'Erro!',
@@ -43,8 +43,8 @@ export default function AddClient({ open, setAdd }) {
                         showConfirmButton: false,
                         timerProgressBar: true,
                         allowOutsideClick: false,
-                        iconColor: currentColor,
-                        background: currentMode === 'dark' ? '#b0b5b5' : 'white',
+                        iconColor: user.appColor,
+                        background: user.appMode === 'dark' ? '#b0b5b5' : 'white',
                         customClass: {
                             container: 'sweetalert-container',
                           },
@@ -60,8 +60,8 @@ export default function AddClient({ open, setAdd }) {
                         showConfirmButton: false,
                         timerProgressBar: true,
                         allowOutsideClick: false,
-                        iconColor: currentColor,
-                        background: currentMode === 'dark' ? '#b0b5b5' : 'white',
+                        iconColor: user.appColor,
+                        background: user.appMode === 'dark' ? '#b0b5b5' : 'white',
                         customClass: {
                             container: 'sweetalert-container',
                           },
@@ -77,8 +77,8 @@ export default function AddClient({ open, setAdd }) {
                         showConfirmButton: false,
                         timerProgressBar: true,
                         allowOutsideClick: false,
-                        iconColor: currentColor,
-                        background: currentMode === 'dark' ? '#b0b5b5' : 'white',
+                        iconColor: user.appColor,
+                        background: user.appMode === 'dark' ? '#b0b5b5' : 'white',
                         customClass: {
                             container: 'sweetalert-container',
                           },
@@ -96,8 +96,8 @@ export default function AddClient({ open, setAdd }) {
                     showConfirmButton: false,
                     timerProgressBar: true,
                     allowOutsideClick: false,
-                    iconColor: currentColor,
-                    background: currentMode === 'dark' ? '#b0b5b5' : 'white',
+                    iconColor: user.appColor,
+                    background: user.appMode === 'dark' ? '#b0b5b5' : 'white',
                     customClass: {
                         container: 'sweetalert-container',
                       },
@@ -109,8 +109,8 @@ export default function AddClient({ open, setAdd }) {
     return (
 
         <Dialog open={open} onClose={() => handleClose(false)}>
-            <DialogTitle>Adicionar Cliente</DialogTitle>
-            <DialogContent>
+            <DialogTitle style={{ backgroundColor: user.appMode === 'dark' ? '#a1a6ad' : '#FFFFFF' }}>Adicionar Cliente</DialogTitle>
+            <DialogContent style={{ backgroundColor: user.appMode === 'dark' ? '#a1a6ad' : '#FFFFFF' }}>
                 <TextField
                     error={client.name === ''}
                     helperText={client.name === '' ? 'Obrigatório' : ''}
@@ -247,7 +247,7 @@ export default function AddClient({ open, setAdd }) {
                     variant="standard"
                 />
             </DialogContent>
-            <DialogActions>
+            <DialogActions style={{ backgroundColor: user.appMode === 'dark' ? '#a1a6ad' : '#FFFFFF' }}>
                 <Button
                     disabled={
                         client.name === ''

@@ -9,7 +9,7 @@ import config from '../config.json';
 const Login = () => {
   let username = useRef();
   let password = useRef();
-  const { setUser, setCurrentMode, setCurrentColor } = useStateContext();
+  const { setUser } = useStateContext();
 
   const validar = async () => {
     try {
@@ -39,9 +39,9 @@ const Login = () => {
             tokenValidDate: res.data.tokenValidDate,
           }));
           setUser({
-            id: res.data._id,
+            _id: res.data._id,
             username: res.data.username,
-            name: res.data.username,
+            name: res.data.name,
             email: res.data.email,
             tipo: res.data.tipo,
             img: res.data.img,
@@ -49,9 +49,9 @@ const Login = () => {
             canManageLicences: res.data.canManageLicences,
             canManagePermissions: res.data.canManagePermissions,
             canManageUsers: res.data.canManageUsers,
+            appColor: res.data.appColor,
+            appMode: res.data.appMode,
           });
-          setCurrentMode(res.data.appMode);
-          setCurrentColor(res.data.appColor);
         }
       }
     } catch (err) {
