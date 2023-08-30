@@ -6,11 +6,55 @@
     xmlns:local="using:WinUI_APP"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d">
-    <Grid Width="Auto" Height="Auto" Background="Transparent" ColumnDefinitions="*" RowDefinitions ="Auto,*">
-        <Border Height="30" Grid.Row="0" Background="Transparent" x:Name="AppTitleBar" Grid.Column="1" VerticalAlignment="Top">
-            <TextBlock x:Name="AppTitle" Text="{StaticResource AppTitleName}" VerticalAlignment="Top" Margin="10,5,0,0" />
-        </Border>
+    mc:Ignorable="d"
+    >
+    <Grid Width="Auto" Height="Auto" Background="Transparent" ColumnDefinitions="*" RowDefinitions ="50,*">
+        <Grid x:Name="AppTitleBar" Height="48" Grid.Row="0" Background="Transparent">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition x:Name="LeftPaddingColumn" Width="0"/>
+                <ColumnDefinition x:Name="IconColumn" Width="Auto"/>
+                <ColumnDefinition x:Name="TitleColumn" Width="Auto"/>
+                <ColumnDefinition x:Name="LeftDragColumn" Width="*"/>
+                <ColumnDefinition x:Name="SearchColumn" Width="Auto"/>
+                <ColumnDefinition x:Name="RightDragColumn" Width="*"/>
+                <ColumnDefinition x:Name="RightPaddingColumn" Width="0"/>
+            </Grid.ColumnDefinitions>
+            <Image x:Name="TitleBarIcon" Source="/Images/WindowIcon.png" Grid.Column="1" Width="16" Height="16" Margin="8,0,0,0"/>
+            <TextBlock x:Name="TitleTextBlock" Text="{StaticResource AppTitleName}" Style="{StaticResource CaptionTextBlockStyle}" Grid.Column="2" VerticalAlignment="Center" Margin="4,0,0,0"/>
+            <StackPanel Grid.Column="4" Orientation="Horizontal">
+                <AutoSuggestBox  QueryIcon="Find" PlaceholderText="Search" VerticalAlignment="Center" Width="230" Margin="4,0"/>
+                <StackPanel Orientation="Vertical" >
+                    <Border Width="35" Height="35" Margin="100,5,0,0"  CornerRadius="20" >
+                        <Button  Padding="0,0,0,0">
+                            <Image Source="{x:Bind profileImage}" Stretch="UniformToFill" />
+                            <Button.Flyout>
+                                <Flyout>
+                                    <StackPanel>
+                                        <Grid ColumnDefinitions="*,*" RowDefinitions ="50,*,*,*">
+                                            <Border Grid.RowSpan="2" Grid.Column="0" Width="60" Height="60" Margin="0,0,10,0" CornerRadius="20" Background="LightGray">
+                                                <Image Source="{x:Bind profileImage}" Stretch="UniformToFill" />
+                                            </Border>
+                                            <TextBlock Grid.Row="0" Grid.Column="1" Style="{ThemeResource BaseTextBlockStyle}" Text="{x:Bind name}" Margin="10,10,10,12" />
+                                            <TextBlock Grid.Row="1" Grid.Column="1" Style="{ThemeResource BaseTextBlockStyle}" Text="{x:Bind email}" Margin="10,-20,10,0" />
+                                            <HyperlinkButton Grid.Row="2" Grid.Column="1" Content="Terminar Sessão" Click="LogOutButton_Click"/>
+                                            <StackPanel Grid.ColumnSpan="2" Grid.Row="3">
+                                                <Button Width="Auto" ></Button>
+                                                <Button Width="Auto" ></Button>
+                                                <Button Width="Auto" ></Button>
+                                            </StackPanel>
+                                        </Grid>                                        
+                                    </StackPanel>
+                                </Flyout>
+                            </Button.Flyout>
+
+                        </Button>
+                    </Border>
+                </StackPanel>
+    
+            </StackPanel>
+         
+        
+        </Grid>
 
         <NavigationView Grid.Row="1" x:Name="sidebar" PaneDisplayMode="Auto" IsSettingsVisible="True" BackRequested="NavigationView_BackRequested" IsBackEnabled="False">
             <NavigationView.MenuItems>
@@ -23,9 +67,9 @@
                         <Border Width="30" Height="30" Margin="0,0,10,0" CornerRadius="20" Background="LightGray">
                             <Image Source="{x:Bind profileImage}" Stretch="UniformToFill" />
                         </Border>
-                        <TextBlock Margin="0,5,0,0" Text="{x:Bind name}"></TextBlock> 
+                        <TextBlock Margin="0,5,0,0" Text="{x:Bind name}"></TextBlock>
                     </StackPanel>
-         
+
                 </NavigationViewItem>
                 <NavigationViewItem Content="Terminar Sessão" Tag="Logout">
                     <NavigationViewItem.Icon>
@@ -41,6 +85,9 @@
                 </Frame.ContentTransitions>
             </Frame>
         </NavigationView>
-    </Grid> 
+       
+    </Grid>   
 
 </Window>
+
+

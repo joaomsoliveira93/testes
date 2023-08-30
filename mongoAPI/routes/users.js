@@ -9,7 +9,7 @@ router.post('/login', async (req, res) => {
     const secretKey = 'mongoDBAPI';
     try {
         const payload = {
-            userId: req.body.username,
+            userId: req.body.userName,
         };
 
         const options = {
