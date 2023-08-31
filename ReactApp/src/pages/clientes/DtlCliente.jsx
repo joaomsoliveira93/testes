@@ -13,6 +13,7 @@ import DoDisturbIcon from '@mui/icons-material/DoDisturb';
 import { useStateContext } from '../../contexts/ContextProvider';
 import { Header } from '../../components';
 import config from '../../config.json';
+import { Licences } from '../../components/Licences';
 
 const DtlCliente = () => {
     const { activeMenu, screenSize, user } = useStateContext();
@@ -250,40 +251,43 @@ const DtlCliente = () => {
                     </Link>
                     <Header category="Page" title="Detalhes do Cliente" />
                 </div>
-                {!edit ? (
-                    <>
-                        <Button
-                            style={{ cursor: 'pointer', backgroundColor: user.appColor, borderRadius: '5px', color: 'white', marginLeft: '12px', marginBottom: '7px', padding: '5px' }}
-                            onClick={() => setEdit(true)}
-                        >
-                            <EditIcon />Editar
-                        </Button>
-                        <Button
-                            style={{ cursor: 'pointer', backgroundColor: user.appColor, borderRadius: '5px', color: 'white', marginLeft: '12px', marginBottom: '7px', padding: '5px' }}
-                            onClick={() => handleDelete()}
-                        >
-                            <DeleteIcon />Apagar
-                        </Button>
-                    </>
-                ) : (
-                    <>
-                        <Button
-                            style={{ cursor: 'pointer', backgroundColor: user.appColor, borderRadius: '5px', color: 'white', marginLeft: '12px', marginBottom: '7px', padding: '5px' }}
-                            onClick={() => handleSave()}
-                        >
-                            <SaveIcon />Guardar
-                        </Button>
-                        <Button
-                            style={{ cursor: 'pointer', backgroundColor: user.appColor, borderRadius: '5px', color: 'white', marginLeft: '12px', marginBottom: '7px', padding: '5px' }}
-                            onClick={() => handleCancel()}
-                        >
-                            <DoDisturbIcon />Cancelar
-                        </Button>
-                    </>
+                {user.canManageClients && (
+                    !edit ? (
+                        <>
+                            <Button
+                                style={{ cursor: 'pointer', backgroundColor: user.appColor, borderRadius: '5px', color: 'white', marginLeft: '12px', marginBottom: '7px', padding: '5px' }}
+                                onClick={() => setEdit(true)}
+                            >
+                                <EditIcon />Editar
+                            </Button>
+                            <Button
+                                style={{ cursor: 'pointer', backgroundColor: user.appColor, borderRadius: '5px', color: 'white', marginLeft: '12px', marginBottom: '7px', padding: '5px' }}
+                                onClick={() => handleDelete()}
+                            >
+                                <DeleteIcon />Apagar
+                            </Button>
+                        </>
+                    ) : (
+                        <>
+                            <Button
+                                style={{ cursor: 'pointer', backgroundColor: user.appColor, borderRadius: '5px', color: 'white', marginLeft: '12px', marginBottom: '7px', padding: '5px' }}
+                                onClick={() => handleSave()}
+                            >
+                                <SaveIcon />Guardar
+                            </Button>
+                            <Button
+                                style={{ cursor: 'pointer', backgroundColor: user.appColor, borderRadius: '5px', color: 'white', marginLeft: '12px', marginBottom: '7px', padding: '5px' }}
+                                onClick={() => handleCancel()}
+                            >
+                                <DoDisturbIcon />Cancelar
+                            </Button>
+                        </>
+                    )
                 )}
+
             </div>
 
-            <div className={`fixed component mt-[180px] mr-2 p-3 bottom-2 -top-4 right-0 ${activeMenu && screenSize > 900 ? 'w-[calc(100%-305px)]' : 'w-[calc(100%-15px)]'} dark:bg-gray-400 bg-white rounded-md overflow-y-scroll`}>
+            <div className={`fixed component mt-[180px] mr-2 p-3 bottom-2 ${user.canManageClients ? '-top-4' : '-top-14'} right-0 ${activeMenu && screenSize > 900 ? 'w-[calc(100%-305px)]' : 'w-[calc(100%-15px)]'} dark:bg-gray-400 bg-white rounded-md overflow-y-scroll`}>
                 {edit ? (
                     <>
                         <div className="flex flex-wrap -mx-3 mb-6">
@@ -542,6 +546,7 @@ const DtlCliente = () => {
 
                     </>
                 )}
+            <Licences clientId={id} />
             </div>
         </>
     );

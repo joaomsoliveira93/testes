@@ -101,13 +101,15 @@ const Clientes = () => {
             <div className={`fixed component z-10 mr-1 top-12 right-0 ${activeMenu && screenSize > 900 ? 'w-[calc(100%-295px)] ' : 'w-[calc(100%-7px)]'} p-2 shadow-md shadow-black dark:bg-gray-400 bg-white rounded-md`}>
                 <Header category="Page" title="Clientes" />
                 <div className="flex">
-                    <Button
-                        className=""
-                        style={{ cursor: 'pointer', backgroundColor: user.appColor, borderRadius: '5px', color: 'white', marginLeft: '12px', marginBottom: '7px', padding: '5px' }}
-                        onClick={() => setAddNew(true)}
-                    >
-                        <AddIcon /> Novo
-                    </Button>
+                    {user.canManageClients && (
+                        <Button
+                            className=""
+                            style={{ cursor: 'pointer', backgroundColor: user.appColor, borderRadius: '5px', color: 'white', marginLeft: '12px', marginBottom: '7px', padding: '5px' }}
+                            onClick={() => setAddNew(true)}
+                        >
+                            <AddIcon /> Novo
+                        </Button>
+                    )}
                     {((activeMenu && ((screenSize - 305) < 950)) || (!activeMenu && (screenSize < 950)))
                         && <Button style={{ cursor: 'pointer', backgroundColor: user.appColor, borderRadius: '5px', color: 'white', marginLeft: '12px', marginBottom: '7px', padding: '5px' }} onClick={() => setShowFilters(!showFilters)}><VisibilityIcon />Filtros</Button>}
                     {
@@ -145,7 +147,7 @@ const Clientes = () => {
                     }
                 </div>
             </div>
-            {addNew && <AddClient open={addNew} setAdd={closeAddModel} /> }
+            {addNew && <AddClient open={addNew} setAdd={closeAddModel} />}
             <div className={`fixed component mt-[180px] mr-2 p-3 bottom-2 -top-4 right-0 ${activeMenu && screenSize > 900 ? 'w-[calc(100%-305px)]' : 'w-[calc(100%-15px)]'} dark:bg-gray-400 bg-white rounded-md`}>
                 <Paper sx={{ width: '100%', height: '100%' }} style={{ backgroundColor: user.appMode === 'dark' ? '#a1a6ad' : '#FFFFFF' }}>
                     <TableContainer style={{ height: '90%', backgroundColor: user.appMode === 'dark' ? '#a1a6ad' : '#FFFFFF' }}>

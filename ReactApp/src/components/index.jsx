@@ -5,3 +5,4 @@ export { default as Header } from './Header';
 export { default as UserProfile } from './UserProfile';
 export { default as AddClient } from './AddClient';
 export { default as AddUser } from './AddUser';
+export { default as UpdatePassword } from './UpdatePassword';

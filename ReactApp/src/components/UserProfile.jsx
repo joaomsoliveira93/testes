@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { MdOutlineCancel } from 'react-icons/md';
 import LogoutIcon from '@mui/icons-material/Logout';
 import AccountBoxIcon from '@mui/icons-material/AccountBox';
@@ -7,11 +7,12 @@ import { useStateContext } from '../contexts/ContextProvider';
 
 const UserProfile = () => {
   const { user, setUser, userProfile, setUserProfile } = useStateContext();
+  const navigate = useNavigate();
   const logout = () => {
     setUser(null);
-    localStorage.removeItem('User');
+    localStorage.removeItem('token');
     setUserProfile(false);
-    window.location.replace('/');
+    navigate('/');
   };
   return (
     <>

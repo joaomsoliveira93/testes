@@ -54,7 +54,7 @@ const App = () => {
           </Routes>
         </div>
       ) : (
-        <div className={`${user.appMode === 'dark' ? 'dark' : ''} flex relative  ${user.appMode === 'Dark' ? 'bg-gray-600' : 'bg-slate-400'}  w-full min-h-screen`}>
+        <div className={`${user.appMode === 'dark' ? 'dark' : ''} flex relative  ${user.appMode === 'dark' ? 'bg-gray-600' : 'bg-slate-400'}  w-full min-h-screen`}>
           <ThemeSettings />
           <Sidebar />
           <Navbar />
