@@ -27,14 +27,22 @@ export const Licences = ({ clientId }) => {
         endedAt: '',
     }]);
 
-    useEffect(async () => {
-        try {
-            const res = await axios.get(`${config.server.apiurl}/alllicences/${clientId}`);
-            setLicences(res.data);
-        } catch (err) {
-            console.log(err);
+    useEffect(() => {
+        const cancelToken = axios.CancelToken.source();
+        axios.get(`${config.server.apiurl}/alllicences/${clientId}`, { cancelToken: cancelToken.token })
+            .then((res) => {
+                setLicences(res.data);
+            }).catch((err) => {
+                if (axios.isCancel(err)) {
+                    console.log("Operação Cancelada!")
+                } else {
+                    console.log(err);
+                }
+            });
+        return () => {
+            cancelToken.cancel();
         }
-    }, []);
+    }, [clientId]);
 
     const handleChange = (event, newValue) => {
         setValue(newValue);

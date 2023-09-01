@@ -10,11 +10,15 @@ const ThemeSettings = () => {
   const { setUser, user, themeSettings, setThemeSettings } = useStateContext();
 
   useEffect(() => {
-    try {
-      axios.put(`${config.server.apiurl}/user/update`, { userId: user._id, user });
-    } catch (err) {
-      console.error(err);
-    }
+    const cancelToken = axios.CancelToken.source();
+    axios.put(`${config.server.apiurl}/user/update`, { userId: user._id, user, cancelToken: cancelToken.token })
+      .catch((err) => {
+        if (axios.isCancel(err)) {
+          console.log("Operação Cancelada!")
+        } else {
+          console.log(err);
+        }
+      });
   }, [user]);
 
   return (

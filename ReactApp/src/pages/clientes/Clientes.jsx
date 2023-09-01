@@ -5,7 +5,7 @@ import AddIcon from '@mui/icons-material/Add';
 import Swal from 'sweetalert2';
 import 'sweetalert2/dist/sweetalert2.min.css';
 import axios from 'axios';
-import { TextField } from '@material-ui/core';
+import TextField from '@mui/material/TextField';
 import { Paper, TableContainer, Table, TableHead, TableBody, TableSortLabel, TableRow, TableCell, TablePagination, Button } from '@mui/material';
 import { useStateContext } from '../../contexts/ContextProvider';
 import { AddClient, Header } from '../../components';
@@ -26,7 +26,8 @@ const Clientes = () => {
     const [filterEmail, setFilterEmail] = useState('');
     const [addNew, setAddNew] = useState(false);
 
-    useEffect(async () => {
+    useEffect(() => {
+        const cancelToken = axios.CancelToken.source();
         Swal.fire({
             title: 'A Carregar...',
             showConfirmButton: false,
@@ -36,14 +37,22 @@ const Clientes = () => {
             iconColor: user.appColor,
         });
 
-        try {
-            const res = await axios.get(`${config.server.apiurl}/allclients`);
-            setInitialData(res.data);
-        } catch (err) {
-            console.log(err);
+        axios.get(`${config.server.apiurl}/allclients`, { cancelToken: cancelToken.token })
+            .then((res) => {
+                setInitialData(res.data);
+                Swal.close();
+            }).catch((err) => {
+                if (axios.isCancel(err)) {
+                    console.log("Operação Cancelada!")
+                } else {
+                    console.log(err);
+                }
+            });
+        return () => {
+            cancelToken.cancel();
+            Swal.close();
         }
-        Swal.close();
-    }, []);
+    }, [user.appColor, user.appMode]);
 
     useEffect(() => {
         if ((activeMenu && ((screenSize - 305) < 900)) || (!activeMenu && (screenSize < 900))) {

@@ -30,79 +30,84 @@ export default function AddClient({ open, setAdd }) {
         setAdd(load);
     };
 
-    const handleSave = async () => {
+    const handleSave = () => {
+        const cancelToken = axios.CancelToken.source();
         if (client.name !== '' && client.ncont !== '' && client.morada !== '' && client.codPost !== '' && client.cidade !== '' && client.email !== '') {
-            try {
-                const res = await axios.post(`${config.server.apiurl}/client/add`, { client, userId: user._id });
-                if (res.data === 'NOK') {
-                    Swal.fire({
-                        title: 'Erro!',
-                        text: 'Não foi possível adicionar o cliente!',
-                        icon: 'error',
-                        timer: 1500,
-                        showConfirmButton: false,
-                        timerProgressBar: true,
-                        allowOutsideClick: false,
-                        iconColor: user.appColor,
-                        background: user.appMode === 'dark' ? '#b0b5b5' : 'white',
-                        customClass: {
-                            container: 'sweetalert-container',
-                          },
-                    }).then(() => {
-                        handleClose(false);
-                    });
-                } else if (res.data === null) {
-                    Swal.fire({
-                        title: 'Erro!',
-                        text: 'Não foi possível realizar a ligação ao servidor. Por favor tenta mais tarde!',
-                        icon: 'error',
-                        timer: 1500,
-                        showConfirmButton: false,
-                        timerProgressBar: true,
-                        allowOutsideClick: false,
-                        iconColor: user.appColor,
-                        background: user.appMode === 'dark' ? '#b0b5b5' : 'white',
-                        customClass: {
-                            container: 'sweetalert-container',
-                          },
-                    }).then(() => {
-                        handleClose(false);
-                    });
-                } else {
-                    Swal.fire({
-                        title: 'Sucesso!',
-                        text: 'O cliente foi adicionado!',
-                        icon: 'success',
-                        timer: 1500,
-                        showConfirmButton: false,
-                        timerProgressBar: true,
-                        allowOutsideClick: false,
-                        iconColor: user.appColor,
-                        background: user.appMode === 'dark' ? '#b0b5b5' : 'white',
-                        customClass: {
-                            container: 'sweetalert-container',
-                          },
-                    }).then(() => {
-                        handleClose(true);
-                    });
-                }
-            } catch (error) {
-                console.error(error);
-                Swal.fire({
-                    title: 'Erro!',
-                    text: 'Não foi possível realizar a ligação ao servidor. Por favor tenta mais tarde!',
-                    icon: 'error',
-                    timer: 1500,
-                    showConfirmButton: false,
-                    timerProgressBar: true,
-                    allowOutsideClick: false,
-                    iconColor: user.appColor,
-                    background: user.appMode === 'dark' ? '#b0b5b5' : 'white',
-                    customClass: {
-                        container: 'sweetalert-container',
-                      },
+            axios.post(`${config.server.apiurl}/client/add`, { client, userId: user._id, cancelToken: cancelToken.token })
+                .then((res) => {
+                    if (res.data === 'NOK') {
+                        Swal.fire({
+                            title: 'Erro!',
+                            text: 'Não foi possível adicionar o cliente!',
+                            icon: 'error',
+                            timer: 1500,
+                            showConfirmButton: false,
+                            timerProgressBar: true,
+                            allowOutsideClick: false,
+                            iconColor: user.appColor,
+                            background: user.appMode === 'dark' ? '#b0b5b5' : 'white',
+                            customClass: {
+                                container: 'sweetalert-container',
+                            },
+                        }).then(() => {
+                            handleClose(false);
+                        });
+                    } else if (res.data === null) {
+                        Swal.fire({
+                            title: 'Erro!',
+                            text: 'Não foi possível realizar a ligação ao servidor. Por favor tenta mais tarde!',
+                            icon: 'error',
+                            timer: 1500,
+                            showConfirmButton: false,
+                            timerProgressBar: true,
+                            allowOutsideClick: false,
+                            iconColor: user.appColor,
+                            background: user.appMode === 'dark' ? '#b0b5b5' : 'white',
+                            customClass: {
+                                container: 'sweetalert-container',
+                            },
+                        }).then(() => {
+                            handleClose(false);
+                        });
+                    } else {
+                        Swal.fire({
+                            title: 'Sucesso!',
+                            text: 'O cliente foi adicionado!',
+                            icon: 'success',
+                            timer: 1500,
+                            showConfirmButton: false,
+                            timerProgressBar: true,
+                            allowOutsideClick: false,
+                            iconColor: user.appColor,
+                            background: user.appMode === 'dark' ? '#b0b5b5' : 'white',
+                            customClass: {
+                                container: 'sweetalert-container',
+                            },
+                        }).then(() => {
+                            handleClose(true);
+                        });
+                    }
+                }).catch((err) => {
+                    if (axios.isCancel(err)) {
+                        console.log("Operação Cancelada!")
+                    } else {
+                        console.log(err);
+                        Swal.fire({
+                            title: 'Erro!',
+                            text: 'Não foi possível realizar a ligação ao servidor. Por favor tenta mais tarde!',
+                            icon: 'error',
+                            timer: 1500,
+                            showConfirmButton: false,
+                            timerProgressBar: true,
+                            allowOutsideClick: false,
+                            iconColor: user.appColor,
+                            background: user.appMode === 'dark' ? '#b0b5b5' : 'white',
+                            customClass: {
+                                container: 'sweetalert-container',
+                            },
+                        });
+                    }
                 });
-            }
         }
     };
 

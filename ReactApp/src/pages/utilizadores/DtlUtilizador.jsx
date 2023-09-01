@@ -37,10 +37,12 @@ const DtlUtilizador = () => {
     canManagePermissions: false,
   });
 
-  useEffect(async () => {
+  useEffect(() => {
+    const cancelToken = axios.CancelToken.source();
     if (!user.canManageUsers) {
       navigate('/clientes');
     }
+
     Swal.fire({
       title: 'A Carregar...',
       allowOutsideClick: false,
@@ -49,16 +51,28 @@ const DtlUtilizador = () => {
       background: user.appMode === 'dark' ? '#a1a6ad' : '#FFFFFF',
       iconColor: user.appColor,
     });
-    try {
-      const res = await axios.get(`${config.server.apiurl}/user/${id}`);
-      setCurrentUser(res.data);
-    } catch (err) {
-      console.log(err);
-    }
-    Swal.close();
-  }, []);
 
-  const handleSave = async () => {
+    axios.get(`${config.server.apiurl}/user/${id}`, { cancelToken: cancelToken.token })
+      .then((res) => {
+        setCurrentUser(res.data);
+        Swal.close();
+      }).catch((err) => {
+        if (axios.isCancel(err)) {
+          console.log("Operação Cancelada!")
+        } else {
+          console.log(err);
+        }
+      });
+
+    return () => {
+      cancelToken.cancel();
+      Swal.close();
+    }
+
+  }, [id, user.appColor, user.appMode, navigate, user.canManageUsers]);
+
+  const handleSave = () => {
+    const cancelToken = axios.CancelToken.source();
     if (currentUser.name !== '' && currentUser.email !== '' && currentUser.appColor !== '' && currentUser.appMode !== '') {
       Swal.fire({
         title: 'Tem a Certeza?',
@@ -71,14 +85,99 @@ const DtlUtilizador = () => {
         cancelButtonText: 'Cancelar',
         iconColor: user.appColor,
         background: user.appMode === 'dark' ? '#b0b5b5' : 'white',
-      }).then(async (result) => {
+      }).then((result) => {
         if (result.isConfirmed) {
-          try {
-            const res = await axios.put(`${config.server.apiurl}/user/update`, { userId: user._id, user: currentUser });
+
+          axios.put(`${config.server.apiurl}/user/update`, { userId: user._id, user: currentUser, cancelToken: cancelToken.token })
+            .then((res) => {
+              if (res.data === 'NOK') {
+                Swal.fire({
+                  title: 'Erro!',
+                  text: 'Não foi possível atualizar os dados deste utilizador!',
+                  icon: 'error',
+                  timer: 1500,
+                  showConfirmButton: false,
+                  timerProgressBar: true,
+                  allowOutsideClick: false,
+                  iconColor: user.appColor,
+                  background: user.appMode === 'dark' ? '#b0b5b5' : 'white',
+                }).then(() => {
+                  setEdit(false);
+                });
+              } else if (res.data === null) {
+                Swal.fire({
+                  title: 'Erro!',
+                  text: 'Não foi possível realizar a ligação ao servidor. Por favor tenta mais tarde!',
+                  icon: 'error',
+                  timer: 1500,
+                  showConfirmButton: false,
+                  timerProgressBar: true,
+                  allowOutsideClick: false,
+                  iconColor: user.appColor,
+                  background: user.appMode === 'dark' ? '#b0b5b5' : 'white',
+                });
+              } else {
+                Swal.fire({
+                  title: 'Sucesso!',
+                  text: 'Os dados deste utilizador foram atualizados!',
+                  icon: 'success',
+                  timer: 1500,
+                  showConfirmButton: false,
+                  timerProgressBar: true,
+                  allowOutsideClick: false,
+                  iconColor: user.appColor,
+                  background: user.appMode === 'dark' ? '#b0b5b5' : 'white',
+                }).then(() => {
+                  if (currentUser.username === user.username) {
+                    setUser(currentUser);
+                  }
+                  setEdit(false);
+                });
+              }
+            }).catch((err) => {
+              if (axios.isCancel(err)) {
+                console.log("Operação Cancelada!")
+              } else {
+                console.log(err);
+                Swal.fire({
+                  title: 'Erro!',
+                  text: 'Não foi possível realizar a ligação ao servidor. Por favor tenta mais tarde!',
+                  icon: 'error',
+                  timer: 1500,
+                  showConfirmButton: false,
+                  timerProgressBar: true,
+                  allowOutsideClick: false,
+                  iconColor: user.appColor,
+                  background: user.appMode === 'dark' ? '#b0b5b5' : 'white',
+                });
+              }
+            });
+        }
+      });
+    }
+  };
+
+  const handleDelete = () => {
+    const cancelToken = axios.CancelToken.source();
+    Swal.fire({
+      title: 'Tem a Certeza?',
+      text: 'Vai apagar este Utilizador!',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Sim',
+      cancelButtonText: 'Cancelar',
+      iconColor: user.appColor,
+      background: user.appMode === 'dark' ? '#b0b5b5' : 'white',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axios.delete(`${config.server.apiurl}/user/delete/${id}`, { cancelToken: cancelToken.token })
+          .then((res) => {
             if (res.data === 'NOK') {
               Swal.fire({
                 title: 'Erro!',
-                text: 'Não foi possível atualizar os dados deste utilizador!',
+                text: 'Não foi possível apagar o utilizador!',
                 icon: 'error',
                 timer: 1500,
                 showConfirmButton: false,
@@ -104,7 +203,7 @@ const DtlUtilizador = () => {
             } else {
               Swal.fire({
                 title: 'Sucesso!',
-                text: 'Os dados deste utilizador foram atualizados!',
+                text: 'O utilizador foi apagado!',
                 icon: 'success',
                 timer: 1500,
                 showConfirmButton: false,
@@ -113,107 +212,33 @@ const DtlUtilizador = () => {
                 iconColor: user.appColor,
                 background: user.appMode === 'dark' ? '#b0b5b5' : 'white',
               }).then(() => {
-                if (currentUser.username === user.username) {
-                  setUser(currentUser);
-                }
-                setEdit(false);
+                navigate('/Utilizadores');
               });
             }
-          } catch (error) {
-            console.error(error);
-            Swal.fire({
-              title: 'Erro!',
-              text: 'Não foi possível realizar a ligação ao servidor. Por favor tenta mais tarde!',
-              icon: 'error',
-              timer: 1500,
-              showConfirmButton: false,
-              timerProgressBar: true,
-              allowOutsideClick: false,
-              iconColor: user.appColor,
-              background: user.appMode === 'dark' ? '#b0b5b5' : 'white',
-            });
-          }
-        }
-      });
-    }
-  };
-
-  const handleDelete = async () => {
-    Swal.fire({
-      title: 'Tem a Certeza?',
-      text: 'Vai apagar este Utilizador!',
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Sim',
-      cancelButtonText: 'Cancelar',
-      iconColor: user.appColor,
-      background: user.appMode === 'dark' ? '#b0b5b5' : 'white',
-    }).then(async (result) => {
-      if (result.isConfirmed) {
-        try {
-          const res = await axios.delete(`${config.server.apiurl}/user/delete/${id}`);
-          if (res.data === 'NOK') {
-            Swal.fire({
-              title: 'Erro!',
-              text: 'Não foi possível apagar o utilizador!',
-              icon: 'error',
-              timer: 1500,
-              showConfirmButton: false,
-              timerProgressBar: true,
-              allowOutsideClick: false,
-              iconColor: user.appColor,
-              background: user.appMode === 'dark' ? '#b0b5b5' : 'white',
-            }).then(() => {
-              setEdit(false);
-            });
-          } else if (res.data === null) {
-            Swal.fire({
-              title: 'Erro!',
-              text: 'Não foi possível realizar a ligação ao servidor. Por favor tenta mais tarde!',
-              icon: 'error',
-              timer: 1500,
-              showConfirmButton: false,
-              timerProgressBar: true,
-              allowOutsideClick: false,
-              iconColor: user.appColor,
-              background: user.appMode === 'dark' ? '#b0b5b5' : 'white',
-            });
-          } else {
-            Swal.fire({
-              title: 'Sucesso!',
-              text: 'O utilizador foi apagado!',
-              icon: 'success',
-              timer: 1500,
-              showConfirmButton: false,
-              timerProgressBar: true,
-              allowOutsideClick: false,
-              iconColor: user.appColor,
-              background: user.appMode === 'dark' ? '#b0b5b5' : 'white',
-            }).then(() => {
-              navigate('/Utilizadores');
-            });
-          }
-        } catch (error) {
-          console.error(error);
-          Swal.fire({
-            title: 'Erro!',
-            text: 'Não foi possível realizar a ligação ao servidor. Por favor tenta mais tarde!',
-            icon: 'error',
-            timer: 1500,
-            showConfirmButton: false,
-            timerProgressBar: true,
-            allowOutsideClick: false,
-            iconColor: user.appColor,
-            background: user.appMode === 'dark' ? '#b0b5b5' : 'white',
+          }).catch((err) => {
+            if (axios.isCancel(err)) {
+              console.log("Operação Cancelada!")
+            } else {
+              console.log(err);
+              Swal.fire({
+                title: 'Erro!',
+                text: 'Não foi possível realizar a ligação ao servidor. Por favor tenta mais tarde!',
+                icon: 'error',
+                timer: 1500,
+                showConfirmButton: false,
+                timerProgressBar: true,
+                allowOutsideClick: false,
+                iconColor: user.appColor,
+                background: user.appMode === 'dark' ? '#b0b5b5' : 'white',
+              });
+            }
           });
-        }
       }
     });
   };
 
-  const handleReset = async () => {
+  const handleReset = () => {
+    const cancelToken = axios.CancelToken.source();
     Swal.fire({
       title: 'Tem a Certeza?',
       text: 'A palavra-passe vair ser restaurada!',
@@ -225,61 +250,66 @@ const DtlUtilizador = () => {
       cancelButtonText: 'Cancelar',
       iconColor: user.appColor,
       background: user.appMode === 'dark' ? '#b0b5b5' : 'white',
-    }).then(async (result) => {
+    }).then((result) => {
       if (result.isConfirmed) {
-        try {
-          const res = await axios.put(`${config.server.apiurl}/user/resetpassword`, { userId: user._id, user: currentUser });
-          if (res.data === 'NOK') {
-            Swal.fire({
-              title: 'Erro!',
-              text: 'Não foi possível restaurar a palavra-passe!',
-              icon: 'error',
-              timer: 1500,
-              showConfirmButton: false,
-              timerProgressBar: true,
-              allowOutsideClick: false,
-              iconColor: user.appColor,
-              background: user.appMode === 'dark' ? '#b0b5b5' : 'white',
-            });
-          } else if (res.data === null) {
-            Swal.fire({
-              title: 'Erro!',
-              text: 'Não foi possível realizar a ligação ao servidor. Por favor tenta mais tarde!',
-              icon: 'error',
-              timer: 1500,
-              showConfirmButton: false,
-              timerProgressBar: true,
-              allowOutsideClick: false,
-              iconColor: user.appColor,
-              background: user.appMode === 'dark' ? '#b0b5b5' : 'white',
-            });
-          } else {
-            Swal.fire({
-              title: 'Sucesso!',
-              text: 'A palavra-passe foi restaurada!',
-              icon: 'success',
-              timer: 1500,
-              showConfirmButton: false,
-              timerProgressBar: true,
-              allowOutsideClick: false,
-              iconColor: user.appColor,
-              background: user.appMode === 'dark' ? '#b0b5b5' : 'white',
-            });
-          }
-        } catch (error) {
-          console.error(error);
-          Swal.fire({
-            title: 'Erro!',
-            text: 'Não foi possível realizar a ligação ao servidor. Por favor tenta mais tarde!',
-            icon: 'error',
-            timer: 1500,
-            showConfirmButton: false,
-            timerProgressBar: true,
-            allowOutsideClick: false,
-            iconColor: user.appColor,
-            background: user.appMode === 'dark' ? '#b0b5b5' : 'white',
+
+        axios.put(`${config.server.apiurl}/user/resetpassword`, { userId: user._id, user: currentUser, cancelToken: cancelToken.token })
+          .then((res) => {
+            if (res.data === 'NOK') {
+              Swal.fire({
+                title: 'Erro!',
+                text: 'Não foi possível restaurar a palavra-passe!',
+                icon: 'error',
+                timer: 1500,
+                showConfirmButton: false,
+                timerProgressBar: true,
+                allowOutsideClick: false,
+                iconColor: user.appColor,
+                background: user.appMode === 'dark' ? '#b0b5b5' : 'white',
+              });
+            } else if (res.data === null) {
+              Swal.fire({
+                title: 'Erro!',
+                text: 'Não foi possível realizar a ligação ao servidor. Por favor tenta mais tarde!',
+                icon: 'error',
+                timer: 1500,
+                showConfirmButton: false,
+                timerProgressBar: true,
+                allowOutsideClick: false,
+                iconColor: user.appColor,
+                background: user.appMode === 'dark' ? '#b0b5b5' : 'white',
+              });
+            } else {
+              Swal.fire({
+                title: 'Sucesso!',
+                text: 'A palavra-passe foi restaurada!',
+                icon: 'success',
+                timer: 1500,
+                showConfirmButton: false,
+                timerProgressBar: true,
+                allowOutsideClick: false,
+                iconColor: user.appColor,
+                background: user.appMode === 'dark' ? '#b0b5b5' : 'white',
+              });
+            }
+          }).catch((err) => {
+            if (axios.isCancel(err)) {
+              console.log("Operação Cancelada!")
+            } else {
+              console.log(err);
+              Swal.fire({
+                title: 'Erro!',
+                text: 'Não foi possível realizar a ligação ao servidor. Por favor tenta mais tarde!',
+                icon: 'error',
+                timer: 1500,
+                showConfirmButton: false,
+                timerProgressBar: true,
+                allowOutsideClick: false,
+                iconColor: user.appColor,
+                background: user.appMode === 'dark' ? '#b0b5b5' : 'white',
+              });
+            }
           });
-        }
       }
     });
   };

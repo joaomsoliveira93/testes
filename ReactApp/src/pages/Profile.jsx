@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Swal from 'sweetalert2';
 import 'sweetalert2/dist/sweetalert2.min.css';
 import { Button } from '@mui/material';
@@ -16,19 +16,6 @@ const Profile = () => {
   const { activeMenu, setUser, user, screenSize } = useStateContext();
   const [edit, setEdit] = useState(false);
   const [changePassword, setChangePassword] = useState(false);
-
-  useEffect(async () => {
-    Swal.fire({
-      title: 'A Carregar...',
-      allowOutsideClick: false,
-      allowEscapeKey: false,
-      showConfirmButton: false,
-      background: user.appMode === 'dark' ? '#a1a6ad' : '#FFFFFF',
-      iconColor: user.appColor,
-    });
-
-    Swal.close();
-  }, []);
 
   const handleSave = async () => {
     if (user.name !== '' && user.email !== '' && user.appColor !== '' && user.appMode !== '') {

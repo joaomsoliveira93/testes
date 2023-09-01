@@ -29,28 +29,38 @@ const Utilizadores = () => {
   const [addNew, setAddNew] = useState(false);
   const navigate = useNavigate();
 
-  useEffect(async () => {
+  useEffect(() => {
+    const cancelToken = axios.CancelToken.source();
     if (!user.canManageUsers) {
       navigate('/clientes');
     }
-    try {
-      Swal.fire({
-        title: 'A Carregar...',
-        allowOutsideClick: false,
-        allowEscapeKey: false,
-        showConfirmButton: false,
-        background: user.appMode === 'dark' ? '#a1a6ad' : '#FFFFFF',
-        iconColor: user.appColor,
+
+    Swal.fire({
+      title: 'A Carregar...',
+      allowOutsideClick: false,
+      allowEscapeKey: false,
+      showConfirmButton: false,
+      background: user.appMode === 'dark' ? '#a1a6ad' : '#FFFFFF',
+      iconColor: user.appColor,
+    });
+
+    axios.get(`${config.server.apiurl}/allusers`, { cancelToken: cancelToken.token })
+      .then((res) => {
+        setRows(res.data);
+        Swal.close();
+      }).catch((err) => {
+        if (axios.isCancel(err)) {
+          console.log("Operação Cancelada!")
+        } else {
+          console.log(err);
+        }
       });
 
-      const res = await axios.get(`${config.server.apiurl}/allusers`);
-
-      setRows(res.data);
-    } catch (err) {
-      console.log(err);
+    return () => {
+      cancelToken.cancel();
+      Swal.close();
     }
-    Swal.close();
-  }, []);
+  }, [navigate, user.canManageUsers, user.appColor, user.appMode]);
 
   const filteredRows = rows.filter(
     (row) => (

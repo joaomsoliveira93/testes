@@ -33,7 +33,8 @@ const DtlCliente = () => {
         repEmail: '',
     });
 
-    useEffect(async () => {
+    useEffect(() => {
+        const cancelToken = axios.CancelToken.source();
         Swal.fire({
             title: 'A Carregar...',
             allowOutsideClick: false,
@@ -43,30 +44,25 @@ const DtlCliente = () => {
             iconColor: user.appColor,
         });
 
-        try {
-            const res = await axios.get(`${config.server.apiurl}/client/${id}`);
-            if (res.data) {
+        axios.get(`${config.server.apiurl}/client/${id}`, { cancelToken: cancelToken.token })
+            .then((res) => {
                 setData(res.data);
                 Swal.close();
-            } else {
-                Swal.fire({
-                    title: 'Este cliente não está disponível, por favor tente mais tarde!',
-                    icon: 'error',
-                    showConfirmButton: false,
-                    timer: 2000,
-                    timerProgressBar: true,
-                    background: user.appMode === 'dark' ? '#a1a6ad' : '#FFFFFF',
-                    iconColor: user.appColor,
-                }).then(() => {
-                    navigate('/clientes');
-                });
-            }
-        } catch (err) {
-            console.error(err);
+            }).catch((err) => {
+                if (axios.isCancel(err)) {
+                    console.log("Operação Cancelada!")
+                } else {
+                    console.log(err);
+                }
+            });
+        return () => {
+            cancelToken.cancel();
+            Swal.close();
         }
-    }, []);
+    }, [id, user.appColor, user.appMode]);
 
     const handleSave = () => {
+        const cancelToken = axios.CancelToken.source();
         if (data.name !== '' && data.ncont !== '' && data.morada !== '' && data.codPost !== '' && data.cidade !== '' && data.email !== '') {
             Swal.fire({
                 title: 'Tem a Certeza?',
@@ -79,73 +75,80 @@ const DtlCliente = () => {
                 cancelButtonText: 'Cancelar',
                 iconColor: user.appColor,
                 background: user.appMode === 'dark' ? '#b0b5b5' : 'white',
-            }).then(async (result) => {
+            }).then((result) => {
                 if (result.isConfirmed) {
-                    try {
-                        const res = await axios.put(`${config.server.apiurl}/client/update`, { userId: user._id, client: data });
-                        if (res.data === 'NOK') {
-                            Swal.fire({
-                                title: 'Erro!',
-                                text: 'Não foi possível atualizar os dados deste cliente!',
-                                icon: 'error',
-                                timer: 1500,
-                                showConfirmButton: false,
-                                timerProgressBar: true,
-                                iconColor: user.appColor,
-                                allowOutsideClick: false,
-                                background: user.appMode === 'dark' ? '#b0b5b5' : 'white',
-                            }).then(async () => {
-                                const res1 = await axios.get(`${config.server.apiurl}/client/${id}`);
-                                setData(res1.data);
-                                setEdit(false);
-                            });
-                        } else if (res.data === null) {
-                            Swal.fire({
-                                title: 'Erro!',
-                                text: 'Não foi possível realizar a ligação ao servidor. Por favor tenta mais tarde!',
-                                icon: 'error',
-                                timer: 1500,
-                                showConfirmButton: false,
-                                timerProgressBar: true,
-                                allowOutsideClick: false,
-                                iconColor: user.appColor,
-                                background: user.appMode === 'dark' ? '#b0b5b5' : 'white',
-                            });
-                        } else {
-                            Swal.fire({
-                                title: 'Sucesso!',
-                                text: 'Os dados deste cliente foram atualizados!',
-                                icon: 'success',
-                                timer: 1500,
-                                showConfirmButton: false,
-                                timerProgressBar: true,
-                                allowOutsideClick: false,
-                                iconColor: user.appColor,
-                                background: user.appMode === 'dark' ? '#b0b5b5' : 'white',
-                            }).then(() => {
-                                setEdit(false);
-                            });
-                        }
-                    } catch (error) {
-                        console.error(error);
-                        Swal.fire({
-                            title: 'Erro!',
-                            text: 'Não foi possível realizar a ligação ao servidor. Por favor tenta mais tarde!',
-                            icon: 'error',
-                            timer: 1500,
-                            showConfirmButton: false,
-                            iconColor: user.appColor,
-                            timerProgressBar: true,
-                            allowOutsideClick: false,
-                            background: user.appMode === 'dark' ? '#b0b5b5' : 'white',
+
+                    axios.put(`${config.server.apiurl}/client/update`, { userId: user._id, client: data, cancelToken: cancelToken.token })
+                        .then((res) => {
+                            if (res.data === 'NOK') {
+                                Swal.fire({
+                                    title: 'Erro!',
+                                    text: 'Não foi possível atualizar os dados deste cliente!',
+                                    icon: 'error',
+                                    timer: 1500,
+                                    showConfirmButton: false,
+                                    timerProgressBar: true,
+                                    iconColor: user.appColor,
+                                    allowOutsideClick: false,
+                                    background: user.appMode === 'dark' ? '#b0b5b5' : 'white',
+                                }).then(async () => {
+                                    const res1 = await axios.get(`${config.server.apiurl}/client/${id}`);
+                                    setData(res1.data);
+                                    setEdit(false);
+                                });
+                            } else if (res.data === null) {
+                                Swal.fire({
+                                    title: 'Erro!',
+                                    text: 'Não foi possível realizar a ligação ao servidor. Por favor tenta mais tarde!',
+                                    icon: 'error',
+                                    timer: 1500,
+                                    showConfirmButton: false,
+                                    timerProgressBar: true,
+                                    allowOutsideClick: false,
+                                    iconColor: user.appColor,
+                                    background: user.appMode === 'dark' ? '#b0b5b5' : 'white',
+                                });
+                            } else {
+                                Swal.fire({
+                                    title: 'Sucesso!',
+                                    text: 'Os dados deste cliente foram atualizados!',
+                                    icon: 'success',
+                                    timer: 1500,
+                                    showConfirmButton: false,
+                                    timerProgressBar: true,
+                                    allowOutsideClick: false,
+                                    iconColor: user.appColor,
+                                    background: user.appMode === 'dark' ? '#b0b5b5' : 'white',
+                                }).then(() => {
+                                    setEdit(false);
+                                });
+                            }
+                        }).catch((err) => {
+                            if (axios.isCancel(err)) {
+                                console.log("Operação Cancelada!")
+                            } else {
+                                console.log(err);
+                                Swal.fire({
+                                    title: 'Erro!',
+                                    text: 'Não foi possível realizar a ligação ao servidor. Por favor tenta mais tarde!',
+                                    icon: 'error',
+                                    timer: 1500,
+                                    showConfirmButton: false,
+                                    iconColor: user.appColor,
+                                    timerProgressBar: true,
+                                    allowOutsideClick: false,
+                                    background: user.appMode === 'dark' ? '#b0b5b5' : 'white',
+                                });
+                            }
+
                         });
-                    }
                 }
             });
         }
     };
 
     const handleDelete = async () => {
+        const cancelToken = axios.CancelToken.source();
         Swal.fire({
             title: 'Tem a Certeza?',
             text: 'Vai apagar este cliente!',
@@ -159,61 +162,65 @@ const DtlCliente = () => {
             background: user.appMode === 'dark' ? '#b0b5b5' : 'white',
         }).then(async (result) => {
             if (result.isConfirmed) {
-                try {
-                    const res = await axios.delete(`${config.server.apiurl}/client/delete/${id}`);
-                    if (res.data === 'NOK') {
-                        Swal.fire({
-                            title: 'Erro!',
-                            text: 'Não foi possível apagar o cliente!',
-                            icon: 'error',
-                            timer: 1500,
-                            showConfirmButton: false,
-                            timerProgressBar: true,
-                            iconColor: user.appColor,
-                            allowOutsideClick: false,
-                            background: user.appMode === 'dark' ? '#b0b5b5' : 'white',
-                        });
-                    } else if (res.data === null) {
-                        Swal.fire({
-                            title: 'Erro!',
-                            text: 'Não foi possível realizar a ligação ao servidor. Por favor tenta mais tarde!',
-                            icon: 'error',
-                            timer: 1500,
-                            showConfirmButton: false,
-                            timerProgressBar: true,
-                            iconColor: user.appColor,
-                            allowOutsideClick: false,
-                            background: user.appMode === 'dark' ? '#b0b5b5' : 'white',
-                        });
-                    } else {
-                        Swal.fire({
-                            title: 'Sucesso!',
-                            text: 'O cliente foi apagado!',
-                            icon: 'success',
-                            timer: 1500,
-                            showConfirmButton: false,
-                            timerProgressBar: true,
-                            iconColor: user.appColor,
-                            allowOutsideClick: false,
-                            background: user.appMode === 'dark' ? '#b0b5b5' : 'white',
-                        }).then(() => {
-                            navigate('/clientes');
-                        });
-                    }
-                } catch (error) {
-                    console.error(error);
-                    Swal.fire({
-                        title: 'Erro!',
-                        text: 'Não foi possível realizar a ligação ao servidor. Por favor tenta mais tarde!',
-                        icon: 'error',
-                        timer: 1500,
-                        showConfirmButton: false,
-                        iconColor: user.appColor,
-                        timerProgressBar: true,
-                        allowOutsideClick: false,
-                        background: user.appMode === 'dark' ? '#b0b5b5' : 'white',
-                    });
-                }
+                axios.delete(`${config.server.apiurl}/client/delete/${id}`, { cancelToken: cancelToken.token })
+                    .then((res) => {
+                        if (res.data === 'NOK') {
+                            Swal.fire({
+                                title: 'Erro!',
+                                text: 'Não foi possível apagar o cliente!',
+                                icon: 'error',
+                                timer: 1500,
+                                showConfirmButton: false,
+                                timerProgressBar: true,
+                                iconColor: user.appColor,
+                                allowOutsideClick: false,
+                                background: user.appMode === 'dark' ? '#b0b5b5' : 'white',
+                            });
+                        } else if (res.data === null) {
+                            Swal.fire({
+                                title: 'Erro!',
+                                text: 'Não foi possível realizar a ligação ao servidor. Por favor tenta mais tarde!',
+                                icon: 'error',
+                                timer: 1500,
+                                showConfirmButton: false,
+                                timerProgressBar: true,
+                                iconColor: user.appColor,
+                                allowOutsideClick: false,
+                                background: user.appMode === 'dark' ? '#b0b5b5' : 'white',
+                            });
+                        } else {
+                            Swal.fire({
+                                title: 'Sucesso!',
+                                text: 'O cliente foi apagado!',
+                                icon: 'success',
+                                timer: 1500,
+                                showConfirmButton: false,
+                                timerProgressBar: true,
+                                iconColor: user.appColor,
+                                allowOutsideClick: false,
+                                background: user.appMode === 'dark' ? '#b0b5b5' : 'white',
+                            }).then(() => {
+                                navigate('/clientes');
+                            });
+                        }
+                    }).catch((err) => {
+                        if (axios.isCancel(err)) {
+                            console.log("Operação Cancelada!")
+                        } else {
+                            console.log(err);
+                            Swal.fire({
+                                title: 'Erro!',
+                                text: 'Não foi possível realizar a ligação ao servidor. Por favor tenta mais tarde!',
+                                icon: 'error',
+                                timer: 1500,
+                                showConfirmButton: false,
+                                iconColor: user.appColor,
+                                timerProgressBar: true,
+                                allowOutsideClick: false,
+                                background: user.appMode === 'dark' ? '#b0b5b5' : 'white',
+                            });
+                        }
+                    })
             }
         });
     };
@@ -546,7 +553,7 @@ const DtlCliente = () => {
 
                     </>
                 )}
-            <Licences clientId={id} />
+                <Licences clientId={id} />
             </div>
         </>
     );
