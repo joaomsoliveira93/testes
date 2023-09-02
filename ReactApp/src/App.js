@@ -12,6 +12,12 @@ const App = () => {
   useEffect(() => {
     const cancelToken = axios.CancelToken.source();
     const temp = JSON.parse(localStorage.getItem('token'));
+    const darkThemeMq = window.matchMedia("(prefers-color-scheme: dark)");
+    if (darkThemeMq.matches) {
+      console.log('dark');
+    } else {
+      console.log('light');
+    }
     if (temp) {
       const tokenValidDate = new Date(temp.tokenValidDate);
       const currentDateTime = new Date();

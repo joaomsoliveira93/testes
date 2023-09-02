@@ -223,7 +223,7 @@ const Utilizadores = () => {
               <TableBody>
                 {stableSort(filteredRows, getComparator(order, orderBy))
                   .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                  .map((row) => (
+                  .map((row) => 
                     <TableRow key={row._id}>
                       <TableCell width="30px">
                         <Link
@@ -240,7 +240,7 @@ const Utilizadores = () => {
                       <TableCell>{row.tipo === 'admin' ? 'Administrador' : 'Utilizador'}</TableCell>
                       <TableCell>{row.estado === 1 ? 'Ativo' : 'Inativo'}</TableCell>
                     </TableRow>
-                  ))}
+                  )}
               </TableBody>
             </Table>
           </TableContainer>

@@ -237,9 +237,19 @@ const DtlCliente = () => {
             cancelButtonText: 'Cancelar',
             iconColor: user.appColor,
             background: user.appMode === 'dark' ? '#b0b5b5' : 'white',
-        }).then(async () => {
-            const res = await axios.get(`${config.server.apiurl}/client/${id}`);
-            setData(res.data);
+        }).then(() => {
+            const cancelToken = axios.CancelToken.source();
+            axios.get(`${config.server.apiurl}/client/${id}`, { cancelToken: cancelToken.token })
+                .then((res) => {
+                    setData(res.data);
+                    Swal.close();
+                }).catch((err) => {
+                    if (axios.isCancel(err)) {
+                        console.log("Operação Cancelada!")
+                    } else {
+                        console.log(err);
+                    }
+                });
             setEdit(false);
         });
     };

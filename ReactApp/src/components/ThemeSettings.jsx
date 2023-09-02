@@ -39,7 +39,24 @@ const ThemeSettings = () => {
         </div>
         <div className="flex-col border-t-1 border-color p-4 ml-4">
           <p className="font-semibold text-xl ">Tema</p>
-          <div className="mt-4">
+          {/*<div className="mt-4">
+            <input
+              type="radio"
+              id="system"
+              name="theme"
+              value="system"
+              className="cursor-pointer"
+              onChange={(e) => setUser({
+                ...user,
+                appMode: e.target.value,
+              })}
+              checked={user.appMode === 'system'}
+            />
+            <label htmlFor="system" className="ml-2 text-md cursor-pointer">
+              Sistema
+            </label>
+            </div>*/}
+          <div className="mt-2">
             <input
               type="radio"
               id="light"
