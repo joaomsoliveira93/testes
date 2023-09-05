@@ -8,7 +8,7 @@ const mongoose = require("mongoose");
 app.use(cors());
 app.use(bodyParser.json({ limit: '50mb' }));
 app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
-
+console.log(config.mongoose.url)
 mongoose.connect(config.mongoose.url, { useNewUrlParser: true });
 const db = mongoose.connection;
 db.on('error', error => console.error(error));
