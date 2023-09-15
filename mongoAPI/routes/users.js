@@ -63,12 +63,13 @@ router.post('/login', async (req, res) => {
 
 router.get('/allusers', async (req, res) => {
     try {
-        const users = await User.find({}, 'username name tipo appColor appMode email estado ');
+        const users = await User.find({}, 'username name tipo appColor appMode email estado');
         if (users.length > 0) {
             res.json(users);
         } else {
             res.send('null')
         }
+        
 
     } catch (error) {
         console.error(error);

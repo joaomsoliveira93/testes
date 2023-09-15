@@ -8,7 +8,6 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 import Client from '@/app/interfaces/Client';
 
-
 interface AddClientProps {
     open: boolean;
     client:Client;
@@ -18,7 +17,6 @@ interface AddClientProps {
     handleSave:()=>void;
 
 }
-
 
 export const AddClientSvr = ({ open, handleClose, client, user, setClient ,handleSave}: AddClientProps) => {
     return (

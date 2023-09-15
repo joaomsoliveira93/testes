@@ -158,9 +158,9 @@ const Clientes = () => {
             </div>
             {addNew && <AddClient open={addNew} setAdd={closeAddModel} />}
             <div className={`fixed component mt-[180px] mr-2 p-3 bottom-2 -top-4 right-0 ${activeMenu && screenSize > 900 ? 'w-[calc(100%-305px)]' : 'w-[calc(100%-15px)]'} dark:bg-gray-400 bg-white rounded-md`}>
-                <Paper sx={{ width: '100%', height: '100%' }} style={{ backgroundColor: user.appMode === 'dark' ? '#a1a6ad' : '#FFFFFF' }}>
+                <Paper sx={{ width: '100%', height: '100%', overflow: 'hidden' }} style={{ backgroundColor: user.appMode === 'dark' ? '#a1a6ad' : '#FFFFFF' }}>
                     <TableContainer style={{ height: '90%', backgroundColor: user.appMode === 'dark' ? '#a1a6ad' : '#FFFFFF' }}>
-                        <Table stickyHeader size="small">
+                        <Table stickyHeader aria-label="sticky table">
                             <TableHead>
                                 <TableRow>
                                     <TableCell style={{ backgroundColor: user.appMode === 'dark' ? '#a1a6ad' : '#FFFFFF' }} />
