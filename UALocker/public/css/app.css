@@ -1,0 +1,53 @@
+.locker-title{
+    text-align: center;
+    padding: 10px 0;
+    background-color: #f8f8f9;
+    color: #bebec3;
+    font-weight: 600;
+}
+section{
+    padding-top: 100px;
+}
+.form-section{
+    padding-left:15px;
+    display: none;
+}
+.form-section.current {
+    display: inherit;
+}
+.parsley-errors-list{
+    margin: 2px 0 3px;
+    padding: 0px;
+    list-style: none;
+    color: red;
+}
+
+.floatButton{
+    position: fixed;
+    right: 20px;
+    bottom: 40px;
+    z-index: 100;
+    height:max-content;
+    width:max-content;
+    padding: auto;
+    font-size: large;
+}
+
+.fixed-header{
+    position:fixed;
+    z-index:1000;
+    width:calc(100% - 220px)!important;
+}
+
+.fixed-header-mini{
+    position:fixed;
+    z-index:1000;
+    width:calc(100% - 70px)!important;
+}
+
+.mini-sidebar{
+    width: 220px!important;
+    height: 100%!important;
+    background-color:#2F4050;
+}
+
