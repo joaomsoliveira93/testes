@@ -4,7 +4,6 @@ import Swal from 'sweetalert2';
 import 'sweetalert2/dist/sweetalert2.min.css';
 import { sha256 } from 'js-sha256';
 import { useStateContext } from '../contexts/ContextProvider';
-import config from '../config.json';
 
 const Login = () => {
   let username = useRef();
@@ -15,7 +14,7 @@ const Login = () => {
     const cancelToken = axios.CancelToken.source();
     if (password !== '' && username !== '') {
       const hashedPassword = sha256(password);
-      axios.post(`${config.server.apiurl}/login`, { userName: username, password: hashedPassword, cancelToken: cancelToken.token })
+      axios.post(`${process.env.REACT_APP_API_URL}/login`, { userName: username, password: hashedPassword, cancelToken: cancelToken.token })
         .then((res) => {
           if (res.data === null) {
             Swal.fire({

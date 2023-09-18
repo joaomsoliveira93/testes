@@ -9,7 +9,6 @@ import axios from 'axios';
 import Swal from 'sweetalert2';
 import 'sweetalert2/dist/sweetalert2.min.css';
 import { useStateContext } from '../contexts/ContextProvider';
-import config from '../config.json';
 
 export default function AddLicence({ client, open, setAdd }) {
 
@@ -45,7 +44,7 @@ export default function AddLicence({ client, open, setAdd }) {
         const cancelToken = axios.CancelToken.source();
         if (licence.tipo === '' && licence.startedAt === '' && licence.endedAt === '' && licence.obs === '') {
 
-            axios.post(`${config.server.apiurl}/licence/add`, { licence, userId: user._id, cancelToken: cancelToken.token })
+            axios.post(`${process.env.REACT_APP_API_URL}/licence/add`, { licence, userId: user._id, cancelToken: cancelToken.token })
                 .then((res) => {
                     if (res.data === 'NOK') {
                         Swal.fire({

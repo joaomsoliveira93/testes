@@ -4,7 +4,6 @@ import axios from 'axios';
 import { Navbar, Sidebar, ThemeSettings, UserProfile } from './components';
 import { Utilizadores, DtlUtilizador, Login, Profile, Clientes, DtlCliente } from './pages';
 import './App.css';
-import config from './config.json';
 import { useStateContext } from './contexts/ContextProvider';
 
 const App = () => {
@@ -21,7 +20,7 @@ const App = () => {
     if (temp) {
       const tokenValidDate = new Date(temp.tokenValidDate);
       const currentDateTime = new Date();
-      axios.post(`${config.server.apiurl}/login`, { userName: '', password: '', token: temp.token, cancelToken: cancelToken.token })
+      axios.post(`${process.env.REACT_APP_API_URL}/login`, { userName: '', password: '', token: temp.token, cancelToken: cancelToken.token })
         .then((res) => {
           if (tokenValidDate < currentDateTime) {
             localStorage.setItem('token', JSON.stringify({
@@ -58,7 +57,7 @@ const App = () => {
   }, [setUser]);
 
   return (
-    <BrowserRouter basename="/">
+    <BrowserRouter basename="/licencasreact/">
       {user === null ? (
         <div className="flex relative w-full min-h-screen bg-blue-500">
           <Routes>

@@ -9,7 +9,6 @@ import TextField from '@mui/material/TextField';
 import { Paper, TableContainer, Table, TableHead, TableBody, TableSortLabel, TableRow, TableCell, TablePagination, Button } from '@mui/material';
 import { useStateContext } from '../../contexts/ContextProvider';
 import { AddClient, Header } from '../../components';
-import config from '../../config.json';
 
 const rowsPerPageOptions = [5, 10, 25];
 
@@ -37,7 +36,7 @@ const Clientes = () => {
             iconColor: user.appColor,
         });
 
-        axios.get(`${config.server.apiurl}/allclients`, { cancelToken: cancelToken.token })
+        axios.get(`${process.env.REACT_APP_API_URL}/allclients`, { cancelToken: cancelToken.token })
             .then((res) => {
                 setInitialData(res.data);
                 Swal.close();
@@ -98,7 +97,7 @@ const Clientes = () => {
     const closeAddModel = async (load) => {
         setAddNew(false);
         if (load) {
-            const res = await axios.get(`${config.server.apiurl}/allclients`);
+            const res = await axios.get(`${process.env.REACT_APP_API_URL}/allclients`);
             setInitialData(res.data);
         }
     };

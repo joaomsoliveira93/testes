@@ -13,7 +13,6 @@ import DoDisturbIcon from '@mui/icons-material/DoDisturb';
 import { Button } from '@mui/material';
 import { useStateContext } from '../contexts/ContextProvider';
 import axios from 'axios';
-import config from '../config.json';
 import Swal from 'sweetalert2';
 import AddLicence from './AddLicence';
 
@@ -33,7 +32,7 @@ export const Licences = ({ clientId }) => {
 
     useEffect(() => {
         const cancelToken = axios.CancelToken.source();
-        axios.get(`${config.server.apiurl}/alllicences/${clientId}`, { cancelToken: cancelToken.token })
+        axios.get(`${process.env.REACT_APP_API_URL}/alllicences/${clientId}`, { cancelToken: cancelToken.token })
             .then((res) => {
                 setLicences(res.data);
             }).catch((err) => {
@@ -90,7 +89,7 @@ export const Licences = ({ clientId }) => {
         setAddNew(false);
         if (load) {
             const cancelToken = axios.CancelToken.source();
-            axios.get(`${config.server.apiurl}/alllicences/${clientId}`, { cancelToken: cancelToken.token })
+            axios.get(`${process.env.REACT_APP_API_URL}/alllicences/${clientId}`, { cancelToken: cancelToken.token })
                 .then((res) => {
                     setLicences(res.data);
                 }).catch((err) => {
@@ -117,7 +116,7 @@ export const Licences = ({ clientId }) => {
             background: user.appMode === 'dark' ? '#b0b5b5' : 'white',
         }).then(() => {
             const cancelToken = axios.CancelToken.source();
-            axios.get(`${config.server.apiurl}/alllicences/${clientId}`, { cancelToken: cancelToken.token })
+            axios.get(`${process.env.REACT_APP_API_URL}/alllicences/${clientId}`, { cancelToken: cancelToken.token })
                 .then((res) => {
                     setLicences(res.data);
                 }).catch((err) => {
@@ -154,7 +153,7 @@ export const Licences = ({ clientId }) => {
         }).then((result) => {
             if (result.isConfirmed) {
 
-                axios.put(`${config.server.apiurl}/licence/update`, { userId: user._id, licence: temp, cancelToken: cancelToken.token })
+                axios.put(`${process.env.REACT_APP_API_URL}/licence/update`, { userId: user._id, licence: temp, cancelToken: cancelToken.token })
                     .then((res) => {
                         if (res.data === 'NOK') {
                             Swal.fire({
@@ -168,7 +167,7 @@ export const Licences = ({ clientId }) => {
                                 allowOutsideClick: false,
                                 background: user.appMode === 'dark' ? '#b0b5b5' : 'white',
                             }).then(async () => {
-                                axios.get(`${config.server.apiurl}/alllicences/${clientId}`, { cancelToken: cancelToken.token })
+                                axios.get(`${process.env.REACT_APP_API_URL}/alllicences/${clientId}`, { cancelToken: cancelToken.token })
                                     .then((res) => {
                                         setLicences(res.data);
                                     }).catch((err) => {
@@ -247,7 +246,7 @@ export const Licences = ({ clientId }) => {
             background: user.appMode === 'dark' ? '#b0b5b5' : 'white',
         }).then(async (result) => {
             if (result.isConfirmed) {
-                axios.delete(`${config.server.apiurl}/licence/delete/${temp}`, { cancelToken: cancelToken.token })
+                axios.delete(`${process.env.REACT_APP_API_URL}/licence/delete/${temp}`, { cancelToken: cancelToken.token })
                     .then((res) => {
                         if (res.data === 'NOK') {
                             Swal.fire({
@@ -285,7 +284,7 @@ export const Licences = ({ clientId }) => {
                                 allowOutsideClick: false,
                                 background: user.appMode === 'dark' ? '#b0b5b5' : 'white',
                             }).then(() => {
-                                axios.get(`${config.server.apiurl}/alllicences/${clientId}`, { cancelToken: cancelToken.token })
+                                axios.get(`${process.env.REACT_APP_API_URL}/alllicences/${clientId}`, { cancelToken: cancelToken.token })
                                     .then((res) => {
                                         setLicences(res.data);
                                     }).catch((err) => {

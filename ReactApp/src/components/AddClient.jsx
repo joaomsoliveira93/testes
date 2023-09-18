@@ -9,7 +9,6 @@ import axios from 'axios';
 import Swal from 'sweetalert2';
 import 'sweetalert2/dist/sweetalert2.min.css';
 import { useStateContext } from '../contexts/ContextProvider';
-import config from '../config.json';
 
 export default function AddClient({ open, setAdd }) {
     const { user } = useStateContext();
@@ -33,7 +32,7 @@ export default function AddClient({ open, setAdd }) {
     const handleSave = () => {
         const cancelToken = axios.CancelToken.source();
         if (client.name !== '' && client.ncont !== '' && client.morada !== '' && client.codPost !== '' && client.cidade !== '' && client.email !== '') {
-            axios.post(`${config.server.apiurl}/client/add`, { client, userId: user._id, cancelToken: cancelToken.token })
+            axios.post(`${process.env.REACT_APP_API_URL}/client/add`, { client, userId: user._id, cancelToken: cancelToken.token })
                 .then((res) => {
                     if (res.data === 'NOK') {
                         Swal.fire({

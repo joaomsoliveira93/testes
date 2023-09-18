@@ -11,7 +11,6 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import { useStateContext } from '../../contexts/ContextProvider';
 import { Header, AddUser } from '../../components';
-import config from '../../config.json';
 
 const rowsPerPageOptions = [5, 10, 25];
 
@@ -44,7 +43,7 @@ const Utilizadores = () => {
       iconColor: user.appColor,
     });
 
-    axios.get(`${config.server.apiurl}/allusers`, { cancelToken: cancelToken.token })
+    axios.get(`${process.env.REACT_APP_API_URL}/allusers`, { cancelToken: cancelToken.token })
       .then((res) => {
         setRows(res.data);
         Swal.close();
@@ -107,7 +106,7 @@ const Utilizadores = () => {
   const closeAddModel = async (load) => {
     setAddNew(false);
     if (load) {
-      const res = await axios.get(`${config.server.apiurl}/allusers`);
+      const res = await axios.get(`${process.env.REACT_APP_API_URL}/allusers`);
       setRows(res.data);
     }
   };

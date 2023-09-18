@@ -1,17 +1,14 @@
 import React, { useRef } from 'react';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
-
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
-
 import axios from 'axios';
 import Swal from 'sweetalert2';
 import 'sweetalert2/dist/sweetalert2.min.css';
 import { useStateContext } from '../contexts/ContextProvider';
-import config from '../config.json';
 
 export default function UpdatePassword({ open, setAdd }) {
     const { user } = useStateContext();
@@ -27,7 +24,7 @@ export default function UpdatePassword({ open, setAdd }) {
         if (current !== '' && new1 !== '' && new2 !== '') {
             if (new1 === new2) {
                 try {
-                    const res = await axios.put(`${config.server.apiurl}/user/changepassword`, { password: current, newpassword: new1, userId: user._id });
+                    const res = await axios.put(`${process.env.REACT_APP_API_URL}/user/changepassword`, { password: current, newpassword: new1, userId: user._id });
                     if (res.data === 'NOK') {
                         Swal.fire({
                             title: 'Erro!',

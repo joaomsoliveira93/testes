@@ -12,7 +12,6 @@ import SaveIcon from '@mui/icons-material/Save';
 import DoDisturbIcon from '@mui/icons-material/DoDisturb';
 import { useStateContext } from '../../contexts/ContextProvider';
 import { Header } from '../../components';
-import config from '../../config.json';
 import { Licences } from '../../components/Licences';
 
 const DtlCliente = () => {
@@ -44,7 +43,7 @@ const DtlCliente = () => {
             iconColor: user.appColor,
         });
 
-        axios.get(`${config.server.apiurl}/client/${id}`, { cancelToken: cancelToken.token })
+        axios.get(`${process.env.REACT_APP_API_URL}/client/${id}`, { cancelToken: cancelToken.token })
             .then((res) => {
                 setData(res.data);
                 Swal.close();
@@ -78,7 +77,7 @@ const DtlCliente = () => {
             }).then((result) => {
                 if (result.isConfirmed) {
 
-                    axios.put(`${config.server.apiurl}/client/update`, { userId: user._id, client: data, cancelToken: cancelToken.token })
+                    axios.put(`${process.env.REACT_APP_API_URL}/client/update`, { userId: user._id, client: data, cancelToken: cancelToken.token })
                         .then((res) => {
                             if (res.data === 'NOK') {
                                 Swal.fire({
@@ -92,7 +91,7 @@ const DtlCliente = () => {
                                     allowOutsideClick: false,
                                     background: user.appMode === 'dark' ? '#b0b5b5' : 'white',
                                 }).then(async () => {
-                                    const res1 = await axios.get(`${config.server.apiurl}/client/${id}`);
+                                    const res1 = await axios.get(`${process.env.REACT_APP_API_URL}/client/${id}`);
                                     setData(res1.data);
                                     setEdit(false);
                                 });
@@ -162,7 +161,7 @@ const DtlCliente = () => {
             background: user.appMode === 'dark' ? '#b0b5b5' : 'white',
         }).then(async (result) => {
             if (result.isConfirmed) {
-                axios.delete(`${config.server.apiurl}/client/delete/${id}`, { cancelToken: cancelToken.token })
+                axios.delete(`${process.env.REACT_APP_API_URL}/client/delete/${id}`, { cancelToken: cancelToken.token })
                     .then((res) => {
                         if (res.data === 'NOK') {
                             Swal.fire({
@@ -239,7 +238,7 @@ const DtlCliente = () => {
             background: user.appMode === 'dark' ? '#b0b5b5' : 'white',
         }).then(() => {
             const cancelToken = axios.CancelToken.source();
-            axios.get(`${config.server.apiurl}/client/${id}`, { cancelToken: cancelToken.token })
+            axios.get(`${process.env.REACT_APP_API_URL}/client/${id}`, { cancelToken: cancelToken.token })
                 .then((res) => {
                     setData(res.data);
                     Swal.close();

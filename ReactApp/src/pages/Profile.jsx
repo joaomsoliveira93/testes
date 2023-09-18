@@ -10,7 +10,6 @@ import PasswordIcon from '@mui/icons-material/Password';
 import axios from 'axios';
 import { Header, UpdatePassword } from '../components';
 import { useStateContext } from '../contexts/ContextProvider';
-import config from '../config.json';
 
 const Profile = () => {
   const { activeMenu, setUser, user, screenSize } = useStateContext();
@@ -33,7 +32,7 @@ const Profile = () => {
       }).then(async (result) => {
         if (result.isConfirmed) {
           try {
-            const res = await axios.put(`${config.server.apiurl}/user/update`, { userId: user._id, user });
+            const res = await axios.put(`${process.env.REACT_APP_API_URL}/user/update`, { userId: user._id, user });
             if (res.data === 'NOK') {
               Swal.fire({
                 title: 'Erro!',
@@ -113,7 +112,7 @@ const Profile = () => {
       background: user.appMode === 'dark' ? '#b0b5b5' : 'white',
     }).then(async (result) => {
       if (result.isConfirmed) {
-        const res = await axios.get(`${config.server.apiurl}/user/${user._id}`);
+        const res = await axios.get(`${process.env.REACT_APP_API_URL}/user/${user._id}`);
         setUser(res.data);
         setEdit(false);
       }

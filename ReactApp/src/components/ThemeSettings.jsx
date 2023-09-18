@@ -4,14 +4,13 @@ import { BsCheck } from 'react-icons/bs';
 import axios from 'axios';
 import { themeColors } from '../data/themeColors';
 import { useStateContext } from '../contexts/ContextProvider';
-import config from '../config.json';
 
 const ThemeSettings = () => {
   const { setUser, user, themeSettings, setThemeSettings } = useStateContext();
 
   useEffect(() => {
     const cancelToken = axios.CancelToken.source();
-    axios.put(`${config.server.apiurl}/user/update`, { userId: user._id, user, cancelToken: cancelToken.token })
+    axios.put(`${process.env.REACT_APP_API_URL}/user/update`, { userId: user._id, user, cancelToken: cancelToken.token })
       .catch((err) => {
         if (axios.isCancel(err)) {
           console.log("Operação Cancelada!")

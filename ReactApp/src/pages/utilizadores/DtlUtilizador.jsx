@@ -19,7 +19,6 @@ import CheckIcon from '@mui/icons-material/Check';
 import axios from 'axios';
 import { Header } from '../../components';
 import { useStateContext } from '../../contexts/ContextProvider';
-import config from '../../config.json';
 
 const DtlUtilizador = () => {
   const { activeMenu, setUser, user, screenSize } = useStateContext();
@@ -52,7 +51,7 @@ const DtlUtilizador = () => {
       iconColor: user.appColor,
     });
 
-    axios.get(`${config.server.apiurl}/user/${id}`, { cancelToken: cancelToken.token })
+    axios.get(`${process.env.REACT_APP_API_URL}/user/${id}`, { cancelToken: cancelToken.token })
       .then((res) => {
         setCurrentUser(res.data);
         Swal.close();
@@ -88,7 +87,7 @@ const DtlUtilizador = () => {
       }).then((result) => {
         if (result.isConfirmed) {
 
-          axios.put(`${config.server.apiurl}/user/update`, { userId: user._id, user: currentUser, cancelToken: cancelToken.token })
+          axios.put(`${process.env.REACT_APP_API_URL}/user/update`, { userId: user._id, user: currentUser, cancelToken: cancelToken.token })
             .then((res) => {
               if (res.data === 'NOK') {
                 Swal.fire({
@@ -172,7 +171,7 @@ const DtlUtilizador = () => {
       background: user.appMode === 'dark' ? '#b0b5b5' : 'white',
     }).then((result) => {
       if (result.isConfirmed) {
-        axios.delete(`${config.server.apiurl}/user/delete/${id}`, { cancelToken: cancelToken.token })
+        axios.delete(`${process.env.REACT_APP_API_URL}/user/delete/${id}`, { cancelToken: cancelToken.token })
           .then((res) => {
             if (res.data === 'NOK') {
               Swal.fire({
@@ -253,7 +252,7 @@ const DtlUtilizador = () => {
     }).then((result) => {
       if (result.isConfirmed) {
 
-        axios.put(`${config.server.apiurl}/user/resetpassword`, { userId: user._id, user: currentUser, cancelToken: cancelToken.token })
+        axios.put(`${process.env.REACT_APP_API_URL}/user/resetpassword`, { userId: user._id, user: currentUser, cancelToken: cancelToken.token })
           .then((res) => {
             if (res.data === 'NOK') {
               Swal.fire({
@@ -333,7 +332,7 @@ const DtlUtilizador = () => {
             ...currentUser,
             estado,
           });
-          const res = await axios.put(`${config.server.apiurl}/user/update`, { userId: user._id, user: currentUser });
+          const res = await axios.put(`${process.env.REACT_APP_API_URL}/user/update`, { userId: user._id, user: currentUser });
           if (res.data === 'NOK') {
             Swal.fire({
               title: 'Erro!',
@@ -403,7 +402,7 @@ const DtlUtilizador = () => {
       background: user.appMode === 'dark' ? '#b0b5b5' : 'white',
     }).then(async (result) => {
       if (result.isConfirmed) {
-        const res = await axios.get(`${config.server.apiurl}/user/${id}`);
+        const res = await axios.get(`${process.env.REACT_APP_API_URL}/user/${id}`);
         setCurrentUser(res.data);
         setEdit(false);
       }
