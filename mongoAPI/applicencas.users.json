@@ -1,0 +1,33 @@
+[{
+  "_id": {
+    "$oid": "65e8ed106f8e8dd6517a8751"
+  },
+  "username": "admin",
+  "name": "Administrador",
+  "tipo": "admin",
+  "estado": 1,
+  "email": "sample@example.com",
+  "password": "f4035833cb911a3e8634903e498ff84b05d4b66f73c6155af3f58b22ad3503f4",
+  "appMode": "dark",
+  "appColor": "#03C9D7",
+  "createdAt": "2024-03-06T12:00:00.000Z",
+  "updatedAt": {
+    "$date": "2024-03-06T23:00:04.333Z"
+  },
+  "createdBy": "60c3f19c3b002f3a6b58cbcf",
+  "updatedBy": {
+    "$oid": "65e8ed106f8e8dd6517a8751"
+  },
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJhZG1pbiIsImlhdCI6MTcwOTc2NDExMCwiZXhwIjoxNzA5OTM2OTEwfQ.iHRHpg-GCfMcnPHwlifrVl4koytg2_A0ubJ45Jt1nyk",
+  "tokenCreatedAt": {
+    "$date": "2024-03-06T22:28:30.344Z"
+  },
+  "tokenValidDate": {
+    "$date": "2024-03-08T22:28:30.344Z"
+  },
+  "canManageUsers": true,
+  "canManagePermissions": true,
+  "canManageLicences": true,
+  "canManageClients": true,
+  "img": ""
+}]

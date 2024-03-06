@@ -5,8 +5,7 @@ const User = require('../models/user')
 const sha256 = require('js-sha256');
 const jwt = require('jsonwebtoken');
 
-router.post('/login', async (req, res) => {
-    const secretKey = 'mongoDBAPI';
+router.post('/login', async (req, res) => {      
     try {
         const payload = {
             userId: req.body.userName,
@@ -15,6 +14,7 @@ router.post('/login', async (req, res) => {
         const options = {
             expiresIn: '2d',
         };
+        const secretKey='teste';
         const token = jwt.sign(payload, secretKey, options);
         const tempuser = await User.findOne({ token: req.body.token });
         if (tempuser) {

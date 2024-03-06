@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { HashRouter as Router, Routes, Route } from 'react-router-dom';
 import axios from 'axios';
 import { Navbar, Sidebar, ThemeSettings, UserProfile } from './components';
 import { Utilizadores, DtlUtilizador, Login, Profile, Clientes, DtlCliente } from './pages';
@@ -57,7 +57,7 @@ const App = () => {
   }, [setUser]);
 
   return (
-    <BrowserRouter basename="/licencasreact/">
+    <Router basename="/">
       {user === null ? (
         <div className="flex relative w-full min-h-screen bg-blue-500">
           <Routes>
@@ -81,7 +81,7 @@ const App = () => {
           </Routes>
         </div>
       )}
-    </BrowserRouter>
+    </Router>
   );
 };
 
