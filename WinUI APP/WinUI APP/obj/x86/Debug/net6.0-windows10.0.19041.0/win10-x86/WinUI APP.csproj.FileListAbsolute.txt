@@ -566,7 +566,6 @@ D:\Repositorios\testes\WinUI APP\WinUI APP\bin\x86\Debug\net6.0-windows10.0.1904
 D:\Repositorios\testes\WinUI APP\WinUI APP\bin\x86\Debug\net6.0-windows10.0.19041.0\win10-x86\hostfxr.dll
 D:\Repositorios\testes\WinUI APP\WinUI APP\bin\x86\Debug\net6.0-windows10.0.19041.0\win10-x86\hostpolicy.dll
 D:\Repositorios\testes\WinUI APP\WinUI APP\bin\x86\Debug\net6.0-windows10.0.19041.0\win10-x86\mscordaccore.dll
-D:\Repositorios\testes\WinUI APP\WinUI APP\bin\x86\Debug\net6.0-windows10.0.19041.0\win10-x86\mscordaccore_x86_x86_6.0.2123.36311.dll
 D:\Repositorios\testes\WinUI APP\WinUI APP\bin\x86\Debug\net6.0-windows10.0.19041.0\win10-x86\mscordbi.dll
 D:\Repositorios\testes\WinUI APP\WinUI APP\bin\x86\Debug\net6.0-windows10.0.19041.0\win10-x86\mscorrc.dll
 D:\Repositorios\testes\WinUI APP\WinUI APP\bin\x86\Debug\net6.0-windows10.0.19041.0\win10-x86\msquic.dll
@@ -620,7 +619,6 @@ D:\Repositorios\testes\WinUI APP\WinUI APP\obj\x86\Debug\net6.0-windows10.0.1904
 D:\Repositorios\testes\WinUI APP\WinUI APP\obj\x86\Debug\net6.0-windows10.0.19041.0\win10-x86\WinUI APP.AssemblyInfoInputs.cache
 D:\Repositorios\testes\WinUI APP\WinUI APP\obj\x86\Debug\net6.0-windows10.0.19041.0\win10-x86\WinUI APP.AssemblyInfo.cs
 D:\Repositorios\testes\WinUI APP\WinUI APP\obj\x86\Debug\net6.0-windows10.0.19041.0\win10-x86\WinUI APP.csproj.CoreCompileInputs.cache
-D:\Repositorios\testes\WinUI APP\WinUI APP\obj\x86\Debug\net6.0-windows10.0.19041.0\win10-x86\WinUI APP.csproj.CopyComplete
 D:\Repositorios\testes\WinUI APP\WinUI APP\obj\x86\Debug\net6.0-windows10.0.19041.0\win10-x86\WinUI APP.dll
 D:\Repositorios\testes\WinUI APP\WinUI APP\obj\x86\Debug\net6.0-windows10.0.19041.0\win10-x86\refint\WinUI APP.dll
 D:\Repositorios\testes\WinUI APP\WinUI APP\obj\x86\Debug\net6.0-windows10.0.19041.0\win10-x86\WinUI APP.pdb
@@ -642,3 +640,6 @@ D:\Repositorios\testes\WinUI APP\WinUI APP\obj\x86\Debug\net6.0-windows10.0.1904
 D:\Repositorios\testes\WinUI APP\WinUI APP\obj\x86\Debug\net6.0-windows10.0.19041.0\win10-x86\qualifiers.txt.intermediate
 D:\Repositorios\testes\WinUI APP\WinUI APP\obj\x86\Debug\net6.0-windows10.0.19041.0\win10-x86\MultipleQualifiersPerDimensionFound.txt
 D:\Repositorios\testes\WinUI APP\WinUI APP\obj\x86\Debug\net6.0-windows10.0.19041.0\win10-x86\ProjectArchitectures.txt
+D:\Repositorios\testes\WinUI APP\WinUI APP\bin\x86\Debug\net6.0-windows10.0.19041.0\win10-x86\mscordaccore_x86_x86_6.0.2724.6912.dll
+D:\Repositorios\testes\WinUI APP\WinUI APP\obj\x86\Debug\net6.0-windows10.0.19041.0\win10-x86\WinUI APP.sourcelink.json
+D:\Repositorios\testes\WinUI APP\WinUI APP\obj\x86\Debug\net6.0-windows10.0.19041.0\win10-x86\WinUI APP.csproj.Up2Date

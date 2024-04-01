@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("WinUI APP")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+db2a9fa20a207941d71313539fb5095853f3e4a6")]
 [assembly: System.Reflection.AssemblyProductAttribute("WinUI APP")]
 [assembly: System.Reflection.AssemblyTitleAttribute("WinUI APP")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

@@ -61,7 +61,7 @@ namespace WinUI_APP.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to http://localhost:3010.
+        ///   Looks up a localized string similar to http://5.189.181.145:3010.
         /// </summary>
         public static string apiServer {
             get {
