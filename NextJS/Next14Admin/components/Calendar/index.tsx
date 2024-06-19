@@ -1,3 +1,4 @@
+"use server"
 import Breadcrumb from "../Breadcrumbs/Breadcrumb";
 
 const Calendar = () => {

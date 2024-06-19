@@ -2,30 +2,27 @@
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
-import Breadcrumb from "@/components/Breadcrumbs/Breadcrumb";
 import { Metadata } from "next";
 import EmailOutlinedIcon from '@mui/icons-material/EmailOutlined';
 import HttpsOutlinedIcon from '@mui/icons-material/HttpsOutlined';
+import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined';
 import GoogleIcon from '@mui/icons-material/Google';
 export const metadata: Metadata = {
-  title: "Signin Page | Next.js E-commerce Dashboard Template",
-  description: "This is Signin page for TailAdmin Next.js",
+  title: "Signup Page | Next.js E-commerce Dashboard Template",
+  description: "This is Signup page for TailAdmin Next.js",
   // other metadata
 };
 
-const SignIn: React.FC = () => {
+const SignUp: React.FC = () => {
   return (
     <>
-      <Breadcrumb pageName="Sign In" />
 
       <div className="rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark">
         <div className="flex flex-wrap items-center">
           <div className="hidden w-full xl:block xl:w-1/2">
             <div className="px-26 py-17.5 text-center">
               <Link className="mb-5.5 inline-block" href="/">
-                <h1 className="text-2xl font-semibold text-white">
-                  Shakib Admin
-                </h1>
+                <h1 className="text-3xl text-white">Shakib Admin</h1>
                 <Image
                   className="dark:hidden"
                   src={"/images/logo/logo-dark.svg"}
@@ -34,14 +31,13 @@ const SignIn: React.FC = () => {
                   height={32}
                 />
               </Link>
-
               <p className="2xl:px-20">
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit
                 suspendisse.
               </p>
 
               <span className="mt-15 inline-block">
-               {/* Imagem para colocar na lateral */}
+                {/* Imagem para colocar na lateral */}
               </span>
             </div>
           </div>
@@ -50,10 +46,27 @@ const SignIn: React.FC = () => {
             <div className="w-full p-4 sm:p-12.5 xl:p-17.5">
               <span className="mb-1.5 block font-medium">Start for free</span>
               <h2 className="mb-9 text-2xl font-bold text-black dark:text-white sm:text-title-xl2">
-                Sign In to ShakibAdmin
+                Sign Up to ShakibAdmin
               </h2>
 
               <form>
+                <div className="mb-4">
+                  <label className="mb-2.5 block font-medium text-black dark:text-white">
+                    Name
+                  </label>
+                  <div className="relative">
+                    <input
+                      type="text"
+                      placeholder="Enter your full name"
+                      className="w-full rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-10 outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
+                    />
+
+                    <span className="absolute right-4 top-4">
+                      <PersonOutlineOutlinedIcon />
+                    </span>
+                  </div>
+                </div>
+
                 <div className="mb-4">
                   <label className="mb-2.5 block font-medium text-black dark:text-white">
                     Email
@@ -66,7 +79,24 @@ const SignIn: React.FC = () => {
                     />
 
                     <span className="absolute right-4 top-4">
-                     <EmailOutlinedIcon />
+                      <EmailOutlinedIcon />
+                    </span>
+                  </div>
+                </div>
+
+                <div className="mb-4">
+                  <label className="mb-2.5 block font-medium text-black dark:text-white">
+                    Password
+                  </label>
+                  <div className="relative">
+                    <input
+                      type="password"
+                      placeholder="Enter your password"
+                      className="w-full rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-10 outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
+                    />
+
+                    <span className="absolute right-4 top-4">
+                      <HttpsOutlinedIcon />
                     </span>
                   </div>
                 </div>
@@ -78,11 +108,11 @@ const SignIn: React.FC = () => {
                   <div className="relative">
                     <input
                       type="password"
-                      placeholder="6+ Characters, 1 Capital letter"
+                      placeholder="Re-enter your password"
                       className="w-full rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-10 outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
                     />
 
-                    <span className="absolute right-4 top-4">                      
+                    <span className="absolute right-4 top-4">
                       <HttpsOutlinedIcon />
                     </span>
                   </div>
@@ -91,7 +121,7 @@ const SignIn: React.FC = () => {
                 <div className="mb-5">
                   <input
                     type="submit"
-                    value="Sign In"
+                    value="Create account"
                     className="w-full cursor-pointer rounded-lg border border-primary bg-primary p-4 text-white transition hover:bg-opacity-90"
                   />
                 </div>
@@ -100,14 +130,14 @@ const SignIn: React.FC = () => {
                   <span>
                     <GoogleIcon />
                   </span>
-                  Sign in with Google
+                  Sign up with Google
                 </button>
 
                 <div className="mt-6 text-center">
                   <p>
-                    Don’t have any account?{" "}
-                    <Link href="/auth/signup" className="text-primary">
-                      Sign Up
+                    Already have an account?{" "}
+                    <Link href="/api/auth/signin" className="text-primary">
+                      Sign in
                     </Link>
                   </p>
                 </div>
@@ -120,4 +150,4 @@ const SignIn: React.FC = () => {
   );
 };
 
-export default SignIn;
+export default SignUp;

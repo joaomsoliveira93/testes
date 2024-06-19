@@ -1,3 +1,4 @@
+
 import Breadcrumb from "@/components/Breadcrumbs/Breadcrumb";
 import TableThree from "@/components/Tables/TableThree";
 import TableTwo from "@/components/Tables/TableTwo";
@@ -10,7 +11,7 @@ export const metadata: Metadata = {
   // other metadata
 };
 
-const TablesPage = () => {
+const TablesPage =  async () => {
   return (
     <>
       <Breadcrumb pageName="Tables" />

@@ -6,10 +6,12 @@ import Profile from '@mui/icons-material/AccountBox';
 import RecentActorsIcon from '@mui/icons-material/RecentActors';
 import Settings from '@mui/icons-material/Settings';
 import LogoutIcon from '@mui/icons-material/Logout';
+import { signOut } from "next-auth/react";
+import { useSession } from "next-auth/react";
 
 const DropdownUser = () => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
-
+  const { data: session } = useSession();
   const trigger = useRef<any>(null);
   const dropdown = useRef<any>(null);
 
@@ -47,9 +49,9 @@ const DropdownUser = () => {
       >
         <span className="hidden text-right lg:block">
           <span className="block text-sm font-medium text-black dark:text-white">
-            User Name
+            {session?.user?.name}
           </span>
-          <span className="block text-xs">User Job Title</span>
+          <span className="block text-xs">{session?.user?.email}</span>
         </span>
 
         <span className="h-12 w-12 rounded-full">
@@ -108,7 +110,7 @@ const DropdownUser = () => {
         <div className="flex flex-col border-b border-stroke px-3 dark:border-strokedark">
         <button 
           className=" flex items-center gap-3.5 text-sm font-medium duration-300 ease-in-out p-2 rounded-md hover:dark:bg-primary hover:bg-secondary lg:text-base"
-          onClick={() => setDropdownOpen(!dropdownOpen)}
+          onClick={() => signOut()}
         >
           <LogoutIcon/>
           Log Out

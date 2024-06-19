@@ -4,15 +4,18 @@ import TwitterIcon from '@mui/icons-material/Twitter';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import GitHubIcon from '@mui/icons-material/GitHub';
 import CameraAltOutlinedIcon from '@mui/icons-material/CameraAltOutlined';
-
+import { getServerSession } from "next-auth/next";
 import { Metadata } from "next";
+import { options } from "../api/auth/[...nextauth]/options";
+
 export const metadata: Metadata = {
   title: "Profile Page | Next.js E-commerce Dashboard Template",
   description: "This is Profile page for TailAdmin Next.js",
   // other metadata
 };
 
-const Profile = () => {
+const Profile = async () => {
+  const session = await getServerSession(options)
   return (
     <>
       <Breadcrumb pageName="Profile" />
@@ -65,9 +68,9 @@ const Profile = () => {
           </div>
           <div className="mt-4">
             <h3 className="mb-1.5 text-2xl font-semibold text-black dark:text-white">
-              User Name
+              {session?.user?.name}
             </h3>
-            <p className="font-medium">User Job Title</p>
+            <p className="font-medium">{session?.user?.email}</p>
             <div className="mx-auto mb-5.5 mt-4.5 grid max-w-94 grid-cols-3 rounded-md border border-stroke py-2.5 shadow-1 dark:border-strokedark dark:bg-[#37404F]">
               <div className="flex flex-col items-center justify-center gap-1 border-r border-stroke px-4 dark:border-strokedark xsm:flex-row">
                 <span className="font-semibold text-black dark:text-white">

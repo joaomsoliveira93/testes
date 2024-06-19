@@ -4,9 +4,10 @@ import "./data-tables-css.css";
 import "./satoshi.css";
 import { useState, useEffect } from "react";
 import Loader from "@/components/common/Loader";
-
 import Sidebar from "@/components/Sidebar/Sidebar";
 import Header from "@/components/Header";
+import AuthProvider from "@/context/AuthProvider";
+
 
 export default function RootLayout({
   children,
@@ -14,8 +15,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
-
   const [loading, setLoading] = useState<boolean>(true);
+
 
   useEffect(() => {
     setTimeout(() => setLoading(false), 1000);
@@ -24,6 +25,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body suppressHydrationWarning={true}>
+        <AuthProvider>
         <div className="dark:bg-black dark:text-bodydark">
           {loading ? (
             <Loader />
@@ -43,7 +45,9 @@ export default function RootLayout({
               </div>
             </div>
           )}
+
         </div>
+        </AuthProvider>
       </body>
     </html>
   );
