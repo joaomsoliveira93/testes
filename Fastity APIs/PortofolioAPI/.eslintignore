@@ -1,0 +1,6 @@
+**/dist
+**/node_modules
+*.md
+*.config.js
+*.eslint.js
+scripts/*

@@ -1,0 +1,11 @@
+{
+    "compilerOptions": {
+        "strict": true,
+        "sourceMap": true,
+        "esModuleInterop": true,
+        "baseUrl": "./",
+        "outDir": "dist",
+        "lib": [ "esnext", "dom" ]
+    },
+    "include": [ "api", "server.ts", "shared", "plugins", "routes", "models", "controllers", "swagger.ts", "config.ts" ]
+}
