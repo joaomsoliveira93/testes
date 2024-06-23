@@ -1,13 +1,13 @@
-import Breadcrumb from "@/components/Breadcrumbs/Breadcrumb";
-import CheckBox from "@/components/Checkboxes/CheckboxOne";
-import CheckBoxTwo from "@/components/Checkboxes/CheckboxTwo";
-import CheckBoxThree from "@/components/Checkboxes/CheckboxThree";
-import CheckBoxFour from "@/components/Checkboxes/CheckboxFour";
-import CheckBoxFive from "@/components/Checkboxes/CheckboxFive";
+import Breadcrumb from "@/components/appLayout/Breadcrumbs/Breadcrumb";
+import CheckBox from "@/components/ui/Checkboxes/CheckboxOne";
+import CheckBoxTwo from "@/components/ui/Checkboxes/CheckboxTwo";
+import CheckBoxThree from "@/components/ui/Checkboxes/CheckboxThree";
+import CheckBoxFour from "@/components/ui/Checkboxes/CheckboxFour";
+import CheckBoxFive from "@/components/ui/Checkboxes/CheckboxFive";
 import { Metadata } from "next";
 export const metadata: Metadata = {
-  title: "CheckBoxes Page | Next.js E-commerce Dashboard Template",
-  description: "This is Buttons page for TailAdmin Next.js",
+  title: "CheckBoxes Page",
+  description: "This is Buttons page",
   // other metadata
 };
 

@@ -4,7 +4,9 @@ import {Document, Schema, model} from 'mongoose';
 interface IUser extends Document
 {
     email?: string;
+    name?: string;
     password?: string;
+    img?:string;
     permission?: UserPermissions;
     lastLogin?: Date;
 }
@@ -14,7 +16,9 @@ function formatUser(user: any): Partial<IUser>
 {
     return {
         id: user._id,
+        name: user.name,
         email: user.email,
+        img:user.img,
         permission: user.permission,
         lastLogin: user.lastLogin
     };
@@ -22,7 +26,9 @@ function formatUser(user: any): Partial<IUser>
 
 const User = model<IUser>('User', new Schema<IUser>({
     email: String,
+    name: String,
     password: String,
+    img:String,
     permission: Number,
     lastLogin: Date
 }), 'user');

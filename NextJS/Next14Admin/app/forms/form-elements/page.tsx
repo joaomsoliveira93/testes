@@ -1,18 +1,18 @@
-import Breadcrumb from "@/components/Breadcrumbs/Breadcrumb";
-import CheckboxFive from "@/components/Checkboxes/CheckboxFive";
-import CheckboxFour from "@/components/Checkboxes/CheckboxFour";
-import CheckboxOne from "@/components/Checkboxes/CheckboxOne";
-import CheckboxThree from "@/components/Checkboxes/CheckboxThree";
-import CheckboxTwo from "@/components/Checkboxes/CheckboxTwo";
-import SwitcherFour from "@/components/Switchers/SwitcherFour";
-import SwitcherOne from "@/components/Switchers/SwitcherOne";
-import SwitcherThree from "@/components/Switchers/SwitcherThree";
-import SwitcherTwo from "@/components/Switchers/SwitcherTwo";
+import Breadcrumb from "@/components/appLayout/Breadcrumbs/Breadcrumb";
+import CheckboxFive from "@/components/ui/Checkboxes/CheckboxFive";
+import CheckboxFour from "@/components/ui/Checkboxes/CheckboxFour";
+import CheckboxOne from "@/components/ui/Checkboxes/CheckboxOne";
+import CheckboxThree from "@/components/ui/Checkboxes/CheckboxThree";
+import CheckboxTwo from "@/components/ui/Checkboxes/CheckboxTwo";
+import SwitcherFour from "@/components/ui/Switchers/SwitcherFour";
+import SwitcherOne from "@/components/ui/Switchers/SwitcherOne";
+import SwitcherThree from "@/components/ui/Switchers/SwitcherThree";
+import SwitcherTwo from "@/components/ui/Switchers/SwitcherTwo";
 
 import { Metadata } from "next";
 export const metadata: Metadata = {
-  title: "Form Elements Page | Next.js E-commerce Dashboard Template",
-  description: "This is Form Elements page for TailAdmin Next.js",
+  title: "Form Elements Page",
+  description: "This is Form Elements page",
   // other metadata
 };
 

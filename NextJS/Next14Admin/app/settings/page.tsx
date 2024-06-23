@@ -1,4 +1,4 @@
-import Breadcrumb from "@/components/Breadcrumbs/Breadcrumb";
+import Breadcrumb from "@/components/appLayout/Breadcrumbs/Breadcrumb";
 import Image from "next/image";
 import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined';
 import EmailOutlinedIcon from '@mui/icons-material/EmailOutlined';
@@ -7,8 +7,8 @@ import FileUploadOutlinedIcon from '@mui/icons-material/FileUploadOutlined';
 
 import { Metadata } from "next";
 export const metadata: Metadata = {
-  title: "Settings Page | Next.js E-commerce Dashboard Template",
-  description: "This is Settings page for ShakibAdmin Next.js",
+  title: "Settings Page",
+  description: "This is Settings page",
   // other metadata
 };
 

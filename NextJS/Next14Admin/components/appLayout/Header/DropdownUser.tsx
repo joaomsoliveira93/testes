@@ -1,3 +1,4 @@
+"use client"
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
@@ -8,12 +9,14 @@ import Settings from '@mui/icons-material/Settings';
 import LogoutIcon from '@mui/icons-material/Logout';
 import { signOut } from "next-auth/react";
 import { useSession } from "next-auth/react";
+import useLocalStorage from "@/hooks/useLocalStorage";
 
 const DropdownUser = () => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const { data: session } = useSession();
   const trigger = useRef<any>(null);
   const dropdown = useRef<any>(null);
+  const [img, setImg] = useLocalStorage("img", "");
 
   useEffect(() => {
     const clickHandler = ({ target }: MouseEvent) => {
@@ -31,6 +34,31 @@ const DropdownUser = () => {
   });
 
   useEffect(() => {
+    const getUserImg = async () => {
+      if (session?.user) {
+
+        const response = await fetch("http://localhost:3010/auth/userImg", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            email: session.user.email,
+          }),
+        });
+
+        if (!response.ok) {
+          throw new Error("Failed to get img");
+        }
+
+        const data = await response.json();
+        const img = data.data
+        if (img) {
+          setImg(img.img);
+        }
+      }
+    }
+    getUserImg();
     const keyHandler = ({ keyCode }: KeyboardEvent) => {
       if (!dropdownOpen || keyCode !== 27) return;
       setDropdownOpen(false);
@@ -57,9 +85,9 @@ const DropdownUser = () => {
         <span className="h-12 w-12 rounded-full">
           <Image
             className="rounded-full"
-            width={112}
-            height={112}
-            src={"/images/userProfile.png"}
+            width={60}
+            height={60}
+            src={`data:image/png;base64,${img}`}
             alt="User"
           />
         </span>
@@ -110,7 +138,7 @@ const DropdownUser = () => {
         <div className="flex flex-col border-b border-stroke px-3 dark:border-strokedark">
         <button 
           className=" flex items-center gap-3.5 text-sm font-medium duration-300 ease-in-out p-2 rounded-md hover:dark:bg-primary hover:bg-secondary lg:text-base"
-          onClick={() => signOut()}
+          onClick={() => {signOut(); window.localStorage.removeItem("img");}}
         >
           <LogoutIcon/>
           Log Out

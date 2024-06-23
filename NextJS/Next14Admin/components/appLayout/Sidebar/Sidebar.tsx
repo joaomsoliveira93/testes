@@ -51,7 +51,7 @@ const Sidebar = ({ }: SidebarProps) => {
                 className="h-6 w-6 rounded-md"
                 width={400}
                 height={400}
-                src={"/images/logo/logo-icon.png"}
+                src={"/images/logo.png"}
                 alt="Logo"
               />
 
@@ -165,12 +165,6 @@ const Sidebar = ({ }: SidebarProps) => {
                         href="/forms/form-layout"
                         icon={<ArrowDropDownCircleIcon />}
                         active={pathname.includes("/forms/form-layout")}
-                      />
-                      <LinkItem
-                        title="Saas"
-                        href="/saas"
-                        icon={<ArrowDropDownCircleIcon />}
-                        active={pathname.includes("/saas")}
                       />
                     </ExpandMenu>
                   </li>

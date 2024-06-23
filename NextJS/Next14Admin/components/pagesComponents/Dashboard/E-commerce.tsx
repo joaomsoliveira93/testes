@@ -1,14 +1,14 @@
 "use client";
 import React from "react";
 
-import { AreaChart, SimpleBar } from "@/components/Charts";
-import ChatCard from "../Chat/ChatCard";
-import TableTwo from "../Tables/TableTwo";
+import { AreaChart, SimpleBar } from "@/components/pagesComponents/Charts";
+import ChatCard from "@/components/ui/Chat/ChatCard";
+import TableTwo from "@/components/pagesComponents/Tables/TableTwo";
 
 // without this the component renders on server and throws an error
 import dynamic from "next/dynamic";
-import DataCard from "../Cards/DataCard";
-const MapOne = dynamic(() => import("../Maps/MapOne"), {
+import DataCard from "@/components/ui/Cards/DataCard";
+const MapOne = dynamic(() => import("@/components/ui/Maps/MapOne"), {
   ssr: false,
 });
 

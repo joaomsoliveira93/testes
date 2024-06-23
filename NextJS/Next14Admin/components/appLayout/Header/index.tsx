@@ -7,8 +7,10 @@ import DropdownUser from "./DropdownUser";
 import Image from "next/image";
 import MenuIcon from '@mui/icons-material/Menu';
 //import SearchIcon from '@mui/icons-material/Search';
-import { useSidebar } from "@/components/Sidebar/use-sidebar";
+import { useSidebar } from "@/components/appLayout/Sidebar/use-sidebar";
 import { useSession } from "next-auth/react";
+import { useEffect } from "react";
+import useLocalStorage from "@/hooks/useLocalStorage";
 
 const Header = (props: {
   sidebarOpen: string | boolean | undefined;
@@ -16,6 +18,35 @@ const Header = (props: {
 }) => {
   const { toggleSidebar, isSidebarOpen } = useSidebar((state) => state);
   const { data: session } = useSession();
+  const [img, setImg] = useLocalStorage("img", "");
+  useEffect(() => {
+    const getUserImg = async () => {
+      if (session?.user) {
+
+        const response = await fetch("http://localhost:3010/auth/userImg", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            email: session.user.email,
+          }),
+        });
+
+        if (!response.ok) {
+          throw new Error("Failed to get img");
+        }
+
+        const data = await response.json();
+        const img = data.data
+        if (img) {
+          setImg(img.img);
+        }
+      }
+    }
+    getUserImg();
+
+  });
   return (
 
     <header className="sticky top-0 z-999 flex w-full bg-white drop-shadow-1 dark:bg-boxdark dark:drop-shadow-none">
@@ -27,7 +58,7 @@ const Header = (props: {
                 className="h-6 w-6 rounded-md"
                 width={400}
                 height={400}
-                src={"/images/logo/logo-icon.png"}
+                src={"/images/logo.png"}
                 alt="Logo"
               />
             </Link>

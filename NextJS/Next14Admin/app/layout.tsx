@@ -4,10 +4,9 @@ import "./data-tables-css.css";
 import "./satoshi.css";
 import { useState, useEffect } from "react";
 import Loader from "@/components/common/Loader";
-import Sidebar from "@/components/Sidebar/Sidebar";
-import Header from "@/components/Header";
+import Sidebar from "@/components/appLayout/Sidebar/Sidebar";
+import Header from "@/components/appLayout/Header";
 import AuthProvider from "@/context/AuthProvider";
-
 
 export default function RootLayout({
   children,

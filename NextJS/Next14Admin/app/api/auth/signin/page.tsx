@@ -1,5 +1,5 @@
 "use client";
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import { signIn } from "next-auth/react";
 import Link from "next/link";
 import Image from "next/image";
@@ -7,25 +7,49 @@ import EmailOutlinedIcon from '@mui/icons-material/EmailOutlined';
 import HttpsOutlinedIcon from '@mui/icons-material/HttpsOutlined';
 import GoogleIcon from '@mui/icons-material/Google';
 import { useRouter } from "next/navigation";
+import Swal from 'sweetalert2'
+import useColorMode from "@/hooks/useColorMode";
+import useSwal from "@/hooks/useSwal";
 
 type Props = {
-  searchParams?: Record<"callbackUrl"|"error",string>
+  searchParams?: Record<"callbackUrl" | "error", string>
 };
 
-const SignIn = (props:Props) => {
+const SignIn = (props: Props) => {
+  const [colorMode] = useColorMode();
   const router = useRouter();
-  const userName = useRef("");
+  const email = useRef("");
   const pass = useRef("");
+  const [error, setError] = useState(false);
+  const [emailError, setEmailError] = useState(false);
+  const { showSwal } = useSwal();
+
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const res = await signIn("credentials", {
-      username: userName.current,
-      password: pass.current,
-      redirect: false,
-    });
+    if (emailError) {
+      showSwal('Login!', 'The email is no valid', 'error');
+    } else {
+      const res = await signIn("credentials", {
+        email: email.current,
+        password: pass.current,
+        redirect: false,
+      });
 
-    if (!res?.error) {
-      router.push(props.searchParams?.callbackUrl ?? "http://localhost:3000");
+      if (!res?.error) {
+        router.push(props.searchParams?.callbackUrl ?? "http://localhost:3000");
+      } else {
+        showSwal('Login!', 'Authentication Failed', 'error');
+        setError(true);
+      }
+    }
+  };
+  const validateEmail = () => {
+    // Define invalid characters
+    const invalidChars = /[^a-zA-Z0-9@._-]/;
+    if (invalidChars.test(email.current) || !email.current.includes('@')) {
+      setEmailError(true);
+    } else {
+      setEmailError(false);
     }
   };
   return (
@@ -65,12 +89,17 @@ const SignIn = (props:Props) => {
                   </label>
                   <div className="relative">
                     <input
-                      onChange={(e) => (userName.current = e.target.value)}
-                      name="name"
+                      onChange={(e) => { email.current = e.target.value; validateEmail() }}
+                      name="email"
                       type="email"
                       placeholder="Enter your email"
-                      className="w-full rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-10 outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
+                      className={`w-full rounded-lg border  bg-transparent py-4 pl-6 pr-10 outline-none focus-visible:shadow-none ${emailError ? 'border-red-800' : 'focus:border-primary border-stroke dark:focus:border-primary dark:border-form-strokedark'}  dark:bg-form-input `}
                     />
+                    {emailError && (
+                      <p className="mb-2.5 block font-medium text-red-800">
+                        The email is invalid!
+                      </p>
+                    )}
                     <span className="absolute right-4 top-4">
                       <EmailOutlinedIcon />
                     </span>
@@ -99,22 +128,13 @@ const SignIn = (props:Props) => {
                     value="Sign In"
                     className="w-full cursor-pointer rounded-lg border border-primary bg-primary p-4 text-white transition hover:bg-opacity-90"
                   />
-                    {!!props.searchParams?.error && (
-                      <p className="bg-red-100 text-red-600 text-center p-2">
-                        Authentication Failed
-                      </p>
-                    )}
+                  {error && (
+                    <p className="bg-red-100 text-red-600 text-center p-2">
+                      Authentication Failed
+                    </p>
+                  )}
                 </div>
               </form>
-              <button
-                type="submit"
-                className="flex w-full items-center justify-center gap-3.5 rounded-lg border border-stroke bg-gray p-4 hover:bg-opacity-50 dark:border-strokedark dark:bg-meta-4 dark:hover:bg-opacity-50"
-              >
-                <span>
-                  <GoogleIcon />
-                </span>
-                Sign in with Google
-              </button>
               <div className="mt-6 text-center">
                 <p>
                   Don’t have any account?{' '}

@@ -6,10 +6,11 @@ import {FastifyInstance} from 'fastify/types/instance';
 import {UserPermissions} from '../shared/enums/user-permissions';
 import {sha256} from 'js-sha256';
 
-export async function register(fastify: FastifyInstance, email: string, password: string): Promise<void>
+export async function register(fastify: FastifyInstance, email: string,name: string, password: string): Promise<void>
 {
     const newUser: IUser = new User({
         email: email,
+        name: name,
         password: sha256(password),
         permission: UserPermissions.AFFILIATED
     });
@@ -22,7 +23,7 @@ export async function register(fastify: FastifyInstance, email: string, password
     await newUser.save();
 }
 
-export async function login(fastify: FastifyInstance, email: string, password: string): Promise<Partial<ISession>>
+export async function login(fastify: FastifyInstance, email: string, password: string)
 {
     const user: IUser | null = await User.findOne({email: email, password: sha256(password)});
 
@@ -43,10 +44,17 @@ export async function login(fastify: FastifyInstance, email: string, password: s
         refreshToken: fastify.jwt.sign({data: tokenUser}, { expiresIn: '60d' })
     });
 
-    return formatSession(await session.save());
+    //const savedSession = await session.save();
+    //const formattedSession = formatSession(savedSession);
+
+    return {
+        //...formattedSession,
+        email: user.email,
+        name: user.name
+    };
 }
 
-export async function refreshUserToken(fastify: FastifyInstance, accessToken: string, refreshToken: string): Promise<Partial<ISession>>
+export async function refreshUserToken(fastify: FastifyInstance, accessToken: string, refreshToken: string)
 {
     const sessionStored: ISession | null = await Session.findOne({accessToken: accessToken, refreshToken: refreshToken});
 
@@ -71,8 +79,14 @@ export async function refreshUserToken(fastify: FastifyInstance, accessToken: st
                 await fastify.jwt.verify(refreshToken);
             
                 sessionStored.accessToken = fastify.jwt.sign({data: formatUser(user)}, { expiresIn: '1h' });
-            
-                return formatSession(await sessionStored.save());
+                const savedSession = await sessionStored.save();
+                const formattedSession = formatSession(savedSession);
+
+                return {
+                    ...formattedSession,
+                    email: user.email,
+                    name: user.name
+                };
             }
             catch (error)
             {
@@ -85,4 +99,18 @@ export async function refreshUserToken(fastify: FastifyInstance, accessToken: st
 export async function revokeSessions(userId: string): Promise<void>
 {
     await Session.deleteMany({user: userId});
+}
+
+export async function userImg(fastify: FastifyInstance, email: string)
+{
+    const user: IUser | null = await User.findOne({email: email});
+
+    if (!user)
+    {
+        throw new CustomError(authenticationError[2001]);
+    }
+
+    return {
+        img: user.img
+    };
 }

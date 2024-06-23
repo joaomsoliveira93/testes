@@ -1,13 +1,13 @@
 
-import Breadcrumb from "@/components/Breadcrumbs/Breadcrumb";
-import TableThree from "@/components/Tables/TableThree";
-import TableTwo from "@/components/Tables/TableTwo";
-import TableSort from "@/components/Tables/TableSort";
+import Breadcrumb from "@/components/appLayout/Breadcrumbs/Breadcrumb";
+import TableThree from "@/components/pagesComponents/Tables/TableThree";
+import TableTwo from "@/components/pagesComponents/Tables/TableTwo";
+import TableSort from "@/components/pagesComponents/Tables/TableSort";
 
 import { Metadata } from "next";
 export const metadata: Metadata = {
-  title: "Tables Page | Next.js E-commerce Dashboard Template",
-  description: "This is Tables page for TailAdmin Next.js",
+  title: "Tables Page ",
+  description: "This is Tables page",
   // other metadata
 };
 

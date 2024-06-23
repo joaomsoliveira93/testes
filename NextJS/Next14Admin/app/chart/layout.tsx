@@ -1,8 +1,8 @@
 import React from "react";
 import { Metadata } from "next";
 export const metadata: Metadata = {
-  title: "Chart Page | Next.js E-commerce Dashboard Template",
-  description: "This is Chart Page for TailAdmin Next.js",
+  title: "Chart Page ",
+  description: "This is Chart Page",
   // other metadata
 };
 type Props = {

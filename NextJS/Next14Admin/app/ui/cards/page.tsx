@@ -1,10 +1,10 @@
-import Breadcrumb from "@/components/Breadcrumbs/Breadcrumb";
-import DataCard from "@/components/Cards/DataCard";
-import ChatCard from "@/components/Chat/ChatCard";
+import Breadcrumb from "@/components/appLayout/Breadcrumbs/Breadcrumb";
+import DataCard from "@/components/ui/Cards/DataCard";
+import ChatCard from "@/components/ui/Chat/ChatCard";
 import { Metadata } from "next";
 export const metadata: Metadata = {
-  title: "DataCards Page | Next.js E-commerce Dashboard Template",
-  description: "This is DataCards page for TailAdmin Next.js",
+  title: "DataCards Page",
+  description: "This is DataCards page",
   // other metadata
 };
 
