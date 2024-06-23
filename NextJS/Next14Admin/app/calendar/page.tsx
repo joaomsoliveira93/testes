@@ -1,5 +1,7 @@
 import Calendar from "@/components/pagesComponents/Calendar";
 import { Metadata } from "next";
+import { Suspense } from "react";
+import Loader from "@/components/common/Loader";
 
 export const  metadata: Metadata = {
   title: "Calendar Page ",
@@ -9,9 +11,9 @@ export const  metadata: Metadata = {
 
 const CalendarPage = async () => {
   return (
-    <>
+    <Suspense fallback={<Loader/>}>
       <Calendar />
-    </>
+    </Suspense>
   );
 };
 

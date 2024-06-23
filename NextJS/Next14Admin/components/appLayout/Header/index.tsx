@@ -97,7 +97,7 @@ const Header = (props: {
             {session?.user && <DropdownNotification />}
             {session?.user && <DropdownMessage />}
           </ul>
-          {session?.user && <DropdownUser />}
+          {session?.user &&( <DropdownUser /> )}
         </div>
       </div>
     </header>
