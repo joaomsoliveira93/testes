@@ -1,16 +1,17 @@
 import AutoLoad, {AutoloadPluginOptions} from '@fastify/autoload';
 import cors from '@fastify/cors';
-import {fastifyJwt} from '@fastify/jwt';
+//import {fastifyJwt} from '@fastify/jwt';
 import {FastifyBaseLogger, FastifyInstance, FastifyPluginAsync, FastifyReply, FastifyRequest, RawServerDefault} from 'fastify';
 import {ZodTypeProvider, serializerCompiler, validatorCompiler} from 'fastify-type-provider-zod';
 import {IncomingMessage, ServerResponse} from 'http';
 import {join} from 'path';
-import configs, {createDbConnection} from './config';
+import /*configs,*/ {createDbConnection} from './shared/config';
 import {CustomError} from './shared/custom-error';
-import {returnError} from './shared/utils';
+//import {returnError} from './shared/utils';
 import {authenticationError} from './shared/responses';
-import {ISession, Session} from './models/session';
-import {IUser} from './models/user';
+//import {ISession, Session} from './models/session';
+//import {IUser} from './models/user';
+import { ApiToken, IApiToken } from 'models/apiToken';
 
 
 export type AppOptions = object & Partial<AutoloadPluginOptions>;
@@ -26,7 +27,7 @@ declare module 'fastify'
     }
 }
 
-declare module '@fastify/jwt'
+/*declare module '@fastify/jwt'
 {
 	interface FastifyJWT
     {
@@ -37,7 +38,7 @@ declare module '@fastify/jwt'
         iat: number;
         exp: number;
 	}
-}
+}*/
 
 const app: FastifyPluginAsync<AppOptions, RawServerDefault, ZodTypeProvider> = (
     fastify,
@@ -46,26 +47,24 @@ const app: FastifyPluginAsync<AppOptions, RawServerDefault, ZodTypeProvider> = (
 {
     createDbConnection();
 
-    fastify.register(fastifyJwt, {secret: `${configs.JWT_SECRET}`});
+    /*fastify.register(fastifyJwt, {secret: `${configs.JWT_SECRET}`});*/
 
     fastify.decorate('authenticate', async function(request: FastifyRequest, response: FastifyReply)
-    {
-        
-            
+    {           
         if (!!request.headers.authorization)
         {
-            try
+            /*try
             {
                 await request.jwtVerify();
             }
             catch (error: any)
             {
                 returnError(authenticationError[2001], response);
-            }
+            }*/
 
-            const sessionStored: ISession | null = await Session.findOne({accessToken: request.headers.authorization.split(' ')[1]});
+            const apiToken: IApiToken | null = await ApiToken.findOne({accessToken: request.headers.authorization.split(' ')[1]});
 
-            if (!sessionStored)
+            if (!apiToken)
             {
                 throw new CustomError(authenticationError[2002]);
             }

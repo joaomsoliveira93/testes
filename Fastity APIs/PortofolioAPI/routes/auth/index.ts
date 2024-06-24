@@ -1,4 +1,4 @@
-import {login, refreshUserToken, revokeSessions, register, userImg} from 'controllers/auth';
+import {getApiTokens, login, register, userImg} from 'controllers/auth';
 import {returnError, returnSuccess} from 'shared/utils';
 import {authenticationSuccess} from 'shared/responses';
 import {FastifyPluginAsync} from 'fastify';
@@ -17,10 +17,10 @@ const route: FastifyPluginAsync = async (fastify) =>
         password: schemaType.string()
     });
 
-    const refreshTokenBodySchema = schemaType.object({
+    /*const refreshTokenBodySchema = schemaType.object({
         accessToken: schemaType.string(),
         refreshToken: schemaType.string()
-    });
+    });*/
 
     const userImgBodySchema = schemaType.object({
         email: schemaType.string()
@@ -28,10 +28,10 @@ const route: FastifyPluginAsync = async (fastify) =>
 
     type AuthRegisterBody = schemaType.infer<typeof authRegisterBodySchema>;
     type AuthLoginBody = schemaType.infer<typeof authLoginBodySchema>;
-    type RefreshTokenBody = schemaType.infer<typeof refreshTokenBodySchema>;
+    //type RefreshTokenBody = schemaType.infer<typeof refreshTokenBodySchema>;
     type userImgBody = schemaType.infer<typeof userImgBodySchema>;
 
-    const authTag = 'auth';
+    const authTag = 'Authentication';
 
     fastify.route<{Body: AuthRegisterBody}>({
         method: 'POST',
@@ -42,6 +42,7 @@ const route: FastifyPluginAsync = async (fastify) =>
             security: [{accessToken: []}],
             body: authRegisterBodySchema
         },
+        preHandler: fastify.authenticate,
         handler: async (request, response) =>
         {
             try
@@ -66,11 +67,11 @@ const route: FastifyPluginAsync = async (fastify) =>
             security: [{accessToken: []}],
             body: authLoginBodySchema
         },
+        preHandler: fastify.authenticate,
         handler: async (request, response) =>
         {
             try
             {
-                
                 const session = await login(fastify, request.body.email, request.body.password);
                 returnSuccess(authenticationSuccess[2001], response, session);
             }
@@ -81,7 +82,7 @@ const route: FastifyPluginAsync = async (fastify) =>
         }
     });
 
-    fastify.route({
+    /*fastify.route({
         method: 'DELETE',
         url: '/logout',
         schema:
@@ -129,7 +130,7 @@ const route: FastifyPluginAsync = async (fastify) =>
                 returnError(error, response);
             }
         }
-    });
+    });*/
 
     fastify.route<{Body: userImgBody}>({
         method: 'POST',
@@ -140,6 +141,7 @@ const route: FastifyPluginAsync = async (fastify) =>
             security: [{accessToken: []}],
             body: userImgBodySchema
         },
+        preHandler: fastify.authenticate,
         handler: async (request, response) =>
         {
             try
@@ -154,6 +156,24 @@ const route: FastifyPluginAsync = async (fastify) =>
             }
         }
     });
+
+    fastify.route({
+        method: 'GET',
+        url: '/apiTokens',
+        schema: {
+          tags: [authTag],
+          security: [{ accessToken: [] }],
+        },
+        preHandler: fastify.authenticate,
+        handler: async (request, response) => {
+          try {
+            const apiTokens = await getApiTokens(fastify);
+            returnSuccess(authenticationSuccess[2006], response, apiTokens);
+          } catch (error: any) {
+            returnError(error, response);
+          }
+        },
+      });
 
     return Promise.resolve();
 };

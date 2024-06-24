@@ -1,0 +1,8 @@
+{
+    "mongoose":{
+        "url":"mongodb://localhost:27017/licences/"
+    },
+    "server":{
+        "port":3010
+    }
+}
