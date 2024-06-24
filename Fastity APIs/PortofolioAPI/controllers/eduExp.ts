@@ -16,15 +16,13 @@ export async function getEduExp(fastify: FastifyInstance, id: string) {
 }
 
 export async function getEduExpProfile(fastify: FastifyInstance, id: string) {
-  const eduExp: IEduExp | null = await EduExp.findOne({ profile: id });
+  const eduExp: IEduExp[] | null = await EduExp.find({ profile: id });
 
   if (!eduExp) {
     throw new CustomError(eduExpResponses[4001]);
   }
 
-  const formatededuExp = formatEduExp(eduExp);
-
-  return formatededuExp;
+  return eduExp;
 }
 
 export async function addEduExp(fastify: FastifyInstance, eduExp: IEduExp) {

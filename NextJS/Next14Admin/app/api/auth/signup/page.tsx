@@ -5,7 +5,6 @@ import Image from "next/image";
 import EmailOutlinedIcon from '@mui/icons-material/EmailOutlined';
 import HttpsOutlinedIcon from '@mui/icons-material/HttpsOutlined';
 import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined';
-import GoogleIcon from '@mui/icons-material/Google';
 import { useRouter } from "next/navigation";
 import useSwal from "@/hooks/useSwal";
 
@@ -33,10 +32,11 @@ const SignUp = (props: Props) => {
         if (emailError) {
           showSwal('Register!', 'The email is no valid', 'error');
         } else {
-          const response = await fetch("http://localhost:3010/auth/register", {
+          const response = await fetch(`${process.env.NEXT_PUBLIC_API}/auth/register`, {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
+              "authorization": `Bearer ${process.env.NEXT_PUBLIC_API_TOKEN}`
             },
             body: JSON.stringify({
               email: email.current,
@@ -47,7 +47,7 @@ const SignUp = (props: Props) => {
           if (response?.ok) {
             setError(false);
             showOKSwal('Register!', 'Your user was created successfuly. Please check your email!', 'success');
-            router.push(props.searchParams?.callbackUrl ?? "http://localhost:3000");
+            router.push(props.searchParams?.callbackUrl ?? `${process.env.NEXT_PUBLIC_APP_URL}`);
           } else {
             showSwal('Register!', 'It was not possible to create the new user!', 'error');
           }

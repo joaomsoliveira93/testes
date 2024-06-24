@@ -16,15 +16,13 @@ export async function getProExp(fastify: FastifyInstance, id: string) {
 }
 
 export async function getProExpProfile(fastify: FastifyInstance, id: string) {
-  const proExp: IProExp | null = await ProExp.findOne({ profile: id });
+  const proExp: IProExp[] | null = await ProExp.find({ profile: id });
 
   if (!proExp) {
     throw new CustomError(proExpResponses[4001]);
   }
 
-  const formatedProExp = formatProExp(proExp);
-
-  return formatedProExp;
+  return proExp;
 }
 
 export async function addProExp(fastify: FastifyInstance, proExp: IProExp) {

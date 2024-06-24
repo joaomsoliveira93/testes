@@ -19,10 +19,11 @@ export const options: NextAuthOptions = {
         }
 
         try {
-          const response = await fetch("http://localhost:3010/auth/login", {
+          const response = await fetch(`${process.env.NEXT_PUBLIC_API}/auth/login`, {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
+              "authorization": `Bearer ${process.env.NEXT_PUBLIC_API_TOKEN}`
             },
             body: JSON.stringify({
               email: credentials.email,

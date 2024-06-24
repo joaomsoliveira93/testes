@@ -23,6 +23,7 @@ interface IProfile extends Document
     web_4?: string;
     web_5?: string;
     web_6?: string;
+    img?:string;
 }
 
 function formatProfile(profile: IProfile): Partial<IProfile>
@@ -49,7 +50,8 @@ function formatProfile(profile: IProfile): Partial<IProfile>
         web_3:profile.web_3,
         web_4:profile.web_4,
         web_5:profile.web_5,
-        web_6:profile.web_6
+        web_6:profile.web_6,
+        img:profile.img
     };
 }
 
@@ -74,7 +76,8 @@ const Profile = model<IProfile>('Profile', new Schema<IProfile>({
     web_3: String,
     web_4: String,
     web_5: String,
-    web_6: String
+    web_6: String,
+    img:String
 }), 'profile');
 
 export {IProfile, Profile, formatProfile};

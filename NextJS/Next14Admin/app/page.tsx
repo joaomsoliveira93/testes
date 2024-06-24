@@ -1,9 +1,9 @@
-import ECommerce from "@/components/pagesComponents/Dashboard/E-commerce";
+import Portfolio from "@/components/pagesComponents/mainPage/Portfolio";
 import { Metadata } from "next";
 
 
 export const metadata: Metadata = {
-  title: "Dashboard ",
+  title: "Meu Portfólio ",
   description: "This is Home Blog page",
   // other metadata
 };
@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 export default async function Home() {
   return (
 
-       <ECommerce />
+       <Portfolio />
 
   );
 }

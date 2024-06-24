@@ -38,10 +38,11 @@ const DropdownUser = () => {
     const getUserImg = async () => {
       if (session?.user) {
 
-        const response = await fetch("http://localhost:3010/auth/userImg", {
+        const response = await fetch(`${process.env.NEXT_PUBLIC_API}/auth/userImg`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
+            "authorization": `Bearer ${process.env.NEXT_PUBLIC_API_TOKEN}`
           },
           body: JSON.stringify({
             email: session.user.email,

@@ -8,6 +8,7 @@ import { IProExp } from 'models/proExp';
 const route: FastifyPluginAsync = async (fastify) => {
   const ProExpBodySchema = schemaType.object({
     profile: schemaType.string(),
+    company: schemaType.string(),
     jobTitlePT: schemaType.string(),
     jobTitleEN: schemaType.string(),
     jobTitleES: schemaType.string(),

@@ -28,6 +28,7 @@ const route: FastifyPluginAsync = async (fastify) => {
     web_4: schemaType.string(),
     web_5: schemaType.string(),
     web_6: schemaType.string(),
+    img:schemaType.string(),
   });
 
   const profileParamsSchema = schemaType.object({
