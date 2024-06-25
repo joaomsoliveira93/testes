@@ -27,8 +27,10 @@ const Profile = async () => {
             src={"/images/cover-01.png"}
             alt="profile cover"
             className="h-full w-full rounded-tl-sm rounded-tr-sm object-cover object-center"
-            width={970}
-            height={260}
+            width="0"
+            height="0"
+            priority
+            style={{ width: '970px', height: '260px' }}
           />
           <div className="absolute bottom-1 right-1 z-10 xsm:bottom-4 xsm:right-4">
             <label
@@ -37,14 +39,14 @@ const Profile = async () => {
             >
               <input type="file" name="cover" id="cover" className="sr-only" />
               <span>
-                <CameraAltOutlinedIcon/>
+                <CameraAltOutlinedIcon />
               </span>
               <span>Edit</span>
             </label>
           </div>
         </div>
         <div className="px-4 pb-6 text-center lg:pb-8 xl:pb-11.5">
-<ImgUpdate/>
+          <ImgUpdate />
           <div className="mt-4">
             <h3 className="mb-1.5 text-2xl font-semibold text-black dark:text-white">
               {session?.user?.name}

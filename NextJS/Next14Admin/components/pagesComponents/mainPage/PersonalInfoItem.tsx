@@ -10,16 +10,17 @@ const DetailsItem = (props: Props) => {
   const { profile } = props;
   return (
     <div className="py-3">
-
-
-      <div className="pt-5 grid grid-cols-1 gap-4 md:grid-cols-1 md:gap-6 xl:grid-cols-1 2xl:gap-7.5">
+      {profile ? (<>
+        <div className="pt-5 grid grid-cols-1 gap-4 md:grid-cols-1 md:gap-6 xl:grid-cols-1 2xl:gap-7.5">
         <div className="flex">
           <Image
             className="rounded-lg"
-            width={100}
-            height={100}
-            src={`data:image/png;base64,${profile?.img}`}
-            alt="User"
+            width="0"
+            height="0"
+            priority
+            style={{ width: '100px', height: 'auto' }}
+            src={profile?.img ? `data:image/png;base64,${profile?.img}` : '/images/placeholder.svg'}
+            alt="logo"
           />
           <div className="ml-5">
             <div className="flex mt-2">
@@ -142,6 +143,10 @@ const DetailsItem = (props: Props) => {
           )
         }
       </div>
+      </>): (
+        <p className="font-semibold pr-2">Sem dados do perfil</p>
+      )}
+      
     </div>
   );
 };

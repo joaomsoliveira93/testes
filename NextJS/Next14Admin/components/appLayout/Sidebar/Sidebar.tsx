@@ -4,7 +4,6 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import Image from "next/image";
 import HomeIcon from "@mui/icons-material/Home";
-import ShoppingBagIcon from "@mui/icons-material/ShoppingBag";
 import Calendar from "@mui/icons-material/CalendarMonth";
 import Table2Icon from "@mui/icons-material/TableChart";
 import Settings from "@mui/icons-material/Settings";
@@ -16,12 +15,8 @@ import MousePointerClick from "@mui/icons-material/Gamepad";
 import CheckBoxIcon from "@mui/icons-material/CheckBox";
 import CardIcon from "@mui/icons-material/CreditCard";
 import ArrowDropDownCircleIcon from "@mui/icons-material/ArrowDropDownCircle";
-import LockIcon from "@mui/icons-material/Lock";
-import LockOpenIcon from "@mui/icons-material/LockOpen";
 import MenuIcon from "@mui/icons-material/Menu";
-import ExitToAppIcon from "@mui/icons-material/ExitToApp";
 import { useSidebar } from "./use-sidebar";
-import { cn } from "@/app/libs/utlis";
 import LinkItem from "./LinkItem";
 import ExpandMenu from "./ExpandMenu";
 import { useSession } from "next-auth/react";
@@ -37,13 +32,7 @@ const Sidebar = ({ }: SidebarProps) => {
     <>
       {session?.user && (
         <aside
-          className={cn(
-            `absolute left-0 top-0 z-0 flex h-screen w-0 flex-col overflow-y-hidden bg-black duration-100 ease-linear  dark:bg-boxdark lg:static lg:translate-x-0 `,
-            {
-              "w-70 z-9999": isSidebarOpen,
-            },
-          )}
-        >
+          className={`absolute left-0 top-0 z-0 flex h-screen w-0 flex-col overflow-y-hidden bg-black duration-100 ease-linear  dark:bg-boxdark lg:static lg:translate-x-0 ${isSidebarOpen && "w-70 z-9999"}`}>
           <div className="relative flex w-full items-center justify-between gap-2 px-6 py-5.5 lg:py-6.5">
             <Link className="flex items-center" href="/">
 
@@ -68,19 +57,15 @@ const Sidebar = ({ }: SidebarProps) => {
             <nav className="px-4 py-4  lg:px-6">
               <div>
                 <ul
-                  className={cn("mb-6 flex flex-col  gap-1.5 ", {
-                    "items-center justify-center": !isSidebarOpen,
-                  })}
+                  className={`mb-6 flex flex-col  gap-1.5 ${!isSidebarOpen &&"items-center justify-center"}`}
                 >
                   <li>
-                    <ExpandMenu name="Homepage" icon={<HomeIcon />}>
                       <LinkItem
-                        icon={<ShoppingBagIcon />}
-                        title="E-commerce"
+                        icon={<HomeIcon />}
+                        title="Portefólio"
                         href="/"
                         active={pathname === "/"}
                       />
-                    </ExpandMenu>
                   </li>
 
                   <li>

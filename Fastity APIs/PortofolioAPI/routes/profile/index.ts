@@ -1,4 +1,4 @@
-import { addProfile, deleteProfile, getProfile, updateProfile } from 'controllers/profile';
+import { addProfile, deleteProfile, getProfile,getProfiles, updateProfile } from 'controllers/profile';
 import { returnError, returnSuccess } from 'shared/utils';
 import { profileResponses } from 'shared/responses';
 import { FastifyPluginAsync } from 'fastify';
@@ -51,6 +51,24 @@ const route: FastifyPluginAsync = async (fastify) => {
     handler: async (request, response) => {
       try {
         const profile = await getProfile(fastify, request.params.id);
+        returnSuccess(profileResponses[2000], response, profile);
+      } catch (error: any) {
+        returnError(error, response);
+      }
+    },
+  });
+
+  fastify.route<{}>({
+    method: 'GET',
+    url: '/getProfiles',
+    schema: {
+      tags: [profileTag],
+      security: [{ accessToken: [] }]
+    },
+    preHandler: fastify.authenticate,
+    handler: async (request, response) => {
+      try {
+        const profile = await getProfiles(fastify);
         returnSuccess(profileResponses[2000], response, profile);
       } catch (error: any) {
         returnError(error, response);

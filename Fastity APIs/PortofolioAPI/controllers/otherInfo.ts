@@ -16,15 +16,13 @@ export async function getOther(fastify: FastifyInstance, id: string) {
 }
 
 export async function getOtherProfile(fastify: FastifyInstance, id: string) {
-  const other: IOther | null = await Other.findOne({ profile: id });
+  const other: IOther[] | null = await Other.find({ profile: id });
 
   if (!other) {
     throw new CustomError(otherResponses[4001]);
   }
 
-  const formatedother = formatOther(other);
-
-  return formatedother;
+  return other;
 }
 
 export async function addOther(fastify: FastifyInstance, other: IOther) {

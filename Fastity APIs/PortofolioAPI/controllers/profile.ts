@@ -3,6 +3,17 @@ import { profileResponses } from 'shared/responses';
 import { IProfile, Profile, formatProfile } from '../models/profile';
 import { FastifyInstance } from 'fastify/types/instance';
 
+
+export async function getProfiles(fastify: FastifyInstance) {
+  const profile: IProfile[] | null = await Profile.find();
+
+  if (!profile) {
+    throw new CustomError(profileResponses[4001]);
+  }
+
+  return profile;
+}
+
 export async function getProfile(fastify: FastifyInstance, id: string) {
   const profile: IProfile | null = await Profile.findOne({ _id: id });
 

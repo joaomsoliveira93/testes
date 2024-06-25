@@ -17,11 +17,11 @@ const ExpandItem = (props: Props) => {
   const [open, setOpen] = React.useState(true);
   return (
     <Collapsible open={open} onOpenChange={setOpen} className="">
-      <CollapsibleTrigger asChild className={`group px-3 py-2  duration-300 ease-in-out p-2  hover:dark:bg-primary hover:bg-secondary ${open ? 'dark:bg-primary bg-secondary dark:text-black text-white rounded-t-md':'bg-primary dark:bg-secondary dark:text-black text-white rounded-md'}`}>
+      <CollapsibleTrigger asChild className={`group px-3 py-2  duration-300 ease-in-out p-2   ${open ? 'dark:bg-primary bg-secondary hover:bg-primary hover:dark:bg-secondary dark:text-black hover:dark:text-white text-white rounded-t-md':'bg-primary dark:bg-secondary hover:dark:bg-primary hover:bg-secondary dark:text-black text-white rounded-md'}`}>
           <div className="flex w-full items-center text-gray-2 cursor-pointer">
-            <div className="flex w-full transform items-center justify-between duration-300 ease-in">
+            <div className="flex w-full transform items-center justify-between duration-300 ease-in-out">
               <p
-                className={`ml-2 text-lg text-gray-2 group-hover:text-white ${open ? 'dark:bg-primary bg-secondary text-white':'bg-primary dark:bg-secondary dark:text-black text-white'}`}
+                className={`ml-2 text-lg text-gray-2 bg-transparent`}
               >
                 {name}
               </p>

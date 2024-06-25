@@ -87,9 +87,11 @@ const DropdownUser = () => {
         <span className="h-12 w-12 rounded-full">
           <Image
             className="rounded-full"
-            width={60}
-            height={60}
-            src={`data:image/png;base64,${img}`}
+            width="0"
+            height="0"
+            priority
+            style={{ width: '35px', height: 'auto' }}
+            src={img ? `data:image/png;base64,${img}` : '/images/placeholder.svg'}        
             alt="User"
           />
         </span>

@@ -16,15 +16,13 @@ export async function getLang(fastify: FastifyInstance, id: string) {
 }
 
 export async function getLangProfile(fastify: FastifyInstance, id: string) {
-  const lang: ILang | null = await Lang.findOne({ profile: id });
+  const lang: ILang[] | null = await Lang.find({ profile: id });
 
   if (!lang) {
     throw new CustomError(langResponses[4001]);
   }
 
-  const formatedLang = formatLang(lang);
-
-  return formatedLang;
+  return lang;
 }
 
 export async function addLang(fastify: FastifyInstance, lang: ILang) {
