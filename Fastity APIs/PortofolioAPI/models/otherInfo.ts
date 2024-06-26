@@ -17,6 +17,7 @@ interface IOther extends Document
     detailsFR: string;
     detailsES: string;
     webSite:string;
+    active:boolean;
     startedAt: string;
     endedAt: string;
 }
@@ -38,6 +39,7 @@ function formatOther(other: IOther): Partial<IOther>
         detailsFR:other.detailsFR,
         detailsES:other.detailsES,
         webSite:other.webSite,
+        active:other.active,
         startedAt:other.startedAt,
         endedAt:other.endedAt
     };
@@ -59,6 +61,7 @@ const Other = model<IOther>('other', new Schema<IOther>({
     detailsFR: String,
     detailsES: String,
     webSite: String,
+    active:Boolean,
     startedAt: String,
     endedAt: String
 }), 'other')

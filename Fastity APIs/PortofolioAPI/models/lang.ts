@@ -12,6 +12,7 @@ interface ILang extends Document
     oralPrd: string;
     oralInt: string;
     write:string;
+    active:boolean;
 }
 
 function formatLang(lang: ILang): Partial<ILang>
@@ -24,7 +25,8 @@ function formatLang(lang: ILang): Partial<ILang>
         oralUnd:lang.oralUnd,
         readUnd:lang.readUnd,
         oralPrd:lang.oralPrd,
-        oralInt:lang.oralInt
+        oralInt:lang.oralInt,
+        active:lang.active
     };
 }
 
@@ -37,7 +39,8 @@ const Lang = model<ILang>('lang', new Schema<ILang>({
     oralUnd: String,
     readUnd: String,
     oralPrd: String,
-    oralInt: String
+    oralInt: String,
+    active:Boolean
 }), 'lang')
 
 export {ILang, Lang, formatLang};

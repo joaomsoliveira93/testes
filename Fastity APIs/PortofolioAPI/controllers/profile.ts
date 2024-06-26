@@ -5,7 +5,7 @@ import { FastifyInstance } from 'fastify/types/instance';
 
 
 export async function getProfiles(fastify: FastifyInstance) {
-  const profile: IProfile[] | null = await Profile.find();
+  const profile: IProfile[] | null = await Profile.find({active:true});
 
   if (!profile) {
     throw new CustomError(profileResponses[4001]);

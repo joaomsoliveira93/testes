@@ -69,7 +69,7 @@ const Header = (props: {
                 aria-hidden={!isSidebarOpen}
                 aria-controls="sidebar"
               >
-                <MenuIcon className="duration-300  ease-in-out rounded-md hover:dark:bg-primary hover:bg-secondary dark:text-white text-black" />
+                <MenuIcon className="h-10 w-10 cursor-pointer text-white duration-300 ease-in-out rounded-md hover:text-black hover:dark:bg-primary hover:bg-secondary" />
               </button>
             )}
           </>)}

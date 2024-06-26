@@ -23,6 +23,7 @@ interface IProfile extends Document
     web_4?: string;
     web_5?: string;
     web_6?: string;
+    active?: boolean;
     img?:string;
 }
 
@@ -51,6 +52,7 @@ function formatProfile(profile: IProfile): Partial<IProfile>
         web_4:profile.web_4,
         web_5:profile.web_5,
         web_6:profile.web_6,
+        active:profile.active,
         img:profile.img
     };
 }
@@ -77,6 +79,7 @@ const Profile = model<IProfile>('Profile', new Schema<IProfile>({
     web_4: String,
     web_5: String,
     web_6: String,
+    active: Boolean,
     img:String
 }), 'profile');
 

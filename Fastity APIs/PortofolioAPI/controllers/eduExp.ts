@@ -16,7 +16,7 @@ export async function getEduExp(fastify: FastifyInstance, id: string) {
 }
 
 export async function getEduExpProfile(fastify: FastifyInstance, id: string) {
-  const eduExp: IEduExp[] | null = await EduExp.find({ profile: id });
+  const eduExp: IEduExp[] | null = await EduExp.find({ profile: id,active:true });
 
   if (!eduExp) {
     throw new CustomError(eduExpResponses[4001]);

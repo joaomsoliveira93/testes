@@ -17,6 +17,7 @@ const route: FastifyPluginAsync = async (fastify) => {
     oralPrd: schemaType.string(),
     oralInt: schemaType.string(),
     write:schemaType.string(),
+    active:schemaType.boolean(),
   });
 
   const LangParamsSchema = schemaType.object({

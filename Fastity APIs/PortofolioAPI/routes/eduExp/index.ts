@@ -22,6 +22,7 @@ const route: FastifyPluginAsync = async (fastify) => {
     detailsFR: schemaType.string(),
     detailsES: schemaType.string(),
     webSite: schemaType.string(),
+    active: schemaType.boolean(),
     startedAt: schemaType.string(),
     endedAt: schemaType.string(),
   });

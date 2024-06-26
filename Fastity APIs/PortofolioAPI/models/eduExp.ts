@@ -1,4 +1,5 @@
 import { Document, Schema, model} from 'mongoose';
+import { boolean } from 'yargs';
 
 interface IEduExp extends Document
 {
@@ -17,6 +18,7 @@ interface IEduExp extends Document
     detailsFR: string;
     detailsES: string;
     webSite:string;
+    active:boolean;
     startedAt: string;
     endedAt: string;
 }
@@ -38,6 +40,7 @@ function formatEduExp(eduExp: IEduExp): Partial<IEduExp>
         detailsFR:eduExp.detailsFR,
         detailsES:eduExp.detailsES,
         webSite:eduExp.webSite,
+        active:eduExp.active,
         startedAt:eduExp.startedAt,
         endedAt:eduExp.endedAt
     };
@@ -59,6 +62,7 @@ const EduExp = model<IEduExp>('eduExp', new Schema<IEduExp>({
     detailsFR: String,
     detailsES: String,
     webSite: String,
+    active:Boolean,
     startedAt: String,
     endedAt: String
 }), 'eduExp')
