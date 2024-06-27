@@ -21,7 +21,7 @@ const ExpEduItem = (props: Props) => {
 
           <div className="grid grid-cols-1 gap-4 md:grid-cols-1 md:gap-6 xl:grid-cols-1 2xl:gap-7.5">
             <div className="flex">
-              <a className="underline" target="_blank" href={row?.webSite}>{row?.webSite}</a>
+              <a className="underline" target="_blank" href={row?.webSite.toLowerCase().includes("http")? row?.webSite : `https://${row?.webSite}`}>{row?.webSite}</a>
             </div>
           </div>
 

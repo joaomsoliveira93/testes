@@ -1,4 +1,9 @@
 import {Document, Schema, model} from 'mongoose';
+import { IEduExp } from './eduExp'
+import { IProExp } from './proExp';
+import { ILang } from './lang';
+import { IOther } from './otherInfo';
+import { IProject, ISimpleProject } from './project';
 
 interface IProfile extends Document
 {
@@ -57,6 +62,19 @@ function formatProfile(profile: IProfile): Partial<IProfile>
     };
 }
 
+function formatProfileInfos(profile: IProfile, proExp:IProExp[],eduExp:IEduExp[],lang:ILang[],otherInfo:IOther[],project: ISimpleProject[]): Partial<any>
+{
+    return {
+        "profile":profile,
+        "proExp":proExp,
+        "eduExp":eduExp,
+        "lang":lang,
+        "otherInfo":otherInfo,
+        "project":project
+    };
+}
+
+
 const Profile = model<IProfile>('Profile', new Schema<IProfile>({
     name: String,
     address: String,
@@ -83,4 +101,4 @@ const Profile = model<IProfile>('Profile', new Schema<IProfile>({
     img:String
 }), 'profile');
 
-export {IProfile, Profile, formatProfile};
+export {IProfile, Profile, formatProfile, formatProfileInfos};

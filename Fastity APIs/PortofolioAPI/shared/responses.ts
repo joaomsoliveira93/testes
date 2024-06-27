@@ -299,6 +299,46 @@ const otherResponses =
     }
 };
 
+const projectResponses =
+{
+    [2000]: {
+        code: 200,
+        message: 'Project retrieved with success'
+    },
+    [2001]: {
+        code: 200,
+        message: 'Project created with success'
+    },
+    [2002]: {
+        code: 200,
+        message: 'Project updated with success'
+    },
+    [2003]: {
+        code: 200,
+        message: 'Project deleted with success'
+    },
+    [4001]: {
+        code: 404,
+        status:404,
+        message: 'Error. Project Not Found'
+    },
+    [4002]: {
+        code: 400,
+        status:400,
+        message: 'Error creating Project.'
+    },
+    [4003]: {
+        code: 400,
+        status:400,
+        message: 'Error updating Project.'
+    },
+    [4004]: {
+        code: 400,
+        status:400,
+        message: 'Error deleting Project.'
+    }
+};
+
 const generalError =
 {
     [1000]: {
@@ -320,6 +360,7 @@ export
     proExpResponses,
     eduExpResponses,
     langResponses,
-    otherResponses
+    otherResponses,
+    projectResponses
 };
 

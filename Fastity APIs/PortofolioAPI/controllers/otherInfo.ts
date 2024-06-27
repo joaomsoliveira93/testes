@@ -16,7 +16,7 @@ export async function getOther(fastify: FastifyInstance, id: string) {
 }
 
 export async function getOtherProfile(fastify: FastifyInstance, id: string) {
-  const other: IOther[] | null = await Other.find({ profile: id, active:true });
+  const other: IOther[] | null = await Other.find({ profile: id});
 
   if (!other) {
     throw new CustomError(otherResponses[4001]);

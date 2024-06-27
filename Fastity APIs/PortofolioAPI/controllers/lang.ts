@@ -16,7 +16,7 @@ export async function getLang(fastify: FastifyInstance, id: string) {
 }
 
 export async function getLangProfile(fastify: FastifyInstance, id: string) {
-  const lang: ILang[] | null = await Lang.find({ profile: id, active:true });
+  const lang: ILang[] | null = await Lang.find({ profile: id });
 
   if (!lang) {
     throw new CustomError(langResponses[4001]);

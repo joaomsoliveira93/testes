@@ -5,7 +5,7 @@ type Props = {
   other?: OtherInfo[]
 };
 
-const Other = (props: Props) => {
+const OtherItem = (props: Props) => {
   const { other } = props;
   return (
     <>
@@ -51,4 +51,4 @@ const Other = (props: Props) => {
   );
 };
 
-export default Other;
+export default OtherItem;

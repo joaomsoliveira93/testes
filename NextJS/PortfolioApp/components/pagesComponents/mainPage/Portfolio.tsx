@@ -5,12 +5,15 @@ import PersonalInfoItem from "./PersonalInfoItem";
 import ExpEduItem from "./ExpEduItem";
 import ExpProItem from "./ExpProItem";
 import LangItem from "./LangItem";
-import Other from "./Other";
+import OtherItem from "./OtherItem";
+import ProjectItem from "./ProjectItem";
 import { Profile } from "@/types/profile";
 import { ProExp } from "@/types/expPro";
 import { EduExp } from "@/types/expEdu";
 import { Lang } from "@/types/lang";
 import { OtherInfo } from "@/types/other";
+import { Project } from "@/types/project";
+import Loader from "@/components/common/Loader";
 
 type request = {
   code: number,
@@ -26,115 +29,63 @@ const Portfolio: React.FC = () => {
   const [eduExp, setEduExp] = useState<EduExp[] | []>([]);
   const [lang, setLang] = useState<Lang[] | []>([]);
   const [other, setOther] = useState<OtherInfo[] | []>([]);
-  useEffect(() => {
-    const getProfiles = async () => {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API}/profile/getProfiles`, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          "authorization": `Bearer ${process.env.NEXT_PUBLIC_API_TOKEN}`
-        }
-      });
-      const data: request = await response.json();
+  const [project, setProject] = useState<Project[] | []>([]);
 
-      if (data.code === 200) {
-        setProfiles(data.data);
-        console.log(data.data[0]._id)
-        setSelected(data.data[0]._id)
+  useEffect(() => { getProfiles(); }, [])
+
+  useEffect(() => {setProfile(undefined);  if (selected) getProfile(); }, [selected]);
+
+  const getProfiles = async () => {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_API}/profile/getProfiles`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        "authorization": `Bearer ${process.env.NEXT_PUBLIC_API_TOKEN}`
       }
+    });
+    const data: request = await response.json();
+
+    if (data.code === 200) {
+      setProfiles(data.data);
+      console.log(data.data[0]._id)
+      setSelected(data.data[0]._id)
     }
-    getProfiles();
-  }, [])
+  };
 
-  useEffect(() => {
-    const getProfile = async () => {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API}/profile/getProfile/${selected}`, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          "authorization": `Bearer ${process.env.NEXT_PUBLIC_API_TOKEN}`
-        }
-      });
-      const data: request = await response.json();
-
-      if (data.code === 200) {
-        setProfile(data.data);
+  const getProfile = async () => {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_API}/profile/getProfileInfos/${selected}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        "authorization": `Bearer ${process.env.NEXT_PUBLIC_API_TOKEN}`
       }
-    }
+    });
+    const data: request = await response.json();
 
-    const getEduExp = async () => {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API}/eduExp/getEduExpProfile/${selected}`, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          "authorization": `Bearer ${process.env.NEXT_PUBLIC_API_TOKEN}`
-        }
-      });
-      const data: request = await response.json();
-      if (data.code === 200) {
-        setEduExp(data.data);
-      }
+    if (data.code === 200) {
+      setProfile(data.data.profile);
+      setProExp(data.data.proExp);
+      setEduExp(data.data.eduExp);
+      setLang(data.data.lang);
+      setOther(data.data.otherInfo);
+      setProject(data.data.project);
+      console.log(data.data.project)
     }
+  };
 
-    const getProExp = async () => {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API}/proExp/getProExpProfile/${selected}`, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          "authorization": `Bearer ${process.env.NEXT_PUBLIC_API_TOKEN}`
-        }
-      });
-      const data: request = await response.json();
-      if (data.code === 200) {
-        setProExp(data.data);
-      }
-    }
-
-    const getLang = async () => {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API}/lang/getLangProfile/${selected}`, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          "authorization": `Bearer ${process.env.NEXT_PUBLIC_API_TOKEN}`
-        }
-      });
-      const data: request = await response.json();
-      if (data.code === 200) {
-        setLang(data.data);
-      }
-    }
-
-    const getOther = async () => {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API}/otherInfo/getOtherProfile/${selected}`, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          "authorization": `Bearer ${process.env.NEXT_PUBLIC_API_TOKEN}`
-        }
-      });
-      const data: request = await response.json();
-      if (data.code === 200) {
-        setOther(data.data);
-      }
-    }
-    if (selected) {
-      getLang();
-      getProExp();
-      getEduExp();
-      getProfile();
-      getOther();
-    }
-
-  }, [selected])
   return (
-    <div className="grid grid-cols-1 gap-4 md:grid-cols-1 md:gap-6 xl:grid-cols-1 2xl:gap-7.5">
-      <select className="p-3 rounded-md dark:text-white text-black dark:bg-primary hover:bg-secondary bg-secondary " value={selected}  name="profile" id="profile" onChange={(e) => setSelected(e.target.value)}>
+    <>
+    {profile ? (
+          <div className="grid grid-cols-1 gap-4 md:grid-cols-1 md:gap-6 xl:grid-cols-1 2xl:gap-7.5">
+      <select className="p-3 rounded-md dark:text-white text-black dark:bg-primary hover:bg-secondary bg-secondary " value={selected} name="profile" id="profile" onChange={(e) => setSelected(e.target.value)}>
         {Profiles ? (<>
           {Profiles?.map((row: Profile, index: number) => (
-            <option className="mt-5 dark:bg-boxdark" value={row._id} selected={row._id === selected} key={index}>{row.name}</option>
+            <option className="mt-5 dark:bg-boxdark bg-primary text-white" value={row._id} selected={row._id === selected} key={index}>
+              {row.name}
+            </option>
           ))}
         </>) :
-          (<option value="" selected key="0">Sem perfis</option>)}
+          (<option className="mt-5 dark:bg-boxdark bg-primary text-white"  value="" selected key="0">Sem perfis</option>)}
 
       </select>
       <ExpandItem name="Dados Pessoais">
@@ -150,9 +101,15 @@ const Portfolio: React.FC = () => {
         <LangItem lang={lang} />
       </ExpandItem>
       <ExpandItem name="Outras Informações">
-        <Other other={other} />
+        <OtherItem other={other} />
+      </ExpandItem>
+      <ExpandItem name="Projetos">
+        <ProjectItem project={project} />
       </ExpandItem>
     </div>
+    ):(<Loader/>)}
+
+    </>
   );
 };
 

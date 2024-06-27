@@ -78,6 +78,10 @@ const openApiSchema =
             {
                 name: 'Aditional Information',
                 description: 'Aditional Information related endpoints'
+            },
+            {
+                name: 'Projects',
+                description: 'Projects related endpoints'
             }
         ],
     components:

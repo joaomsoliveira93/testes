@@ -16,7 +16,7 @@ export async function getProExp(fastify: FastifyInstance, id: string) {
 }
 
 export async function getProExpProfile(fastify: FastifyInstance, id: string) {
-  const proExp: IProExp[] | null = await ProExp.find({ profile: id, active: true });
+  const proExp: IProExp[] | null = await ProExp.find({ profile: id});
 
   if (!proExp) {
     throw new CustomError(proExpResponses[4001]);
