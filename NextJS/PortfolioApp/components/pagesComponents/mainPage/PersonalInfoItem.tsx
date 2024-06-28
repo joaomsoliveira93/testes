@@ -44,7 +44,7 @@ const DetailsItem = (props: Props) => {
             <div className="grid grid-cols-1 gap-4 md:grid-cols-1 md:gap-6 xl:grid-cols-2 2xl:gap-7.5">
               <div className="flex">
                 <p className="font-semibold pr-2">E-mail:</p>
-                <a  className="underline" href={`mailto:${profile?.email_1}`}>{profile?.email_1}</a>
+                <a className="underline" href={`mailto:${profile?.email_1}`}>{profile?.email_1}</a>
               </div>
             </div>
 
@@ -146,7 +146,70 @@ const DetailsItem = (props: Props) => {
           }
         </div>
       </>) : (
-        <p className="font-semibold pr-2">Sem dados do perfil</p>
+        <div role="status" className=" animate-pulse overflow-hidden shadow-default">
+
+          <div className="pt-5 grid grid-cols-1 gap-4 md:grid-cols-1 md:gap-6 xl:grid-cols-1 2xl:gap-7.5">
+            <div className="grid grid-cols-2">
+              <svg className="w-15 h-15 text-gray-200 dark:text-gray-600" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 18">
+                <path d="M18 0H2a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2Zm-5.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Zm4.376 10.481A1 1 0 0 1 16 15H4a1 1 0 0 1-.895-1.447l3.5-7A1 1 0 0 1 7.468 6a.965.965 0 0 1 .9.5l2.775 4.757 1.546-1.887a1 1 0 0 1 1.618.1l2.541 4a1 1 0 0 1 .028 1.011Z" />
+              </svg>
+              <div className="ml-0">
+                <div className="h-4 mt-3 dark:bg-white rounded-full bg-black "></div>
+                <div className="h-4 mt-3 dark:bg-white rounded-full bg-black "></div>
+                <div className="h-4 mt-3 dark:bg-white rounded-full bg-black "></div>
+              </div>
+            </div>
+          </div>
+
+          <div className="pt-5 grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-6 xl:grid-cols-2 2xl:gap-7.5">
+            <div>
+              <div className="grid grid-cols-1 gap-4 md:grid-cols-1 md:gap-6 xl:grid-cols-2 2xl:gap-7.5">
+                <div className="h-4 mt-2 dark:bg-white rounded-full bg-black "></div>
+              </div>
+              <div className="grid grid-cols-1 gap-4 md:grid-cols-1 md:gap-6 xl:grid-cols-2 2xl:gap-7.5">
+                <div className="h-4 mt-2 dark:bg-white rounded-full bg-black "></div>
+              </div>
+              <div className="grid grid-cols-1 gap-4 md:grid-cols-1 md:gap-6 xl:grid-cols-2 2xl:gap-7.5">
+                <div className="h-4 mt-2 dark:bg-white rounded-full bg-black "></div>
+              </div>
+              <div className="grid grid-cols-1 gap-4 md:grid-cols-1 md:gap-6 xl:grid-cols-2 2xl:gap-7.5">
+                <div className="h-4 mt-2 dark:bg-white rounded-full bg-black "></div>
+              </div>
+            </div>
+      
+            <div>
+              <div className="grid grid-cols-1 gap-4 md:grid-cols-1 md:gap-6 xl:grid-cols-2 2xl:gap-7.5">
+                <div className="h-4 mt-2 dark:bg-white rounded-full bg-black "></div>
+              </div>
+              <div className="grid grid-cols-1 gap-4 md:grid-cols-1 md:gap-6 xl:grid-cols-2 2xl:gap-7.5">
+                <div className="h-4 mt-2 dark:bg-white rounded-full bg-black "></div>
+              </div>
+              <div className="grid grid-cols-1 gap-4 md:grid-cols-1 md:gap-6 xl:grid-cols-2 2xl:gap-7.5">
+                <div className="h-4 mt-2 dark:bg-white rounded-full bg-black "></div>
+              </div>
+              <div className="grid grid-cols-1 gap-4 md:grid-cols-1 md:gap-6 xl:grid-cols-2 2xl:gap-7.5">
+                <div className="h-4 mt-2   dark:bg-white rounded-full bg-black "></div>
+              </div>
+            </div>
+          </div>
+          
+          <div className="pt-5 grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-6 xl:grid-cols-2 2xl:gap-7.5">
+            <div className="grid grid-cols-1 gap-4 md:grid-cols-1 md:gap-6 xl:grid-cols-2 2xl:gap-7.5">
+              <div className="h-4 dark:bg-white rounded-full bg-black "></div>
+            </div>
+            <div className="flex">
+              <div className="h-4 mt-2 dark:bg-white rounded-full bg-black "></div>
+              <div>
+                <div className="h-4 mt-2 dark:bg-white rounded-full bg-black "></div>
+                <div className="h-4 mt-2 dark:bg-white rounded-full bg-black "></div>
+                <div className="h-4 mt-2 dark:bg-white rounded-full bg-black "></div>
+                <div className="h-4 mt-2 dark:bg-white rounded-full bg-black "></div>
+                <div className="h-4 mt-2 dark:bg-white rounded-full bg-black "></div>
+                <div className="h-4 mt-2 dark:bg-white rounded-full bg-black "></div>
+              </div>
+            </div>
+          </div>
+        </div>
       )}
 
     </div>

@@ -1,73 +1,21 @@
-"use client"
-import { useEffect, useState } from 'react';
-import { useParams } from 'next/navigation';
 import Breadcrumb from "@/components/appLayout/Breadcrumbs/Breadcrumb";
-import Image from "next/image";
-import { Project } from '@/types/project';
-import CancelPresentationOutlinedIcon from '@mui/icons-material/CancelPresentationOutlined';
-import Loader from '@/components/common/Loader';
+import ImgViewer from "@/components/ui/imgUpdate/imgViewer";
+import {getProject} from "@/app/actions"
 
-type Request = {
-    code: number,
-    message: string,
-    data: any
+
+type Params = {
+    proj: string
 }
 
-
-const Page = () => {
-    const { proj } = useParams();
-    const [project, setProject] = useState<Project | undefined>(undefined);
-    const [currentImageIndex, setCurrentImageIndex] = useState(0);
-    const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-    const [modalImage, setModalImage] = useState<string | null>(null);
-
-    useEffect(() => {
-        if (proj) { getProject() }
-    }, [proj]);
-
-    const getProject = async () => {
-        const response = await fetch(`${process.env.NEXT_PUBLIC_API}/project/getProject/${proj}`, {
-            method: "GET",
-            headers: {
-                "Content-Type": "application/json",
-                "authorization": `Bearer ${process.env.NEXT_PUBLIC_API_TOKEN}`
-            }
-        });
-        const data: Request = await response.json();
-
-        if (data.code === 200) {
-            setProject(data.data);
-            console.log(data.data);
-        }
-    };
-
-    const handleNextImage = () => {
-        if (project && project.imgs) {
-            setCurrentImageIndex((currentImageIndex + 1) % project.imgs.length);
-        }
-    };
-
-    const handlePreviousImage = () => {
-        if (project && project.imgs) {
-            setCurrentImageIndex((currentImageIndex - 1 + project.imgs.length) % project.imgs.length);
-        }
-    };
-
-    const openModal = (img: string) => {
-        setModalImage(img);
-        setIsModalOpen(true);
-    };
-
-    const closeModal = () => {
-        setIsModalOpen(false);
-        setModalImage(null);
-    };
+const Page = async (params: Params) => {
+    const { proj } = params
+    let project = await getProject(proj);
 
     return (
         <>
+            <Breadcrumb pageName="Detalhes do Projecto" />
             {project ? (
                 <>
-                    <Breadcrumb pageName="Detalhes do Projecto" />
                     <div className="overflow-hidden rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark">
                         <div className="px-7 pb-6 lg:pb-8 xl:pb-11.5">
                             <div className="mt-4">
@@ -85,61 +33,47 @@ const Page = () => {
                                         {project?.detailsPT}
                                     </p>
                                 </div>
-                                {project?.imgs && project?.imgs.length > 0 && (
-                                    <div className="mt-6">
-                                        <h4 className="font-semibold text-black dark:text-white mb-4">
-                                            Imagens
-                                        </h4>
-                                        <div className="flex justify-between items-center mb-4">
-                                            <button
-                                                onClick={handlePreviousImage}
-                                                className="bg-gray-300 dark:bg-gray-700 text-black dark:text-white px-4 py-2 rounded hover:bg-primary"
-                                            >
-                                                Anterior
-                                            </button>
-                                            <button
-                                                onClick={handleNextImage}
-                                                className="bg-gray-300 dark:bg-gray-700 text-black dark:text-white px-4 py-2 rounded hover:bg-primary"
-                                            >
-                                                Próxima
-                                            </button>
-                                        </div>
-                                        <div className="relative w-full h-125 mb-4" onClick={() => openModal(project.imgs[currentImageIndex])}>
-                                            <Image
-                                                src={`data:image/jpeg;base64,${project.imgs[currentImageIndex]}`}
-                                                alt={`Project image ${currentImageIndex + 1}`}
-                                                layout="fill"
-                                                objectFit="cover"
-                                                className="rounded-sm"
-                                            />
-                                        </div>
-                                    </div>
-                                )}
+                                <ImgViewer imgs={project.imgs} />
                             </div>
                         </div>
                     </div>
-                    {isModalOpen && (
-                        <div className="fixed inset-0 z-99999 flex items-center justify-center bg-black bg-opacity-90">
-                            <div className="relative w-3/4 h-3/4">
-                                <Image
-                                    src={`data:image/jpeg;base64,${modalImage}`}
-                                    alt="Enlarged project image"
-                                    layout="fill"
-                                    objectFit="contain"
-                                    className="rounded-sm"
-                                />
-                                <button
-                                    onClick={closeModal}
-                                    className="absolute bg-gray-300 dark:bg-gray-700 text-black dark:text-white "
-                                >
-                                    <CancelPresentationOutlinedIcon className='h-10 w-10 hover:bg-red-800 hover:rounded-md' />
-                                </button>
-                            </div>
-                        </div>
-                    )}
+
                 </>
             ) : (
-                <Loader />
+                <div role="status" className=" animate-pulse overflow-hidden rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark">
+                    <div className="px-7 pb-6 lg:pb-8 xl:pb-11.5">
+                        <div className="mt-4">
+                            <h3 className="mb-1.5 text-2xl font-semibold text-black dark:text-white">
+                                <div className="h-4 dark:bg-white rounded-full bg-black max-w-[30%] mb-4"></div>
+                            </h3>
+                            <div>
+                                <h4 className="font-semibold text-black dark:text-white">
+                                    <div className="h-4 dark:bg-white rounded-full bg-black max-w-[45%] mb-4"></div>
+                                </h4>
+                                <div className="mt-4.5">
+                                    <div className="h-4 dark:bg-white rounded-full bg-black max-w-[65%] mb-4"></div>
+                                </div>
+                                <div className="mt-4.5">
+                                    <div className="h-4 dark:bg-white rounded-full bg-black max-w-[95%] mb-4"></div>
+                                    <div className="h-4 dark:bg-white rounded-full bg-black max-w-[95%] mb-4"></div>
+                                    <div className="h-4 dark:bg-white rounded-full bg-black max-w-[95%] mb-4"></div>
+                                </div>
+                            </div>
+
+                            <div className="mt-6">
+                                <h4 className="font-semibold text-black dark:text-white mb-4">
+                                    <div className="h-4 dark:bg-white rounded-full bg-black max-w-[10%] mb-4"></div>
+                                </h4>
+                                <div className="relative w-full h-50 mb-4 ">
+                                    <svg className="h-50 text-gray-200 dark:text-gray-600 mx-auto" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 18">
+                                        <path d="M18 0H2a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2Zm-5.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Zm4.376 10.481A1 1 0 0 1 16 15H4a1 1 0 0 1-.895-1.447l3.5-7A1 1 0 0 1 7.468 6a.965.965 0 0 1 .9.5l2.775 4.757 1.546-1.887a1 1 0 0 1 1.618.1l2.541 4a1 1 0 0 1 .028 1.011Z" />
+                                    </svg>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
             )}
         </>
     );
