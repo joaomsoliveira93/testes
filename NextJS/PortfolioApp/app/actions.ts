@@ -7,6 +7,7 @@ type request = {
 }
 
 export async function getProject(proj:string) {
+    console.log(proj)
     const response = await fetch(`${process.env.NEXT_PUBLIC_API}/project/getProject/${proj}`, {
         method: "GET",
         headers: {

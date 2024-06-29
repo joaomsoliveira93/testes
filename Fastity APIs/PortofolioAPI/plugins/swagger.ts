@@ -82,6 +82,10 @@ const openApiSchema =
             {
                 name: 'Projects',
                 description: 'Projects related endpoints'
+            },
+            {
+                name: 'Documents',
+                description: 'Documents related endpoints'
             }
         ],
     components:

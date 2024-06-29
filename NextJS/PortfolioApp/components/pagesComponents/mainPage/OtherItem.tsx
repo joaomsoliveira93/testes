@@ -17,9 +17,12 @@ const OtherItem = (props: Props) => {
                 <div className="flex">
                   <p className="font-semibold pr-2">{row?.institution}</p><p>{row?.titlePT}</p>
                 </div>
-                <div className="flex">
-                  <p>{row?.locationPT}</p>
-                </div>
+                {row?.locationPT && (
+                  <div className="flex">
+                    <p>{row?.locationPT}</p>
+                  </div>
+                )}
+
               </div>
               {row.webSite && (
                 <div className="grid grid-cols-1 gap-4 md:grid-cols-1 md:gap-6 xl:grid-cols-1 2xl:gap-7.5">
@@ -47,38 +50,38 @@ const OtherItem = (props: Props) => {
         <p className="py-3">Sem Informações adicionais</p>
       )}
     </>
-  ):(
+  ) : (
     <div role="status" className=" animate-pulse overflow-hidden shadow-default ">
-    <div className="py-3" >
-      <div className="grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-6 xl:grid-cols-1 2xl:gap-7.5">  
-        <div className="h-4 dark:bg-white rounded-full bg-black max-w-[60%] mb-1"></div>
+      <div className="py-3" >
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-6 xl:grid-cols-1 2xl:gap-7.5">
+          <div className="h-4 dark:bg-white rounded-full bg-black max-w-[60%] mb-1"></div>
+        </div>
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-1 md:gap-6 xl:grid-cols-1 2xl:gap-7.5">
+          <div className="h-4 dark:bg-white rounded-full bg-black max-w-[30%] mb-1"></div>
+        </div>
+        <hr className="py-2" />
+        <div className="">
+          <div className="h-4 dark:bg-white rounded-full bg-black max-w-[95%] mb-1"></div>
+          <div className="h-4 dark:bg-white rounded-full bg-black max-w-[95%] mb-1"></div>
+          <div className="h-4 dark:bg-white rounded-full bg-black max-w-[95%] mb-1"></div>
+        </div>
       </div>
-      <div className="grid grid-cols-1 gap-4 md:grid-cols-1 md:gap-6 xl:grid-cols-1 2xl:gap-7.5">
-        <div className="h-4 dark:bg-white rounded-full bg-black max-w-[30%] mb-1"></div> 
-      </div>
-      <hr className="py-2" />
-      <div className="">  
-        <div className="h-4 dark:bg-white rounded-full bg-black max-w-[95%] mb-1"></div>      
-        <div className="h-4 dark:bg-white rounded-full bg-black max-w-[95%] mb-1"></div>    
-        <div className="h-4 dark:bg-white rounded-full bg-black max-w-[95%] mb-1"></div>    
-      </div>
-    </div>
 
-    <div className="py-3 mt-3" >
-      <div className="grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-6 xl:grid-cols-1 2xl:gap-7.5">  
-        <div className="h-4 dark:bg-white rounded-full bg-black max-w-[60%] mb-1"></div>
-      </div>
-      <div className="grid grid-cols-1 gap-4 md:grid-cols-1 md:gap-6 xl:grid-cols-1 2xl:gap-7.5">
-        <div className="h-4 dark:bg-white rounded-full bg-black max-w-[30%] mb-1"></div> 
-      </div>
-      <hr className="py-2" />
-      <div className="">  
-        <div className="h-4 dark:bg-white rounded-full bg-black max-w-[95%] mb-1"></div>      
-        <div className="h-4 dark:bg-white rounded-full bg-black max-w-[95%] mb-1"></div>    
-        <div className="h-4 dark:bg-white rounded-full bg-black max-w-[95%] mb-1"></div>    
+      <div className="py-3 mt-3" >
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-6 xl:grid-cols-1 2xl:gap-7.5">
+          <div className="h-4 dark:bg-white rounded-full bg-black max-w-[60%] mb-1"></div>
+        </div>
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-1 md:gap-6 xl:grid-cols-1 2xl:gap-7.5">
+          <div className="h-4 dark:bg-white rounded-full bg-black max-w-[30%] mb-1"></div>
+        </div>
+        <hr className="py-2" />
+        <div className="">
+          <div className="h-4 dark:bg-white rounded-full bg-black max-w-[95%] mb-1"></div>
+          <div className="h-4 dark:bg-white rounded-full bg-black max-w-[95%] mb-1"></div>
+          <div className="h-4 dark:bg-white rounded-full bg-black max-w-[95%] mb-1"></div>
+        </div>
       </div>
     </div>
-  </div>
   )}
   </>
 

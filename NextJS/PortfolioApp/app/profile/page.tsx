@@ -7,7 +7,7 @@ import CameraAltOutlinedIcon from '@mui/icons-material/CameraAltOutlined';
 import { getServerSession } from "next-auth/next";
 import { Metadata } from "next";
 import { options } from "../api/auth/[...nextauth]/options";
-import ImgUpdate from "@/components/ui/imgUpdate/imgUpdate";
+import ImgUpdate from "@/components/ui/imgUpdate";
 
 export const metadata: Metadata = {
   title: "Profile Page",

@@ -9,7 +9,7 @@ type Props = {
 const DetailsItem = (props: Props) => {
   const { profile } = props;
   return (
-    <div className="py-3">
+    <div className="duration-300 ease-in-out p-2py-3">
       {profile ? (<>
         <div className="pt-5 grid grid-cols-1 gap-4 md:grid-cols-1 md:gap-6 xl:grid-cols-1 2xl:gap-7.5">
           <div className="flex">

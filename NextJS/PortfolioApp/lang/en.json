@@ -1,0 +1,15 @@
+{
+    "Home": {
+      "navigation": {
+        "portfolio": "Portfolio",
+        "profile": "Profile"
+      },
+      "title": "test title",
+      "description": "test description"
+    },
+    "LocaleSwitcher": {
+    "pt": "Portugues",
+    "en": "English",
+    "label": "Sprache"
+  }
+  }

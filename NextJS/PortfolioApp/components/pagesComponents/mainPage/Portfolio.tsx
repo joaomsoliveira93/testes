@@ -8,6 +8,7 @@ import LangItem from "./LangItem";
 import OtherItem from "./OtherItem";
 import ProjectItem from "./ProjectItem";
 import { Profile } from "@/types/profile";
+import DocumentItem from "./DocumentItem";
 
 type request = {
   code: number,
@@ -24,7 +25,8 @@ const Portfolio: React.FC = () => {
   const [lang, setLang] = useState(undefined);
   const [other, setOther] = useState(undefined);
   const [project, setProject] = useState(undefined);
-
+  const [document, setDocument] = useState(undefined);
+  
   useEffect(() => { getProfiles(); }, [])
 
   useEffect(() => {
@@ -34,6 +36,7 @@ const Portfolio: React.FC = () => {
     setOther(undefined);
     setProject(undefined);
     setProExp(undefined);
+    setDocument(undefined);
     if (selected) getProfile();
   }, [selected]);
 
@@ -71,6 +74,7 @@ const Portfolio: React.FC = () => {
       setLang(data.data.lang);
       setOther(data.data.otherInfo);
       setProject(data.data.project);
+      setDocument(data.data.document)
     }
   };
 
@@ -106,6 +110,9 @@ const Portfolio: React.FC = () => {
         </ExpandItem>
         <ExpandItem name="Projetos">
           <ProjectItem project={project} />
+        </ExpandItem>
+        <ExpandItem name="Documentos">
+          <DocumentItem doc={document} />
         </ExpandItem>
       </div>
     </>

@@ -339,6 +339,46 @@ const projectResponses =
     }
 };
 
+const documentResponses =
+{
+    [2000]: {
+        code: 200,
+        message: 'Document retrieved with success'
+    },
+    [2001]: {
+        code: 200,
+        message: 'Document created with success'
+    },
+    [2002]: {
+        code: 200,
+        message: 'Document updated with success'
+    },
+    [2003]: {
+        code: 200,
+        message: 'Document deleted with success'
+    },
+    [4001]: {
+        code: 404,
+        status:404,
+        message: 'Error. Document Not Found'
+    },
+    [4002]: {
+        code: 400,
+        status:400,
+        message: 'Error creating Document.'
+    },
+    [4003]: {
+        code: 400,
+        status:400,
+        message: 'Error updating Document.'
+    },
+    [4004]: {
+        code: 400,
+        status:400,
+        message: 'Error deleting Document.'
+    }
+};
+
 const generalError =
 {
     [1000]: {
@@ -361,6 +401,7 @@ export
     eduExpResponses,
     langResponses,
     otherResponses,
-    projectResponses
+    projectResponses,
+    documentResponses
 };
 

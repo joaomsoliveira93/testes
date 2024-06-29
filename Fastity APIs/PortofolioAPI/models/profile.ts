@@ -4,6 +4,7 @@ import { IProExp } from './proExp';
 import { ILang } from './lang';
 import { IOther } from './otherInfo';
 import { IProject, ISimpleProject } from './project';
+import { IDocument } from './document';
 
 interface IProfile extends Document
 {
@@ -62,7 +63,7 @@ function formatProfile(profile: IProfile): Partial<IProfile>
     };
 }
 
-function formatProfileInfos(profile: IProfile, proExp:IProExp[],eduExp:IEduExp[],lang:ILang[],otherInfo:IOther[],project: ISimpleProject[]): Partial<any>
+function formatProfileInfos(profile: IProfile, proExp:IProExp[],eduExp:IEduExp[],lang:ILang[],otherInfo:IOther[],project: ISimpleProject[],document:IDocument[]): Partial<any>
 {
     return {
         "profile":profile,
@@ -70,7 +71,8 @@ function formatProfileInfos(profile: IProfile, proExp:IProExp[],eduExp:IEduExp[]
         "eduExp":eduExp,
         "lang":lang,
         "otherInfo":otherInfo,
-        "project":project
+        "project":project,
+        "document":document
     };
 }
 

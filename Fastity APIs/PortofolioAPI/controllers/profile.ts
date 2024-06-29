@@ -8,6 +8,7 @@ import { EduExp, IEduExp } from 'models/eduExp';
 import { ILang, Lang } from 'models/lang';
 import { IOther, Other } from 'models/otherInfo';
 import { IProject, Project } from 'models/project';
+import { Doc, IDocument } from 'models/document';
 
 
 export async function getProfiles(fastify: FastifyInstance) {
@@ -39,12 +40,13 @@ export async function getProfileInfos(fastify: FastifyInstance, id: string) {
   const lang:ILang[] |null = await Lang.find({profile:id})
   const otherInfo:IOther[] |null = await Other.find({profile:id})
   const project:ISimpleProject[] | null = await Project.find({profile:id})
+  const document:IDocument[] |null = await Doc.find({profile:id})
 
   if (!profile) {
     throw new CustomError(profileResponses[4001]);
   }
 
-  const formatedProfileInfos = formatProfileInfos(profile,proExp,eduExp,lang,otherInfo,project);
+  const formatedProfileInfos = formatProfileInfos(profile,proExp,eduExp,lang,otherInfo,project,document);
 
   return formatedProfileInfos;
 }

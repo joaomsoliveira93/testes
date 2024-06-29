@@ -8,7 +8,7 @@ const Collapsible = CollapsiblePrimitive.Root;
 const CollapsibleTrigger = CollapsiblePrimitive.CollapsibleTrigger;
 const CollapsibleContent = CollapsiblePrimitive.CollapsibleContent;
 import s from "./style.module.css";
-import { useSidebar } from "./use-sidebar";
+import { useSidebar } from "@/context/SidebarContext";
 type Props = {
   children?: React.ReactNode;
   icon?: React.ReactNode;
@@ -18,11 +18,11 @@ type Props = {
 const ExpandMenu = (props: Props) => {
   const { children, icon, name } = props;
   const [open, setOpen] = React.useState(false);
-  const { isSidebarOpen } = useSidebar((state) => state);
+  const { sidebarOpen } = useSidebar();
   return (
     <Collapsible open={open} onOpenChange={setOpen} className="">
       <CollapsibleTrigger asChild className="group rounded-md px-3 py-2  duration-300 ease-in-out p-2  hover:dark:bg-primary hover:bg-secondary">
-        {isSidebarOpen ? (
+        {sidebarOpen ? (
           <div className="flex w-full items-center text-gray-2 cursor-pointer">
             {icon}
             <div
@@ -42,7 +42,7 @@ const ExpandMenu = (props: Props) => {
         )}
       </CollapsibleTrigger>
       <CollapsibleContent className={s.CollapsibleContent}>
-        <div className="px-3">{isSidebarOpen && children}</div>
+        <div className="px-3">{sidebarOpen && children}</div>
       </CollapsibleContent>
     </Collapsible>
   );

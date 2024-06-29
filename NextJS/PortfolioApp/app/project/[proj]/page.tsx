@@ -1,22 +1,42 @@
 import Breadcrumb from "@/components/appLayout/Breadcrumbs/Breadcrumb";
-import ImgViewer from "@/components/ui/imgUpdate/imgViewer";
-import {getProject} from "@/app/actions"
-
+import ImgViewer from "@/components/ui/imgViewer";
 
 type Params = {
-    proj: string
-}
+    params: {
+        proj: string;
+    };
+};
 
-const Page = async (params: Params) => {
+type request = {
+    code: number,
+    message: string,
+    data: any
+};
+
+const Page = async ({ params }: Params) => {
     const { proj } = params
-    let project = await getProject(proj);
+
+    let project=null
+    const response = await fetch(`${process.env.NEXT_PUBLIC_API}/project/getProject/${proj}`, {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json",
+            "authorization": `Bearer ${process.env.NEXT_PUBLIC_API_TOKEN}`
+        }
+    });
+    const data: request = await response.json();
+    if (data.code===200){
+        project = data.data
+    }else{
+        project = null
+    }
 
     return (
         <>
             <Breadcrumb pageName="Detalhes do Projecto" />
             {project ? (
                 <>
-                    <div className="overflow-hidden rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark">
+                    <div className="overflow-hidden rounded-lg border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark">
                         <div className="px-7 pb-6 lg:pb-8 xl:pb-11.5">
                             <div className="mt-4">
                                 <h3 className="mb-1.5 text-2xl font-semibold text-black dark:text-white">

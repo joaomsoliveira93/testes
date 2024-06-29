@@ -11,9 +11,9 @@ const LangItem = (props: Props) => {
     <> {lang ? (
       <>
         {lang?.length !== 0 ? (
-          <div className="py-2 w-full bg-white shadow-default dark:bg-boxdark">
+          <div className="py-2 w-full shadow-default dark:bg-boxdark">
             <table className="border w-full border-stroke bg-white px-4 py-4 text-left dark:bg-boxdark dark:border-strokedark">
-              <thead>
+              <thead >
                 <tr>
                   <th className="border-b border-stroke bg-white px-4 py-4 text-left dark:bg-boxdark dark:border-strokedark" />
                   <th colSpan={2} className="text-center border-b border-stroke bg-white px-4 py-4 dark:bg-boxdark dark:border-strokedark">
