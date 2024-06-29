@@ -1,16 +1,128 @@
 {
-  "Home": {
-    "navigation": {
-      "home": "Inicio",
-      "portfolio": "Portefólio",
-      "profile": "Perfil"
-    },
-    "title": "Titulo teste",
-    "description": "Descrição teste"
-  },
   "LocaleSwitcher": {
     "pt": "Português",
     "en": "Inglês",
+    "es" :"Espanhol",
+    "fr": "Francês",
     "label": "Sprache"
+  },
+  "tableSort":{
+    "search":"Procurar...",
+    "next": "Próximo",
+    "prev": "Anterior",
+    "page": "Página",
+    "of": "de",
+    "details":"Ver Detalhes"
+  },
+  "Sidebar": {
+    "portfolio": "Portefólio",
+    "profiles": "Perfis"
+  },
+  "Header": {
+    "userDropdown": {
+      "profile": "Meu Perfil",
+      "contacts": "Contactos",
+      "settings": "Definições",
+      "logout": "Teminar Sessão"
+    }
+  },
+  "LoginScreen": {
+    "sideTitle": "O meu Portfólio",
+    "sideDesc": "Inicie sessão para ter acesso a edição dos portefólios disponíveis",
+    "title": "Iniciar Sessão no Meu Portefólio",
+    "logout": "Teminar Sessão",
+    "email": "E-mail",
+    "emailPlaceholder":"Introduza o seu E-mail",
+    "emailError":"E-mail Inválido",
+    "password": "Palavra-Passe",
+    "passwordPlaceholder": "Introduza a sua Palavra-Passe",
+    "signInBtn":"Iniciar Sessão",
+    "authError":"O E-mail ou Palavra-Passe introduzidas não são válidas.",
+    "noAccount":"Não tens uma conta?",
+    "signUp":"Registar-se"
+  },
+  "SignupScreen": {
+    "register":"Rgistar-se",
+    "sideTitle": "O meu Portfólio",
+    "sideDesc": "Registe-se para ter acesso a edição dos portefólios disponíveis",
+    "title": "Registar-se no Meu Portefólio",
+    "name":"Nome",
+    "namePlaceholder":"Introduza o seu Nome",
+    "email": "E-mail",
+    "emailPlaceholder":"Introduza o seu E-mail",
+    "emailError":"E-mail Inválido",
+    "password": "Palavra-Passe",
+    "passwordPlaceholder": "Introduza a sua Palavra-Passe",
+    "rpassword": "Reescreva a Palavra-Passe",
+    "rpasswordPlaceholder": "Introduza novamente a sua Palavra-Passe",
+    "passwordError":"As Palavras-passe não coincidem",
+    "signUpBtn":"Criar Conta",
+    "authError":"Não foi possível Realizar o registo.",
+    "account":"Já tens uma conta?",
+    "signIn":"Iniciar Sessão",
+    "accountSuccess":"A sua conta foi criada com sucesso. Por favor verifique o seu E-mail.",
+    "accountError":"Não foi possível criar a sua conta. Por favor tente mais tarde"
+  },
+  "portfolioScreen":{
+    "noProfiles":"Sem Perfis para mostrar",
+    "personalInfo":"Dados Pessoais",
+    "proExp":"Experiência Profissional",
+    "eduExp":"Educação e formação",
+    "lang":"Competências Linguistícas",
+    "otherInfo":"Outras Informações",
+    "projects":"Projetos",
+    "documents":"Documentos",
+    "personalInfoItem":{
+      "name":"Nome",
+      "nationality":"Nacionalidade",
+      "address":"Morada",
+      "linkedin":"LinkedIn",
+      "email":"E-mail",
+      "phone":"Telefone",
+      "web":"Páginas Web"
+    },    
+    "proExpItem":{
+      "present":"Atual",
+      "noExp":"Sem experiência profissional"
+    },
+    "eduExpItem":{
+      "present":"Atual",
+      "noEdu":"Sem Educação e Formação"
+    },
+    "langItem":{
+      "und":"Comprender",
+      "spk":"Falar",
+      "write":"Escrever",
+      "undOral":"Compreenção Oral",
+      "read":"Ler",
+      "prdOral":"Produção Oral",
+      "intOral":"Interação Oral",
+      "sub":"Níveis: A1 e A2: Utilizador de base; B1 e B2: Utilizador independente; C1 e C2: Utilizador avançado",
+      "noLang":"Sem Competências Lingistícas"
+    },
+    "otherItem":{
+      "present":"Atual",
+      "noOther":"Sem Outras informações"
+    },
+    "projectItem":{
+      "more":"Ver mais",
+      "noProj":"Sem Projetos"
+    },
+    "documentItem":{
+      "see":"Ver Documento",
+      "noDoc":"Sem Documentos"
+    }
+  },
+  "dtlProjScreen": {
+    "title": "Detalhes do Projeto",
+    "pictures":"Imagens",
+    "next":"Próximo",
+    "prev":"Anterior"
+  },
+  "profilesScreen": {
+    "title": "Todos os Perfis",
+    "image":"Imagem",
+    "name":"Nome",
+    "active":"Ativo"
   }
 }

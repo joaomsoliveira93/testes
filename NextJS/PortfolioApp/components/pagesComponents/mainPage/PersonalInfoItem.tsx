@@ -1,6 +1,7 @@
 import React from "react";
 import { Profile } from "@/types/profile";
 import Image from "next/image";
+import {useLocale, useTranslations} from 'next-intl';
 
 type Props = {
   profile?: Profile
@@ -8,6 +9,8 @@ type Props = {
 
 const DetailsItem = (props: Props) => {
   const { profile } = props;
+  const t = useTranslations('portfolioScreen.personalInfoItem');
+  const locale = useLocale();
   return (
     <div className="duration-300 ease-in-out p-2py-3">
       {profile ? (<>
@@ -24,15 +27,15 @@ const DetailsItem = (props: Props) => {
             />
             <div className="ml-5">
               <div className="flex mt-2">
-                <p className="font-semibold pr-2">Nome:</p>
+                <p className="font-semibold pr-2">{t('name')}:</p>
                 <p>{profile?.name}</p>
               </div>
               <div className="flex mt-3">
-                <p className="font-semibold pr-2">Nacionalidade:</p>
-                <p>{profile?.nationalityPT}</p>
+                <p className="font-semibold pr-2">{t('nationality')}:</p>
+                <p>{locale==='pt' ? profile?.nationalityPT : locale==='es' ? profile?.nationalityES :locale==='fr' ? profile?.nationalityFR :profile?.nationalityEN}</p>
               </div>
               <div className="flex mt-3">
-                <p className="font-semibold pr-2">Morada:</p>
+                <p className="font-semibold pr-2">{t('address')}:</p>
                 <p>{profile?.address}</p>
               </div>
             </div>
@@ -43,7 +46,7 @@ const DetailsItem = (props: Props) => {
           <div>
             <div className="grid grid-cols-1 gap-4 md:grid-cols-1 md:gap-6 xl:grid-cols-2 2xl:gap-7.5">
               <div className="flex">
-                <p className="font-semibold pr-2">E-mail:</p>
+                <p className="font-semibold pr-2">{t('email')}:</p>
                 <a className="underline" href={`mailto:${profile?.email_1}`}>{profile?.email_1}</a>
               </div>
             </div>
@@ -82,7 +85,7 @@ const DetailsItem = (props: Props) => {
           <div>
             <div className="grid grid-cols-1 gap-4 md:grid-cols-1 md:gap-6 xl:grid-cols-2 2xl:gap-7.5">
               <div className="flex">
-                <p className="font-semibold pr-2">Telefone:</p>
+                <p className="font-semibold pr-2">{t('phone')}:</p>
                 <p>{profile?.phone_1}</p>
               </div>
             </div>
@@ -122,7 +125,7 @@ const DetailsItem = (props: Props) => {
             profile?.linkedIn && (<>
               <div className="grid grid-cols-1 gap-4 md:grid-cols-1 md:gap-6 xl:grid-cols-2 2xl:gap-7.5">
                 <div className="flex">
-                  <p className="font-semibold pr-2">LinkedIn:</p>
+                  <p className="font-semibold pr-2">{t('linkedin')}:</p>
                   <a className="underline" target="_blank" href={profile?.linkedIn.toLowerCase().includes("http") ? profile?.linkedIn : `https://${profile?.linkedIn}`}>{profile?.linkedIn}</a>
                 </div>
               </div>
@@ -132,7 +135,7 @@ const DetailsItem = (props: Props) => {
           {
             (profile?.web_1 || profile?.web_2 || profile?.web_3 || profile?.web_4 || profile?.web_5 || profile?.web_6) && (
               <div className="flex">
-                <p className="font-semibold pr-2">Páginas Web:</p>
+                <p className="font-semibold pr-2">{t('web')}:</p>
                 <div>
                   <div>{profile?.web_1 && (<a target="_blank" className="underline" href={profile?.web_1.toLowerCase().includes("http") ? profile?.web_1 : `https://${profile?.web_1}`}>{profile?.web_1}</a>)}</div>
                   <div>{profile?.web_2 && (<a target="_blank" className="underline" href={profile?.web_2.toLowerCase().includes("http") ? profile?.web_2 : `https://${profile?.web_2}`}>{profile?.web_2}</a>)}</div>

@@ -1,0 +1,117 @@
+{
+    "LocaleSwitcher": {
+      "pt": "Portugués",
+      "en": "Inglés",
+      "es": "Espanhól",
+      "fr": "Francés",
+      "label": "Idioma"
+    },
+    "Sidebar": {
+      "portfolio": "Portafolio",
+      "profile": "Perfil",
+      "title": "Título de prueba",
+      "description": "Descripción de prueba"
+    },
+    "Header": {
+      "userDropdown": {
+        "profile": "Mi Perfil",
+        "contacts": "Contactos",
+        "settings": "Configuraciones",
+        "logout": "Cerrar Sesión"
+      }
+    },
+    "LoginScreen": {
+      "sideTitle": "Mi Portafolio",
+      "sideDesc": "Inicie sesión para acceder a la edición de los portafolios disponibles",
+      "title": "Iniciar Sesión en Mi Portafolio",
+      "logout": "Cerrar Sesión",
+      "email": "Correo Electrónico",
+      "emailPlaceholder": "Introduzca su Correo Electrónico",
+      "emailError": "Correo Electrónico Inválido",
+      "password": "Contraseña",
+      "passwordPlaceholder": "Introduzca su Contraseña",
+      "signInBtn": "Iniciar Sesión",
+      "authError": "El Correo Electrónico o Contraseña introducidos no son válidos.",
+      "noAccount": "¿No tienes una cuenta?",
+      "signUp": "Regístrate"
+    },
+    "SignupScreen": {
+      "register": "Regístrate",
+      "sideTitle": "Mi Portafolio",
+      "sideDesc": "Regístrese para acceder a la edición de los portafolios disponibles",
+      "title": "Regístrate en Mi Portafolio",
+      "name": "Nombre",
+      "namePlaceholder": "Introduzca su Nombre",
+      "email": "Correo Electrónico",
+      "emailPlaceholder": "Introduzca su Correo Electrónico",
+      "emailError": "Correo Electrónico Inválido",
+      "password": "Contraseña",
+      "passwordPlaceholder": "Introduzca su Contraseña",
+      "rpassword": "Reescriba la Contraseña",
+      "rpasswordPlaceholder": "Introduzca nuevamente su Contraseña",
+      "passwordError": "Las Contraseñas no coinciden",
+      "signUpBtn": "Crear Cuenta",
+      "authError": "No se pudo completar el registro.",
+      "account": "¿Ya tienes una cuenta?",
+      "signIn": "Iniciar Sesión",
+      "accountSuccess": "Su cuenta ha sido creada con éxito. Por favor verifique su Correo Electrónico.",
+      "accountError": "No se pudo crear su cuenta. Por favor intente más tarde."
+    },
+    "portfolioScreen": {
+      "noProfiles": "Sin Perfiles para mostrar",
+      "personalInfo": "Información Personal",
+      "proExp": "Experiencia Profesional",
+      "eduExp": "Educación y Formación",
+      "lang": "Habilidades Lingüísticas",
+      "otherInfo": "Otra Información",
+      "projects": "Proyectos",
+      "documents": "Documentos",
+      "personalInfoItem": {
+        "name": "Nombre",
+        "nationality": "Nacionalidad",
+        "address": "Dirección",
+        "linkedin": "LinkedIn",
+        "email": "Correo Electrónico",
+        "phone": "Teléfono",
+        "web": "Páginas Web"
+      },
+      "proExpItem": {
+        "present": "Actual",
+        "noExp": "Sin experiencia profesional"
+      },
+      "eduExpItem": {
+        "present": "Actual",
+        "noEdu": "Sin Educación y Formación"
+      },
+      "langItem": {
+        "und": "Entender",
+        "spk": "Hablar",
+        "write": "Escribir",
+        "undOral": "Comprensión Oral",
+        "read": "Leer",
+        "prdOral": "Producción Oral",
+        "intOral": "Interacción Oral",
+        "sub": "Niveles: A1 y A2: Usuario básico; B1 y B2: Usuario independiente; C1 y C2: Usuario avanzado",
+        "noLang": "Sin Habilidades Lingüísticas"
+      },
+      "otherItem": {
+        "present": "Actual",
+        "noOther": "Sin Otra información"
+      },
+      "projectItem": {
+        "more": "Ver más",
+        "noProj": "Sin Proyectos"
+      },
+      "documentItem": {
+        "see": "Ver Documento",
+        "noDoc": "Sin Documentos"
+      }
+    },
+    "dtlProjScreen": {
+      "title": "Detalles del Proyecto",
+      "pictures": "Imágenes",
+      "next": "Siguiente",
+      "prev": "Anterior"
+    }
+  }
+  

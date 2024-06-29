@@ -1,5 +1,6 @@
 import React from "react";
 import { EduExp } from "@/types/expEdu";
+import {useLocale, useTranslations} from 'next-intl';
 
 type Props = {
   eduExp?: EduExp[]
@@ -7,6 +8,8 @@ type Props = {
 
 const ExpEduItem = (props: Props) => {
   const { eduExp } = props;
+  const t = useTranslations('portfolioScreen.eduExpItem');
+  const locale = useLocale();
   return (
     <>{eduExp ? (
       <>
@@ -16,7 +19,7 @@ const ExpEduItem = (props: Props) => {
               <div className="py-3" key={index}>
                 <div className="grid grid-cols-1 gap-4 md:grid-cols-1 md:gap-6 xl:grid-cols-1 2xl:gap-7.5">
                   <div className="flex">
-                    <p className="font-semibold pr-2">{row?.institution}</p><p>{row?.coursePT}</p>
+                    <p className="font-semibold pr-2">{row?.institution}</p><p>{locale==='pt' ? row?.coursePT :locale==='es' ? row?.courseES: locale==='fr' ? row?.courseFR :  row?.courseEN}</p>
                   </div>
                 </div>
 
@@ -28,20 +31,20 @@ const ExpEduItem = (props: Props) => {
 
                 <div className="grid grid-cols-1 gap-4 md:grid-cols-1 md:gap-6 xl:grid-cols-1 2xl:gap-7.5">
                   <div className="flex">
-                    <p>{row?.startedAt}</p><p className="px-2">-</p><p>{!row?.endedAt ? 'Atual' : row?.endedAt}</p>
+                    <p>{row?.startedAt}</p><p className="px-2">-</p><p>{!row?.endedAt ? t('present') : row?.endedAt}</p>
                   </div>
                 </div>
                 <hr className="py-2" />
                 <div className="grid grid-cols-1 gap-4 md:grid-cols-1 md:gap-6 xl:grid-cols-1 2xl:gap-7.5">
                   <div className="flex">
-                    <p>{row?.detailsPT}</p>
+                    <p>{locale==='pt' ? row?.detailsPT :locale==='es' ? row?.detailsES: locale==='fr' ? row?.detailsFR :  row?.detailsEN}</p>
                   </div>
                 </div>
               </div>
             ))}
           </div>
         ) : (
-          <p className="py-3">Sem Educação e Formação</p>
+          <p className="py-3">{t('noEdu')} </p>
         )}
       </>
     ) : (

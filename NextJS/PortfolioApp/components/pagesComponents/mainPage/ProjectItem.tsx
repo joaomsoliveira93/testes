@@ -2,6 +2,7 @@ import React from "react";
 import { Project } from "@/types/project";
 import Link from "next/link";
 import Arrow from '@mui/icons-material/TrendingFlatOutlined';
+import { useLocale, useTranslations } from 'next-intl';
 
 type Props = {
   project?: Project[]
@@ -9,6 +10,8 @@ type Props = {
 
 const projectItem = (props: Props) => {
   const { project } = props;
+  const t = useTranslations('portfolioScreen.projectItem');
+  const locale = useLocale();
   return (
     <>
       {project ? (
@@ -19,7 +22,7 @@ const projectItem = (props: Props) => {
                 <div className="py-3" key={index}>
                   <div className="grid grid-cols-1 gap-4 md:grid-cols-1 md:gap-6 xl:grid-cols-1 2xl:gap-7.5">
                     <div className="flex">
-                      <p className="font-semibold pr-2">{row?.institution}</p><p>{row?.titlePT}</p>
+                      <p className="font-semibold pr-2">{row?.institution}</p><p>{locale === 'pt' ? row?.titlePT : locale === 'es' ? row?.titleES : locale === 'fr' ? row?.titleFR : row?.titleEN}</p>
                     </div>
                   </div>
                   {row.url && (
@@ -33,15 +36,17 @@ const projectItem = (props: Props) => {
                   <hr className="py-2" />
                   <div className="">
                     <div className="flex">
-                      <p>{row?.detailsPT.slice(0, 200)}...
-                        <Link className="flex items-center hover:underline text-black dark:text-white" href={`/project/${row._id}`}> Ver mais <Arrow /> </Link></p>
+                    
+                      <p>{locale==='pt' ? row?.detailsPT.slice(0, 200) :locale==='es' ? row?.detailsES.slice(0, 200): locale==='fr' ? row?.detailsFR.slice(0, 200) :  row?.detailsEN.slice(0, 200)}...
+                        <Link className="flex items-center hover:underline text-black dark:text-white" href={`/project/${row._id}`}> {t('more')} <Arrow /> </Link>
+                      </p>
                     </div>
                   </div>
                 </div>
               ))}
             </div>
           ) : (
-            <p className="py-3">Sem Projetos</p>
+            <p className="py-3">{t('noProj')}</p>
           )}
         </>
 

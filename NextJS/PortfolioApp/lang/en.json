@@ -1,15 +1,116 @@
 {
-    "Home": {
-      "navigation": {
-        "portfolio": "Portfolio",
-        "profile": "Profile"
-      },
-      "title": "test title",
-      "description": "test description"
-    },
-    "LocaleSwitcher": {
-    "pt": "Portugues",
+  "LocaleSwitcher": {
+    "pt": "Portuguese",
     "en": "English",
-    "label": "Sprache"
+    "es": "Spanish",
+    "fr": "French",
+    "label": "Language"
+  },
+  "Sidebar": {
+    "portfolio": "Portfolio",
+    "profile": "Profile",
+    "title": "Test Title",
+    "description": "Test Description"
+  },
+  "Header": {
+    "userDropdown": {
+      "profile": "My Profile",
+      "contacts": "Contacts",
+      "settings": "Settings",
+      "logout": "Log Out"
+    }
+  },
+  "LoginScreen": {
+    "sideTitle": "My Portfolio",
+    "sideDesc": "Log in to access the editing of available portfolios",
+    "title": "Log In to My Portfolio",
+    "logout": "Log Out",
+    "email": "Email",
+    "emailPlaceholder": "Enter your Email",
+    "emailError": "Invalid Email",
+    "password": "Password",
+    "passwordPlaceholder": "Enter your Password",
+    "signInBtn": "Log In",
+    "authError": "The Email or Password entered is not valid.",
+    "noAccount": "Don't have an account?",
+    "signUp": "Sign Up"
+  },
+  "SignupScreen": {
+    "register": "Sign Up",
+    "sideTitle": "My Portfolio",
+    "sideDesc": "Sign up to access the editing of available portfolios",
+    "title": "Sign Up for My Portfolio",
+    "name": "Name",
+    "namePlaceholder": "Enter your Name",
+    "email": "Email",
+    "emailPlaceholder": "Enter your Email",
+    "emailError": "Invalid Email",
+    "password": "Password",
+    "passwordPlaceholder": "Enter your Password",
+    "rpassword": "Retype Password",
+    "rpasswordPlaceholder": "Retype your Password",
+    "passwordError": "Passwords do not match",
+    "signUpBtn": "Create Account",
+    "authError": "Registration could not be completed.",
+    "account": "Already have an account?",
+    "signIn": "Log In",
+    "accountSuccess": "Your account was successfully created. Please check your Email.",
+    "accountError": "Your account could not be created. Please try again later."
+  },
+  "portfolioScreen": {
+    "noProfiles": "No Profiles to show",
+    "personalInfo": "Personal Information",
+    "proExp": "Professional Experience",
+    "eduExp": "Education and Training",
+    "lang": "Linguistic Skills",
+    "otherInfo": "Other Information",
+    "projects": "Projects",
+    "documents": "Documents",
+    "personalInfoItem": {
+      "name": "Name",
+      "nationality": "Nationality",
+      "address": "Address",
+      "linkedin": "LinkedIn",
+      "email": "Email",
+      "phone": "Phone",
+      "web": "Web Pages"
+    },
+    "proExpItem": {
+      "present": "Current",
+      "noExp": "No professional experience"
+    },
+    "eduExpItem": {
+      "present": "Current",
+      "noEdu": "No Education and Training"
+    },
+    "langItem": {
+      "und": "Understand",
+      "spk": "Speak",
+      "write": "Write",
+      "undOral": "Oral Comprehension",
+      "read": "Read",
+      "prdOral": "Oral Production",
+      "intOral": "Oral Interaction",
+      "sub": "Levels: A1 and A2: Basic user; B1 and B2: Independent user; C1 and C2: Proficient user",
+      "noLang": "No Linguistic Skills"
+    },
+    "otherItem": {
+      "present": "Current",
+      "noOther": "No Other information"
+    },
+    "projectItem": {
+      "more": "See more",
+      "noProj": "No Projects"
+    },
+    "documentItem": {
+      "see": "See Document",
+      "noDoc": "No Documents"
+    }
+  },
+  "dtlProjScreen": {
+    "title": "Project Details",
+    "pictures": "Images",
+    "next": "Next",
+    "prev": "Previous"
   }
-  }
+}

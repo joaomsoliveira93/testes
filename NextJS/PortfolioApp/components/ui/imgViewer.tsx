@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import CancelPresentationOutlinedIcon from '@mui/icons-material/CancelPresentationOutlined';
+import { useTranslations } from 'next-intl';
 
 type Props = {
     imgs: string[]
@@ -11,6 +12,7 @@ const ImgViewer = (props: Props) => {
     const [currentImageIndex, setCurrentImageIndex] = useState(0);
     const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
     const [modalImage, setModalImage] = useState<string | null>(null);
+    const t = useTranslations('dtlProjScreen');
 
     const handleNextImage = () => {
         if (imgs) {
@@ -39,20 +41,20 @@ const ImgViewer = (props: Props) => {
             {imgs && imgs.length > 0 && (
                 <div className="mt-6">
                     <h4 className="font-semibold text-black dark:text-white mb-4">
-                        Imagens
+                    {t('pictures')}
                     </h4>
                     <div className="flex justify-between items-center mb-4">
                         <button
                             onClick={handlePreviousImage}
                             className="bg-gray-300 dark:bg-gray-700 text-black dark:text-white px-4 py-2 rounded hover:bg-primary"
                         >
-                            Anterior
+                            {t('prev')}
                         </button>
                         <button
                             onClick={handleNextImage}
                             className="bg-gray-300 dark:bg-gray-700 text-black dark:text-white px-4 py-2 rounded hover:bg-primary"
                         >
-                            Próxima
+                            {t('next')}
                         </button>
                     </div>
                     <div className="relative w-full h-125 mb-4" onClick={() => openModal(imgs[currentImageIndex])}>

@@ -1,0 +1,117 @@
+{
+    "LocaleSwitcher": {
+      "pt": "Portugais",
+      "en": "Anglais",
+      "es": "Espanhol",
+      "fr": "Français",
+      "label": "Langue"
+    },
+    "Sidebar": {
+      "portfolio": "Portfolio",
+      "profile": "Profil",
+      "title": "Titre Test",
+      "description": "Description Test"
+    },
+    "Header": {
+      "userDropdown": {
+        "profile": "Mon Profil",
+        "contacts": "Contacts",
+        "settings": "Paramètres",
+        "logout": "Déconnexion"
+      }
+    },
+    "LoginScreen": {
+      "sideTitle": "Mon Portfolio",
+      "sideDesc": "Connectez-vous pour accéder à l'édition des portfolios disponibles",
+      "title": "Se Connecter à Mon Portfolio",
+      "logout": "Déconnexion",
+      "email": "E-mail",
+      "emailPlaceholder": "Entrez votre E-mail",
+      "emailError": "E-mail invalide",
+      "password": "Mot de Passe",
+      "passwordPlaceholder": "Entrez votre Mot de Passe",
+      "signInBtn": "Se Connecter",
+      "authError": "L'E-mail ou le Mot de Passe entré n'est pas valide.",
+      "noAccount": "Vous n'avez pas de compte?",
+      "signUp": "S'inscrire"
+    },
+    "SignupScreen": {
+      "register": "S'inscrire",
+      "sideTitle": "Mon Portfolio",
+      "sideDesc": "Inscrivez-vous pour accéder à l'édition des portfolios disponibles",
+      "title": "S'inscrire à Mon Portfolio",
+      "name": "Nom",
+      "namePlaceholder": "Entrez votre Nom",
+      "email": "E-mail",
+      "emailPlaceholder": "Entrez votre E-mail",
+      "emailError": "E-mail invalide",
+      "password": "Mot de Passe",
+      "passwordPlaceholder": "Entrez votre Mot de Passe",
+      "rpassword": "Retapez le Mot de Passe",
+      "rpasswordPlaceholder": "Retapez votre Mot de Passe",
+      "passwordError": "Les Mots de Passe ne correspondent pas",
+      "signUpBtn": "Créer un Compte",
+      "authError": "L'inscription n'a pas pu être complétée.",
+      "account": "Vous avez déjà un compte?",
+      "signIn": "Se Connecter",
+      "accountSuccess": "Votre compte a été créé avec succès. Veuillez vérifier votre E-mail.",
+      "accountError": "Votre compte n'a pas pu être créé. Veuillez réessayer plus tard."
+    },
+    "portfolioScreen": {
+      "noProfiles": "Aucun Profil à afficher",
+      "personalInfo": "Informations Personnelles",
+      "proExp": "Expérience Professionnelle",
+      "eduExp": "Éducation et Formation",
+      "lang": "Compétences Linguistiques",
+      "otherInfo": "Autres Informations",
+      "projects": "Projets",
+      "documents": "Documents",
+      "personalInfoItem": {
+        "name": "Nom",
+        "nationality": "Nationalité",
+        "address": "Adresse",
+        "linkedin": "LinkedIn",
+        "email": "E-mail",
+        "phone": "Téléphone",
+        "web": "Pages Web"
+      },
+      "proExpItem": {
+        "present": "Actuel",
+        "noExp": "Aucune expérience professionnelle"
+      },
+      "eduExpItem": {
+        "present": "Actuel",
+        "noEdu": "Aucune Éducation et Formation"
+      },
+      "langItem": {
+        "und": "Comprendre",
+        "spk": "Parler",
+        "write": "Écrire",
+        "undOral": "Compréhension Orale",
+        "read": "Lire",
+        "prdOral": "Production Orale",
+        "intOral": "Interaction Orale",
+        "sub": "Niveaux: A1 et A2: Utilisateur de base; B1 et B2: Utilisateur indépendant; C1 et C2: Utilisateur avancé",
+        "noLang": "Aucune Compétence Linguistique"
+      },
+      "otherItem": {
+        "present": "Actuel",
+        "noOther": "Aucune autre information"
+      },
+      "projectItem": {
+        "more": "Voir plus",
+        "noProj": "Aucun Projet"
+      },
+      "documentItem": {
+        "see": "Voir le Document",
+        "noDoc": "Aucun Document"
+      }
+    },
+    "dtlProjScreen": {
+      "title": "Détails du Projet",
+      "pictures": "Images",
+      "next": "Suivant",
+      "prev": "Précédent"
+    }
+  }
+  

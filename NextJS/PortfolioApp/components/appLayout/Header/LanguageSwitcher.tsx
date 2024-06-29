@@ -16,6 +16,14 @@ export default function LanguageSwitcher() {
         {
           value: 'pt',
           label: t('pt')
+        },
+        {
+          value: 'fr',
+          label: t('fr')
+        },
+        {
+          value: 'es',
+          label: t('es')
         }
       ]}
       label={t('label')}

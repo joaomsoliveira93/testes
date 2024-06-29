@@ -1,12 +1,14 @@
 "use client"
 import React from 'react';
 import Arrow from '@mui/icons-material/TrendingFlatOutlined';
+import { useTranslations } from 'next-intl';
 
 type OpenPdfButtonProps = {
   base64Pdf: string;
 }
 
 const OpenPdfButton: React.FC<OpenPdfButtonProps> = ({ base64Pdf }) => {
+  const t = useTranslations('portfolioScreen.documentItem');
   const handleClick = () => {
 
     const pdfBlob = base64ToBlob(base64Pdf, 'application/pdf');
@@ -26,7 +28,7 @@ const OpenPdfButton: React.FC<OpenPdfButtonProps> = ({ base64Pdf }) => {
 
   return (
     <button className='hover:underline text-black dark:text-white' onClick={handleClick}>
-      Ver Documento <Arrow />
+      {t('see')} <Arrow />
     </button>
   );
 };

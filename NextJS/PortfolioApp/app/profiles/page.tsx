@@ -1,55 +1,55 @@
-import { getProject } from "@/app/actions";
+import { getProfiles } from "@/app/actions";
 import Breadcrumb from "@/components/appLayout/Breadcrumbs/Breadcrumb";
-import ImgViewer from "@/components/ui/imgViewer";
 import { getLocale, getMessages } from 'next-intl/server';
+import { Profile } from "@/types/profile";
+import Link from "next/link";
+import TableSort from "@/components/ui/TableSort";
 
-type Params = {
-    params: {
-        proj: string;
-    };
-};
 
-type request = {
-    code: number,
-    message: string,
-    data: any
-};
-
-const Page = async ({ params }: Params) => {
-    const { proj } = params;
+const Page = async () => {
     const locale = await getLocale();
     const messages = await getMessages();
-    const t:any = messages.dtlProjScreen
-    let project = await getProject(proj)
+    const t: any = messages.profilesScreen
+    let profiles: Profile[] = await getProfiles()
+    const columns: (keyof Profile)[] = ["_id","img", "name", "active"];
+    const labels: { [key in keyof Profile]: string } = {
+        img: t ? t.image : "Image",
+        name: t ? t.name : "Name",
+        active: t ? t.active : "Active",
+        _id: t ? t.id : "Id",
+        address: "",
+        nationalityPT: "",
+        nationalityEN: "",
+        nationalityES: "",
+        nationalityFR: "",
+        email_1: "",
+        email_2: "",
+        email_3: "",
+        email_4: "",
+        phone_1: "",
+        phone_2: "",
+        phone_3: "",
+        phone_4: "",
+        linkedIn: "",
+        web_1: "",
+        web_2: "",
+        web_3: "",
+        web_4: "",
+        web_5: "",
+        web_6: "",
+    };
 
     return (
         <>
-            <Breadcrumb pageName={t.title} />
-            {project ? (
-                <>
-                    <div className="overflow-hidden rounded-lg border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark">
-                        <div className="px-7 pb-6 lg:pb-8 xl:pb-11.5">
-                            <div className="mt-4">
-                                <h3 className="mb-1.5 text-2xl font-semibold text-black dark:text-white">
-                                {locale==='pt' ? project?.titlePT :locale==='es' ? project?.titleES: locale==='fr' ? project?.titleFR :  project?.titleEN}
-                                </h3>
-                                <div>
-                                    <h4 className="font-semibold text-black dark:text-white">
-                                        {project?.institution}
-                                    </h4>
-                                    <p className="mt-4.5">
-                                        {project?.tecnologies}
-                                    </p>
-                                    <p className="mt-4.5">
-                                        {locale==='pt' ? project?.detailsPT : locale==='es' ? project?.detailsES: locale==='fr' ? project?.detailsFR : project?.detailsEN}
-                                    </p>
-                                </div>
-                                <ImgViewer imgs={project.imgs} />
-                            </div>
-                        </div>
-                    </div>
-
-                </>
+            <Breadcrumb pageName={t ? t.title : "All Profiles"} />
+            {profiles ? (
+                <TableSort
+                    data={profiles}
+                    columns={columns}
+                    labels={labels}
+                    imageKey="img"
+                    link="/profiles/"
+                />
             ) : (
                 <div role="status" className=" animate-pulse overflow-hidden rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark">
                     <div className="px-7 pb-6 lg:pb-8 xl:pb-11.5">

@@ -1,5 +1,6 @@
 import React from "react";
 import { Lang } from "@/types/lang";
+import { useLocale,useTranslations} from 'next-intl';
 
 type Props = {
   lang?: Lang[]
@@ -7,6 +8,8 @@ type Props = {
 
 const LangItem = (props: Props) => {
   const { lang } = props;
+  const t = useTranslations('portfolioScreen.langItem');
+  const locale = useLocale();
   return (
     <> {lang ? (
       <>
@@ -17,13 +20,13 @@ const LangItem = (props: Props) => {
                 <tr>
                   <th className="border-b border-stroke bg-white px-4 py-4 text-left dark:bg-boxdark dark:border-strokedark" />
                   <th colSpan={2} className="text-center border-b border-stroke bg-white px-4 py-4 dark:bg-boxdark dark:border-strokedark">
-                    <p className="font-medium">Compreender</p>
+                    <p className="font-medium">{t('und')} </p>
                   </th>
                   <th colSpan={2} className="border-b border-stroke bg-white px-4 py-4 text-center dark:bg-boxdark dark:border-strokedark">
-                    <p className="font-medium">Falar</p>
+                    <p className="font-medium">{t('spk')} </p>
                   </th>
                   <th className="border-b border-stroke bg-white px-4 py-4 text-center dark:bg-boxdark dark:border-strokedark">
-                    <p className="font-medium">Escrever</p>
+                    <p className="font-medium">{t('write')} </p>
                   </th>
                 </tr>
               </thead>
@@ -32,16 +35,16 @@ const LangItem = (props: Props) => {
                 <tr>
                   <td className="border-b border-stroke bg-white px-4 py-4 text-center dark:bg-boxdark dark:border-strokedark" />
                   <td className="border-b border-stroke bg-white px-4 py-4 text-center dark:bg-boxdark dark:border-strokedark">
-                    <p className="font-medium">Compreensão Oral</p>
+                    <p className="font-medium">{t('undOral')} </p>
                   </td>
                   <td className="border-b border-stroke bg-white px-4 py-4 text-center dark:bg-boxdark dark:border-strokedark">
-                    <p className="font-medium">Leitura</p>
+                    <p className="font-medium">{t('read')} </p>
                   </td>
                   <td className="border-b border-stroke bg-white px-4 py-4 text-center dark:bg-boxdark dark:border-strokedark">
-                    <p className="font-medium">Produção Oral</p>
+                    <p className="font-medium">{t('prdOral')} </p>
                   </td>
                   <td className="border-b border-stroke bg-white px-4 py-4 text-center dark:bg-boxdark dark:border-strokedark">
-                    <p className="font-medium">Interação Oral</p>
+                    <p className="font-medium">{t('intOral')} </p>
                   </td>
                   <td className="border-b border-stroke bg-white px-4 py-4 text-center dark:bg-boxdark dark:border-strokedark">
                     <p className="font-medium"></p>
@@ -55,7 +58,7 @@ const LangItem = (props: Props) => {
                   >
                     <td className="border-b border-stroke bg-white px-4 py-4 text-center dark:bg-boxdark dark:border-strokedark">
                       <p className="text-sm text-black dark:text-white">
-                        {row?.namePT}
+                      {locale==='pt' ? row?.namePT :locale==='es' ? row?.nameES: locale==='fr' ? row?.nameFR :  row?.nameEN}
                       </p>
                     </td>
                     <td className="border-b border-stroke bg-white px-4 py-4 text-center dark:bg-boxdark dark:border-strokedark">
@@ -84,10 +87,10 @@ const LangItem = (props: Props) => {
                 ))}
               </tbody>
             </table>
-            <p className="pl-2 pt-2 text-sm">Níveis: A1 e A2: Utilizador de base; B1 e B2: Utilizador independente; C1 e C2: Utilizador avançado</p>
+            <p className="pl-2 pt-2 text-sm">{t('sub')} </p>
           </div>
         ) : (
-          <p className="py-3">Sem competências linguísticas</p>
+          <p className="py-3">{t('noLang')} </p>
         )}
       </>
     ) : (

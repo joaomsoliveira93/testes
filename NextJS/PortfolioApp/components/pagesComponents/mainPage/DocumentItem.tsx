@@ -1,6 +1,7 @@
 import React from "react";
 import { Document } from "@/types/document";
 import OpenPdfButton from "@/components/ui/openPDFButton";
+import { useLocale, useTranslations } from 'next-intl';
 
 type Props = {
   doc?: Document[]
@@ -8,6 +9,8 @@ type Props = {
 
 const DocumentItem = (props: Props) => {
   const { doc } = props;
+  const t = useTranslations('portfolioScreen.documentItem');
+  const locale = useLocale();
   return (<>{doc ? (
     <>
       {doc?.length !== 0 ? (
@@ -16,15 +19,15 @@ const DocumentItem = (props: Props) => {
             <div className="py-3" key={index}>
               <div className="grid grid-cols-1 gap-4 md:grid-cols-1 md:gap-6 xl:grid-cols-1 2xl:gap-7.5">
                 <div className="flex">
-                  <p className="font-semibold pr-2">{row?.namePT}</p>
+                  <p className="font-semibold pr-2">{locale === 'pt' ? row?.namePT : locale === 'es' ? row?.nameES : locale === 'fr' ? row?.nameFR : row?.nameEN}</p>
                 </div>
               </div>
-              <OpenPdfButton base64Pdf={row?.binary}/>
+              <OpenPdfButton base64Pdf={row?.binary} />
             </div>
           ))}
         </div>
       ) : (
-        <p className="py-3">Sem Documentos</p>
+        <p className="py-3">{t('noDoc')}</p>
       )}
     </>
   ) : (

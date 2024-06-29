@@ -10,6 +10,8 @@ import LogoutIcon from '@mui/icons-material/Logout';
 import { signOut } from "next-auth/react";
 import { useSession } from "next-auth/react";
 import useLocalStorage from "@/hooks/useLocalStorage";
+import {useTranslations} from 'next-intl';
+
 
 
 const DropdownUser = () => {
@@ -18,6 +20,7 @@ const DropdownUser = () => {
   const trigger = useRef<any>(null);
   const dropdown = useRef<any>(null);
   const [img, setImg] = useLocalStorage("img", "");
+  const t = useTranslations('Header.userDropdown');
 
   useEffect(() => {
     const clickHandler = ({ target }: MouseEvent) => {
@@ -115,7 +118,7 @@ const DropdownUser = () => {
               className="flex items-center gap-3.5 text-sm font-medium duration-300 ease-in-out p-2 rounded-md hover:dark:bg-primary hover:bg-secondary  lg:text-base"
             >
               <Profile/>
-              My Profile
+              {t('profile')}
             </Link>
           </li>
           <li>
@@ -125,7 +128,7 @@ const DropdownUser = () => {
               className="flex items-center gap-3.5 text-sm font-medium duration-300 ease-in-out p-2 rounded-md hover:dark:bg-primary hover:bg-secondary lg:text-base"
             >
               <RecentActorsIcon/>
-              My Contacts
+              {t('contacts')}
             </Link>
           </li>
           <li>
@@ -135,7 +138,7 @@ const DropdownUser = () => {
               className="flex items-center gap-3.5 text-sm font-medium duration-300 ease-in-out p-2 rounded-md hover:dark:bg-primary hover:bg-secondary lg:text-base"
             >
               <Settings/>
-              Account Settings
+              {t('settings')}
             </Link>
           </li>
         </ul>
@@ -145,7 +148,7 @@ const DropdownUser = () => {
           onClick={() => {signOut(); window.localStorage.removeItem("img");}}
         >
           <LogoutIcon/>
-          Log Out
+          {t('logout')}
         </button>
         </div>
 

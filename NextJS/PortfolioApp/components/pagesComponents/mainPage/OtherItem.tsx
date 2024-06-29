@@ -1,5 +1,6 @@
 import React from "react";
 import { OtherInfo } from "@/types/other";
+import { useLocale, useTranslations } from 'next-intl';
 
 type Props = {
   other?: OtherInfo[]
@@ -7,6 +8,8 @@ type Props = {
 
 const OtherItem = (props: Props) => {
   const { other } = props;
+  const t = useTranslations('portfolioScreen.otherItem');
+  const locale = useLocale();
   return (<>{other ? (
     <>
       {other?.length !== 0 ? (
@@ -15,11 +18,29 @@ const OtherItem = (props: Props) => {
             <div className="py-3" key={index}>
               <div className="grid grid-cols-1 gap-4 md:grid-cols-1 md:gap-6 xl:grid-cols-1 2xl:gap-7.5">
                 <div className="flex">
-                  <p className="font-semibold pr-2">{row?.institution}</p><p>{row?.titlePT}</p>
+                  <p className="font-semibold pr-2">{row?.institution}</p><p>{locale === 'pt' ? row?.titlePT : locale === 'es' ? row?.titleES : locale === 'fr' ? row?.titleFR : row?.titleEN}</p>
                 </div>
-                {row?.locationPT && (
+                {(locale === 'pt' && row?.locationPT) && (
                   <div className="flex">
                     <p>{row?.locationPT}</p>
+                  </div>
+                )}
+
+                {(locale === 'en' && row?.locationEN) && (
+                  <div className="flex">
+                    <p>{row?.locationEN}</p>
+                  </div>
+                )}
+
+                {(locale === 'es' && row?.locationES) && (
+                  <div className="flex">
+                    <p>{row?.locationES}</p>
+                  </div>
+                )}
+
+                {(locale === 'fr' && row?.locationFR) && (
+                  <div className="flex">
+                    <p>{row?.locationFR}</p>
                   </div>
                 )}
 
@@ -34,20 +55,20 @@ const OtherItem = (props: Props) => {
 
               <div className="grid grid-cols-1 gap-4 md:grid-cols-1 md:gap-6 xl:grid-cols-1 2xl:gap-7.5">
                 <div className="flex">
-                  <p>{row?.startedAt}</p><p className="px-2">-</p><p>{!row?.endedAt ? 'Atual' : row?.endedAt}</p>
+                  <p>{row?.startedAt}</p><p className="px-2">-</p><p>{!row?.endedAt ? t('present') : row?.endedAt}</p>
                 </div>
               </div>
               <hr className="py-2" />
               <div className="grid grid-cols-1 gap-4 md:grid-cols-1 md:gap-6 xl:grid-cols-1 2xl:gap-7.5">
                 <div className="flex">
-                  <p>{row?.detailsPT}</p>
+                  <p>{locale === 'pt' ? row?.detailsPT : locale === 'es' ? row?.detailsES : locale === 'fr' ? row?.detailsFR : row?.detailsEN}</p>
                 </div>
               </div>
             </div>
           ))}
         </div>
       ) : (
-        <p className="py-3">Sem Informações adicionais</p>
+        <p className="py-3">{t('noOther')}</p>
       )}
     </>
   ) : (

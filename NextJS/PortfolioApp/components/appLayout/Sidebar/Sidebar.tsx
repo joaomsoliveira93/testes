@@ -19,7 +19,7 @@ const Sidebar = () => {
   const pathname = usePathname();
   const { sidebarOpen, setSidebarOpen } = useSidebar(); // Use context
   const { data: session } = useSession();
-  const t = useTranslations('Home');
+  const t = useTranslations('Sidebar');
 
   return (
     <>
@@ -58,17 +58,17 @@ const Sidebar = () => {
                   <li>
                     <LinkItem
                       icon={<HomeIcon />}
-                      title={t('navigation.portfolio')}
+                      title={t('portfolio')}
                       href="/"
                       active={pathname === "/"}
                     />
                   </li>
                   <li>
                     <LinkItem
-                      title="Profile"
-                      href="/profile"
+                      title={t('profiles')}
+                      href="/profiles"
                       icon={<Profile />}
-                      active={pathname.includes("/profile")}
+                      active={pathname.includes("/profiles")}
                     />
                   </li>
                   <li>

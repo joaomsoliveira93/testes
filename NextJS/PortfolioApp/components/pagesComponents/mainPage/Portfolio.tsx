@@ -9,6 +9,7 @@ import OtherItem from "./OtherItem";
 import ProjectItem from "./ProjectItem";
 import { Profile } from "@/types/profile";
 import DocumentItem from "./DocumentItem";
+import {useTranslations} from 'next-intl';
 
 type request = {
   code: number,
@@ -26,6 +27,7 @@ const Portfolio: React.FC = () => {
   const [other, setOther] = useState(undefined);
   const [project, setProject] = useState(undefined);
   const [document, setDocument] = useState(undefined);
+  const t = useTranslations('portfolioScreen');
   
   useEffect(() => { getProfiles(); }, [])
 
@@ -90,28 +92,28 @@ const Portfolio: React.FC = () => {
               </option>
             ))}
           </>) :
-            (<option className="mt-5 dark:bg-boxdark bg-primary text-white" value="" selected key="0">Sem perfis</option>)}
+            (<option className="mt-5 dark:bg-boxdark bg-primary text-white" value="" selected key="0">{t('noProfiles')}</option>)}
         </select>
 
-        <ExpandItem name="Dados Pessoais">
+        <ExpandItem name={t('personalInfo')}>
           <PersonalInfoItem profile={profile} />
         </ExpandItem>
-        <ExpandItem name="Experiência Professional">
+        <ExpandItem name={t('proExp')}>
           <ExpProItem proExp={proExp} />
         </ExpandItem>
-        <ExpandItem name="Educação e Formação">
+        <ExpandItem name={t('eduExp')}>
           <ExpEduItem eduExp={eduExp} />
         </ExpandItem>
-        <ExpandItem name="Competências Linguísticas">
+        <ExpandItem name={t('lang')}>
           <LangItem lang={lang} />
         </ExpandItem>
-        <ExpandItem name="Outras Informações">
+        <ExpandItem name={t('otherInfo')}>
           <OtherItem other={other} />
         </ExpandItem>
-        <ExpandItem name="Projetos">
+        <ExpandItem name={t('projects')}>
           <ProjectItem project={project} />
         </ExpandItem>
-        <ExpandItem name="Documentos">
+        <ExpandItem name={t('documents')}>
           <DocumentItem doc={document} />
         </ExpandItem>
       </div>
